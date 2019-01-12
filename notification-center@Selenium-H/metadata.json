@@ -3,10 +3,10 @@
   "description": "Detaches Notification center to right side", 
   "extension-id": "notification-center@Selenium-H", 
   "gettext-domain": "gnome-shell-extensions", 
-  "name": "notification-center@Selenium-H", 
+  "name": "Notification Center", 
   "shell-version": [
-    "3.22"
+    "3.30"
   ], 
   "uuid": "notification-center@Selenium-H", 
-  "version": 1
+  "version": 3
 }
