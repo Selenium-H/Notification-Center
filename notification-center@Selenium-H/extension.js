@@ -29,19 +29,20 @@ var NotificationCenter = new Lang.Class({
 
     _init: function () 
 	{
-      		this.parent(0.0, _("NotificationCenter"));
-
 		Gtk.IconTheme.get_default().append_search_path(Me.path + '/icons/');
+		this.count=0;
 
-                this.count=0;
+      		this.parent(0.0, _("NotificationCenter"));
         	this._messageList = Main.panel.statusArea.dateMenu._messageList;
         	this._messageListParent = this._messageList.actor.get_parent();
         	this._messageListParent.remove_actor(this._messageList.actor);
 
         	this.box = new St.BoxLayout({ style:"max-height: 700px; padding: 0px;"});
         	this.box.add(this._messageList.actor);
-        	this.menu.box.add(this.box);
+            	this._messageList._removeSection(this._messageList._notificationSection);
+		this._messageList._addSection(this._messageList._notificationSection);
 
+        	this.menu.box.add(this.box);
                 this._indicator = new St.Icon({
             						icon_name: "notifications-symbolic",
       							style_class: "system-status-icon"
@@ -49,17 +50,22 @@ var NotificationCenter = new Lang.Class({
 
        		this.actor.add_child(this._indicator);
 		Main.panel.addToStatusArea("NotificationCenter", this, 2, "right");   
- 	
-		this.menu.connect("open-state-changed", Lang.bind(this, this._seen));
-       		Main.messageTray.connect('source-added', Lang.bind(this, this._newNotif));
-       		Main.messageTray.connect('source-removed', Lang.bind(this, this._remNotif));				               	                                  
-		//Main.panel.statusArea.dateMenu._indicator.actor.get_children()[0].hide();	// Removes Notification Dot from Date Time Menu
-
-		this.dndpref = new Gio.Settings({ schema_id:'org.gnome.desktop.notifications' });	// Loads DND preferences
+                
+		this.dndpref = new Gio.Settings({ schema_id:'org.gnome.desktop.notifications' });
                 this.dnditem = new PopupMenu.PopupSwitchMenuItem("Do Not Disturb");        	
-   	        this._loadDndStatus(this.dnditem);
                 this.menu.addMenuItem(this.dnditem);
+
+       		Main.messageTray.connect('source-added', Lang.bind(this, this._newNotif));
+       		Main.messageTray.connect('source-removed', Lang.bind(this, this._remNotif));
+		this._messageList._mediaSection._list.connect('actor-added', Lang.bind(this, this._autohideIcon));
+		this._messageList._mediaSection._list.connect('actor-removed', Lang.bind(this, this._autohideIcon));   
+		this._messageList._eventsSection._list.connect('actor-added', Lang.bind(this, this._autohideIcon));
+		this._messageList._eventsSection._list.connect('actor-removed', Lang.bind(this, this._autohideIcon));
+
+		this.menu.connect("open-state-changed", Lang.bind(this, this._seen));
                 this.dnditem.connect("toggled", Lang.bind(this, this._setDndState));  
+
+		this._autohideIcon();
     	},
 
     _loadDndStatus: function (dnditem)
@@ -67,58 +73,64 @@ var NotificationCenter = new Lang.Class({
                 if(this.dndpref.get_boolean('show-banners')==true)	
 		{
 			dnditem.setToggleState(false);
-                        Main.messageTray._bannerBin.show();                   
-		}
-        	 
+                        Main.messageTray._bannerBin.show();       
+                        return false;           
+		}	 
         	else
 		{
 			dnditem.setToggleState(true); 
-                        Main.messageTray._bannerBin.hide();
+			this._indicator.icon_name = "dnd-symbolic";
+                       	Main.messageTray._bannerBin.hide();
+                       return true;
 		}
 	},
 
     _setDndState: function () 
 	{
- 		if(this.dnditem.state)	
-		{
-			this.dndpref.set_boolean('show-banners',false);
-                        Main.messageTray._bannerBin.hide();
-		}
+ 		if(this.dnditem.state)		this.dndpref.set_boolean('show-banners',false);
 
-		else
-		{
-			this.dndpref.set_boolean('show-banners',true);
-                        Main.messageTray._bannerBin.show();       
-		}
+		else				this.dndpref.set_boolean('show-banners',true);   
 	},
 
     _seen: function()
 	{
    		if (this.menu.isOpen) 
 		{
-			this._messageList.setDate(new Date()); 
-             	     	this._indicator.icon_name="notifications-symbolic";
+			this._messageList.setDate(new Date());
+                        this.count=0;
             	}
+                this._autohideIcon();
         },
 
     _newNotif: function()
 	{
-         	this._indicator.icon_name = "notification-new-symbolic" ;   
                 this.count++;
+	        this._autohideIcon();
 	},
 
     _remNotif: function()
 	{	
 		this.count--;
-                this._indicator.icon_name = (this.count> 0) ? "notification-new-symbolic" : "notifications-symbolic" ;
+		this._autohideIcon();
+	},
+
+    _autohideIcon: function()
+	{
+		if(this._loadDndStatus(this.dnditem)==false)	this._indicator.icon_name = (this.count<=0 ) ? "notifications-symbolic":"new-notif-symbolic" ;
+		
+		if(this._messageList._notificationSection._canClear()==false&&this._messageList._eventsSection._canClear()==false&&this._messageList._mediaSection._shouldShow()==false&&this.menu.isOpen==false&&this.count<=0)  
+		{
+			this.actor.hide();
+			this.count=0;
+		}
+                else this.actor.show();
 	},
 
     destroy: function () 
 	{
         	this.box.remove_child(this._messageList.actor)
         	this._messageListParent.add_actor(this._messageList.actor);
-        	this.parent();
-        	//Main.panel.statusArea.dateMenu._indicator.actor.get_children()[0].show();		
+        	this.parent();		
 		Main.messageTray._bannerBin.show();
                 Main.messageTray._bannerBin.x=0;
     	} 
