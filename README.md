@@ -1,5 +1,5 @@
 # Notification Center 
-A GNOME Shell extension that eables placing of notification center anywhere in top panel.
+A GNOME Shell extension that eables notification center indicator on top panel and customizations.
 
 ![Screenshot](/Screenshot/image1.png)
 ![Screenshot](/Screenshot/image2.png)
@@ -13,9 +13,9 @@ Enable it using GNOME Tweak Tool.
 
 ## GNOME Shell Extension Website
 
-You can install it from [here](https://extensions.gnome.org/extension/1526/notification-centerselenium-h/).  
+You can install Version 7 of this extension from [here](https://extensions.gnome.org/extension/1526/notification-centerselenium-h/).  
 
-# Customisations
+# Customizations
 ![Screenshot](/Screenshot/image3.png)
 
 # Credits
