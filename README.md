@@ -1,3 +1,4 @@
+![Screenshot](/notification-center@Selenium-H/eicon.png)
 # Notification Center 
 This extension eables placing of notification center anywhere in top panel
 
