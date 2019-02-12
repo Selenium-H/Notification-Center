@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="gnome-shell-extensions">
+  	<enum id='org.gnome.shell.extensions.notification-center.banner-position'>
+    		<value value='0' nick='left'/>
+    		<value value='1' nick='center'/>
+    		<value value='2' nick='right'/>
+  	</enum>
+  	<enum id='org.gnome.shell.extensions.notification-center.new-notification'>
+    		<value value='0' nick='none'/>
+    		<value value='1' nick='dot'/>
+    		<value value='2' nick='count'/>
+  	</enum>
+  	<enum id='org.gnome.shell.extensions.notification-center.dnd-position'>
+    		<value value='0' nick='none'/>
+    		<value value='1' nick='top'/>
+    		<value value='2' nick='bottom'/>
+  	</enum>
+  	<schema path="/org/gnome/shell/extensions/notification-center/" id="org.gnome.shell.extensions.notification-center">
+    		<key type="s" name="indicator-position">
+      			<default>'right'</default>
+      			<summary>Indicator position</summary>
+      			<description>Notification Center indicator position.</description>
+    		</key>
+    		<key name="banner-position" enum="org.gnome.shell.extensions.notification-center.banner-position">
+      			<default>'right'</default>
+      			<summary>Notification Banner position</summary>
+      			<description>Changes Position of notification banner.</description>
+    		</key>
+		<key name="new-notification" enum="org.gnome.shell.extensions.notification-center.new-notification">
+      			<default>'dot'</default>
+      			<summary>On new notification</summary>
+      			<description>When new notification arrives.</description>
+    		</key>
+		<key name="dnd-position" enum="org.gnome.shell.extensions.notification-center.dnd-position">
+      			<default>'bottom'</default>
+      			<summary>Do Not Disturb Menu Position</summary>
+      			<description>Do Not Disturb menu position.</description>
+    		</key>
+    		<key type="b" name="show-label">
+      			<default>false</default>
+      			<summary>Always Shows Label </summary>
+      			<description>Always shows counts or dots till all notifications are cleared</description>
+    		</key>
+    		<key type="b" name="autohide">
+      			<default>true</default>
+      			<summary>Autohide Indicator</summary>
+      			<description>Enables of disables autohide of indicator</description>
+    		</key>
+		<key type="b" name="blink-icon">
+      			<default>false</default>
+      			<summary>Blink Bell Icon on Notification</summary>
+      			<description>Notification Bell icon blink on recieving new notification</description>
+    		</key>
+  	</schema>
+</schemalist>
