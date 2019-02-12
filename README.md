@@ -1,4 +1,4 @@
-# Notification Center 
+# Notification Center  ( Version 9 )
 A GNOME Shell extension that eables notification center indicator on top panel and customizations.
 
 ![Screenshot](/Screenshot/image1.png)
@@ -26,3 +26,4 @@ This extension is inspired from
 [Notifications Alert Extension](https://extensions.gnome.org/extension/258/notifications-alert-on-user-menu/) by hackedbellini
 
 [Files View Extension](https://extensions.gnome.org/extension/1395/files-view/) by abakkk
+ 
