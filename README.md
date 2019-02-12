@@ -1,4 +1,4 @@
-# **Notification Center**  *( Version 9 )*
+# **Notification Center**  ( Version 9 )
 A GNOME Shell extension that eables notification center indicator on top panel and customizations.
 
 ![Screenshot](/Screenshot/image1.png)
@@ -7,6 +7,8 @@ A GNOME Shell extension that eables notification center indicator on top panel a
 # Installation
 
 ## Manual
+Download or Clone the Repository and exract the Zip file.
+
 Copy the notification-center@Selenium-H folder to ~/.local/share/gnome-shell/extensions folder.
 
 Enable it using GNOME Tweak Tool.
