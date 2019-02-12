@@ -1,5 +1,5 @@
 # Notification Center 
-This extension eables placing of notification center anywhere in top panel
+A GNOME Shell extension that eables placing of notification center anywhere in top panel.
 
 ![Screenshot](/Screenshot/image1.png)
 ![Screenshot](/Screenshot/image2.png)
