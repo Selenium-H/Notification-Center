@@ -1,4 +1,4 @@
-# Notification Center  ( Version 9 )
+# **Notification Center**  *( Version 9 )*
 A GNOME Shell extension that eables notification center indicator on top panel and customizations.
 
 ![Screenshot](/Screenshot/image1.png)
