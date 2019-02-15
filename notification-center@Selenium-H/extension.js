@@ -44,7 +44,7 @@ var 	NotificationCenter = new Lang.Class({
         	this.actor.add_child(this._indicator);
 
 		Main.panel.addToStatusArea("NotificationCenter", this, 2, this.prefs.get_string('indicator-position'));
-		Main.messageTray._bannerBin.x=(this.prefs.get_enum('banner-position')-1)*((Main.layoutManager.monitors[0].width)-this.menu.box.width);
+		Main.messageTray._bannerBin.x=(this.prefs.get_enum('banner-position')-1)*(Main.layoutManager.monitors[0].width-(Main.messageTray._bannerBin.width=this.box.width));
 		this.resetIndicator();
     	},
 
@@ -96,7 +96,6 @@ var 	NotificationCenter = new Lang.Class({
 			this.icon.icon_name = "dnd-symbolic";
 			this.label.hide();
                        	Main.messageTray._bannerBin.hide();
-                        return true;
 	},
 
 	newMenu: function()

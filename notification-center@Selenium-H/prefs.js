@@ -86,7 +86,6 @@ const 	Prefs1 = 	new GObject.Class({
 
 const	AboutPage = 	new GObject.Class({
     	Name: 		'AboutPage',
-    	GTypeName: 	'AboutPage',
     	Extends: 	Gtk.ScrolledWindow,
 
     	_init: function(params) 
@@ -98,10 +97,8 @@ const	AboutPage = 	new GObject.Class({
         	let image 	= new Gtk.Image({ file: Extension.dir.get_child('eicon.png').get_path(), pixel_size: 96 });
        	 	let textBox	= new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
         	let text 	= new Gtk.Label({ wrap: true, justify: 2, use_markup: true,
-                                  		  label: "<big><b>" + Metadata.name + "</b></big>" + "\n" +
-                                         	  "<small>Version" + " " + Metadata.version +"</small>\n\n" +
-                                         	  (Metadata.description) + "\n\n\n\n\n\n" +
-                                         	  "<span size=\"small\">This program comes with ABSOLUTELY NO WARRANTY.\nSee the "+ 						  	  "<a href=\"https://www.gnu.org/licenses/old-licenses/gpl-2.0.html\">GNU General Public License, version 2 or later</a>"+ 	 							  " for details.</span>"+ "\n" });
+                                  		  label: "<big><b>" + Metadata.name + "</b></big>" + "\n" +"<small>Version" + " " + Metadata.version +"</small>\n\n" +
+                                         	  (Metadata.description) + "\n\n\n\n\n\n" +"<span size=\"small\">This program comes with ABSOLUTELY NO WARRANTY.\nSee the "+ 						  	  "<a href=\"https://www.gnu.org/licenses/old-licenses/gpl-2.0.html\">GNU General Public License, version 2 or later</a>"+ 	 							  " for details.</span>"+ "\n" });
 		imageBox.set_center_widget(image);
         	vbox.pack_start(imageBox, false, false, 0);
         	textBox.pack_start(text, false, false, 0);
