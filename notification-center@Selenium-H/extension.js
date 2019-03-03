@@ -1,4 +1,6 @@
+const Config = imports.misc.config;
 const ExtensionUtils = imports.misc.extensionUtils;
+const Gettext = imports.gettext;
 const Gtk = imports.gi.Gtk;
 const Gio = imports.gi.Gio;
 const Lang = imports.lang;
@@ -9,6 +11,7 @@ const Panel = imports.ui.panel;
 const PanelMenu = imports.ui.panelMenu;
 const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
+const _ = Gettext.domain("notification-center").gettext;
 
 function enable()
 {
@@ -26,12 +29,14 @@ var 	NotificationCenter = new Lang.Class({
 
     	_init: function ()
 	{
-		this.parent(0.5, "NotificationCenter");
 		Gtk.IconTheme.get_default().append_search_path(Me.path + '/icons/');
+   		this.initTranslations();
+
 		this.dndpref 	=  new Gio.Settings({schema_id:'org.gnome.desktop.notifications'});	
 		this.prefs 	=  new Gio.Settings({	settings_schema: Gio.SettingsSchemaSource.new_from_directory(Me.path + "/schemas", 
 							Gio.SettingsSchemaSource.get_default(), false).lookup(Me.metadata["settings-schema"], true) });
 		this.unseen=0;
+		this.parent(1-0.5*this.prefs.get_enum('indicator-pos'), "NotificationCenter");
 		this.detachNotificationCenter();	
 		this.newMenu();
 
@@ -43,16 +48,16 @@ var 	NotificationCenter = new Lang.Class({
         	this._indicator.add_child(this.label);
         	this.actor.add_child(this._indicator);
 
-		Main.panel.addToStatusArea("NotificationCenter", this, 2, this.prefs.get_string('indicator-position'));
-		Main.messageTray._bannerBin.x=(this.prefs.get_enum('banner-position')-1)*(Main.layoutManager.monitors[0].width-(Main.messageTray._bannerBin.width=this.box.width));
+		Main.panel.addToStatusArea("NotificationCenter", this, 2, this.prefs.get_string('indicator-pos'));
+		Main.messageTray._bannerBin.x=(this.prefs.get_enum('banner-pos')-1)*(Main.layoutManager.monitors[0].width-(Main.messageTray._bannerBin.width=this.box.width));
 		this.resetIndicator();
     	},
 
 	addDndMenu: function()
 	{
-			this.dnditem = new PopupMenu.PopupSwitchMenuItem("Do Not Disturb");     	
-                	this.menu.addMenuItem(this.dnditem);
-                	this.dnditem.connect("toggled", Lang.bind(this, this.setDndState));  
+		this.dnditem = new PopupMenu.PopupSwitchMenuItem(_("Do Not Disturb"));     
+		this.dnditem.connect("toggled", Lang.bind(this, this.setDndState));  	
+               	this.menu.addMenuItem(this.dnditem);
 	},
 
 	blinkIcon: function()
@@ -83,6 +88,12 @@ var 	NotificationCenter = new Lang.Class({
                 Main.panel.statusArea.dateMenu.actor.get_children()[0].remove_actor(Main.panel.statusArea.dateMenu.actor.get_children()[0].get_children()[0]);
 	},
 
+	initTranslations:function()
+	{
+	    	let localeDir = Me.dir.get_child("locale");
+		Gettext.bindtextdomain("notification-center", localeDir.query_exists(null) ? localeDir.get_path() : Config.LOCALEDIR );
+	},
+
     	loadDndStatus: function ()
  	{
                 if(this.dndpref.get_boolean('show-banners')==true)	
@@ -96,6 +107,7 @@ var 	NotificationCenter = new Lang.Class({
 			this.icon.icon_name = "dnd-symbolic";
 			this.label.hide();
                        	Main.messageTray._bannerBin.hide();
+                        return true;
 	},
 
 	newMenu: function()
@@ -105,8 +117,8 @@ var 	NotificationCenter = new Lang.Class({
 		switch(this.prefs.get_enum('dnd-position'))
 		{
 			case 1 : this.addDndMenu();
-			case 0 : this.menu.box.add(this.box); 				break;
-                        default: this.menu.box.add(this.box); this.addDndMenu();	break;
+			case 0 : this.menu.box.add(this.box); 					break;
+                        default: this.menu.box.add(this.box); this.addDndMenu(this.menu);	break;
 		}
 		this.menu.connect("open-state-changed", Lang.bind(this, this.seen));		
 	},
@@ -126,7 +138,9 @@ var 	NotificationCenter = new Lang.Class({
 
     	resetIndicator: function()
 	{
-		if(this.prefs.get_boolean('autohide')==true)	(this._messageList._notificationSection._canClear()==false&&this._messageList._eventsSection._canClear()==false&&this._messageList._mediaSection._shouldShow()==false&&this.menu.isOpen==false)? this.actor.hide():this.actor.show();
+		if(this.prefs.get_boolean('autohide')==true)  ( this._messageList._notificationSection._canClear() == false && 
+								this._messageList._eventsSection._canClear() 	   == false && 						                        this._messageList._mediaSection._shouldShow()	   == false &&
+								this.menu.isOpen				   == false) ? this.actor.hide():this.actor.show();
 
 		if(this.loadDndStatus()==false&&this.unseen>0)
 		switch(this.prefs.get_enum('new-notification'))
