@@ -1,0 +1,150 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# This file is distributed under the same license as the GNU make package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: notification-center\n"
+"POT-Creation-Date: 2016-06-10 19:03-0400\n"
+"PO-Revision-Date: 2019-03-03 17:13+0100\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: Jimmy Scionti <jimmy.scionti@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: it_IT\n"
+
+#: extension.js:58
+msgid "Do Not Disturb"
+msgstr "Non disturbare"
+
+#: prefs.js:36
+msgid "Preferences"
+msgstr "Preferenze"
+
+#: prefs.js:37
+msgid "About"
+msgstr "Info"
+
+#: prefs.js:52
+msgid "AutoHide notification indicator on panel"
+msgstr "Autohide dell'indicatore di notifica sul pannello"
+
+#: prefs.js:53
+msgid "Show Dots or Counts till all notifications are cleared"
+msgstr "Mostra Punti o Valori fintantoché vi sono notifiche"
+
+#: prefs.js:54
+msgid "Blink bell icon on new notifications "
+msgstr "Icona della campanella lampeggiante per le nuove notifiche"
+
+#: prefs.js:55
+msgid "Show Do Not Disturb menu entry "
+msgstr "Mostra il pulsante Non disturbare"
+
+#: prefs.js:55
+msgid "Don't Show"
+msgstr "Non mostrare"
+
+#: prefs.js:55
+msgid "On Top"
+msgstr "In alto"
+
+#: prefs.js:55
+msgid "At Bottom"
+msgstr "In basso"
+
+#: prefs.js:56
+msgid "Notification Banner Position"
+msgstr "Posizione del banner delle notifiche"
+
+#: prefs.js:56 prefs.js:57
+msgid "Left"
+msgstr "Sinistra"
+
+#: prefs.js:56 prefs.js:57
+msgid "Center"
+msgstr "Centro"
+
+#: prefs.js:56 prefs.js:57
+msgid "Right"
+msgstr "Destra"
+
+#: prefs.js:57
+msgid "Notification Center indicator position"
+msgstr "Posizione dell'indicatore del Centro notifiche"
+
+#: prefs.js:58
+msgid "When new notification arrives"
+msgstr "Quando arriva una nuova notifica"
+
+#: prefs.js:58
+msgid "Show Nothing"
+msgstr "Lascia inalterato"
+
+#: prefs.js:58
+msgid "Show Dot"
+msgstr "Mostra punti"
+
+#: prefs.js:58
+msgid "Show Count"
+msgstr "Mostra valori"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:26
+msgid "Indicator position"
+msgstr "Posizione dell'indicatore"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:27
+msgid "Notification Center Indicator position."
+msgstr "Posizione dell'indicatore del Centro notifiche."
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:31
+msgid "Notification Banner position"
+msgstr "Posizione del banner delle notifiche"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:32
+msgid "Changes Position of Notification Banner Position."
+msgstr "Cambia la posizione del banner delle notifiche."
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:36
+msgid "On new notification"
+msgstr "Con una nuova notifica"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:37
+msgid "When new notification Arrives."
+msgstr "Quando arriva una nuova notifica."
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:41
+msgid "Do Not Disturb Menu Position"
+msgstr "Posizione del pulsante Non disturbare"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:42
+msgid "Do Not Disturb Menu Position."
+msgstr "Posizione del pulsante Non disturbare."
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:46
+msgid "Always Shows Label"
+msgstr "Mostra sempre"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:47
+msgid "Always shows Count or Dots"
+msgstr "Mostra sempre Valore o Punti"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:51
+msgid "Autohide Indicator"
+msgstr "Autohide dell'indicatore"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:52
+msgid "Enables of disables autohide of indicator"
+msgstr "Abilita o disabilita l'autohide dell'indicatore"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:56
+msgid "Blink Bell Icon on Notification"
+msgstr "Lampeggio su notifica"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:57
+msgid "Blink Notification Bell icon on recieving new notification"
+msgstr "Icona campanella lampeggia alla ricezione di una nuova notifica"
