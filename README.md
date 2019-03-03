@@ -26,4 +26,6 @@ This extension is inspired from
 [Extend Panel Menu Entension](https://extensions.gnome.org/extension/1201/extend-panel-menu/) by julio641742, 
 [Notifications Alert Extension](https://extensions.gnome.org/extension/258/notifications-alert-on-user-menu/) by hackedbellini, 
 [Files View Extension](https://extensions.gnome.org/extension/1395/files-view/) by abakkk
+
+Thanks to @amivaleo (Italian Translation)  
  
