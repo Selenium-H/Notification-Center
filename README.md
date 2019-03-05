@@ -15,7 +15,7 @@ A GNOME Shell extension that eables notification center indicator on top panel a
 ## Manual
 Download or Clone the Repository and exract the Zip file.
 
-Copy the animation-tweaks@Selenium-H folder to ~/.local/share/gnome-shell/extensions folder.
+Copy the notification-center@Selenium-H folder to ~/.local/share/gnome-shell/extensions folder.
 
 Restart Gnome Shell ( Alt + F2 , Press r , Press Enter )
 
