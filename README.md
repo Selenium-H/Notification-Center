@@ -6,6 +6,7 @@
 <p align="center">
 Version 10
 </p>
+
 <p align="center">
 A GNOME Shell extension that eables notification center indicator on top panel and customizations.
 </p>
