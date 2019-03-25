@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="gnome-shell-extensions">
+  	<enum id='org.gnome.shell.extensions.notification-center.dnd-position'>
+    		<value value='0' nick='none'/>
+    		<value value='1' nick='top'/>
+    		<value value='2' nick='bottom'/>
+  	</enum>
+  	<enum id='org.gnome.shell.extensions.notification-center.clear-button-alignment'>
+    		<value value='0' nick='left'/>
+    		<value value='1' nick='center'/>
+    		<value value='2' nick='right'/>
+  	</enum>
+  	<enum id='org.gnome.shell.extensions.notification-center.banner-pos'>
+    		<value value='0' nick='left'/>
+    		<value value='1' nick='center'/>
+    		<value value='2' nick='right'/>
+  	</enum>
+  	<enum id='org.gnome.shell.extensions.notification-center.indicator-pos'>
+    		<value value='0' nick='left'/>
+    		<value value='1' nick='center'/>
+    		<value value='2' nick='right'/>
+  	</enum>
+  	<enum id='org.gnome.shell.extensions.notification-center.new-notification'>
+    		<value value='0' nick='none'/>
+    		<value value='1' nick='dot'/>
+    		<value value='2' nick='count'/>
+  	</enum>
+  	<enum id='org.gnome.shell.extensions.notification-center.for-list'>
+    		<value value='0' nick='none'/>
+    		<value value='1' nick='count'/>
+    		<value value='2' nick='banner'/>
+		<value value='3' nick='both'/>
+  	</enum>
+  	<schema path="/org/gnome/shell/extensions/notification-center/" id="org.gnome.shell.extensions.notification-center">
+    		<key type="b" name="show-media">
+      			<default>true</default>
+      			<summary>Media Section on Notification Center </summary>
+      			<description>Show Media Section on Notification Center</description>
+    		</key>
+    		<key type="b" name="show-notifications">
+      			<default>true</default>
+      			<summary>Notifications on Notification Center </summary>
+      			<description>Show Notifications list on Notification Center</description>
+    		</key>
+    		<key type="b" name="show-events">
+      			<default>true</default>
+      			<summary>Events on Notification Center </summary>
+      			<description>Show Events list on Notification Center</description>
+    		</key>
+    		<key type="b" name="show-events-in-calendar">
+      			<default>true</default>
+      			<summary>Keep events on Calendar Menu </summary>
+      			<description>Keep events besides Calendar Menu</description>
+    		</key>
+		<key name="dnd-position" enum="org.gnome.shell.extensions.notification-center.dnd-position">
+      			<default>'bottom'</default>
+      			<summary>Do Not Disturb menu position</summary>
+      			<description>Do Not Disturb menu position.</description>
+    		</key>
+		<key name="clear-button-alignment" enum="org.gnome.shell.extensions.notification-center.clear-button-alignment">
+      			<default>'right'</default>
+      			<summary>Clear All button alignment </summary>
+      			<description>Alignment for Clear All button .</description>
+    		</key>
+    		<key name='banner-pos' enum='org.gnome.shell.extensions.notification-center.banner-pos'>
+      			<default>'right'</default>
+      			<summary>Notification Banner position</summary>
+      			<description>Changes position of Notification Banner.</description>
+    		</key>
+
+    		<key name='indicator-pos' enum='org.gnome.shell.extensions.notification-center.banner-pos'>
+      			<default>'right'</default>
+      			<summary>Indicator position</summary>
+      			<description>Notification Center indicator position.</description>
+    		</key>
+    		<key type="b" name="autohide">
+      			<default>true</default>
+      			<summary>Autohide Indicator</summary>
+      			<description>Enables of disables autohide of indicator</description>
+    		</key>
+		<key name="new-notification" enum="org.gnome.shell.extensions.notification-center.new-notification">
+      			<default>'dot'</default>
+      			<summary>On new notification</summary>
+      			<description>When new notification arrives.</description>
+    		</key>
+		<key type="b" name="blink-icon">
+      			<default>false</default>
+      			<summary>Blink Bell Icon on Notification</summary>
+      			<description>Blink Notification Bell icon on recieving new notification</description>
+    		</key>
+		<key type="i" name="blink-time">
+      			<default>500</default>
+      			<summary>Blink Bell Icon on Notification</summary>
+      			<description>Blink Notification Bell icon on recieving new notification</description>
+    		</key>
+    		<key type="b" name="show-label">
+      			<default>false</default>
+      			<summary>Always Shows Label </summary>
+      			<description>Always shows Count or Dots</description>
+    		</key>
+		<key name="list" type="as">
+      		<default>[]</default>
+      		<summary>Applications to ignore notifications from</summary>
+      		<description>List of applications to ignore notifications from</description>
+    		</key>
+    		<key name="name-list" type="as">
+      		<default>[]</default>
+      		<summary>Name of applications to ignore notifications from</summary>
+      		<description>List of Names of application to ignore notifications from</description>
+    		</key>
+		<key name="for-list" enum="org.gnome.shell.extensions.notification-center.for-list">
+      		<default>'none'</default>
+      		<summary>Preferences for Apps on List</summary>
+      		<description>What to do for Apps on List.</description>
+    		</key>
+  	</schema>
+</schemalist>
