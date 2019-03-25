@@ -1,35 +1,46 @@
-![Screenshot](/notification-center@Selenium-H/eicon.png) 
+<p align="center">
+<img src = /notification-center@Selenium-H/eicon.png >
+</p>
 
-# **Notification Center**  ( Version 9 )
+# &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Notification Center
+<p align="center">
+Version 10
+</p>
+<p align="center">
 A GNOME Shell extension that eables notification center indicator on top panel and customizations.
+</p>
 
-![Screenshot](/Screenshot/image1.png)
-![Screenshot](/Screenshot/image2.png)
+![Screenshot](/Screenshots/Image_01.png) ![Screenshot](/Screenshots/Image_02.png)
 
+# &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Customizations
 
-# Customizations
-![Screenshot](/Screenshot/image3.png)
+<p align="center">
+<img src = /Screenshots/Image_03.png >
+</p>
 
-# Installation
+<p align="center">
+<img src = /Screenshots/Image_04.png >
+</p>
 
-## Manual
-Download or Clone the Repository and exract the Zip file.
+<p align="center">
+<img src = /Screenshots/Image_05.png >
+</p>
 
-Copy the notification-center@Selenium-H folder to ~/.local/share/gnome-shell/extensions folder.
+# &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__Installations__
+
+## Manual&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GNOME Shell Extension Website
+Download or clone the repository and exract the zip file.
+
+Go to the extracted folder and run   ./INSTALL.sh   in terminal.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You can install Version 9 of this extension from [here](https://extensions.gnome.org/extension/1526/notification-centerselenium-h/).
 
 Restart Gnome Shell ( Alt + F2 , Press r , Press Enter )
 
 Enable it using GNOME Tweak Tool.
-## GNOME Shell Extension Website
 
-You can install Version 7 of this extension from [here](https://extensions.gnome.org/extension/1526/notification-centerselenium-h/).  
-
-# Credits
+# &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Credits
 This extension is inspired from
-
 [Extend Panel Menu Entension](https://extensions.gnome.org/extension/1201/extend-panel-menu/) by julio641742, 
 [Notifications Alert Extension](https://extensions.gnome.org/extension/258/notifications-alert-on-user-menu/) by hackedbellini, 
 [Files View Extension](https://extensions.gnome.org/extension/1395/files-view/) by abakkk
 
 Thanks to @amivaleo (Italian Translation)  
- 
