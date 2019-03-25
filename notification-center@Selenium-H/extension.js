@@ -169,7 +169,8 @@ const 	NotificationCenter = new Lang.Class({
 	},
 
     	resetIndicator: function()
-	{									                                                                                    			if(this._messageList._notificationSection._canClear() == false && this._messageList._eventsSection._canClear() == false &&
+	{
+		if(this._messageList._notificationSection._canClear() == false && this._messageList._eventsSection._canClear() == false &&
 		   this._messageList._mediaSection._shouldShow() == false )
 		{
 			this.clearButton.hide();
