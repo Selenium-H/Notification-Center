@@ -36,7 +36,7 @@ Download or clone the repository and exract the zip file.
 
 Open terminal in extracted folder and run
 
-+ chmod +x INSTALL.sh && ./INSTALL.sh&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You can install Version 9 of this extension from [here](https://extensions.gnome.org/extension/1526/notification-centerselenium-h/).
++ chmod +x INSTALL.sh && ./INSTALL.sh &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; You can install Version 9 of this extension from [here](https://extensions.gnome.org/extension/1526/notification-centerselenium-h/).
 
 Restart Gnome Shell ( Alt + F2 , Press r , Press Enter )
 
