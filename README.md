@@ -10,7 +10,9 @@ Version 10
 A GNOME Shell extension that eables notification center indicator on top panel and customizations.
 </p>
 
-![Screenshot](/Screenshots/Image_01.png) ![Screenshot](/Screenshots/Image_02.png)
+<p align="center">
+<img src = /Screenshots/Image_01.png >
+</p>
 
 # &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Customizations
 
