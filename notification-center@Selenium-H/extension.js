@@ -54,10 +54,10 @@ const 	NotificationCenter = new Lang.Class({
 
 	addClearButton: function()
 	{
-        	let clearButton = new St.Button({style_class: 'message-list-clear-button button',label: _("Clear All"),can_focus: true});
-        	    clearButton.set_x_align(1+this.prefs.get_enum('clear-button-alignment'));
-                    clearButton.connect('clicked',Lang.bind(this,function(){ this._messageList._notificationSection.clear(); this._messageList._eventsSection.clear(); }));
-        	    this.menu.box.add(clearButton);
+        	    this.clearButton = new St.Button({style_class: 'message-list-clear-button button',label: _("Clear All"),can_focus: true});
+        	    this.clearButton.set_x_align(1+this.prefs.get_enum('clear-button-alignment'));
+                    this.clearButton.connect('clicked',Lang.bind(this,function(){ this._messageList._notificationSection.clear(); this._messageList._eventsSection.clear(); }));
+        	    this.menu.box.add(this.clearButton);
 		    this.menu.addMenuItem(new PopupMenu.PopupBaseMenuItem({activate: false,hover: false}));
 	},
 
@@ -169,10 +169,18 @@ const 	NotificationCenter = new Lang.Class({
 	},
 
     	resetIndicator: function()
-	{
-		if(this.prefs.get_boolean('autohide')==true)  ( this._messageList._notificationSection._canClear() == false && 
-								this._messageList._eventsSection._canClear() 	   == false && 						                        this._messageList._mediaSection._shouldShow()	   == false &&
-								this.menu.isOpen				   == false) ? this.actor.hide():this.actor.show();
+	{									                                                                                    			if(this._messageList._notificationSection._canClear() == false && this._messageList._eventsSection._canClear() == false &&
+		   this._messageList._mediaSection._shouldShow() == false )
+		{
+			this.clearButton.hide();
+			if(this.prefs.get_boolean('autohide') == true && this.menu.isOpen == false) this.actor.hide();
+		}
+		else 
+		{
+			this.actor.show();
+			this.clearButton.show();
+		}
+
 		if(this.loadDndStatus()==false&&this.unseen>0)
 		{
 			this.blinkIcon();
