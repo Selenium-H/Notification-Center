@@ -10,9 +10,10 @@
     "3.24",
     "3.26",
     "3.28",
-    "3.30"
+    "3.30",
+    "3.32"
   ], 
   "url": "https://github.com/Selenium-H/Notification-Center", 
   "uuid": "notification-center@Selenium-H", 
-  "version": 10
+  "version": 11
 }

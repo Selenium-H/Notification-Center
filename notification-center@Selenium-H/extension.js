@@ -129,16 +129,16 @@ const 	NotificationCenter = new Lang.Class({
 
     	loadDndStatus: function ()
  	{
+		this.icon.icon_name = Gtk.IconTheme.get_default().has_icon("notifications-symbolic")?"notifications-symbolic":"preferences-system-notifications-symbolic";
                 if(this.dndpref.get_boolean('show-banners')==true)
 		{
 			this.dnditem.setToggleState(false);
 			this.icon.set_opacity(255);
-			this.icon.icon_name = Gtk.IconTheme.get_default().has_icon("notifications-symbolic")?"notifications-symbolic":"preferences-system-notifications-symbolic";
                         Main.messageTray._bannerBin.show();
                         return false;
 		}
 			this.dnditem.setToggleState(true); 
-			this.icon.icon_name = "notifications-disabled-symbolic";
+		 	this.icon.set_opacity(150);
 			this.label.hide();
                        	Main.messageTray._bannerBin.hide();
                         return true;
@@ -237,6 +237,8 @@ const 	NotificationCenter = new Lang.Class({
 		this._messageList._addSection(this._messageList._mediaSection);
 		this._messageList._addSection(this._messageList._notificationSection);
 		this._messageList._addSection(this._messageList._eventsSection);
+
+		Main.messageTray._bannerBin.show();
 		Main.messageTray._bannerBin.x=0;
 		this.parent();
 	},
