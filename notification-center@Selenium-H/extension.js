@@ -129,7 +129,7 @@ const 	NotificationCenter = new Lang.Class({
 
     	loadDndStatus: function ()
  	{
-		this.icon.icon_name = Gtk.IconTheme.get_default().has_icon("notifications-symbolic")?"notifications-symbolic":"preferences-system-notifications-symbolic";
+		this.icon.icon_name = Gtk.IconTheme.get_default().has_icon("notification-symbolic")?"notification-symbolic":"preferences-system-notifications-symbolic";
                 if(this.dndpref.get_boolean('show-banners')==true)
 		{
 			this.dnditem.setToggleState(false);
