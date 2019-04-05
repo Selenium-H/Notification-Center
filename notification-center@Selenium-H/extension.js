@@ -93,6 +93,8 @@ const 	NotificationCenter = new Lang.Class({
 	{
 		this._messageList = Main.panel.statusArea.dateMenu._messageList;
 		this.box = new St.BoxLayout({ style:"padding: 15px; padding-bottom: 0px; max-height: "+(0.76*Main.layoutManager.monitors[0].height)+"px; min-width:" 						            + this._messageList.actor.width+"px; max-width:"+0.2*Main.layoutManager.monitors[0].width+"px;",vertical: true});
+		this.scrollView = new St.ScrollView({ 	hscrollbar_policy: 2,x_fill: true, y_fill: true });
+ 		this.scrollView.add_actor(this.box);
 		this.addThisSection(this._messageList._mediaSection	   ,"show-media"	 ,1);
 		this.addThisSection(this._messageList._notificationSection ,"show-notifications" ,0);
 		this.addThisSection(this._messageList._eventsSection 	   ,"show-events" 	 ,1);
@@ -101,8 +103,8 @@ const 	NotificationCenter = new Lang.Class({
 		switch(this.prefs.get_enum('dnd-position'))
 		{
 			case 1 : this.addDndMenu();
-			case 0 : this.menu.box.add(this.box); this.addClearButton();  				break;
-                        default: this.menu.box.add(this.box); this.addClearButton(); this.addDndMenu(this.menu);	break;
+			case 0 : this.menu.box.add(this.scrollView); this.addClearButton();  				break;
+                        default: this.menu.box.add(this.scrollView); this.addClearButton(); this.addDndMenu(this.menu);	break;
 		}
 		this.menu.connect("open-state-changed", Lang.bind(this, this.seen));
 		Main.panel.statusArea.dateMenu.actor.get_children()[0].remove_actor(Main.panel.statusArea.dateMenu._indicator.actor);	
