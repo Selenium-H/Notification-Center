@@ -48,4 +48,4 @@ This extension is inspired from
 [Notifications Alert Extension](https://extensions.gnome.org/extension/258/notifications-alert-on-user-menu/) by hackedbellini, 
 [Files View Extension](https://extensions.gnome.org/extension/1395/files-view/) by abakkk
 
-Thanks to @amivaleo (Italian Translation)  
+Thanks to @amivaleo (Italian Translation),@goodwillcoding
