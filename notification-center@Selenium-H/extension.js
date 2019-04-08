@@ -92,8 +92,8 @@ const 	NotificationCenter = new Lang.Class({
 	buildNotificationCenter: function()
 	{
 		this._messageList = Main.panel.statusArea.dateMenu._messageList;
-		this.box = new St.BoxLayout({ style:"padding: 15px; padding-bottom: 0px; max-height: "+(0.76*Main.layoutManager.monitors[0].height)+"px; min-width:" 						            + this._messageList.actor.width+"px; max-width:"+0.2*Main.layoutManager.monitors[0].width+"px;",vertical: true});
-		this.scrollView = new St.ScrollView({ 	hscrollbar_policy: 2,x_fill: true, y_fill: true });
+		this.box = new St.BoxLayout({ vertical: true});
+		this.scrollView = new St.ScrollView({ style:"padding: 15px; padding-bottom: 0px; min-width:"+ this._messageList.actor.width+"px; max-width:" 										+0.2*Main.layoutManager.monitors[0].width + "px;", hscrollbar_policy: 2, x_fill: true, y_fill: true});
  		this.scrollView.add_actor(this.box);
 		this.addThisSection(this._messageList._mediaSection	   ,"show-media"	 ,1);
 		this.addThisSection(this._messageList._notificationSection ,"show-notifications" ,0);
