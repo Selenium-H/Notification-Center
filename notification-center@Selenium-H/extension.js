@@ -48,7 +48,7 @@ const 	NotificationCenter = new Lang.Class({
 
         	this.actor.add_child(this._indicator);
 		Main.panel.addToStatusArea("NotificationCenter", this, 2, this.prefs.get_string('indicator-pos'));
-		Main.messageTray._bannerBin.x=(this.prefs.get_enum('banner-pos')-1)*(Main.layoutManager.monitors[0].width-(Main.messageTray._bannerBin.width=this.box.width));
+		Main.messageTray._bannerBin.x=(this.prefs.get_enum('banner-pos')-1)*(Main.layoutManager.monitors[0].width-(Main.messageTray._bannerBin.width =    															          this.scrollView.width));
 		this.resetIndicator();
     	},
 
