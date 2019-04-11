@@ -35,7 +35,8 @@ const 	NotificationCenter = new Lang.Class({
    		this.initTranslations();
 		this.connectedSignals = [];
 		this.showingSections  = [];
-		this.unseen = 0;
+		this._loopTimeoutId   = null;
+		this.unseen 	      = 0;
 
 		this.parent(1-0.5*this.prefs.get_enum('indicator-pos'), "NotificationCenter");	
 		this.buildNotificationCenter();
@@ -48,7 +49,7 @@ const 	NotificationCenter = new Lang.Class({
 
         	this.actor.add_child(this._indicator);
 		Main.panel.addToStatusArea("NotificationCenter", this, 2, this.prefs.get_string('indicator-pos'));
-		Main.messageTray._bannerBin.x=(this.prefs.get_enum('banner-pos')-1)*(Main.layoutManager.monitors[0].width-(Main.messageTray._bannerBin.width =    															          this.scrollView.width));
+		Main.messageTray._bannerBin.x = (this.prefs.get_enum('banner-pos')-1)*(Main.layoutManager.monitors[0].width-(Main.messageTray._bannerBin.width = this.scrollView.width));
 		this.resetIndicator();
     	},
 
@@ -56,7 +57,12 @@ const 	NotificationCenter = new Lang.Class({
 	{
         	    this.clearButton = new St.Button({style_class: 'message-list-clear-button button',label: _("Clear All"),can_focus: true});
         	    this.clearButton.set_x_align(1+this.prefs.get_enum('clear-button-alignment'));
-                    this.clearButton.connect('clicked',Lang.bind(this,function(){ this._messageList._notificationSection.clear(); this._messageList._eventsSection.clear(); }));
+                    this.clearButton.connect('clicked',Lang.bind(this,function(){ 	len=this.showingSections.length;
+                									while(len!=0){
+											this.showingSections[len-1].clear();
+	               									len--;
+											}				
+										}));
         	    this.menu.box.add(this.clearButton);
 		    this.menu.addMenuItem(new PopupMenu.PopupBaseMenuItem({activate: false,hover: false}));
 	},
@@ -83,7 +89,7 @@ const 	NotificationCenter = new Lang.Class({
 	{
 		if(this.prefs.get_boolean('blink-icon')==true)
 		{
-			Mainloop.source_remove(this._loopTimeoutId);
+			if(this._loopTimeoutId!=null) Mainloop.source_remove(this._loopTimeoutId);		
 			this.icon.set_opacity((this.icon.get_opacity()==255)? 100 : 255);
 			this._loopTimeoutId=Mainloop.timeout_add(this.prefs.get_int('blink-time'), Lang.bind(this, this.blinkIcon));
 		}
@@ -146,6 +152,18 @@ const 	NotificationCenter = new Lang.Class({
                         return true;
 	},
 
+	manageAutohide:function()
+	{
+		this.clearButton.hide();
+		if(this.prefs.get_boolean("autohide")==true && this.menu.isOpen == false) this.actor.hide();
+
+		len=this.showingSections.length;
+                while(len!=0){
+			if(this.showingSections[len-1]._shouldShow()) 	{this.actor.show();	this.clearButton.show(); }
+	               	len--;
+		}
+	},
+
 	manageEvents: function(action)
 	{
 		if(this.prefs.get_boolean('show-events')==false) return ;
@@ -153,7 +171,7 @@ const 	NotificationCenter = new Lang.Class({
 		switch(action)
 		{
 			case 0: this._messageList._removeSection(this._messageList._eventsSection); this.box.add(this._messageList._eventsSection.actor);	return;
-			case 1: this.box.remove_child(this.box.get_children()[2]); this._messageList._addSection(this._messageList._eventsSection);		return;
+			case 1: this.box.remove_child(this.box.get_children()[this.showingSections.length-1]);this._messageList._addSection(this._messageList._eventsSection); return;
 		}
 	},
 
@@ -172,18 +190,14 @@ const 	NotificationCenter = new Lang.Class({
 
     	resetIndicator: function()
 	{
-		if(this._messageList._notificationSection._canClear() == false && this._messageList._eventsSection._canClear() == false &&
-		   this._messageList._mediaSection._shouldShow() == false )
-		{
-			this.clearButton.hide();
-			if(this.prefs.get_boolean('autohide') == true && this.menu.isOpen == false) this.actor.hide();
-		}
-		else 
-		{
-			this.actor.show();
-			this.clearButton.show();
+		len=this.showingSections.length;
+                while(len!=0){
+			this.showingSections[len-1].setDate(new Date());  
+	               	len--;
 		}
 
+		this.manageAutohide();  
+			
 		if(this.loadDndStatus()==false&&this.unseen>0)
 		{
 			this.blinkIcon();
@@ -198,7 +212,7 @@ const 	NotificationCenter = new Lang.Class({
 		{
    			this.label.hide();
 			this.unseen=0;
-			Mainloop.source_remove(this._loopTimeoutId);
+			if(this._loopTimeoutId!=null) { Mainloop.source_remove(this._loopTimeoutId); this._loopTimeoutId=null;}		
 		}
 	},
 
@@ -206,9 +220,8 @@ const 	NotificationCenter = new Lang.Class({
 	{
    		if (this.menu.isOpen) 
 		{
-			this._messageList.setDate(new Date()); 
 			this.manageEvents(0);
-			Mainloop.source_remove(this._loopTimeoutId);
+			if(this._loopTimeoutId!=null) { Mainloop.source_remove(this._loopTimeoutId); this._loopTimeoutId=null;}		
 			if(this.prefs.get_boolean('show-label')==false) this.unseen=0;
             	}
 		if (!this.menu.isOpen) this.manageEvents(1);
