@@ -58,14 +58,15 @@ const 	Prefs1 = 	new GObject.Class({
 	 	    	    this.prefSwitch(_('Show Events List on Notification Center')       ,"show-events"		     ,2);
 			    this.prefSwitch(_('Keep Events List besides Calendar')             ,"show-events-in-calendar"    ,3);
 			    this.prefCombo (_('Show Do Not Disturb menu entry ') ,'dnd-position',4 ,['none','top'   ,'bottom'] ,[_("Don't Show"),_('On Top'),_('At Bottom')]);
-			    this.prefCombo (_('Clear All Button position ')	 ,'clear-button-alignment',5 ,['left','center','right'] ,[_('Left'),_('Center'),_('Right')]);
+			    this.prefCombo (_('Clear All Button position ')	 ,'clear-button-alignment',5 ,['left','center','right','hide'] ,[_('Left'),_('Center'),_('Right'),_("Don't Show")]);
 			    this.prefCombo (_('Notification Banner position')    ,'banner-pos' ,6 ,['left','center','right' ] ,[_('Left'),_('Center'),_('Right')]);
+			    this.prefTime  (_('Maximum height of Notification Center ( in % )')		,'max-height'		,7	,20	,100	,1);
 			    break;
 		    case 2 :this.prefCombo (_('Notification Center indicator position'),'indicator-pos' ,0 ,['left','center','right'] ,[_('Left'),_('Center'),_('Right')]);
 			    this.prefSwitch(_('AutoHide notification indicator on panel')		,'autohide'	  	,1);
 			    this.prefCombo (_('When new notification arrives'),'new-notification',2,['none','dot','count'],[_('Show Nothing'),_('Show Dot'),_('Show Count')]); 
    	        	    this.prefSwitch(_('Blink bell icon on new notifications ')	   	        ,'blink-icon'		,3);
-	        	    this.prefTime  (_('Blink Time Interval     ( in milliseconds )')		,'blink-time'		,4);
+	        	    this.prefTime  (_('Blink Time Interval     ( in milliseconds )')		,'blink-time'		,4	,100	,10000	,10);
 	        	    this.prefSwitch(_('Show Dots or Counts till all notifications are cleared') ,'show-label'		,5);
 		    default:break;
 		}
@@ -76,19 +77,17 @@ const 	Prefs1 = 	new GObject.Class({
 	{
 		let SettingLabel 	= new Gtk.Label({xalign: 1, label: LABEL,halign: Gtk.Align.START });
 		let SettingCombo 	= new Gtk.ComboBoxText();
-        	SettingCombo.append(options[0], 	items[0]);
-        	SettingCombo.append(options[1], 	items[1]);
-        	SettingCombo.append(options[2], 	items[2]);
+		for (let i=0;i<options.length;i++) SettingCombo.append(options[i], 	items[i]);
             	SettingCombo.set_active(options.indexOf(settings.get_string(KEY)));
             	SettingCombo.connect('changed', Lang.bind (this, function(widget) {settings.set_string(KEY, options[widget.get_active()]);  }));
 		this.grid.attach(SettingLabel,      0, pos, 1, 1);
 		this.grid.attach(SettingCombo,      2, pos, 3, 1);
 	},
 
-	prefTime: function(LABEL,KEY,pos) 
+	prefTime: function(LABEL,KEY,pos,mn,mx,st) 
 	{
 		let SettingLabel 	= new Gtk.Label({ xalign: 1, label: LABEL,halign: Gtk.Align.START });
-    		let timeSetting = Gtk.SpinButton.new_with_range(100,10000,10);
+    		let timeSetting = Gtk.SpinButton.new_with_range(mn,mx,st);
   		timeSetting.set_value(settings.get_int(KEY));
   		timeSetting.connect('notify::value', function(spin){ settings.set_int(KEY,spin.get_value_as_int()); });
     		this.grid.attach(SettingLabel    ,0, pos, 1,  1);

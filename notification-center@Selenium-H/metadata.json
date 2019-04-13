@@ -8,12 +8,12 @@
   "shell-version": [
     "3.22",
     "3.24",
-    "3.26",
+    "2.26",
     "3.28",
     "3.30",
     "3.32"
   ], 
   "url": "https://github.com/Selenium-H/Notification-Center", 
   "uuid": "notification-center@Selenium-H", 
-  "version": 13
+  "version": 14
 }

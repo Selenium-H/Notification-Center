@@ -12,15 +12,19 @@ const PanelMenu = imports.ui.panelMenu;
 const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
 const _ = Gettext.domain("notification-center").gettext;
+const SHELL_VERSION = imports.misc.config.PACKAGE_VERSION;
+
+let notificationCenter;
 
 function enable()
 {
-    	notificationCenter = new NotificationCenter();
+     	notificationCenter = new NotificationCenter();
 }
 
 function disable()
 {
-   	notificationCenter.destroy();
+	notificationCenter.undoChanges();   	
+	notificationCenter.destroy();
 }
 
 const 	NotificationCenter = new Lang.Class({
@@ -32,12 +36,12 @@ const 	NotificationCenter = new Lang.Class({
 		this.dndpref 	=  new Gio.Settings({schema_id:'org.gnome.desktop.notifications'});	
 		this.prefs 	=  new Gio.Settings({	settings_schema: Gio.SettingsSchemaSource.new_from_directory(Me.path + "/schemas", 
 							Gio.SettingsSchemaSource.get_default(), false).lookup(Me.metadata["settings-schema"], true) });
-   		this.initTranslations();
 		this.connectedSignals = [];
 		this.showingSections  = [];
 		this._loopTimeoutId   = null;
 		this.unseen 	      = 0;
 
+		this.initTranslations();
 		this.parent(1-0.5*this.prefs.get_enum('indicator-pos'), "NotificationCenter");	
 		this.buildNotificationCenter();
 		
@@ -46,8 +50,8 @@ const 	NotificationCenter = new Lang.Class({
 		this._indicator =  new St.BoxLayout({ vertical: false, style_class: 'panel-status-menu-box',style:"spacing:0.0em"});
         	this._indicator.add_child(this.icon);
         	this._indicator.add_child(this.label);
-
         	this.actor.add_child(this._indicator);
+
 		Main.panel.addToStatusArea("NotificationCenter", this, 2, this.prefs.get_string('indicator-pos'));
 		Main.messageTray._bannerBin.x = (this.prefs.get_enum('banner-pos')-1)*(Main.layoutManager.monitors[0].width-(Main.messageTray._bannerBin.width = this.scrollView.width));
 		this.resetIndicator();
@@ -55,23 +59,23 @@ const 	NotificationCenter = new Lang.Class({
 
 	addClearButton: function()
 	{
-        	    this.clearButton = new St.Button({style_class: 'message-list-clear-button button',label: _("Clear All"),can_focus: true});
-        	    this.clearButton.set_x_align(1+this.prefs.get_enum('clear-button-alignment'));
-                    this.clearButton.connect('clicked',Lang.bind(this,function(){ 	len=this.showingSections.length;
-                									while(len!=0){
-											this.showingSections[len-1].clear();
-	               									len--;
-											}				
-										}));
-        	    this.menu.box.add(this.clearButton);
-		    this.menu.addMenuItem(new PopupMenu.PopupBaseMenuItem({activate: false,hover: false}));
+		if(this.prefs.get_enum("clear-button-alignment")==3) return;
+	
+        	this.clearButton = new St.Button({style_class: 'message-list-clear-button button',label: _("Clear All"),can_focus: true});
+            	this.clearButton.set_x_align(1+this.prefs.get_enum('clear-button-alignment'));
+                this.clearButton.connect('clicked',()=>	{ 	let len=this.showingSections.length;
+                						while(len!=0){	this.showingSections[len-1].clear();
+	               								len--;
+								}this.clearButton.hide();				
+							});
+        	this.menu.box.add(this.clearButton);
+		this.menu.addMenuItem(new PopupMenu.PopupBaseMenuItem({reactive:false}));
 	},
 
 	addDndMenu: function()
 	{
 		this.dnditem = new PopupMenu.PopupSwitchMenuItem(_("Do Not Disturb"));     
-		this.dnditem.connect("toggled", Lang.bind(this, this.setDndState));  	
-               	this.menu.addMenuItem(this.dnditem);
+		this.dnditem.connect("toggled", ()=>{(this.dnditem.state) ? this.dndpref.set_boolean('show-banners',false):this.dndpref.set_boolean('show-banners',true);});
 	},
 
 	addThisSection:function(section,KEY,fNo)
@@ -87,7 +91,7 @@ const 	NotificationCenter = new Lang.Class({
 
 	blinkIcon: function()
 	{
-		if(this.prefs.get_boolean('blink-icon')==true)
+		if(this.prefs.get_boolean("blink-icon"))
 		{
 			if(this._loopTimeoutId!=null) Mainloop.source_remove(this._loopTimeoutId);		
 			this.icon.set_opacity((this.icon.get_opacity()==255)? 100 : 255);
@@ -97,30 +101,32 @@ const 	NotificationCenter = new Lang.Class({
 
 	buildNotificationCenter: function()
 	{
+		this.notifyEntry  = new PopupMenu.PopupBaseMenuItem({reactive:false});     
 		this._messageList = Main.panel.statusArea.dateMenu._messageList;
-		this.box = new St.BoxLayout({ vertical: true});
-		this.scrollView = new St.ScrollView({ style:"padding: 15px; padding-bottom: 0px; min-width:"+ this._messageList.actor.width+"px; max-width:" 										+0.2*Main.layoutManager.monitors[0].width + "px;", hscrollbar_policy: 2, x_fill: true, y_fill: true});
- 		this.scrollView.add_actor(this.box);
+		this.box 	  = new St.BoxLayout({ vertical: true});
+		this.scrollView   = new St.ScrollView({ hscrollbar_policy:2,x_fill:true, y_fill: true,style:"min-width:"+this._messageList.actor.width+"px;max-height: "+0.01*this.prefs.get_int("max-height")*Main.layoutManager.monitors[0].height +"px; max-width:"+this._messageList.actor.width+"px; padding: 0px;"});
+		this.addDndMenu();
 		this.addThisSection(this._messageList._mediaSection	   ,"show-media"	 ,1);
 		this.addThisSection(this._messageList._notificationSection ,"show-notifications" ,0);
 		this.addThisSection(this._messageList._eventsSection 	   ,"show-events" 	 ,1);
 		this.manageEvents(1);
-
-		switch(this.prefs.get_enum('dnd-position'))
+		this.scrollView.add_actor(this.box);
+		this.notifyEntry.actor.add(this.scrollView);
+		switch(this.prefs.get_enum("dnd-position"))
 		{
-			case 1 : this.addDndMenu();
-			case 0 : this.menu.box.add(this.scrollView); this.addClearButton();  				break;
-                        default: this.menu.box.add(this.scrollView); this.addClearButton(); this.addDndMenu(this.menu);	break;
+			case 1 : this.menu.addMenuItem(this.dnditem);
+			case 0 : this.menu.addMenuItem(this.notifyEntry); this.addClearButton();  					break;
+                        default: this.menu.addMenuItem(this.notifyEntry); this.addClearButton(); this.menu.addMenuItem(this.dnditem); 	break;
 		}
-		this.menu.connect("open-state-changed", Lang.bind(this, this.seen));
 		Main.panel.statusArea.dateMenu.actor.get_children()[0].remove_actor(Main.panel.statusArea.dateMenu._indicator.actor);	
+		this.menu.connect("open-state-changed",()=>this.seen());
 	},
 
 	filterNotifications: function()
 	{
 		let source=Main.messageTray.getSources()[Main.messageTray.getSources().length-1];
-		if(this.prefs.get_strv('name-list').indexOf(source.title)>=0)
-		switch(this.prefs.get_enum('for-list'))
+		if(this.prefs.get_strv("name-list").indexOf(source.title)>=0)
+		switch(this.prefs.get_enum("for-list"))
 		{
 			case 0: 					return ;
 			case 1: source.policy.destroy(); 		return ;
@@ -138,7 +144,7 @@ const 	NotificationCenter = new Lang.Class({
     	loadDndStatus: function ()
  	{
 		this.icon.icon_name = Gtk.IconTheme.get_default().has_icon("notification-symbolic")?"notification-symbolic":"preferences-system-notifications-symbolic";
-                if(this.dndpref.get_boolean('show-banners')==true)
+                if(this.dndpref.get_boolean("show-banners")==true)
 		{
 			this.dnditem.setToggleState(false);
 			this.icon.set_opacity(255);
@@ -152,21 +158,22 @@ const 	NotificationCenter = new Lang.Class({
                         return true;
 	},
 
-	manageAutohide:function()
+	manageAutohide: function()
 	{
-		this.clearButton.hide();
-		if(this.prefs.get_boolean("autohide")==true && this.menu.isOpen == false) this.actor.hide();
+		if(this.menu.isOpen) return;
 
-		len=this.showingSections.length;
-                while(len!=0){
-			if(this.showingSections[len-1]._shouldShow()) 	{this.actor.show();	this.clearButton.show(); }
-	               	len--;
+		if( this.prefs.get_boolean("autohide") == true ) this.actor.hide();
+		if(this.prefs.get_boolean("show-events")==true){this._messageList._eventsSection._reloadEvents();
+			if(SHELL_VERSION < '3.32.0') if(this._messageList._eventsSection._canClear()){this.actor.show();this.clearButton.show(); return;}
+			if(this._messageList._eventsSection._shouldShow()){this.actor.show();this.clearButton.show(); return;}
 		}
+		if(this.prefs.get_boolean("show-notifications"))if(this._messageList._notificationSection._canClear()){this.actor.show();this.clearButton.show(); return;}
+		if(this.prefs.get_boolean("show-media")) if(this._messageList._mediaSection._shouldShow()) this.actor.show(); return;
 	},
 
 	manageEvents: function(action)
 	{
-		if(this.prefs.get_boolean('show-events')==false) return ;
+		if(this.prefs.get_boolean("show-events")==false) return ;
 		if(this.prefs.get_boolean("show-events-in-calendar")==true)
 		switch(action)
 		{
@@ -190,24 +197,18 @@ const 	NotificationCenter = new Lang.Class({
 
     	resetIndicator: function()
 	{
-		len=this.showingSections.length;
-                while(len!=0){
-			this.showingSections[len-1].setDate(new Date());  
-	               	len--;
-		}
-
-		this.manageAutohide();  
-			
+		this.manageAutohide();
 		if(this.loadDndStatus()==false&&this.unseen>0)
 		{
 			this.blinkIcon();
-			switch(this.prefs.get_enum('new-notification'))
+			switch(this.prefs.get_enum("new-notification"))
 			{
 				case 1	: 	this.label.show(); this.label.text='• '; 			return;
 				case 2	: 	this.label.show(); this.label.text=this.unseen.toString()+' '; 	return;
 				default : 	this.label.hide();						return;
 			}
 		}
+
 		if(this.unseen<=0)
 		{
    			this.label.hide();
@@ -220,23 +221,20 @@ const 	NotificationCenter = new Lang.Class({
 	{
    		if (this.menu.isOpen) 
 		{
+			this._messageList.setDate(new Date());
 			this.manageEvents(0);
 			if(this._loopTimeoutId!=null) { Mainloop.source_remove(this._loopTimeoutId); this._loopTimeoutId=null;}		
-			if(this.prefs.get_boolean('show-label')==false) this.unseen=0;
+			if(this.prefs.get_boolean("show-label")==false) this.unseen=0;
             	}
 		if (!this.menu.isOpen) this.manageEvents(1);
 		this.resetIndicator();
         },
-        
-    	setDndState: function () 
-	{
- 		(this.dnditem.state) ? this.dndpref.set_boolean('show-banners',false):this.dndpref.set_boolean('show-banners',true);   
-	},
 
-    	destroy: function () 
+    	undoChanges: function () 
 	{
+		if(this._loopTimeoutId!=null) { Mainloop.source_remove(this._loopTimeoutId); this._loopTimeoutId=null;}		
 		this.manageEvents(0);
-		len=this.showingSections.length;
+		let len=this.showingSections.length;
                 while(len!=0)
 		{
 			this.showingSections[len-1]._list.disconnect(this.connectedSignals[2*len-1]);
@@ -252,9 +250,7 @@ const 	NotificationCenter = new Lang.Class({
 		this._messageList._addSection(this._messageList._mediaSection);
 		this._messageList._addSection(this._messageList._notificationSection);
 		this._messageList._addSection(this._messageList._eventsSection);
-
 		Main.messageTray._bannerBin.show();
 		Main.messageTray._bannerBin.x=0;
-		this.parent();
 	},
 });

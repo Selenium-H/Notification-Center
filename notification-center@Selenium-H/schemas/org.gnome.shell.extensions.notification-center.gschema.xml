@@ -9,6 +9,7 @@
     		<value value='0' nick='left'/>
     		<value value='1' nick='center'/>
     		<value value='2' nick='right'/>
+    		<value value='3' nick='hide'/>
   	</enum>
   	<enum id='org.gnome.shell.extensions.notification-center.banner-pos'>
     		<value value='0' nick='left'/>
@@ -67,7 +68,11 @@
       			<summary>Notification Banner position</summary>
       			<description>Changes position of Notification Banner.</description>
     		</key>
-
+		<key type="i" name="max-height">
+      			<default>100</default>
+      			<summary>Maximum height of Notification Center</summary>
+      			<description>Maximum height of Notification Center</description>
+    		</key>
     		<key name='indicator-pos' enum='org.gnome.shell.extensions.notification-center.banner-pos'>
       			<default>'right'</default>
       			<summary>Indicator position</summary>
