@@ -163,9 +163,12 @@ const 	NotificationCenter = new Lang.Class({
 		if(this.menu.isOpen) return;
 
 		if( this.prefs.get_boolean("autohide") == true ) this.actor.hide();
-		if(this.prefs.get_boolean("show-events")==true){this._messageList._eventsSection._reloadEvents();
-			if(SHELL_VERSION < '3.32.0') if(this._messageList._eventsSection._canClear()){this.actor.show();this.clearButton.show(); return;}
+		if(this.prefs.get_boolean("show-events")==true){
+			if(SHELL_VERSION < '3.30.0') {if(this._messageList._eventsSection._canClear()){this.actor.show();this.clearButton.show(); return;}}
+			else {
+			this._messageList._eventsSection._reloadEvents(); 
 			if(this._messageList._eventsSection._shouldShow()){this.actor.show();this.clearButton.show(); return;}
+			}
 		}
 		if(this.prefs.get_boolean("show-notifications"))if(this._messageList._notificationSection._canClear()){this.actor.show();this.clearButton.show(); return;}
 		if(this.prefs.get_boolean("show-media")) if(this._messageList._mediaSection._shouldShow()) this.actor.show(); return;
