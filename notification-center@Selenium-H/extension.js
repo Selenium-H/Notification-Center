@@ -165,7 +165,7 @@ const 	NotificationCenter = new Lang.Class({
 
 	manageAutohide: function()
 	{
-		if(this.menu.isOpen || this.prefs.get_boolean("autohide")==false ) return;
+		if(this.menu.isOpen) return;
 		
 		if(this.prefs.get_boolean("show-notifications"))if(this._messageList._notificationSection._canClear()){this.actor.show();this.clearButton.show(); return;}
 		if(this.prefs.get_boolean("show-events")) {
@@ -178,7 +178,7 @@ const 	NotificationCenter = new Lang.Class({
 			}
 		}
 		if(this.prefs.get_boolean("show-media"))  if(this._messageList._mediaSection._shouldShow()) {this.actor.show(); return;}
-		this.actor.hide();
+		(this.prefs.get_boolean("autohide")==false)?this.actor.show(): this.actor.hide();
 	},
 
 	manageEvents: function(action)
