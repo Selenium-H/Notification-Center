@@ -166,17 +166,19 @@ const 	NotificationCenter = new Lang.Class({
 	manageAutohide: function()
 	{
 		if(this.menu.isOpen || this.prefs.get_boolean("autohide")==false ) return;
-
+		
 		if(this.prefs.get_boolean("show-notifications"))if(this._messageList._notificationSection._canClear()){this.actor.show();this.clearButton.show(); return;}
-		if(this.prefs.get_boolean("show-media")) if(this._messageList._mediaSection._shouldShow()) {this.actor.show(); return;}
-		if(this.prefs.get_boolean("show-events")){
-			if(SHELL_VERSION < '3.30.0') {
-				if(this._messageList._eventsSection._canClear()){this.actor.show();this.clearButton.show(); return;}}
+		if(this.prefs.get_boolean("show-events")) {
+			if(SHELL_VERSION < "3.32.0") {
+				if(this._messageList._eventsSection._canClear()==false) {this.actor.hide();} else {this.actor.show(); this.clearButton.show();return;}
+			}
 			else {
 				this._messageList._eventsSection._reloadEvents(); 
-				if(this._messageList._eventsSection._shouldShow()){this.actor.show();this.clearButton.show(); return;}
+				if(this._messageList._eventsSection._shouldShow()) {this.actor.show(); return;}
 			}
-		}this.actor.hide();
+		}
+		if(this.prefs.get_boolean("show-media"))  if(this._messageList._mediaSection._shouldShow()) {this.actor.show(); return;}
+		this.actor.hide();
 	},
 
 	manageEvents: function(action)
