@@ -69,6 +69,7 @@ const 	NotificationCenter = new Lang.Class({
 								}this.clearButton.hide();				
 							});
         	this.menu.box.add(this.clearButton);
+		this.clearButton.hide();
 		this.menu.addMenuItem(new PopupMenu.PopupBaseMenuItem({reactive:false}));
 	},
 
@@ -120,6 +121,10 @@ const 	NotificationCenter = new Lang.Class({
 		}
 		Main.panel.statusArea.dateMenu.actor.get_children()[0].remove_actor(Main.panel.statusArea.dateMenu._indicator.actor);	
 		this.menu.connect("open-state-changed",()=>this.seen());
+		if(this.prefs.get_boolean("show-events")) this.dmSig = Main.panel.statusArea.dateMenu.menu.connect("open-state-changed",()=>
+		{
+			if(!Main.panel.statusArea.dateMenu.menu.isOpen){this._messageList.setDate(new Date()); this.resetIndicator();}
+		});
 	},
 
 	filterNotifications: function()
@@ -160,18 +165,18 @@ const 	NotificationCenter = new Lang.Class({
 
 	manageAutohide: function()
 	{
-		if(this.menu.isOpen) return;
+		if(this.menu.isOpen || this.prefs.get_boolean("autohide")==false ) return;
 
-		if( this.prefs.get_boolean("autohide") == true ) this.actor.hide();
-		if(this.prefs.get_boolean("show-events")==true){
-			if(SHELL_VERSION < '3.30.0') {if(this._messageList._eventsSection._canClear()){this.actor.show();this.clearButton.show(); return;}}
-			else {
-			this._messageList._eventsSection._reloadEvents(); 
-			if(this._messageList._eventsSection._shouldShow()){this.actor.show();this.clearButton.show(); return;}
-			}
-		}
 		if(this.prefs.get_boolean("show-notifications"))if(this._messageList._notificationSection._canClear()){this.actor.show();this.clearButton.show(); return;}
-		if(this.prefs.get_boolean("show-media")) if(this._messageList._mediaSection._shouldShow()) this.actor.show(); return;
+		if(this.prefs.get_boolean("show-media")) if(this._messageList._mediaSection._shouldShow()) {this.actor.show(); return;}
+		if(this.prefs.get_boolean("show-events")){
+			if(SHELL_VERSION < '3.30.0') {
+				if(this._messageList._eventsSection._canClear()){this.actor.show();this.clearButton.show(); return;}}
+			else {
+				this._messageList._eventsSection._reloadEvents(); 
+				if(this._messageList._eventsSection._shouldShow()){this.actor.show();this.clearButton.show(); return;}
+			}
+		}this.actor.hide();
 	},
 
 	manageEvents: function(action)
@@ -255,5 +260,6 @@ const 	NotificationCenter = new Lang.Class({
 		this._messageList._addSection(this._messageList._eventsSection);
 		Main.messageTray._bannerBin.show();
 		Main.messageTray._bannerBin.x=0;
+		if(this.prefs.get_boolean("show-events")) Main.panel.statusArea.dateMenu.menu.disconnect(this.dmSig);
 	},
 });
