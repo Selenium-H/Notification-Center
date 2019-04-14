@@ -15,75 +15,75 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: extension.js:64
+#: extension.js:65
 msgid "Clear All"
 msgstr ""
 
-#: extension.js:77
+#: extension.js:79
 msgid "Do Not Disturb"
 msgstr ""
 
-#: prefs.js:36
+#: prefs.js:38
 msgid "Notifications"
 msgstr ""
 
-#: prefs.js:37
+#: prefs.js:39
 msgid "Indicator"
 msgstr ""
 
-#: prefs.js:38
+#: prefs.js:40
 msgid "List"
 msgstr ""
 
-#: prefs.js:39
+#: prefs.js:41
 msgid "About"
 msgstr ""
 
-#: prefs.js:56
+#: prefs.js:54
 msgid "Show Media Section on Notification Center"
 msgstr ""
 
-#: prefs.js:57
+#: prefs.js:55
 msgid "Show Notification List on Notification Center"
 msgstr ""
 
-#: prefs.js:58
+#: prefs.js:56
 msgid "Show Events List on Notification Center"
 msgstr ""
 
-#: prefs.js:59
+#: prefs.js:57
 msgid "Keep Events List besides Calendar"
 msgstr ""
 
-#: prefs.js:60
+#: prefs.js:58
 msgid "Show Do Not Disturb menu entry "
 msgstr ""
 
-#: prefs.js:60 prefs.js:61
+#: prefs.js:59 prefs.js:61
 msgid "Don't Show"
 msgstr ""
 
-#: prefs.js:60
+#: prefs.js:59
 msgid "On Top"
 msgstr ""
 
-#: prefs.js:60
+#: prefs.js:59
 msgid "At Bottom"
 msgstr ""
 
-#: prefs.js:61
+#: prefs.js:60
 msgid "Clear All Button position "
 msgstr ""
 
-#: prefs.js:61 prefs.js:62 prefs.js:65
+#: prefs.js:61 prefs.js:63 prefs.js:67
 msgid "Left"
 msgstr ""
 
-#: prefs.js:61 prefs.js:62 prefs.js:65
+#: prefs.js:61 prefs.js:63 prefs.js:67
 msgid "Center"
 msgstr ""
 
-#: prefs.js:61 prefs.js:62 prefs.js:65
+#: prefs.js:61 prefs.js:63 prefs.js:67
 msgid "Right"
 msgstr ""
 
@@ -91,78 +91,78 @@ msgstr ""
 msgid "Notification Banner position"
 msgstr ""
 
-#: prefs.js:63
+#: prefs.js:64
 msgid "Maximum height of Notification Center ( in % )"
 msgstr ""
 
-#: prefs.js:65
+#: prefs.js:66
 msgid "Notification Center indicator position"
 msgstr ""
 
-#: prefs.js:66
+#: prefs.js:68
 msgid "AutoHide notification indicator on panel"
 msgstr ""
 
-#: prefs.js:67
+#: prefs.js:69
 msgid "When new notification arrives"
 msgstr ""
 
-#: prefs.js:67
+#: prefs.js:70
 msgid "Show Nothing"
 msgstr ""
 
-#: prefs.js:67
+#: prefs.js:70
 msgid "Show Dot"
 msgstr ""
 
-#: prefs.js:67
+#: prefs.js:70
 msgid "Show Count"
 msgstr ""
 
-#: prefs.js:68
+#: prefs.js:71
 msgid "Blink bell icon on new notifications "
 msgstr ""
 
-#: prefs.js:69
+#: prefs.js:72
 msgid "Blink Time Interval     ( in milliseconds )"
 msgstr ""
 
-#: prefs.js:70
+#: prefs.js:73
 msgid "Show Dots or Counts till all notifications are cleared"
 msgstr ""
 
-#: prefs.js:123
+#: prefs.js:126
 msgid "Choose an application"
 msgstr ""
 
-#: prefs.js:167
+#: prefs.js:170
 msgid "Application List"
 msgstr ""
 
-#: prefs.js:236
+#: prefs.js:239
 msgid "If new notification arrives for apps on this list"
 msgstr ""
 
-#: prefs.js:236
+#: prefs.js:239
 msgid "Show them"
 msgstr ""
 
-#: prefs.js:236
+#: prefs.js:239
 msgid "Show counts only"
 msgstr ""
 
-#: prefs.js:236
+#: prefs.js:239
 msgid "Show banner only"
 msgstr ""
 
-#: prefs.js:236
+#: prefs.js:239
 msgid "Ignore them"
 msgstr ""
 
-#: prefs.js:237
+#: prefs.js:240
 msgid "     Add    "
 msgstr ""
 
-#: prefs.js:241
+#: prefs.js:244
 msgid " Remove "
 msgstr ""

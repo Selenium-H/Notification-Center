@@ -14,7 +14,6 @@ const PanelMenu = imports.ui.panelMenu;
 const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
 const _ = Gettext.domain("notification-center").gettext;
-const SHELL_VERSION = imports.misc.config.PACKAGE_VERSION;
 
 let notificationCenter;
 
@@ -118,8 +117,9 @@ const 	NotificationCenter = new Lang.Class({
 		switch(this.prefs.get_enum("dnd-position"))
 		{
 			case 1 : this.menu.addMenuItem(this.dnditem);
-			case 0 : this.menu.addMenuItem(this.notifyEntry); this.addClearButton();  					break;
-                        default: this.menu.addMenuItem(this.notifyEntry);this.addClearButton();	this.menu.addMenuItem(new PopupMenu.PopupBaseMenuItem({reactive:false})); 													this.menu.addMenuItem(this.dnditem); 	break;
+			case 0 : this.menu.addMenuItem(this.notifyEntry); this.addClearButton();  						break;
+                        default: this.menu.addMenuItem(this.notifyEntry); this.addClearButton();
+				 this.menu.addMenuItem(new PopupMenu.PopupBaseMenuItem({reactive:false})); this.menu.addMenuItem(this.dnditem); break;
 		}
 		Main.panel.statusArea.dateMenu.actor.get_children()[0].remove_actor(Main.panel.statusArea.dateMenu._indicator.actor);	
 		this.menu.connect("open-state-changed",()=>this.seen());
@@ -136,10 +136,10 @@ const 	NotificationCenter = new Lang.Class({
 		if(this.prefs.get_strv("name-list").indexOf(source.title)>=0)
 		switch(this.prefs.get_enum("for-list"))
 		{
-			case 0: 					return ;
-			case 1: source.policy.destroy(); 		return ;
-			case 3: source.policy.destroy();
-			case 2: this.unseen--;				return ;
+			case 0: 											return ;
+			case 1: (Config.PACKAGE_VERSION < "3.32.0")? source.policy = null : source.policy.destroy(); 	return ;
+			case 3: (Config.PACKAGE_VERSION < "3.32.0")? source.policy = null : source.policy.destroy();
+			case 2: this.unseen--;										return ;
                	}
 	},
 
@@ -173,7 +173,7 @@ const 	NotificationCenter = new Lang.Class({
 		this.clearButtonEntry.actor.show();
 		if(this.prefs.get_boolean("show-notifications"))if(this._messageList._notificationSection._canClear()){this.actor.show(); return;}
 		if(this.prefs.get_boolean("show-events")) {
-			if(SHELL_VERSION < "3.32.0") {
+			if(Config.PACKAGE_VERSION < "3.32.0") {
 				if(this._messageList._eventsSection._canClear()==false) {this.actor.hide();} else {this.actor.show();return;}
 			}
 			else{
