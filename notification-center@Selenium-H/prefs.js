@@ -1,3 +1,5 @@
+//Version 14
+
 const Config = imports.misc.config;
 const ExtensionUtils = imports.misc.extensionUtils;
 const Extension = ExtensionUtils.getCurrentExtension();
@@ -33,10 +35,10 @@ const 	NotificationCenterPrefs = new GObject.Class({
     	_init: function() 
 	{
         	this.parent({ transition_type: 0, transition_duration: 500 });
-        	this.add_titled(new Prefs1(1)		,'prefs',_('Notifications'));
-        	this.add_titled(new Prefs1(2)		,'prefs',_('Indicator'));
-        	this.add_titled(new AppsListPrefs()	,'list'	,_('List'));
-       		this.add_titled(new AboutPage()	        ,'about',_('About'));
+        	this.add_titled(new Prefs1(1)		,'Notifications',_('Notifications'));
+        	this.add_titled(new Prefs1(2)		,'Indicator'	,_('Indicator'    ));
+        	this.add_titled(new AppsListPrefs()	,'List'		,_('List'         ));
+       		this.add_titled(new AboutPage()	        ,'About'	,_('About'        ));
     	}
 });
 
@@ -45,35 +47,36 @@ const 	Prefs1 = 	new GObject.Class({
 
     	_init: function(page) 
 	{
-        	this.parent();
-	
-		settings	= new Gio.Settings({ 	settings_schema: Gio.SettingsSchemaSource.new_from_directory(Extension.path + "/schemas", 								Gio.SettingsSchemaSource.get_default(), false).lookup(Extension.metadata['settings-schema'], true) });
-    		this.grid 	= new Gtk.Grid({ column_spacing: 80, halign: Gtk.Align.CENTER, margin: 20, row_spacing: 20 });
-    		this.grid.set_border_width(20);
-		
+	 	let settings	= new Gio.Settings({ 	settings_schema: Gio.SettingsSchemaSource.new_from_directory(Extension.path + "/schemas", 								Gio.SettingsSchemaSource.get_default(), false).lookup(Extension.metadata['settings-schema'], true) });
+    		this.grid 	= new Gtk.Grid({ column_spacing: 80, halign: Gtk.Align.CENTER, margin: 20, row_spacing: 20,border_width:20 });
 		switch(page)
 		{	
-		    case 1 :this.prefSwitch(_('Show Media Section on Notification Center')     ,"show-media"	     	     ,0);
-			    this.prefSwitch(_('Show Notification List on Notification Center') ,"show-notifications"	     ,1);
-	 	    	    this.prefSwitch(_('Show Events List on Notification Center')       ,"show-events"		     ,2);
-			    this.prefSwitch(_('Keep Events List besides Calendar')             ,"show-events-in-calendar"    ,3);
-			    this.prefCombo (_('Show Do Not Disturb menu entry ') ,'dnd-position',4 ,['none','top'   ,'bottom'] ,[_("Don't Show"),_('On Top'),_('At Bottom')]);
-			    this.prefCombo (_('Clear All Button position ')	 ,'clear-button-alignment',5 ,['left','center','right','hide'] ,[_('Left'),_('Center'),_('Right'),_("Don't Show")]);
-			    this.prefCombo (_('Notification Banner position')    ,'banner-pos' ,6 ,['left','center','right' ] ,[_('Left'),_('Center'),_('Right')]);
-			    this.prefTime  (_('Maximum height of Notification Center ( in % )')		,'max-height'		,7	,20	,100	,1);
+		    case 1 :this.prefSwitch(_('Show Media Section on Notification Center')     ,"show-media"	     	     ,0 		,settings);
+			    this.prefSwitch(_('Show Notification List on Notification Center') ,"show-notifications"	     ,1 		,settings);
+	 	    	    this.prefSwitch(_('Show Events List on Notification Center')       ,"show-events"		     ,2 		,settings);
+			    this.prefSwitch(_('Keep Events List besides Calendar')             ,"show-events-in-calendar"    ,3 		,settings);
+			    this.prefCombo (_('Show Do Not Disturb menu entry ') ,'dnd-position'			     ,4 
+					    ,['none','top','bottom'] 		,[_("Don't Show"),_('On Top'),_('At Bottom')] 			,settings);
+			    this.prefCombo (_('Clear All Button position ')	 ,'clear-button-alignment'		     ,5 
+					    ,['left','center','right','hide'] 	,[_('Left'),_('Center'),_('Right'),_("Don't Show")] 		,settings);
+			    this.prefCombo (_('Notification Banner position')    ,'banner-pos' 				     ,6 
+					    ,['left','center','right' ] 	,[_('Left'),_('Center'),_('Right')] 				,settings);
+			    this.prefTime  (_('Maximum height of Notification Center ( in % )')	,'max-height'	     	     ,7	,20,100,1 	,settings);
 			    break;
-		    case 2 :this.prefCombo (_('Notification Center indicator position'),'indicator-pos' ,0 ,['left','center','right'] ,[_('Left'),_('Center'),_('Right')]);
-			    this.prefSwitch(_('AutoHide notification indicator on panel')		,'autohide'	  	,1);
-			    this.prefCombo (_('When new notification arrives'),'new-notification',2,['none','dot','count'],[_('Show Nothing'),_('Show Dot'),_('Show Count')]); 
-   	        	    this.prefSwitch(_('Blink bell icon on new notifications ')	   	        ,'blink-icon'		,3);
-	        	    this.prefTime  (_('Blink Time Interval     ( in milliseconds )')		,'blink-time'		,4	,100	,10000	,10);
-	        	    this.prefSwitch(_('Show Dots or Counts till all notifications are cleared') ,'show-label'		,5);
+		    case 2 :this.prefCombo (_('Notification Center indicator position'),'indicator-pos' 		     ,0 
+					    ,['left','center','right'] 		,[_('Left'),_('Center'),_('Right')] 				,settings);
+			    this.prefSwitch(_('AutoHide notification indicator on panel')		,'autohide'	     ,1 		,settings);
+			    this.prefCombo (_('When new notification arrives'),'new-notification'			     ,2
+					    ,['none','dot','count']		,[_('Show Nothing'),_('Show Dot'),_('Show Count')] 		,settings); 
+   	        	    this.prefSwitch(_('Blink bell icon on new notifications ')	   	        ,'blink-icon'	     ,3 		,settings);
+	        	    this.prefTime  (_('Blink Time Interval     ( in milliseconds )')		,'blink-time'	     ,4	,100,10000,10 	,settings);
+	        	    this.prefSwitch(_('Show Dots or Counts till all notifications are cleared') ,'show-label'	     ,5 		,settings);
 		    default:break;
 		}
 		return this.grid;
 	},
 
-	prefCombo: function(LABEL,KEY,pos,options,items)
+	prefCombo: function(LABEL,KEY,pos,options,items ,settings)
 	{
 		let SettingLabel 	= new Gtk.Label({xalign: 1, label: LABEL,halign: Gtk.Align.START });
 		let SettingCombo 	= new Gtk.ComboBoxText();
@@ -84,7 +87,7 @@ const 	Prefs1 = 	new GObject.Class({
 		this.grid.attach(SettingCombo,      2, pos, 3, 1);
 	},
 
-	prefTime: function(LABEL,KEY,pos,mn,mx,st) 
+	prefTime: function(LABEL,KEY,pos,mn,mx,st ,settings) 
 	{
 		let SettingLabel 	= new Gtk.Label({ xalign: 1, label: LABEL,halign: Gtk.Align.START });
     		let timeSetting = Gtk.SpinButton.new_with_range(mn,mx,st);
@@ -94,7 +97,7 @@ const 	Prefs1 = 	new GObject.Class({
 		this.grid.attach(timeSetting     ,2, pos, 3,  1);
 	},
 
-	prefSwitch: function(LABEL,KEY,pos)
+	prefSwitch: function(LABEL,KEY,pos ,settings)
 	{
 		let SettingLabel 	= new Gtk.Label({ xalign: 1, label: LABEL,halign: Gtk.Align.START });
     		let SettingSwitch 	= new Gtk.Switch({hexpand: false,active: settings.get_boolean(KEY),halign:Gtk.Align.END});
@@ -185,8 +188,8 @@ const 	AppsListPrefs = new GObject.Class({
         	SettingCombo.append(options[1], 	items[1]);
         	SettingCombo.append(options[2], 	items[2]);
         	SettingCombo.append(options[3], 	items[3]);		
-            	SettingCombo.set_active(options.indexOf(settings.get_string(KEY)));
-            	SettingCombo.connect('changed', Lang.bind (this, function(widget) {settings.set_string(KEY, options[widget.get_active()]);  }));
+            	SettingCombo.set_active(options.indexOf(this.settings.get_string(KEY)));
+            	SettingCombo.connect('changed', Lang.bind (this, function(widget) {this.settings.set_string(KEY, options[widget.get_active()]);  }));
 		box.attach(SettingLabel,0,pos,1,1);
 		box.attach(SettingCombo,0,pos+1,1,1);
 	},
@@ -230,7 +233,7 @@ const 	AppsListPrefs = new GObject.Class({
   	},
 
 	showPrefs: function()
-	{	
+{
 		let box = new Gtk.Grid({ column_spacing: 20, halign: Gtk.Align.CENTER, margin: 20, row_spacing: 20 });
 
 		this.prefCombo(_('If new notification arrives for apps on this list'),'for-list',1,['none','count','banner','both'], 							[_('Show them'),_('Show counts only'),_('Show banner only'),_('Ignore them')],box);
@@ -238,7 +241,7 @@ const 	AppsListPrefs = new GObject.Class({
     		addButton.connect('clicked', Lang.bind(this, this.addApp));
       		box.attach(addButton,0,0,1,1);
 
-    		let delButton = new Gtk.Button({label: _(" Remove "),halign:Gtk.Align.END});
+let delButton = new Gtk.Button({label: _(" Remove "),halign:Gtk.Align.END});
       		delButton.connect('clicked', Lang.bind(this, this.removeApp));
       		box.attach(delButton,0,0,1,1);
 		this.attach(box,1,0,1,1); 
