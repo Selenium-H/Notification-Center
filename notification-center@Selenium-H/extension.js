@@ -79,6 +79,7 @@ const 	NotificationCenter = new Lang.Class({
 	{
 		this.dnditem = new PopupMenu.PopupSwitchMenuItem(_("Do Not Disturb"));     
 		this.dnditem.connect("toggled", ()=>{(this.dnditem.state) ? this.dndpref.set_boolean('show-banners',false):this.dndpref.set_boolean('show-banners',true);});
+		this.actor.connect("button-press-event", (actor, event)=>this.middleClickDndToggle(actor, event));
 	},
 
 	addThisSection:function(section,KEY,fNo)
@@ -174,6 +175,26 @@ const 	NotificationCenter = new Lang.Class({
 			this.label.hide();
                        	Main.messageTray._bannerBin.hide();
                         return true;
+	},
+
+	middleClickDndToggle: function(actor, event) {
+		let button = event.get_button();
+		// if middle click
+		if (button == 2) {
+			// close the menu, since it gets open on any click
+			if (this.menu.isOpen) {
+				this.menu.close();
+			}
+			// toggle DND state
+			if (this.dndpref.get_boolean('show-banners') == true) {
+				this.dndpref.set_boolean('show-banners', false)
+			}
+			else {
+				this.dndpref.set_boolean('show-banners', true);
+			}
+			// reload dnd status
+			this.loadDndStatus();
+		};
 	},
 
 	manageAutohide: function()
