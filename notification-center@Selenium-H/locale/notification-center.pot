@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: notification-center-10.0\n"
+"Project-Id-Version: notification-center-15.0\n"
 "POT-Creation-Date: 2016-06-10 19:03-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -15,11 +15,11 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: extension.js:65
+#: extension.js:66
 msgid "Clear All"
 msgstr ""
 
-#: extension.js:79
+#: extension.js:80
 msgid "Do Not Disturb"
 msgstr ""
 
@@ -104,65 +104,85 @@ msgid "AutoHide notification indicator on panel"
 msgstr ""
 
 #: prefs.js:69
-msgid "When new notification arrives"
+msgid "Shortcut key combiation to show indicator"
 msgstr ""
 
 #: prefs.js:70
-msgid "Show Nothing"
+msgid "Alt Key"
 msgstr ""
 
 #: prefs.js:70
-msgid "Show Dot"
+msgid "Ctrl Key"
 msgstr ""
 
 #: prefs.js:70
-msgid "Show Count"
+msgid "Shift Key"
+msgstr ""
+
+#: prefs.js:70
+msgid "Super Key    "
 msgstr ""
 
 #: prefs.js:71
-msgid "Blink bell icon on new notifications "
+msgid "When new notification arrives"
 msgstr ""
 
 #: prefs.js:72
-msgid "Blink Time Interval     ( in milliseconds )"
+msgid "Show Nothing"
+msgstr ""
+
+#: prefs.js:72
+msgid "Show Dot"
+msgstr ""
+
+#: prefs.js:72
+msgid "Show Count"
 msgstr ""
 
 #: prefs.js:73
+msgid "Blink bell icon on new notifications "
+msgstr ""
+
+#: prefs.js:74
+msgid "Blink Time Interval     ( in milliseconds )"
+msgstr ""
+
+#: prefs.js:75
 msgid "Show Dots or Counts till all notifications are cleared"
 msgstr ""
 
-#: prefs.js:126
+#: prefs.js:151
 msgid "Choose an application"
 msgstr ""
 
-#: prefs.js:170
+#: prefs.js:195
 msgid "Application List"
 msgstr ""
 
-#: prefs.js:239
+#: prefs.js:264
 msgid "If new notification arrives for apps on this list"
 msgstr ""
 
-#: prefs.js:239
+#: prefs.js:264
 msgid "Show them"
 msgstr ""
 
-#: prefs.js:239
+#: prefs.js:264
 msgid "Show counts only"
 msgstr ""
 
-#: prefs.js:239
+#: prefs.js:264
 msgid "Show banner only"
 msgstr ""
 
-#: prefs.js:239
+#: prefs.js:264
 msgid "Ignore them"
 msgstr ""
 
-#: prefs.js:240
+#: prefs.js:265
 msgid "     Add    "
 msgstr ""
 
-#: prefs.js:244
+#: prefs.js:269
 msgid " Remove "
 msgstr ""

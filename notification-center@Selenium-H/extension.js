@@ -1,19 +1,19 @@
-// Version 14
+// Version 15
 
 const Config = imports.misc.config;
-const ExtensionUtils = imports.misc.extensionUtils;
 const Gettext = imports.gettext;
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const Lang = imports.lang;
 const Main = imports.ui.main;
 const Mainloop = imports.mainloop;
-const Me = ExtensionUtils.getCurrentExtension();
-const Panel = imports.ui.panel;
+const Me = imports.misc.extensionUtils.getCurrentExtension();
+const Meta = imports.gi.Meta;
 const PanelMenu = imports.ui.panelMenu;
 const PopupMenu = imports.ui.popupMenu;
+const Shell = imports.gi.Shell;
 const St = imports.gi.St;
-const _ = Gettext.domain("notification-center").gettext;
+const _ = imports.gettext.domain("notification-center").gettext;
 
 let notificationCenter;
 
@@ -54,6 +54,7 @@ const 	NotificationCenter = new Lang.Class({
         	this.actor.add_child(this._indicator);
 		Main.panel.addToStatusArea("NotificationCenter", this, 2, this.prefs.get_string('indicator-pos'));
 		this.resetIndicator();
+		this.indicatorViewShortcut();
     	},
 
 	addClearButton: function()
@@ -136,11 +137,20 @@ const 	NotificationCenter = new Lang.Class({
 		if(this.prefs.get_strv("name-list").indexOf(source.title)>=0)
 		switch(this.prefs.get_enum("for-list"))
 		{
-			case 0: 											return ;
-			case 1: (Config.PACKAGE_VERSION < "3.32.0")? source.policy = null : source.policy.destroy(); 	return ;
-			case 3: (Config.PACKAGE_VERSION < "3.32.0")? source.policy = null : source.policy.destroy();
-			case 2: this.unseen--;										return ;
+			case 0: 										break ;
+			case 1: source.policy = new Main.MessageTray.NotificationPolicy({showBanners:false}); 	break ;
+			case 3: source.policy = new Main.MessageTray.NotificationPolicy({showBanners:false});
+			case 2: this.unseen--;									break ;
                	}
+	},
+
+	indicatorViewShortcut : function()
+	{
+		Main.wm.addKeybinding(	'indicator-shortcut', this.prefs
+					,Meta.KeyBindingFlags.NONE
+					,Shell.ActionMode.NORMAL | Shell.ActionMode.OVERVIEW
+					,()=>{(this.actor.visible==true) ? this.actor.hide():this.actor.show();}
+				     );
 	},
 
 	initTranslations:function()
@@ -268,6 +278,7 @@ const 	NotificationCenter = new Lang.Class({
 		Main.messageTray._bannerBin.show();
 		Main.messageTray._bannerBin.x=0;
 		if(this.prefs.get_boolean("show-events")) Main.panel.statusArea.dateMenu.menu.disconnect(this.dmSig);
-		Main.panel.statusArea.dateMenu.actor.get_children()[0].add_actor(Main.panel.statusArea.dateMenu._indicator.actor);	
+		Main.panel.statusArea.dateMenu.actor.get_children()[0].add_actor(Main.panel.statusArea.dateMenu._indicator.actor);
+		Main.wm.removeKeybinding('indicator-shortcut');	
 	},
 });

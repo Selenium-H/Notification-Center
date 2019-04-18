@@ -83,6 +83,11 @@
       			<summary>Autohide Indicator</summary>
       			<description>Enables of disables autohide of indicator</description>
     		</key>
+    		<key type="as" name="indicator-shortcut">
+      			<default><![CDATA[['<Super>c']]]></default>
+      			<summary>Shortcut to show indicator </summary>
+      			<description>Shortcut key combination to show or hide indicator</description>
+    		</key>
 		<key name="new-notification" enum="org.gnome.shell.extensions.notification-center.new-notification">
       			<default>'dot'</default>
       			<summary>On new notification</summary>
