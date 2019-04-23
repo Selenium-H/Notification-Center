@@ -110,6 +110,11 @@
       <summary>Always Shows Label </summary>
       <description>Always shows Count or Dots</description>
     </key>
+    <key name="middle-click-dnd" type="b"> 
+      <default>true</default>
+      <summary>Middle click to toggle Do Not Disturb mode </summary>
+      <description>Enables or disables middle click to toggle Do Not Disturb Mode  </description>
+    </key>
     <key name="list" type="as">
       <default>[]</default>
       <summary>Applications to ignore notifications from</summary>
