@@ -15,79 +15,79 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: extension.js:66
-msgid "Clear All"
-msgstr ""
-
-#: extension.js:80
+#: extension.js:58
 msgid "Do Not Disturb"
 msgstr ""
 
-#: prefs.js:38
-msgid "Notifications"
-msgstr ""
-
-#: prefs.js:39
-msgid "Indicator"
-msgstr ""
-
-#: prefs.js:40
-msgid "List"
+#: extension.js:68
+msgid "Clear All"
 msgstr ""
 
 #: prefs.js:41
+msgid "Notifications"
+msgstr ""
+
+#: prefs.js:42
+msgid "Indicator"
+msgstr ""
+
+#: prefs.js:43
+msgid "List"
+msgstr ""
+
+#: prefs.js:44
 msgid "About"
 msgstr ""
 
-#: prefs.js:54
+#: prefs.js:57
 msgid "Show Media Section on Notification Center"
 msgstr ""
 
-#: prefs.js:55
+#: prefs.js:58
 msgid "Show Notification List on Notification Center"
 msgstr ""
 
-#: prefs.js:56
+#: prefs.js:59
 msgid "Show Events List on Notification Center"
 msgstr ""
 
-#: prefs.js:57
+#: prefs.js:60
 msgid "Keep Events List besides Calendar"
 msgstr ""
 
-#: prefs.js:58
+#: prefs.js:61
 msgid "Show Do Not Disturb menu entry "
 msgstr ""
 
-#: prefs.js:59 prefs.js:61
+#: prefs.js:61 prefs.js:62
 msgid "Don't Show"
 msgstr ""
 
-#: prefs.js:59
+#: prefs.js:61
 msgid "On Top"
 msgstr ""
 
-#: prefs.js:59
+#: prefs.js:61
 msgid "At Bottom"
 msgstr ""
 
-#: prefs.js:60
+#: prefs.js:62
 msgid "Clear All Button position "
 msgstr ""
 
-#: prefs.js:61 prefs.js:63 prefs.js:67
+#: prefs.js:62 prefs.js:63 prefs.js:67
 msgid "Left"
 msgstr ""
 
-#: prefs.js:61 prefs.js:63 prefs.js:67
+#: prefs.js:62 prefs.js:63 prefs.js:67
 msgid "Center"
 msgstr ""
 
-#: prefs.js:61 prefs.js:63 prefs.js:67
+#: prefs.js:62 prefs.js:63 prefs.js:67
 msgid "Right"
 msgstr ""
 
-#: prefs.js:62
+#: prefs.js:63
 msgid "Notification Banner position"
 msgstr ""
 
@@ -95,7 +95,7 @@ msgstr ""
 msgid "Maximum height of Notification Center ( in % )"
 msgstr ""
 
-#: prefs.js:66
+#: prefs.js:67
 msgid "Notification Center indicator position"
 msgstr ""
 
@@ -107,82 +107,86 @@ msgstr ""
 msgid "Shortcut key combiation to show indicator"
 msgstr ""
 
-#: prefs.js:70
+#: prefs.js:69
 msgid "Alt Key"
 msgstr ""
 
-#: prefs.js:70
+#: prefs.js:69
 msgid "Ctrl Key"
 msgstr ""
 
-#: prefs.js:70
+#: prefs.js:69
 msgid "Shift Key"
 msgstr ""
 
-#: prefs.js:70
-msgid "Super Key    "
+#: prefs.js:69
+msgid "Super Key"
 msgstr ""
 
-#: prefs.js:71
+#: prefs.js:70
 msgid "When new notification arrives"
 msgstr ""
 
-#: prefs.js:72
+#: prefs.js:70
 msgid "Show Nothing"
 msgstr ""
 
-#: prefs.js:72
+#: prefs.js:70
 msgid "Show Dot"
 msgstr ""
 
-#: prefs.js:72
+#: prefs.js:70
 msgid "Show Count"
 msgstr ""
 
-#: prefs.js:73
+#: prefs.js:71
 msgid "Blink bell icon on new notifications "
 msgstr ""
 
-#: prefs.js:74
+#: prefs.js:72
 msgid "Blink Time Interval     ( in milliseconds )"
 msgstr ""
 
-#: prefs.js:75
+#: prefs.js:73
 msgid "Show Dots or Counts till all notifications are cleared"
 msgstr ""
 
-#: prefs.js:151
+#: prefs.js:74
+msgid "Middle click panel icon to toggle Do Not Disturb mode"
+msgstr ""
+
+#: prefs.js:170
 msgid "Choose an application"
 msgstr ""
 
-#: prefs.js:195
+#: prefs.js:214
 msgid "Application List"
 msgstr ""
 
-#: prefs.js:264
+#: prefs.js:282
 msgid "If new notification arrives for apps on this list"
 msgstr ""
 
-#: prefs.js:264
+#: prefs.js:282
 msgid "Show them"
 msgstr ""
 
-#: prefs.js:264
+#: prefs.js:282
 msgid "Show counts only"
 msgstr ""
 
-#: prefs.js:264
+#: prefs.js:282
 msgid "Show banner only"
 msgstr ""
 
-#: prefs.js:264
+#: prefs.js:282
 msgid "Ignore them"
 msgstr ""
 
-#: prefs.js:265
+#: prefs.js:283
 msgid "     Add    "
 msgstr ""
 
-#: prefs.js:269
+#: prefs.js:287
 msgid " Remove "
 msgstr ""
