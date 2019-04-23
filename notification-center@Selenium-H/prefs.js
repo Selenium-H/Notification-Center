@@ -15,12 +15,12 @@ const _ = Gettext.domain("notification-center").gettext;
 
 function init()
 {
-	initTranslations()
+  initTranslations()
 }
 
 function buildPrefsWidget() 
 {
-	let widget = new NotificationCenterPrefs();
+  let widget = new NotificationCenterPrefs();
   let switcher = new Gtk.StackSwitcher({halign: Gtk.Align.CENTER, visible: true, stack: widget});
   Mainloop.timeout_add(0, () => {
     widget.get_toplevel().get_titlebar().custom_title = switcher;
@@ -45,7 +45,7 @@ const NotificationCenterPrefs = new GObject.Class({
   }
 });
 
-const Prefs1 = 	new GObject.Class({
+const Prefs1 =  new GObject.Class({
   Name: 'Prefs1',
 
   _init: function(page)
@@ -77,7 +77,7 @@ const Prefs1 = 	new GObject.Class({
     }
     return this.grid;
 },
-	
+  
  prefCombo: function(LABEL, KEY, pos, options, items, settings)
   {
     let SettingLabel = new Gtk.Label({xalign: 1, label: LABEL, halign: Gtk.Align.START});
@@ -93,38 +93,38 @@ const Prefs1 = 	new GObject.Class({
     this.grid.attach(SettingCombo, 2, pos, 3, 1);
   },
 
-	prefStr: function(LABEL, KEY, pos, options, items, settings) 
-	{
-		let SettingLabel 	= new Gtk.Label({ xalign: 1, label: LABEL,halign: Gtk.Align.START });
-		let SettingCombo 	= new Gtk.ComboBoxText();
-		for (let i=0;i<options.length;i++) {
-		  SettingCombo.append(options[i], 	items[i]);
-		}
-		
-		let keyVal=settings.get_strv(KEY);
-		let strSetting = new Gtk.Entry({text:keyVal[0].substring(1+keyVal[0].indexOf('>'))});
-		let box = new Gtk.Box({halign:Gtk.Align.END});
-		
-		strSetting.set_width_chars(1);
-		SettingCombo.set_active(options.indexOf(keyVal[0].substring(0,1+keyVal[0].indexOf('>'))));
-		SettingCombo.connect('changed', Lang.bind (this, function(widget) {	
-		  keyVal.pop(); 
-		  keyVal.push(options[widget.get_active()]+strSetting.text);
-		  settings.set_strv(KEY,keyVal);
-		}));
-		
-    strSetting.connect('changed'	, Lang.bind (this, function()	{	
+  prefStr: function(LABEL, KEY, pos, options, items, settings) 
+  {
+    let SettingLabel  = new Gtk.Label({ xalign: 1, label: LABEL,halign: Gtk.Align.START });
+    let SettingCombo  = new Gtk.ComboBoxText();
+    for (let i=0;i<options.length;i++) {
+      SettingCombo.append(options[i],   items[i]);
+    }
+    
+    let keyVal=settings.get_strv(KEY);
+    let strSetting = new Gtk.Entry({text:keyVal[0].substring(1+keyVal[0].indexOf('>'))});
+    let box = new Gtk.Box({halign:Gtk.Align.END});
+    
+    strSetting.set_width_chars(1);
+    SettingCombo.set_active(options.indexOf(keyVal[0].substring(0,1+keyVal[0].indexOf('>'))));
+    SettingCombo.connect('changed', Lang.bind (this, function(widget) {  
+      keyVal.pop(); 
+      keyVal.push(options[widget.get_active()]+strSetting.text);
+      settings.set_strv(KEY,keyVal);
+    }));
+    
+    strSetting.connect('changed'  , Lang.bind (this, function()  {  
       keyVal.pop(); 
       keyVal.push(options[SettingCombo.get_active()]+strSetting.text);
-			settings.set_strv(KEY,keyVal);
-		}));
-		
-		box.add(SettingCombo);
-		box.add(new Gtk.Label({label: "  +  "}));
-		box.add(strSetting);
+      settings.set_strv(KEY,keyVal);
+    }));
+    
+    box.add(SettingCombo);
+    box.add(new Gtk.Label({label: "  +  "}));
+    box.add(strSetting);
     this.grid.attach(SettingLabel   ,0, pos, 1,  1);
-		this.grid.attach(box		,2, pos, 3,  1);
-	},
+    this.grid.attach(box    ,2, pos, 3,  1);
+  },
 
   prefTime: function(LABEL, KEY, pos, mn, mx, st, settings)
   {
@@ -166,10 +166,10 @@ const AppsListPrefs = new GObject.Class({
   },
 
   addApp: function() 
-	{
+  {
     let dialog = new Gtk.Dialog({ title: _('Choose an application'),transient_for: this.get_toplevel(),use_header_bar: true,modal: true });
-		dialog._appChooser = new Gtk.AppChooserWidget({ show_all: true });
-		dialog.set_default_response(Gtk.ResponseType.OK);
+    dialog._appChooser = new Gtk.AppChooserWidget({ show_all: true });
+    dialog.set_default_response(Gtk.ResponseType.OK);
     dialog.add_button(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL);
     let addButton = dialog.add_button("Add", Gtk.ResponseType.OK);
     let hbox = new Gtk.Box({orientation: Gtk.Orientation.VERTICAL,margin: 5});
@@ -177,8 +177,8 @@ const AppsListPrefs = new GObject.Class({
     dialog.get_content_area().pack_start(hbox, true, true, 0);
     dialog.connect('response', Lang.bind(this, function(dialog, id) {
       if (id != Gtk.ResponseType.OK) {
-        			dialog.destroy();
-        			return;
+              dialog.destroy();
+              return;
       }
 
       let appInfo = dialog._appChooser.get_app_info();
@@ -186,97 +186,97 @@ const AppsListPrefs = new GObject.Class({
         return;
       }
 
-			let appsList = this.settings.get_strv('list');
-			let nameList = this.settings.get_strv('name-list');
+      let appsList = this.settings.get_strv('list');
+      let nameList = this.settings.get_strv('name-list');
       if (appsList.indexOf(appInfo.get_id())>=0) {
         dialog.destroy();
         return;
       }
       appsList.push(appInfo.get_id());
-			nameList.push(appInfo.get_name());
-			this.settings.set_strv('list', appsList);
-			this.settings.set_strv('name-list', nameList);
+      nameList.push(appInfo.get_name());
+      this.settings.set_strv('list', appsList);
+      this.settings.set_strv('name-list', nameList);
       this._store.set(this._store.append(),[0, 2, 1],[appInfo, appInfo.get_icon(), appInfo.get_name()]);
 
-     	dialog.destroy();
+      dialog.destroy();
     }));
     
     dialog.show_all();
   },
 
-	makeList: function()
-	{
-		this._store = new Gtk.ListStore();
+  makeList: function()
+  {
+    this._store = new Gtk.ListStore();
     this._store.set_column_types([Gio.AppInfo, GObject.TYPE_STRING, Gio.Icon]);
 
-		let iconRenderer = new Gtk.CellRendererPixbuf;
-		let nameRenderer = new Gtk.CellRendererText;
-    let appColumn 	 = new Gtk.TreeViewColumn({expand: true, resizable:true,alignment: 0.5,sort_column_id: 1,title:_("Application List")});
+    let iconRenderer = new Gtk.CellRendererPixbuf;
+    let nameRenderer = new Gtk.CellRendererText;
+    let appColumn    = new Gtk.TreeViewColumn({expand: true, resizable:true,alignment: 0.5,sort_column_id: 1,title:_("Application List")});
     appColumn.pack_start(iconRenderer, false);
     appColumn.pack_start(nameRenderer, true);
     appColumn.add_attribute(iconRenderer, "gicon"  ,2);
     appColumn.add_attribute(nameRenderer, "text"   ,1);
-		this.treeView = new Gtk.TreeView({ model: this._store,hexpand: true,vexpand: true ,halign: Gtk.Align.START});
+    this.treeView = new Gtk.TreeView({ model: this._store,hexpand: true,vexpand: true ,halign: Gtk.Align.START});
     this.treeView.append_column(appColumn);
-		let listBox   = new Gtk.ScrolledWindow({hexpand: true, shadow_type: Gtk.ShadowType.IN});
-		appColumn.set_fixed_width(350);
-		listBox.add(this.treeView);
-		this.attach(listBox,0,0,1,1);
-	},
+    let listBox   = new Gtk.ScrolledWindow({hexpand: true, shadow_type: Gtk.ShadowType.IN});
+    appColumn.set_fixed_width(350);
+    listBox.add(this.treeView);
+    this.attach(listBox,0,0,1,1);
+  },
 
-	prefCombo: function(LABEL,KEY,pos,options,items,box)
-	{
-		let SettingLabel 	= new Gtk.Label({xalign: 1, label: LABEL,halign: Gtk.Align.CENTER });
-		let SettingCombo 	= new Gtk.ComboBoxText({});
-    SettingCombo.append(options[0], 	items[0]);
-    SettingCombo.append(options[1], 	items[1]);
-    SettingCombo.append(options[2], 	items[2]);
-    SettingCombo.append(options[3], 	items[3]);		
+  prefCombo: function(LABEL,KEY,pos,options,items,box)
+  {
+    let SettingLabel  = new Gtk.Label({xalign: 1, label: LABEL,halign: Gtk.Align.CENTER });
+    let SettingCombo  = new Gtk.ComboBoxText({});
+    SettingCombo.append(options[0],   items[0]);
+    SettingCombo.append(options[1],   items[1]);
+    SettingCombo.append(options[2],   items[2]);
+    SettingCombo.append(options[3],   items[3]);    
     SettingCombo.set_active(options.indexOf(this.settings.get_string(KEY)));
     SettingCombo.connect('changed', Lang.bind (this, function(widget) {this.settings.set_string(KEY, options[widget.get_active()]);  }));
-		box.attach(SettingLabel,0,pos,1,1);
-		box.attach(SettingCombo,0,pos+1,1,1);
-	},
+    box.attach(SettingLabel,0,pos,1,1);
+    box.attach(SettingCombo,0,pos+1,1,1);
+  },
 
   refreshList: function() 
-	{
+  {
     this._store.clear();
     let appsList = this.settings.get_strv('list');
-		let nameList = this.settings.get_strv('name-list');
+    let nameList = this.settings.get_strv('name-list');
 
     for (let i = 0; i < nameList.length; i++) {
       let appInfo = Gio.DesktopAppInfo.new(appsList[i]);
-			if(Gio.DesktopAppInfo.new(appsList[i])==null){
+      if(Gio.DesktopAppInfo.new(appsList[i])==null){
         appsList.splice(i,1);
-				nameList.splice(i,1);
-				i--;
-			}
-			else {
-			  this._store.set(this._store.append(),[0, 2, 1],[appInfo, appInfo.get_icon(), nameList[i]]);
-			}
+        nameList.splice(i,1);
+        i--;
+      }
+      else {
+        this._store.set(this._store.append(),[0, 2, 1],[appInfo, appInfo.get_icon(), nameList[i]]);
+      }
     }
     
     this.settings.set_strv('list',appsList);
-		this.settings.set_strv('name-list', nameList);
+    this.settings.set_strv('name-list', nameList);
   },
 
   removeApp: function() 
-	{
+  {
     let [any, model, iter] = this.treeView.get_selection().get_selected();
-		let appsList = this.settings.get_strv('list');
-		let nameList = this.settings.get_strv('name-list');
+    let appsList = this.settings.get_strv('list');
+    let nameList = this.settings.get_strv('name-list');
 
     if (any) {
       let indx,appInfo = this._store.get_value(iter, 0); 
       appsList.splice((indx=appsList.indexOf(appInfo.get_id())),1);
-			nameList.splice(indx,1);
-			this.settings.set_strv('list',appsList);
-			this.settings.set_strv('name-list', nameList);
+      nameList.splice(indx,1);
+      this.settings.set_strv('list',appsList);
+      this.settings.set_strv('name-list', nameList);
       this._store.remove(iter);
     }
   },
 
-	showPrefs: function()
+  showPrefs: function()
   {
     let box = new Gtk.Grid({ column_spacing: 20, halign: Gtk.Align.CENTER, margin: 20, row_spacing: 20 });
     this.prefCombo(_('If new notification arrives for apps on this list'),'for-list',1,['none','count','banner','both'], [_('Show them'),_('Show counts only'),_('Show banner only'),_('Ignore them')],box);
