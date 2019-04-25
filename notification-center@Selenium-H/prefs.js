@@ -60,8 +60,8 @@ const Prefs1 =  new GObject.Class({
           this.prefSwitch(_('Keep Events List besides Calendar'), "show-events-in-calendar", 3, settings);
           this.prefCombo (_('Show Do Not Disturb menu entry '), 'dnd-position', 4, ['none','top','bottom'], [_("Don't Show"), _('On Top'), _('At Bottom')], settings);
           this.prefCombo (_('Clear All Button position '), 'clear-button-alignment', 5, ['left','center','right','hide'], [_('Left'), _('Center'), _('Right'), _("Don't Show")], settings);
-          this.prefCombo (_('Notification Banner position'), 'banner-pos', 6, ['left','center','right' ], [_('Left'), _('Center'), _('Right')], settings);
-          this.prefTime  (_('Maximum height of Notification Center ( in % )') ,'max-height', 7, 20, 100, 1, settings);
+          this.prefTime  (_('Maximum height of Notification Center ( in % )') ,'max-height', 6, 20, 100, 1, settings);
+          this.prefCombo (_('Notification Banner position'), 'banner-pos', 7, ['left','center','right' ], [_('Left'), _('Center'), _('Right')], settings);
           break;
         case 2:
           this.prefCombo (_('Notification Center indicator position'),'indicator-pos', 0, ['left','center','right'], [_('Left'), _('Center'), _('Right')], settings);
@@ -120,7 +120,7 @@ const Prefs1 =  new GObject.Class({
     }));
     
     box.add(SettingCombo);
-    box.add(new Gtk.Label({label: "  +  "}));
+    box.add(new Gtk.Label({label: "   +   "}));
     box.add(strSetting);
     this.grid.attach(SettingLabel   ,0, pos, 1,  1);
     this.grid.attach(box    ,2, pos, 3,  1);
