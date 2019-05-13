@@ -96,7 +96,6 @@ const NotificationCenter = new Lang.Class({
     if(this.prefs.get_boolean(KEY)){
       this._messageList._removeSection(section);
       this.box.add(section.actor);
-      section._delegate = this;
       this.connectedSignals.push(section._list.connect('actor-added'   ,()=> this.newNotif(fNo) ))
       this.connectedSignals.push(section._list.connect('actor-removed' ,()=> this.remNotif(fNo) ));
       this.showingSections.push(section);   
