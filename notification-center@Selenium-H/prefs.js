@@ -69,7 +69,7 @@ const Prefs1 =  new GObject.Class({
           this.prefSwitch('autohide', 2);
           this.prefStr('indicator-shortcut', 3, ['<Alt>', '<Ctrl>', '<Shift>', '<Super>'], [_('Alt Key'), _('Ctrl Key'), _('Shift Key'), _('Super Key')]);
           this.prefCombo('new-notification', 4, ['none', 'dot', 'count'], [_('Show Nothing'), _('Show Dot'), _('Show Count')]);
-          this.prefSwitch('include-events-count', 5);
+           this.prefSwitch('include-events-count', 5);
           this.prefSwitch('blink-icon', 6);
           this.prefTime ('blink-time', 7, 100, 10000, 10);
           this.prefSwitch('show-label', 8);
