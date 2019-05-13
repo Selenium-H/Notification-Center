@@ -61,59 +61,69 @@
     <key enum="org.gnome.shell.extensions.notification-center.clear-button-alignment" name="clear-button-alignment">
       <default>'right'</default>
       <summary>Clear All button alignment </summary>
-      <description>Alignment for Clear All button .</description>
+      <description>Clear All Button position .</description>
     </key>
     <key enum="org.gnome.shell.extensions.notification-center.banner-pos" name="banner-pos">
       <default>'right'</default>
       <summary>Notification Banner position</summary>
-      <description>Changes position of Notification Banner.</description>
+      <description>Notification Banner position</description>
     </key>
     <key name="max-height" type="i">
       <default>100</default>
       <summary>Maximum height of Notification Center</summary>
-      <description>Maximum height of Notification Center</description>
+      <description>Maximum height of Notification Center ( in % )</description>
     </key>
     <key enum="org.gnome.shell.extensions.notification-center.banner-pos" name="indicator-pos">
       <default>'right'</default>
       <summary>Indicator position</summary>
       <description>Notification Center indicator position.</description>
     </key>
+    <key name="individual-icons" type="b">
+      <default>false</default>
+      <summary>Individual Icons for Sections</summary>
+      <description>Show individual icons for each section on panel</description>
+    </key>
     <key name="autohide" type="b">
       <default>true</default>
       <summary>Autohide Indicator</summary>
-      <description>Enables of disables autohide of indicator</description>
+      <description>AutoHide notification indicator on panel</description>
     </key>
     <key name="indicator-shortcut" type="as">
       <default>
         <![CDATA[['<Super>c']]]>
       </default>
       <summary>Shortcut to show indicator </summary>
-      <description>Shortcut key combination to show or hide indicator</description>
+      <description>Shortcut key combiation to show indicator</description>
     </key>
     <key enum="org.gnome.shell.extensions.notification-center.new-notification" name="new-notification">
       <default>'dot'</default>
       <summary>On new notification</summary>
       <description>When new notification arrives.</description>
     </key>
+    <key name="include-events-count" type="b">
+      <default>false</default>
+      <summary>Include events in above case</summary>
+      <description>Include events in above case</description>
+    </key>
     <key name="blink-icon" type="b">
       <default>false</default>
       <summary>Blink Bell Icon on Notification</summary>
-      <description>Blink Notification Bell icon on recieving new notification</description>
+      <description>Blink bell icon on new notifications</description>
     </key>
     <key name="blink-time" type="i">
       <default>500</default>
       <summary>Blink Bell Icon on Notification</summary>
-      <description>Blink Notification Bell icon on recieving new notification</description>
+      <description>Blink Time Interval     ( in milliseconds )</description>
     </key>
     <key name="show-label" type="b">
       <default>false</default>
       <summary>Always Shows Label </summary>
-      <description>Always shows Count or Dots</description>
+      <description>Show Dots or Counts till all notifications are cleared</description>
     </key>
     <key name="middle-click-dnd" type="b"> 
       <default>true</default>
       <summary>Middle click to toggle Do Not Disturb mode </summary>
-      <description>Enables or disables middle click to toggle Do Not Disturb Mode  </description>
+      <description>Middle click panel icon to toggle Do Not Disturb</description>
     </key>
     <key name="list" type="as">
       <default>[]</default>
@@ -128,7 +138,12 @@
     <key enum="org.gnome.shell.extensions.notification-center.for-list" name="for-list">
       <default>'none'</default>
       <summary>Preferences for Apps on List</summary>
-      <description>What to do for Apps on List.</description>
+      <description>If new notification arrives for apps on this list.</description>
     </key>
+    <key name="reload-signal" type="b">
+      <default>false</default>
+      <summary>Signals the extension to reload </summary>
+      <description>Signals the extension to reload</description>
+    </key>    
   </schema>
 </schemalist>

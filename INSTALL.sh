@@ -42,6 +42,8 @@ echo "Done"
 
 echo "Copying New Version"
 cp -rf notification-center@Selenium-H $installDir
+cp -rf locale $installDir"/notification-center@Selenium-H"
+cp -rf schemas $installDir"/notification-center@Selenium-H"
 echo "Done"
 
 cd $installDir"/notification-center@Selenium-H"
@@ -51,6 +53,10 @@ echo "Done"
 
 cd locale
 echo "Creating Translations"
-mkdir it/LC_MESSAGES
-msgfmt it/notification-center.po -o it/LC_MESSAGES/notification-center.mo
+
+for locale in */
+  do
+    mkdir ${locale}/LC_MESSAGES
+    msgfmt ${locale}/notification-center.po -o ${locale}/LC_MESSAGES/notification-center.mo
+  done
 echo "All Done !"
