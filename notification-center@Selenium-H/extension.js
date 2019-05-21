@@ -19,6 +19,8 @@ const _ = imports.gettext.domain("notification-center").gettext;
 let notificationCenter = null;
 
 function enable() {
+  Main.panel.statusArea.dateMenu.menu.open();
+  Main.panel.statusArea.dateMenu.menu.close();
   notificationCenter = new NotificationCenter();
   notificationCenter.startNotificationCenter();
   reloadExtensionOnPrefsChange();
@@ -55,6 +57,7 @@ const NotificationCenter = new Lang.Class({
     this._loopTimeoutId = null;
     this.notificationCount = 0;
     this.eventsCount = 0;
+    this.rightClick = false;
     
     this.eventsIcon = new St.Icon({style_class:'system-status-icon'});
     this.eventsLabel = new St.Label({ text: '',visible:false});
@@ -93,13 +96,17 @@ const NotificationCenter = new Lang.Class({
   },
 
   addThisSection:function(section,KEY,fNo) {
-    if(this.prefs.get_boolean(KEY)){
-      this._messageList._removeSection(section);
-      this.box.add(section.actor);
+    if(this.prefs.get_boolean(KEY)) {
+      this.addSectionToThis(section);
       this.connectedSignals.push(section._list.connect('actor-added'   ,()=> this.newNotif(fNo) ))
       this.connectedSignals.push(section._list.connect('actor-removed' ,()=> this.remNotif(fNo) ));
       this.showingSections.push(section);   
     }
+  },
+
+  addSectionToThis: function (section) {
+      this._messageList._removeSection(section);
+      this.box.add(section.actor);
   },
 
   blinkIcon: function() {
@@ -292,6 +299,42 @@ const NotificationCenter = new Lang.Class({
     
   middleClickDndToggle: function (actor, event) {
     let button = event.get_button();
+
+    if(button == 1) {
+      if (this.menu.isOpen) {
+        this._messageList.setDate(new Date());
+        if(this._loopTimeoutId!=null) { 
+          Mainloop.source_remove(this._loopTimeoutId); 
+          this._loopTimeoutId=null;
+        }    
+        if(this.prefs.get_boolean("show-label")==false) { 
+          this.notificationCount=0;
+          this.eventsCount=0;
+        }
+        this.rightClick = true;
+        this.resetIndicator();
+      }
+      return;
+    }
+
+    if(button == 3) {
+    
+      if(this.rightClick) {
+        return;
+      }
+
+      this.removeAndDisconnectSections();
+      this.showEventsInCalendar = false;
+      Main.panel.statusArea.dateMenu.menu.open();
+      Main.panel.statusArea.dateMenu.menu.close();
+      this.showEventsInCalendar=(this.showEventsSection)?this.prefs.get_boolean("show-events-in-calendar"): false; 
+      this.rebuildMessageList();
+      this.menu.close()
+      this.menu.open();
+      this.rightClick = true;
+      return ;
+    }
+
     // if middle click
     if (button == 2) {
       // close the menu, since it gets open on any click
@@ -318,6 +361,13 @@ const NotificationCenter = new Lang.Class({
     this.resetIndicator();
   },
 
+  rebuildMessageList: function() {
+    this.addThisSection(this._messageList._mediaSection        ,"show-media"         ,0);
+    this.addThisSection(this._messageList._notificationSection ,"show-notifications" ,1);
+    this.addThisSection(this._messageList._eventsSection       ,"show-events"        ,2);
+    this.manageEvents(1);
+  },
+
   remNotif: function(fNo) {
     switch(fNo) {
       case 1 : 
@@ -330,10 +380,30 @@ const NotificationCenter = new Lang.Class({
     this.resetIndicator();
   },
 
+  removeAndDisconnectSections : function() {
+    
+    let len=this.showingSections.length;
+    
+    while(len!=0) {
+      this.showingSections[len-1]._list.disconnect(this.connectedSignals[2*len-1]);
+      this.showingSections[len-1]._list.disconnect(this.connectedSignals[2*len-2]);
+      this.removeSectionFromThis(len-1);
+      this.connectedSignals.pop();
+      this.connectedSignals.pop(); 
+      this.showingSections.pop(); 
+      len--;
+    }
+  },
+
   removeDotFromDateMenu: function() {
     Main.panel.statusArea.dateMenu.actor.get_children()[0].remove_actor(Main.panel.statusArea.dateMenu._indicator.actor);  
     this.dtActors=Main.panel.statusArea.dateMenu.actor.get_children()[0].get_children();
     Main.panel.statusArea.dateMenu.actor.get_children()[0].remove_actor(this.dtActors[0]);
+  },
+
+  removeSectionFromThis : function(len) {
+    this.box.remove_child(this.box.get_children()[len]);
+    this._messageList._addSection(this.showingSections[len]);
   },
   
   resetIndicator: function() {
@@ -365,24 +435,13 @@ const NotificationCenter = new Lang.Class({
   },
 
   seen: function() {
-    if (this.menu.isOpen) {
-      this._messageList.setDate(new Date());
-      this.manageEvents(0);
-      if(this._loopTimeoutId!=null) { 
-        Mainloop.source_remove(this._loopTimeoutId); 
-        this._loopTimeoutId=null;
-      }    
-      if(this.prefs.get_boolean("show-label")==false) { 
-        this.notificationCount=0;
-        this.eventsCount=0;
-      }
-    }
-    
     if (!this.menu.isOpen) {
       this.manageEvents(1);
+      this.resetIndicator();
+      return ;
     }
-    
-    this.resetIndicator();
+    this.manageEvents(0);
+    this.rightClick = false;
   },
 
   startNotificationCenter: function() {
@@ -393,12 +452,7 @@ const NotificationCenter = new Lang.Class({
     this._indicator.add_child(this.notificationLabel);
     this.actor.add_child(this._indicator);
     Main.panel.addToStatusArea("NotificationCenter", this, 2, this.prefs.get_string('indicator-pos'));
-
-    this.addThisSection(this._messageList._mediaSection        ,"show-media"         ,0);
-    this.addThisSection(this._messageList._notificationSection ,"show-notifications" ,1);
-    this.addThisSection(this._messageList._eventsSection       ,"show-events"        ,2);
-    
-    this.manageEvents(1);
+    this.rebuildMessageList();    
     
     this.scrollView.add_actor(this.box);
     this.scrollView._delegate = this;
@@ -446,19 +500,10 @@ const NotificationCenter = new Lang.Class({
       Mainloop.source_remove(this._loopTimeoutId); 
       this._loopTimeoutId=null;
     }    
+
     this.manageEvents(0);
-    let len=this.showingSections.length;
-    
-    while(len!=0) {
-      this.showingSections[len-1]._list.disconnect(this.connectedSignals[2*len-1]);
-      this.showingSections[len-1]._list.disconnect(this.connectedSignals[2*len-2]);
-      this.box.remove_child(this.box.get_children()[len-1]);
-      this._messageList._addSection(this.showingSections[len-1]);
-      this.connectedSignals.pop();
-      this.connectedSignals.pop(); 
-      this.showingSections.pop(); 
-      len--;
-    }
+    this.removeAndDisconnectSections();
+
     this._messageList._removeSection(this._messageList._mediaSection);
     this._messageList._removeSection(this._messageList._notificationSection);
     this._messageList._removeSection(this._messageList._eventsSection);
