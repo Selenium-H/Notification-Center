@@ -318,23 +318,25 @@ const NotificationCenter = new Lang.Class({
     }
 
     if(button == 3) {
-    
-      if(this.rightClick) {
-        return;
+
+      if(this.rightClick==false && this.menu.isOpen == true) {
+        this.removeAndDisconnectSections();
+        this.showEventsInCalendar = false;
+        this.menu.close();
+        Main.panel.statusArea.dateMenu.menu.open();
+        Main.panel.statusArea.dateMenu.menu.close();
+        this.showEventsInCalendar=(this.showEventsSection)?this.prefs.get_boolean("show-events-in-calendar"): false; 
+        this.rebuildMessageList();
+        this.menu.open();
+        this.rightClick = true;
+        return ;
       }
 
-      this.removeAndDisconnectSections();
-      this.showEventsInCalendar = false;
-      Main.panel.statusArea.dateMenu.menu.open();
-      Main.panel.statusArea.dateMenu.menu.close();
-      this.showEventsInCalendar=(this.showEventsSection)?this.prefs.get_boolean("show-events-in-calendar"): false; 
-      this.rebuildMessageList();
-      this.menu.close()
-      this.menu.open();
-      this.rightClick = true;
-      return ;
-    }
-
+      if(this.rightClick==true || this.menu.isOpen==false) {
+        this.rightClick = false;
+        return;
+      }
+    }  
     // if middle click
     if (button == 2) {
       // close the menu, since it gets open on any click
@@ -437,11 +439,12 @@ const NotificationCenter = new Lang.Class({
   seen: function() {
     if (!this.menu.isOpen) {
       this.manageEvents(1);
+      this.rightClick = false;
       this.resetIndicator();
       return ;
     }
+    
     this.manageEvents(0);
-    this.rightClick = false;
   },
 
   startNotificationCenter: function() {
