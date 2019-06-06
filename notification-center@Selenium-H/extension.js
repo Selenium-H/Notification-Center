@@ -46,7 +46,7 @@ const NotificationCenter = new Lang.Class({
   _init: function () {
     Convenience.initTranslations("notification-center");
     this.prefs = Convenience.getSettings("org.gnome.shell.extensions.notification-center");
-    this.dndpref = new Gio.Settings({schema_id:'org.gnome.desktop.notifications'});
+    this.dndpref = new Gio.Settings({schema_id:"org.gnome.desktop.notifications"});
     this.parent(1-0.5*this.prefs.get_enum('indicator-pos'), "NotificationCenter");
     this.loadPreferences();
     
@@ -54,6 +54,7 @@ const NotificationCenter = new Lang.Class({
     this.showingSections = [];
     this.prefSignals = [];
     this.dmsig = null;
+    this.cmsig = null;
     this._loopTimeoutId = null;
     this.notificationCount = 0;
     this.eventsCount = 0;
@@ -64,7 +65,6 @@ const NotificationCenter = new Lang.Class({
     this.mediaIcon = new St.Icon({style_class:'system-status-icon'});
     this.notificationIcon = new St.Icon({style_class:'system-status-icon'});
     this.notificationLabel = new St.Label({ text: '',visible:false});
-
     this._indicator =  new St.BoxLayout({ vertical: false, style_class: 'panel-status-menu-box',style:"spacing:0.0em"});
 
     this._messageList = Main.panel.statusArea.dateMenu._messageList;
@@ -95,10 +95,10 @@ const NotificationCenter = new Lang.Class({
     this.menu.box.add_child(box);
   },
 
-  addThisSection:function(section,KEY,fNo) {
-    if(this.prefs.get_boolean(KEY)) {
+  addThisSection:function(section,toBeAdded,fNo) {
+    if(toBeAdded) {
       this.addSectionToThis(section);
-      this.connectedSignals.push(section._list.connect('actor-added'   ,()=> this.newNotif(fNo) ))
+      this.connectedSignals.push(section._list.connect('actor-added'   ,()=> this.newNotif(fNo) ));
       this.connectedSignals.push(section._list.connect('actor-removed' ,()=> this.remNotif(fNo) ));
       this.showingSections.push(section);   
     }
@@ -109,16 +109,29 @@ const NotificationCenter = new Lang.Class({
       this.box.add(section.actor);
   },
 
-  blinkIcon: function() {
-    if(this.prefs.get_boolean("blink-icon") && this.dndpref.get_boolean("show-banners")){
-      if(this._loopTimeoutId!=null) {
-        Mainloop.source_remove(this._loopTimeoutId);
-      }
-      this.notificationIcon.set_opacity((this.notificationIcon.get_opacity()==255)? 100 : 255);
-      this._loopTimeoutId=Mainloop.timeout_add(this.prefs.get_int('blink-time'), Lang.bind(this, this.blinkIcon));
+  autoCloseMenu : function() {
+    if (global.display.focus_window!= null && this.menu.isOpen) {
+        this.menu.close();
     }
   },
 
+  blinkIcon: function(blinkTimes,interval) {
+  
+    if(this._loopTimeoutId!=null) {
+      Mainloop.source_remove(this._loopTimeoutId);
+    }
+
+    if(blinkTimes < 0) {
+			this._loopTimeoutId=null;    
+      return;      
+    }
+    
+    if(this.dndpref.get_boolean("show-banners")){
+      this.notificationIcon.set_opacity((this.notificationIcon.get_opacity()==255)? 100 : 255);
+      this._loopTimeoutId=Mainloop.timeout_add(interval, ()=> this.blinkIcon(--blinkTimes,interval));
+    }
+  },
+  
   dndToggle: function() {
     (this.dndpref.get_boolean('show-banners')==true) ? this.dndpref.set_boolean('show-banners',false):this.dndpref.set_boolean('show-banners',true);
   },
@@ -139,7 +152,7 @@ const NotificationCenter = new Lang.Class({
             return ;
       }
     }
-    this.blinkIcon();
+    this.blinkIcon(2*this.prefs.get_int("blink-icon"),this.prefs.get_int("blink-time"));
   },
 
   indicatorViewShortcut : function() {
@@ -181,6 +194,7 @@ const NotificationCenter = new Lang.Class({
     this.showThreeIcons = this.prefs.get_boolean("individual-icons");
     this.includeEventsCount=this.prefs.get_boolean("include-events-count");
     this.newNotificationAction=this.prefs.get_enum("new-notification"); 
+    this.menuAutoclose = this.prefs.get_boolean("autoclose-menu");
   },
 
   manageAutohide: function(iconState=false) {
@@ -205,7 +219,7 @@ const NotificationCenter = new Lang.Class({
     }
     
     if(this.showEventsSection) {
-      if(Config.PACKAGE_VERSION < "3.32.0") { // For Shell Version 3.32 and beyond
+      if(Config.PACKAGE_VERSION < "3.32.0") { // For Shell Version below 3.32.0 
         if(this._messageList._eventsSection._canClear()) {
           this.actor.show();
           this.clearButton.show();
@@ -298,56 +312,55 @@ const NotificationCenter = new Lang.Class({
   },
     
   middleClickDndToggle: function (actor, event) {
-    let button = event.get_button();
-
-    if(button == 1) {
-      if (this.menu.isOpen) {
-        this._messageList.setDate(new Date());
-        if(this._loopTimeoutId!=null) { 
-          Mainloop.source_remove(this._loopTimeoutId); 
-          this._loopTimeoutId=null;
-        }    
-        if(this.prefs.get_boolean("show-label")==false) { 
-          this.notificationCount=0;
-          this.eventsCount=0;
+    switch(event.get_button()) {
+      case 1 :  // if left click
+        if (this.menu.isOpen) {
+          this._messageList.setDate(new Date());
+          if(this._loopTimeoutId!=null) { 
+            Mainloop.source_remove(this._loopTimeoutId); 
+            this._loopTimeoutId=null;
+          }    
+          if(this.prefs.get_boolean("show-label")==false) { 
+            this.notificationCount=0;
+            this.eventsCount=0;
+          }
+          this.rightClick = true;
+          this.resetIndicator();
         }
-        this.rightClick = true;
-        this.resetIndicator();
-      }
-      return;
-    }
+        return;
+        
+      case 2: // if middle click
+      
+        // close the menu, since it gets open on any click
+        if (this.menu.isOpen) {
+          this.menu.actor.hide();
+        }
+        // toggle DND state
+        this.dndToggle();
+        // reload dnd status
+        this.loadDndStatus();
+      
+        return;
+    
+      case 3 :  //if right click 
+        if(this.rightClick==false && this.menu.isOpen == true) {
+          this.removeAndDisconnectSections();
+          this.showEventsInCalendar = false;
+          this.menu.close();
+          Main.panel.statusArea.dateMenu.menu.open();
+          Main.panel.statusArea.dateMenu.menu.close();
+          this.showEventsInCalendar=(this.showEventsSection)?this.prefs.get_boolean("show-events-in-calendar"): false; 
+          this.rebuildMessageList();
+          this.menu.open();
+          this.rightClick = true;
+          return ;
+        }
 
-    if(button == 3) {
-
-      if(this.rightClick==false && this.menu.isOpen == true) {
-        this.removeAndDisconnectSections();
-        this.showEventsInCalendar = false;
-        this.menu.close();
-        Main.panel.statusArea.dateMenu.menu.open();
-        Main.panel.statusArea.dateMenu.menu.close();
-        this.showEventsInCalendar=(this.showEventsSection)?this.prefs.get_boolean("show-events-in-calendar"): false; 
-        this.rebuildMessageList();
-        this.menu.open();
-        this.rightClick = true;
-        return ;
-      }
-
-      if(this.rightClick==true || this.menu.isOpen==false) {
-        this.rightClick = false;
+        if(this.rightClick==true || this.menu.isOpen==false) {
+          this.rightClick = false;
+        }
         return;
       }
-    }  
-    // if middle click
-    if (button == 2) {
-      // close the menu, since it gets open on any click
-      if (this.menu.isOpen) {
-        this.menu.actor.hide();
-      }
-      // toggle DND state
-      this.dndToggle();
-      // reload dnd status
-      this.loadDndStatus();
-    };
   },
 
   newNotif: function(fNo) {
@@ -364,9 +377,9 @@ const NotificationCenter = new Lang.Class({
   },
 
   rebuildMessageList: function() {
-    this.addThisSection(this._messageList._mediaSection        ,"show-media"         ,0);
-    this.addThisSection(this._messageList._notificationSection ,"show-notifications" ,1);
-    this.addThisSection(this._messageList._eventsSection       ,"show-events"        ,2);
+    this.addThisSection(this._messageList._mediaSection        ,this.showMediaSection         ,0);
+    this.addThisSection(this._messageList._notificationSection ,this.showNotificationSection  ,1);
+    this.addThisSection(this._messageList._eventsSection       ,this.showEventsSection        ,2);
     this.manageEvents(1);
   },
 
@@ -383,9 +396,7 @@ const NotificationCenter = new Lang.Class({
   },
 
   removeAndDisconnectSections : function() {
-    
     let len=this.showingSections.length;
-    
     while(len!=0) {
       this.showingSections[len-1]._list.disconnect(this.connectedSignals[2*len-1]);
       this.showingSections[len-1]._list.disconnect(this.connectedSignals[2*len-2]);
@@ -443,7 +454,6 @@ const NotificationCenter = new Lang.Class({
       this.resetIndicator();
       return ;
     }
-    
     this.manageEvents(0);
   },
 
@@ -496,6 +506,10 @@ const NotificationCenter = new Lang.Class({
         this.resetIndicator();
       });
     }
+    
+    if(this.menuAutoclose) {
+      this.cmsig = global.display.connect('notify::focus-window', () => this.autoCloseMenu());
+    }
   },
 
   undoChanges: function () {
@@ -516,8 +530,12 @@ const NotificationCenter = new Lang.Class({
     Main.messageTray._bannerBin.show();
     Main.messageTray._bannerBin.x=0;
     
-    if(this.dmSig!= null) {
+    if(this.showEventsSection) {
       Main.panel.statusArea.dateMenu.menu.disconnect(this.dmSig);
+    }
+    
+    if(this.menuAutoclose) {
+       global.display.disconnect(this.cmsig);
     }
 
     for(let i=1;i<this.dtActors.length;i++) {

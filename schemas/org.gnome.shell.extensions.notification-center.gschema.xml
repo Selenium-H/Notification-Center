@@ -35,110 +35,115 @@
   <schema id="org.gnome.shell.extensions.notification-center" path="/org/gnome/shell/extensions/notification-center/">
     <key name="show-media" type="b">
       <default>true</default>
-      <summary>Media Section on Notification Center </summary>
+      <summary>Show Media Section on Notification Center</summary>
       <description>Show Media Section on Notification Center</description>
     </key>
     <key name="show-notifications" type="b">
       <default>true</default>
-      <summary>Notifications on Notification Center </summary>
+      <summary>Show Notifications list on Notification Center</summary>
       <description>Show Notifications list on Notification Center</description>
     </key>
     <key name="show-events" type="b">
       <default>true</default>
-      <summary>Events on Notification Center </summary>
+      <summary>Show Events list on Notification Center</summary>
       <description>Show Events list on Notification Center</description>
     </key>
     <key name="show-events-in-calendar" type="b">
       <default>true</default>
-      <summary>Keep events on Calendar Menu </summary>
+      <summary>Keep events besides Calendar Menu</summary>
       <description>Keep events besides Calendar Menu</description>
     </key>
     <key enum="org.gnome.shell.extensions.notification-center.dnd-position" name="dnd-position">
       <default>'bottom'</default>
       <summary>Do Not Disturb menu position</summary>
-      <description>Do Not Disturb menu position.</description>
+      <description>Do Not Disturb menu position</description>
     </key>
     <key enum="org.gnome.shell.extensions.notification-center.clear-button-alignment" name="clear-button-alignment">
       <default>'right'</default>
-      <summary>Clear All button alignment </summary>
-      <description>Clear All Button position .</description>
+      <summary>Clear All Button position</summary>
+      <description>Clear All Button position</description>
+    </key>
+    <key name="autoclose-menu" type="b">
+      <default>false</default>
+      <summary>Close Notification Center when focus is switched</summary>
+      <description>Close Notification Center when focus is switched</description>
+    </key>
+    <key name="max-height" type="i">
+      <default>100</default>
+      <summary>Maximum height of Notification Center ( in % )</summary>
+      <description>Maximum height of Notification Center ( in % )</description>
     </key>
     <key enum="org.gnome.shell.extensions.notification-center.banner-pos" name="banner-pos">
       <default>'right'</default>
       <summary>Notification Banner position</summary>
       <description>Notification Banner position</description>
     </key>
-    <key name="max-height" type="i">
-      <default>100</default>
-      <summary>Maximum height of Notification Center</summary>
-      <description>Maximum height of Notification Center ( in % )</description>
-    </key>
     <key enum="org.gnome.shell.extensions.notification-center.banner-pos" name="indicator-pos">
       <default>'right'</default>
-      <summary>Indicator position</summary>
-      <description>Notification Center indicator position.</description>
+      <summary>Notification Center indicator position</summary>
+      <description>Notification Center indicator position</description>
     </key>
     <key name="individual-icons" type="b">
       <default>false</default>
-      <summary>Individual Icons for Sections</summary>
+      <summary>Show individual icons for each section on panel</summary>
       <description>Show individual icons for each section on panel</description>
     </key>
     <key name="autohide" type="b">
       <default>true</default>
-      <summary>Autohide Indicator</summary>
+      <summary>AutoHide notification indicator on panel</summary>
       <description>AutoHide notification indicator on panel</description>
     </key>
     <key name="indicator-shortcut" type="as">
       <default>
         <![CDATA[['<Super>c']]]>
       </default>
-      <summary>Shortcut to show indicator </summary>
+      <summary>Shortcut key combiation to show indicator</summary>
       <description>Shortcut key combiation to show indicator</description>
     </key>
     <key enum="org.gnome.shell.extensions.notification-center.new-notification" name="new-notification">
       <default>'dot'</default>
-      <summary>On new notification</summary>
-      <description>When new notification arrives.</description>
+      <summary>When new notification arrives</summary>
+      <description>When new notification arrives</description>
     </key>
     <key name="include-events-count" type="b">
       <default>false</default>
       <summary>Include events in above case</summary>
       <description>Include events in above case</description>
     </key>
-    <key name="blink-icon" type="b">
-      <default>false</default>
-      <summary>Blink Bell Icon on Notification</summary>
-      <description>Blink bell icon on new notifications</description>
+    <key name="blink-icon" type="i">
+      <default>0</default>
+      <summary>Number of times panel icon blinks on new notification</summary>
+      <description>Number of times panel icon blinks on new notification</description>
     </key>
     <key name="blink-time" type="i">
       <default>500</default>
-      <summary>Blink Bell Icon on Notification</summary>
-      <description>Blink Time Interval     ( in milliseconds )</description>
+      <summary>Blink Time Interval ( in milliseconds )</summary>
+      <description>Blink Time Interval ( in milliseconds )</description>
     </key>
     <key name="show-label" type="b">
       <default>false</default>
-      <summary>Always Shows Label </summary>
+      <summary>Show Dots or Counts till all notifications are cleared</summary>
       <description>Show Dots or Counts till all notifications are cleared</description>
     </key>
     <key name="middle-click-dnd" type="b"> 
       <default>true</default>
-      <summary>Middle click to toggle Do Not Disturb mode </summary>
+      <summary>Middle click panel icon to toggle Do Not Disturb</summary>
       <description>Middle click panel icon to toggle Do Not Disturb</description>
     </key>
     <key name="list" type="as">
       <default>[]</default>
-      <summary>Applications to ignore notifications from</summary>
+      <summary>List of applications to ignore notifications from</summary>
       <description>List of applications to ignore notifications from</description>
     </key>
     <key name="name-list" type="as">
       <default>[]</default>
-      <summary>Name of applications to ignore notifications from</summary>
+      <summary>List of Names of application to ignore notifications from</summary>
       <description>List of Names of application to ignore notifications from</description>
     </key>
     <key enum="org.gnome.shell.extensions.notification-center.for-list" name="for-list">
       <default>'none'</default>
-      <summary>Preferences for Apps on List</summary>
-      <description>If new notification arrives for apps on this list.</description>
+      <summary>If new notification arrives for apps on this list</summary>
+      <description>If new notification arrives for apps on this list</description>
     </key>
     <key name="reload-signal" type="b">
       <default>false</default>

@@ -60,8 +60,9 @@ const Prefs1 =  new GObject.Class({
           this.prefSwitch("show-events-in-calendar", 3);
           this.prefCombo ('dnd-position', 4, ['none','top','bottom'], [_("Don't Show"), _('On Top'), _('At Bottom')]);
           this.prefCombo ('clear-button-alignment', 5, ['left','center','right','hide'], [_('Left'), _('Center'), _('Right'), _("Don't Show")]);
-          this.prefCombo ('banner-pos', 6, ['left','center','right' ], [_('Left'), _('Center'), _('Right')]);
+          this.prefSwitch("autoclose-menu", 6);
           this.prefTime  ('max-height', 7, 20, 100, 1);
+          this.prefCombo ('banner-pos', 8, ['left','center','right' ], [_('Left'), _('Center'), _('Right')]);
           break;
         case 2:
           this.prefCombo ('indicator-pos', 0, ['left','center','right'], [_('Left'), _('Center'), _('Right')]);
@@ -69,11 +70,11 @@ const Prefs1 =  new GObject.Class({
           this.prefSwitch('autohide', 2);
           this.prefStr('indicator-shortcut', 3, ['<Alt>', '<Ctrl>', '<Shift>', '<Super>'], [_('Alt Key'), _('Ctrl Key'), _('Shift Key'), _('Super Key')]);
           this.prefCombo('new-notification', 4, ['none', 'dot', 'count'], [_('Show Nothing'), _('Show Dot'), _('Show Count')]);
-           this.prefSwitch('include-events-count', 5);
-          this.prefSwitch('blink-icon', 6);
+          this.prefSwitch('include-events-count', 5);
+          this.prefTime('blink-icon', 6,0,10000,1);
           this.prefTime ('blink-time', 7, 100, 10000, 10);
           this.prefSwitch('show-label', 8);
-          this.prefSwitch('middle-click-dnd'  ,9);
+          this.prefSwitch('middle-click-dnd' ,9);
         default:
           break;
     }
@@ -81,7 +82,7 @@ const Prefs1 =  new GObject.Class({
 },
 
  attachLabel: function(KEY,pos) {
-   let prefLabel = new Gtk.Label({xalign: 1, label: _(settings.settings_schema.get_key(KEY).get_description()), halign: Gtk.Align.START});
+   let prefLabel = new Gtk.Label({xalign: 1, label: _(settings.settings_schema.get_key(KEY).get_summary()), halign: Gtk.Align.START});
    this.grid.attach(prefLabel,0,pos,1,1);
  },
   
@@ -173,7 +174,7 @@ const AppsListPrefs = new GObject.Class({
 
 
   attachLabel: function(KEY,pos,box) {
-    let prefLabel = new Gtk.Label({xalign: 1, label: _(settings.settings_schema.get_key(KEY).get_description()), halign: Gtk.Align.START});
+    let prefLabel = new Gtk.Label({xalign: 1, label: _(settings.settings_schema.get_key(KEY).get_summary()), halign: Gtk.Align.START});
     box.attach(prefLabel,0,pos,1,1);
   },
  
@@ -337,8 +338,10 @@ const AboutPage = new GObject.Class({
 		settings.reset("show-events-in-calendar");
 		settings.reset("dnd-position"           );
 		settings.reset("clear-button-alignment" );
+		settings.reset("autoclose-menu"         );
+	  settings.reset("max-height"             );
 		settings.reset("banner-pos"             );
-		settings.reset("max-height"             );
+
 		
 		settings.reset("indicator-pos"          );
 		settings.reset("individual-icons"       );
