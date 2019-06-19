@@ -237,7 +237,7 @@ const AppsListPrefs = new GObject.Class({
     this.attach(listBox,0,0,1,1);
   },
 
- prefCombo: function(KEY, pos, options, items,box) {
+  prefCombo: function(KEY, pos, options, items,box) {
     let SettingCombo = new Gtk.ComboBoxText();
     for (let i = 0; i < options.length; i++) {
       SettingCombo.append(options[i],  items[i]);
@@ -332,6 +332,7 @@ const AboutPage = new GObject.Class({
   },
   
   resetExtension: function() {
+  
 		settings.reset("show-media"             );
 		settings.reset("show-notifications"     );
 		settings.reset("show-events"            );
@@ -342,7 +343,6 @@ const AboutPage = new GObject.Class({
 	  settings.reset("max-height"             );
 		settings.reset("banner-pos"             );
 
-		
 		settings.reset("indicator-pos"          );
 		settings.reset("individual-icons"       );
 		settings.reset("autohide"               );
