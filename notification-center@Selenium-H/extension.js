@@ -1,4 +1,4 @@
-// Version 16
+// Version 17
 
 const Config = imports.misc.config;
 const Gettext = imports.gettext;
@@ -19,17 +19,20 @@ const _ = imports.gettext.domain("notification-center").gettext;
 let notificationCenter = null;
 
 function enable() {
+
   notificationCenter = new NotificationCenter();
   notificationCenter.startNotificationCenter();
   reloadExtensionOnPrefsChange();
 }
 
 function disable() {
+
   notificationCenter.undoChanges();  
   notificationCenter.destroy();
 }
 
 function reloadExtensionOnPrefsChange() {
+
   // Reloads the Extension when preferences are changed.
   notificationCenter.prefs.connect("changed::reload-signal", () => {
     disable();
@@ -38,10 +41,12 @@ function reloadExtensionOnPrefsChange() {
 }
 
 const NotificationCenter = new Lang.Class({
+
   Name: "NotificationCenter",
   Extends: PanelMenu.Button,
 
   _init: function () {
+
     Convenience.initTranslations("notification-center");
     this.prefs = Convenience.getSettings("org.gnome.shell.extensions.notification-center");
     this.dndpref = new Gio.Settings({schema_id:"org.gnome.desktop.notifications"});
@@ -54,25 +59,35 @@ const NotificationCenter = new Lang.Class({
     this.dmsig = null;
     this.cmsig = null;
     this._loopTimeoutId = null;
+
     this.notificationCount = 0;
     this.eventsCount = 0;
-    this.rightClick = false;
+    this.mediaCount = 0;
+
+    this.rightClick = false; 
     
-    this.eventsIcon = new St.Icon({style_class:'system-status-icon'});
+    this.eventsIcon = new St.Icon({icon_name: "x-office-calendar-symbolic",style_class:'system-status-icon',visible:false});
     this.eventsLabel = new St.Label({ text: '',visible:false});
-    this.mediaIcon = new St.Icon({style_class:'system-status-icon'});
-    this.notificationIcon = new St.Icon({style_class:'system-status-icon'});
+    this.mediaIcon = new St.Icon({icon_name : "audio-x-generic-symbolic",style_class:'system-status-icon',visible:false});
+    this.notificationIcon = new St.Icon({style_class:'system-status-icon',visible:false});
     this.notificationLabel = new St.Label({ text: '',visible:false});
     this._indicator =  new St.BoxLayout({ vertical: false, style_class: 'panel-status-menu-box',style:"spacing:0.0em"});
+    this.actor.hide();
 
     this._messageList = Main.panel.statusArea.dateMenu._messageList;
+    
+    this.mediaSection = this._messageList._mediaSection;
+    this.notificationSection = this._messageList._notificationSection;
+    this.eventsSection = this._messageList._eventsSection;
+
     this.box  = new St.BoxLayout({style_class:'calendar',vertical: true,pack_start:false});
-    this.clearButton = new St.Button({style_class: 'message-list-clear-button button',label: _("Clear All"),can_focus: true});
+    this.clearButton = new St.Button({style_class: 'message-list-clear-button button',label: _("Clear All"),can_focus: true,visible:false});
     this.scrollView = new St.ScrollView({hscrollbar_policy:2,x_fill:true,y_fill:true,style:"min-width:"+this._messageList.actor.width+"px;max-height: "+0.01*this.prefs.get_int("max-height")*Main.layoutManager.monitors[0].height+"px; max-width:"+this._messageList.actor.width+"px; padding: 0px;"});
     this.dnditem = new PopupMenu.PopupSwitchMenuItem(_("Do Not Disturb")); 
   },
 
   addClearButton: function() {
+
     if(this.prefs.get_enum("clear-button-alignment")==3){
       return;
     }
@@ -94,6 +109,7 @@ const NotificationCenter = new Lang.Class({
   },
 
   addThisSection:function(section,toBeAdded,fNo) {
+
     if(toBeAdded) {
       this.addSectionToThis(section);
       this.connectedSignals.push(section._list.connect('actor-added'   ,()=> this.newNotif(fNo) ));
@@ -103,11 +119,13 @@ const NotificationCenter = new Lang.Class({
   },
 
   addSectionToThis: function (section) {
+
       this._messageList._removeSection(section);
       this.box.add(section.actor);
   },
 
   autoCloseMenu : function() {
+
     if (global.display.focus_window!= null && this.menu.isOpen) {
         this.menu.close();
     }
@@ -120,7 +138,7 @@ const NotificationCenter = new Lang.Class({
     }
 
     if(blinkTimes < 0) {
-			this._loopTimeoutId=null;    
+      this._loopTimeoutId=null;    
       return;      
     }
     
@@ -131,10 +149,12 @@ const NotificationCenter = new Lang.Class({
   },
   
   dndToggle: function() {
-    (this.dndpref.get_boolean('show-banners')==true) ? this.dndpref.set_boolean('show-banners',false):this.dndpref.set_boolean('show-banners',true);
+
+    this.dndpref.set_boolean('show-banners',!this.dndpref.get_boolean('show-banners'));
   },
 
   filterNotifications: function() {
+
     let source = Main.messageTray.getSources()[Main.messageTray.getSources().length-1];
     if (this.prefs.get_strv("name-list").indexOf(source.title)>=0) {
       switch(this.prefs.get_enum("for-list")) {
@@ -154,19 +174,22 @@ const NotificationCenter = new Lang.Class({
   },
 
   indicatorViewShortcut : function() {
+
     Main.wm.addKeybinding(
       'indicator-shortcut',
       this.prefs,
       Meta.KeyBindingFlags.NONE,
       Shell.ActionMode.NORMAL | Shell.ActionMode.OVERVIEW,
-      () => { (this.actor.visible==true) ? this.actor.hide() : this.manageAutohide(true); }
+      () => { 
+        this.notificationIcon.visible = !(this.mediaIcon.visible && this.eventsIcon.visible);
+        this.actor.visible=!this.actor.visible;
+      }
     );
   },
 
   loadDndStatus: function () {
+
     this.notificationIcon.icon_name = Gtk.IconTheme.get_default().has_icon("notification-symbolic")?"notification-symbolic":"preferences-system-notifications-symbolic";
-    this.eventsIcon.icon_name = "x-office-calendar-symbolic";
-    this.mediaIcon.icon_name = "audio-x-generic-symbolic";
     
     if(this.dndpref.get_boolean("show-banners")) {
       this.dnditem.setToggleState(false);
@@ -184,6 +207,7 @@ const NotificationCenter = new Lang.Class({
   },
   
   loadPreferences: function() {
+
     this.autohide = this.prefs.get_boolean("autohide");
     this.showMediaSection = this.prefs.get_boolean("show-media");
     this.showNotificationSection = this.prefs.get_boolean("show-notifications");
@@ -197,84 +221,53 @@ const NotificationCenter = new Lang.Class({
   },
 
   manageAutohide: function(iconState=false) {
+
     if(this.menu.isOpen) {
       return;
     }
-    
-    this.notificationIcon.hide();
-    this.eventsIcon.hide();
-    this.mediaIcon.hide(); 
-    this.clearButton.hide();
-    
-    if(this.showNotificationSection) {
-      if(this._messageList._notificationSection._canClear()) {
-        this.actor.show();
-        this.notificationIcon.show();     
-        this.clearButton.show();
-        if(this.showThreeIcons == false) {
-          return;
-        }
-      }
-    }
-    
-    if(this.showEventsSection) {
-      if(Config.PACKAGE_VERSION < "3.32.0") { // For Shell Version below 3.32.0 
-        if(this._messageList._eventsSection._canClear()) {
-          this.actor.show();
-          this.clearButton.show();
-          if(this.showThreeIcons == false) {
-            this.notificationIcon.show();
-            return;
-          }
-          this.eventsIcon.show();
-        }
-      }
-      else{  // For Shell Version 3.32 and beyond
-        this._messageList._eventsSection._reloadEvents(); 
-        if(this._messageList._eventsSection._shouldShow()) {
-          this.actor.show(); 
-          if(this.showThreeIcons == false) {
-            this.notificationIcon.show();
-            return;
-          }
-          this.eventsIcon.show();
-        }
-      }
-    }
-    
-    if(this.showMediaSection) {
-      if(this._messageList._mediaSection._shouldShow()) {
-        this.actor.show(); 
-        if(this.showThreeIcons == false) {
-          this.notificationIcon.show();
-          return;
-        }
-        this.mediaIcon.show();
-      }
-    }
-    
-    if(this.eventsIcon.visible==true||this.mediaIcon.visible==true || this.notificationIcon.visible==true ) {
-      return;
-    }
-    if(this.autohide==false||iconState==true) {
-      this.notificationIcon.show();
-      this.actor.show();
-      return;
+
+    this.mediaIcon.visible = this.mediaSection._shouldShow() && this.showThreeIcons;
+
+    if( Config.PACKAGE_VERSION >= "3.32.0" ) {
+      this.eventsSection._reloadEvents();
+      this.eventsIcon.visible = this.eventsSection._shouldShow() && this.showThreeIcons;
+      this.notificationIcon.visible = this.notificationSection._canClear() || (this.mediaSection._shouldShow() || this.eventsSection._shouldShow()) && !this.showThreeIcons ;  
     }
     else {
-      this.actor.hide();
+      this.eventsIcon.visible = (this.eventsSection._canClear()) && this.showThreeIcons;  
+      this.notificationIcon.visible = this.notificationSection._canClear() || (this.mediaSection._shouldShow() || this.eventsSection._canClear()) && !this.showThreeIcons ;  
+    }
+
+    
+    this.actor.visible = (this.mediaIcon.visible || this.eventsIcon.visible || this.notificationIcon.visible || !this.autohide);
+    if(this.actor.visible && (this.mediaIcon.visible || this.eventsIcon.visible || this.notificationIcon.visible) == false ) {
+        this.notificationIcon.visible = true;
     }
   },
 
+  manageClearButtonHide: function() {
+
+    if(!this.notificationSection._canClear()) {
+      if(Config.PACKAGE_VERSION >= "3.32.0") {
+        this.clearButton.hide(); 
+        return;
+      }
+     if(!this.eventsSection._shouldShow()||!this.eventsSection._canClear()) {
+        this.clearButton.hide(); 
+      }
+    } 
+  },
+
   manageEvents: function(action) {
+
     if(this.showEventsInCalendar == true) {
       switch(action) {
         case 0:
           if(this.eventsSectionhere == true) {
             return;
           }
-          this._messageList._removeSection(this._messageList._eventsSection); 
-          this.box.add(this._messageList._eventsSection.actor);  
+          this._messageList._removeSection(this.eventsSection); 
+          this.box.add(this.eventsSection.actor);  
           this.eventsSectionhere = true;
           return;
         case 1: 
@@ -282,7 +275,7 @@ const NotificationCenter = new Lang.Class({
             return;
           }
        	  this.box.remove_child(this.box.get_children()[this.showingSections.length-1]);
-       	  this._messageList._addSection(this._messageList._eventsSection);
+       	  this._messageList._addSection(this.eventsSection);
        	  this.eventsSectionhere = false;
           return;
       }
@@ -290,6 +283,7 @@ const NotificationCenter = new Lang.Class({
   },
   
   manageLabel:function(nCount,eCount) {  
+
     switch(this.newNotificationAction) {
       case 1  : 
         if(nCount>0) {
@@ -298,7 +292,8 @@ const NotificationCenter = new Lang.Class({
         }
         if(eCount > 0) {   
           this.eventsLabel.show(); 
-          this.eventsLabel.text="• ";      
+          this.eventsLabel.text="• ";  
+          this.eventsIcon.show();   
         }
         return;
       case 2  :
@@ -308,7 +303,8 @@ const NotificationCenter = new Lang.Class({
         }
         if(eCount > 0 ) {   
           this.eventsLabel.show(); 
-          this.eventsLabel.text=eCount.toString()+" ";      
+          this.eventsLabel.text=eCount.toString()+" ";         
+          this.eventsIcon.show();   
         }
         return;
       default :   
@@ -319,9 +315,20 @@ const NotificationCenter = new Lang.Class({
   },
     
   middleClickDndToggle: function (actor, event) {
+
     switch(event.get_button()) {
       case 1 :  // if left click
         if (this.menu.isOpen) {
+         
+          if(( this.scrollView.height == 0) && (this.mediaCount + this.eventsCount + this.notificationCount > 0 )) {
+            if(actor.visible == true) {
+              log('Detected empty notification center. Rebuilding');
+              this.removeAndDisconnectSections();
+              this.rebuildMessageList();
+              this.manageEvents(0);            
+            }
+          }
+
           this._messageList.setDate(new Date());
           if(this._loopTimeoutId!=null) { 
             Mainloop.source_remove(this._loopTimeoutId); 
@@ -366,27 +373,40 @@ const NotificationCenter = new Lang.Class({
   },
 
   newNotif: function(fNo) {
+
     switch(fNo) {
+      case 0: 
+        this.mediaCount++;
+        break;
       case 1 : 
         this.notificationCount++; 
         this.filterNotifications();
+        this.clearButton.show();
         break;
       case 2 :
         this.eventsCount++;
+        if( Config.PACKAGE_VERSION < "3.32.0" ) {
+          this.clearButton.show();
+        }
         break;
     }
     this.resetIndicator();
   },
 
   rebuildMessageList: function() {
+
     this._messageList.setDate(new Date());
-    this.addThisSection(this._messageList._mediaSection        ,this.showMediaSection         ,0);
-    this.addThisSection(this._messageList._notificationSection ,this.showNotificationSection  ,1);
-    this.addThisSection(this._messageList._eventsSection       ,this.showEventsSection        ,2);
+    this.addThisSection(this.mediaSection        ,this.showMediaSection         ,0);
+    this.addThisSection(this.notificationSection ,this.showNotificationSection  ,1);
+    this.addThisSection(this.eventsSection       ,this.showEventsSection        ,2);
   },
 
   remNotif: function(fNo) {
+
     switch(fNo) {
+      case 0 :
+        this.mediaCount--;
+        break;
       case 1 : 
         this.notificationCount--; 
         break;
@@ -394,10 +414,12 @@ const NotificationCenter = new Lang.Class({
         this.eventsCount--;
         break;
     }
+    this.manageClearButtonHide();
     this.resetIndicator();
   },
 
   removeAndDisconnectSections : function() {
+
     let len=this.showingSections.length;
     while(len!=0) {
       this.showingSections[len-1]._list.disconnect(this.connectedSignals[2*len-1]);
@@ -411,17 +433,20 @@ const NotificationCenter = new Lang.Class({
   },
 
   removeDotFromDateMenu: function() {
+
     Main.panel.statusArea.dateMenu.actor.get_children()[0].remove_actor(Main.panel.statusArea.dateMenu._indicator.actor);  
     this.dtActors=Main.panel.statusArea.dateMenu.actor.get_children()[0].get_children();
     Main.panel.statusArea.dateMenu.actor.get_children()[0].remove_actor(this.dtActors[0]);
   },
 
   removeSectionFromThis : function(len) {
+
     this.box.remove_child(this.box.get_children()[len]);
     this._messageList._addSection(this.showingSections[len]);
   },
   
   resetIndicator: function() {
+
     this.manageAutohide();
         
     if(this.includeEventsCount==false) {
@@ -447,9 +472,11 @@ const NotificationCenter = new Lang.Class({
         this._loopTimeoutId=null;
       }		
     }
+    
   },
 
   seen: function() {
+
     if (!this.menu.isOpen) {
       this.rightClick = false;
       this.resetIndicator();
@@ -459,6 +486,7 @@ const NotificationCenter = new Lang.Class({
   },
 
   startNotificationCenter: function() {
+
     this._indicator.add_child(this.eventsIcon);
     this._indicator.add_child(this.eventsLabel);
     this._indicator.add_child(this.mediaIcon);
@@ -505,9 +533,11 @@ const NotificationCenter = new Lang.Class({
         if(!Main.panel.statusArea.dateMenu.menu.isOpen) {
           this._messageList.setDate(new Date());
         }
-        if(this.prefs.get_boolean("show-label")==false && this.showEventsInCalendar == true) { 
-          this.eventsCount=0;
+        if(this.showEventsInCalendar == true) { 
           this.manageEvents(1);
+          if(this.prefs.get_boolean("show-label")==false) {
+            this.eventsCount=0;
+          }
         } 
         this.resetIndicator();
       });
@@ -519,6 +549,7 @@ const NotificationCenter = new Lang.Class({
   },
 
   undoChanges: function () {
+
     if(this._loopTimeoutId!=null) { 
       Mainloop.source_remove(this._loopTimeoutId); 
       this._loopTimeoutId=null;
@@ -527,12 +558,12 @@ const NotificationCenter = new Lang.Class({
     this.manageEvents(0);
     this.removeAndDisconnectSections();
 
-    this._messageList._removeSection(this._messageList._mediaSection);
-    this._messageList._removeSection(this._messageList._notificationSection);
-    this._messageList._removeSection(this._messageList._eventsSection);
-    this._messageList._addSection(this._messageList._mediaSection);
-    this._messageList._addSection(this._messageList._notificationSection);
-    this._messageList._addSection(this._messageList._eventsSection);
+    this._messageList._removeSection(this.mediaSection);
+    this._messageList._removeSection(this.notificationSection);
+    this._messageList._removeSection(this.eventsSection);
+    this._messageList._addSection(this.mediaSection);
+    this._messageList._addSection(this.notificationSection);
+    this._messageList._addSection(this.eventsSection);
     
     Main.messageTray._bannerBin.show();
     Main.messageTray._bannerBin.x=0;
