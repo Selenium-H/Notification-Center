@@ -8,7 +8,7 @@ Version 16
 </p>
 
 <p align="center">
-A GNOME Shell extension that eables notification center indicator on top panel and customizations.
+A GNOME Shell extension that enables notification center indicator on top panel and customizations.
 </p>
 
 <p align="center">
