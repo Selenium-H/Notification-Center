@@ -321,7 +321,7 @@ const NotificationCenter = new Lang.Class({
         if (this.menu.isOpen) {
          
           if(( this.scrollView.height == 0) && (this.mediaCount + this.eventsCount + this.notificationCount > 0 )) {
-            if(actor.visible == true) {
+            if(this.actor.visible == true) {
               log('Detected empty notification center. Rebuilding');
               this.removeAndDisconnectSections();
               this.rebuildMessageList();
