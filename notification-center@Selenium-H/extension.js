@@ -226,18 +226,26 @@ const NotificationCenter = new Lang.Class({
       return;
     }
 
-    this.mediaIcon.visible = this.mediaSection._shouldShow() && this.showThreeIcons;
+    this.mediaIcon.visible = this.mediaSection._shouldShow() && this.showThreeIcons && this.showMediaSection;
 
-    if( Config.PACKAGE_VERSION >= "3.32.0" ) {
-      this.eventsSection._reloadEvents();
-      this.eventsIcon.visible = this.eventsSection._shouldShow() && this.showThreeIcons;
-      this.notificationIcon.visible = this.notificationSection._canClear() || (this.mediaSection._shouldShow() || this.eventsSection._shouldShow()) && !this.showThreeIcons ;  
+    if(this.showEventsSection) {
+      if( Config.PACKAGE_VERSION >= "3.32.0" ) {
+        this.eventsSection._reloadEvents();
+        this.eventsIcon.visible = this.eventsSection._shouldShow() && this.showThreeIcons;
+        this.notificationIcon.visible = (this.notificationSection._canClear() && this.showNotificationSection) || 
+                                        ((this.mediaSection._shouldShow() && this.showMediaSection) || this.eventsSection._shouldShow()) && !this.showThreeIcons ;  
+      }
+      else {
+        this.eventsIcon.visible = (this.eventsSection._canClear()) && this.showThreeIcons;  
+        this.notificationIcon.visible = (this.notificationSection._canClear() && this.showNotificationSection) || 
+                                        ((this.mediaSection._shouldShow() && this.showMediaSection) || this.eventsSection._canClear()) && !this.showThreeIcons ;  
+      }
     }
     else {
-      this.eventsIcon.visible = (this.eventsSection._canClear()) && this.showThreeIcons;  
-      this.notificationIcon.visible = this.notificationSection._canClear() || (this.mediaSection._shouldShow() || this.eventsSection._canClear()) && !this.showThreeIcons ;  
+      this.eventsIcon.visible = false;
+      this.notificationIcon.visible = (this.notificationSection._canClear() && this.showNotificationSection) || 
+                                      (this.mediaSection._shouldShow() && this.showMediaSection && !this.showThreeIcons) ;
     }
-
     
     this.actor.visible = (this.mediaIcon.visible || this.eventsIcon.visible || this.notificationIcon.visible || !this.autohide);
     if(this.actor.visible && (this.mediaIcon.visible || this.eventsIcon.visible || this.notificationIcon.visible) == false ) {
@@ -319,14 +327,13 @@ const NotificationCenter = new Lang.Class({
     switch(event.get_button()) {
       case 1 :  // if left click
         if (this.menu.isOpen) {
-         
-          if(( this.scrollView.height == 0) && (this.mediaCount + this.eventsCount + this.notificationCount > 0 )) {
-            if(this.actor.visible == true) {
-              log('Detected empty notification center. Rebuilding');
-              this.removeAndDisconnectSections();
-              this.rebuildMessageList();
-              this.manageEvents(0);            
-            }
+          if((this.notificationSection.actor.height*this.showNotificationSection + 
+              this.mediaSection.actor.height*this.showMediaSection+
+              this.eventsSection.actor.height*this.showEventsSection) != this.scrollView.height) {
+                log('Detected missing messages. Rebuilding');
+                this.removeAndDisconnectSections();
+                this.rebuildMessageList();
+                this.manageEvents(0);            
           }
 
           this._messageList.setDate(new Date());
