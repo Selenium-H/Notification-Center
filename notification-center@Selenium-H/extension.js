@@ -1,4 +1,8 @@
-// Version 17
+/*
+Version 17
+==========
+ 
+*/
 
 const Config = imports.misc.config;
 const Gettext = imports.gettext;
@@ -55,7 +59,6 @@ const NotificationCenter = new Lang.Class({
     
     this.connectedSignals = [];
     this.showingSections = [];
-    this.prefSignals = [];
     this.dmsig = null;
     this.cmsig = null;
     this._loopTimeoutId = null;
@@ -67,10 +70,10 @@ const NotificationCenter = new Lang.Class({
     this.rightClick = false; 
     
     this.eventsIcon = new St.Icon({icon_name: "x-office-calendar-symbolic",style_class:'system-status-icon',visible:false});
-    this.eventsLabel = new St.Label({ text: '',visible:false});
+    this.eventsLabel = new St.Label({ text: "• ",visible:false});
     this.mediaIcon = new St.Icon({icon_name : "audio-x-generic-symbolic",style_class:'system-status-icon',visible:false});
     this.notificationIcon = new St.Icon({style_class:'system-status-icon',visible:false});
-    this.notificationLabel = new St.Label({ text: '',visible:false});
+    this.notificationLabel = new St.Label({ text: "• ",visible:false});
     this._indicator =  new St.BoxLayout({ vertical: false, style_class: 'panel-status-menu-box',style:"spacing:0.0em"});
     this.actor.hide();
 
@@ -79,6 +82,7 @@ const NotificationCenter = new Lang.Class({
     this.mediaSection = this._messageList._mediaSection;
     this.notificationSection = this._messageList._notificationSection;
     this.eventsSection = this._messageList._eventsSection;
+
 
     this.box  = new St.BoxLayout({style_class:'calendar',vertical: true,pack_start:false});
     this.clearButton = new St.Button({style_class: 'message-list-clear-button button',label: _("Clear All"),can_focus: true,visible:false});
@@ -108,12 +112,12 @@ const NotificationCenter = new Lang.Class({
     this.menu.box.add_child(box);
   },
 
-  addThisSection:function(section,toBeAdded,fNo) {
+  addThisSection:function(section,toBeAdded,messageType) {
 
     if(toBeAdded) {
       this.addSectionToThis(section);
-      this.connectedSignals.push(section._list.connect('actor-added'   ,()=> this.newNotif(fNo) ));
-      this.connectedSignals.push(section._list.connect('actor-removed' ,()=> this.remNotif(fNo) ));
+      this.connectedSignals.push(section._list.connect('actor-added'   ,()=> this.newNotif(messageType) ));
+      this.connectedSignals.push(section._list.connect('actor-removed' ,()=> this.remNotif(messageType) ));
       this.showingSections.push(section);   
     }
   },
@@ -138,7 +142,8 @@ const NotificationCenter = new Lang.Class({
     }
 
     if(blinkTimes < 0) {
-      this._loopTimeoutId=null;    
+      this._loopTimeoutId=null; 
+      this.loadDndStatus();   
       return;      
     }
     
@@ -147,10 +152,22 @@ const NotificationCenter = new Lang.Class({
       this._loopTimeoutId=Mainloop.timeout_add(interval, ()=> this.blinkIcon(--blinkTimes,interval));
     }
   },
+
+  blinkIconStop: function() {
   
+    if(this._loopTimeoutId!=null) {
+      Mainloop.source_remove(this._loopTimeoutId);
+      this._loopTimeoutId=null; 
+    }
+    
+    this.loadDndStatus();
+  
+  },
+    
   dndToggle: function() {
 
     this.dndpref.set_boolean('show-banners',!this.dndpref.get_boolean('show-banners'));
+    
   },
 
   filterNotifications: function() {
@@ -209,15 +226,17 @@ const NotificationCenter = new Lang.Class({
   loadPreferences: function() {
 
     this.autohide = this.prefs.get_boolean("autohide");
-    this.showMediaSection = this.prefs.get_boolean("show-media");
-    this.showNotificationSection = this.prefs.get_boolean("show-notifications");
-    this.showEventsSection = this.prefs.get_boolean("show-events");
-    this.showEventsInCalendar=(this.showEventsSection)?this.prefs.get_boolean("show-events-in-calendar"): false;
+    this.mediaSectionToBeShown = (this.prefs.get_int("show-media")>0)?true:false;
+    this.notificationSectionToBeShown = (this.prefs.get_int("show-notification")>0)?true:false;
+    this.eventsSectionToBeShown = (this.prefs.get_int("show-events")>0)?true:false;
+    this.showEventsInCalendar=(this.eventsSectionToBeShown)?this.prefs.get_boolean("show-events-in-calendar"): false;
     this.showThreeIcons = this.prefs.get_boolean("individual-icons");
     this.includeEventsCount=this.prefs.get_boolean("include-events-count");
     this.newNotificationAction=this.prefs.get_enum("new-notification"); 
     this.menuAutoclose = this.prefs.get_boolean("autoclose-menu");
     this.eventsSectionhere = this.showEventsInCalendar;
+    this.orderOfSections = this.prefs.get_strv("sections-order");
+
   },
 
   manageAutohide: function(iconState=false) {
@@ -226,25 +245,25 @@ const NotificationCenter = new Lang.Class({
       return;
     }
 
-    this.mediaIcon.visible = this.mediaSection._shouldShow() && this.showThreeIcons && this.showMediaSection;
+    this.mediaIcon.visible = this.mediaSection._shouldShow() && this.showThreeIcons && this.mediaSectionToBeShown;
 
-    if(this.showEventsSection) {
+    if(this.eventsSectionToBeShown) {
       if( Config.PACKAGE_VERSION >= "3.32.0" ) {
         this.eventsSection._reloadEvents();
         this.eventsIcon.visible = this.eventsSection._shouldShow() && this.showThreeIcons;
-        this.notificationIcon.visible = (this.notificationSection._canClear() && this.showNotificationSection) || 
-                                        ((this.mediaSection._shouldShow() && this.showMediaSection) || this.eventsSection._shouldShow()) && !this.showThreeIcons ;  
+        this.notificationIcon.visible = (this.notificationSection._canClear() && this.notificationSectionToBeShown) || 
+                                        ((this.mediaSection._shouldShow() && this.mediaSectionToBeShown) || this.eventsSection._shouldShow()) && !this.showThreeIcons ;  
       }
       else {
         this.eventsIcon.visible = (this.eventsSection._canClear()) && this.showThreeIcons;  
-        this.notificationIcon.visible = (this.notificationSection._canClear() && this.showNotificationSection) || 
-                                        ((this.mediaSection._shouldShow() && this.showMediaSection) || this.eventsSection._canClear()) && !this.showThreeIcons ;  
+        this.notificationIcon.visible = (this.notificationSection._canClear() && this.notificationSectionToBeShown) || 
+                                        ((this.mediaSection._shouldShow() && this.mediaSectionToBeShown) || this.eventsSection._canClear()) && !this.showThreeIcons ;  
       }
     }
     else {
       this.eventsIcon.visible = false;
-      this.notificationIcon.visible = (this.notificationSection._canClear() && this.showNotificationSection) || 
-                                      (this.mediaSection._shouldShow() && this.showMediaSection && !this.showThreeIcons) ;
+      this.notificationIcon.visible = (this.notificationSection._canClear() && this.notificationSectionToBeShown) || 
+                                      (this.mediaSection._shouldShow() && this.mediaSectionToBeShown && !this.showThreeIcons) ;
     }
     
     this.actor.visible = (this.mediaIcon.visible || this.eventsIcon.visible || this.notificationIcon.visible || !this.autohide);
@@ -253,17 +272,19 @@ const NotificationCenter = new Lang.Class({
     }
   },
 
-  manageClearButtonHide: function() {
+  manageClearButtonVisibility: function() {
+  
+    if(!this.menu.isOpen) {
+      return;
+    }
 
-    if(!this.notificationSection._canClear()) {
-      if(Config.PACKAGE_VERSION >= "3.32.0") {
-        this.clearButton.hide(); 
-        return;
-      }
-     if(!this.eventsSection._shouldShow()||!this.eventsSection._canClear()) {
-        this.clearButton.hide(); 
-      }
-    } 
+    if(Config.PACKAGE_VERSION >= "3.32.0") {
+      this.clearButton.visible = this.notificationSection._canClear() && this.notificationSectionToBeShown;
+      return;
+    }
+
+    this.clearButton.visible = (this.eventsSection._canClear()&&this.eventsSectionToBeShown)||(this.notificationSection._canClear()&&this.notificationSectionToBeShown)
+    
   },
 
   manageEvents: function(action) {
@@ -274,15 +295,15 @@ const NotificationCenter = new Lang.Class({
           if(this.eventsSectionhere == true) {
             return;
           }
-          this._messageList._removeSection(this.eventsSection); 
-          this.box.add(this.eventsSection.actor);  
+          this._messageList._removeSection(this.eventsSection);   
+          this.box.insert_child_at_index(this.eventsSection.actor,this.showingSections.indexOf(this.eventsSection));
           this.eventsSectionhere = true;
           return;
         case 1: 
           if(this.eventsSectionhere == false) {
             return;
           }
-       	  this.box.remove_child(this.box.get_children()[this.showingSections.length-1]);
+       	  this.box.remove_child(this.box.get_children()[this.showingSections.indexOf(this.eventsSection)]);
        	  this._messageList._addSection(this.eventsSection);
        	  this.eventsSectionhere = false;
           return;
@@ -292,34 +313,24 @@ const NotificationCenter = new Lang.Class({
   
   manageLabel:function(nCount,eCount) {  
 
-    switch(this.newNotificationAction) {
-      case 1  : 
+    this.notificationLabel.visible = nCount*this.newNotificationAction;
+    this.eventsLabel.visible = eCount*this.newNotificationAction;
+    
+    if(this.eventsLabel.visible == true){
+      this.eventsIcon.show();
+    }
+    
+    if(this.newNotificationAction == 2) {
+
         if(nCount>0) {
-          this.notificationLabel.show();
-          this.notificationLabel.text="• ";      
-        }
-        if(eCount > 0) {   
-          this.eventsLabel.show(); 
-          this.eventsLabel.text="• ";  
-          this.eventsIcon.show();   
-        }
-        return;
-      case 2  :
-        if(nCount>0) {
-          this.notificationLabel.show();
           this.notificationLabel.text=nCount.toString()+" ";      
         }
         if(eCount > 0 ) {   
-          this.eventsLabel.show(); 
-          this.eventsLabel.text=eCount.toString()+" ";         
-          this.eventsIcon.show();   
+          this.eventsLabel.text=eCount.toString()+" ";
         }
         return;
-      default :   
-        this.notificationLabel.hide();            
-        this.eventsLabel.hide();            
-        return;
     }
+    
   },
     
   middleClickDndToggle: function (actor, event) {
@@ -327,9 +338,9 @@ const NotificationCenter = new Lang.Class({
     switch(event.get_button()) {
       case 1 :  // if left click
         if (this.menu.isOpen) {
-          if((this.notificationSection.actor.height*this.showNotificationSection + 
-              this.mediaSection.actor.height*this.showMediaSection+
-              this.eventsSection.actor.height*this.showEventsSection) != this.scrollView.height) {
+          if((this.notificationSection.actor.height*this.notificationSectionToBeShown + 
+              this.mediaSection.actor.height*this.mediaSectionToBeShown+
+              this.eventsSection.actor.height*this.eventsSectionToBeShown) != this.scrollView.height) {
                 log('Detected missing messages. Rebuilding');
                 this.removeAndDisconnectSections();
                 this.rebuildMessageList();
@@ -337,10 +348,7 @@ const NotificationCenter = new Lang.Class({
           }
 
           this._messageList.setDate(new Date());
-          if(this._loopTimeoutId!=null) { 
-            Mainloop.source_remove(this._loopTimeoutId); 
-            this._loopTimeoutId=null;
-          }    
+          this.blinkIconStop();
           if(this.prefs.get_boolean("show-label")==false) { 
             this.notificationCount=0;
             this.eventsCount=0;
@@ -379,22 +387,18 @@ const NotificationCenter = new Lang.Class({
       }
   },
 
-  newNotif: function(fNo) {
+  newNotif: function(messageType) {
 
-    switch(fNo) {
-      case 0: 
+    switch(messageType) {
+      case "media": 
         this.mediaCount++;
         break;
-      case 1 : 
+      case "notification" : 
         this.notificationCount++; 
         this.filterNotifications();
-        this.clearButton.show();
         break;
-      case 2 :
+      case "events" :
         this.eventsCount++;
-        if( Config.PACKAGE_VERSION < "3.32.0" ) {
-          this.clearButton.show();
-        }
         break;
     }
     this.resetIndicator();
@@ -403,25 +407,25 @@ const NotificationCenter = new Lang.Class({
   rebuildMessageList: function() {
 
     this._messageList.setDate(new Date());
-    this.addThisSection(this.mediaSection        ,this.showMediaSection         ,0);
-    this.addThisSection(this.notificationSection ,this.showNotificationSection  ,1);
-    this.addThisSection(this.eventsSection       ,this.showEventsSection        ,2);
+    
+    for(let i=0;i<this.orderOfSections.length;i++){
+      this.addThisSection(this[this.orderOfSections[i]+"Section"]       ,this[this.orderOfSections[i]+"SectionToBeShown"]        ,this.orderOfSections[i]);
+    }
   },
 
-  remNotif: function(fNo) {
+  remNotif: function(messageType) {
 
-    switch(fNo) {
-      case 0 :
+    switch(messageType) {
+      case "media" :
         this.mediaCount--;
         break;
-      case 1 : 
-        this.notificationCount--; 
+      case "notification" : 
+        (this.notificationCount>0)? this.notificationCount-- : 0;
         break;
-      case 2 :
-        this.eventsCount--;
+      case "events" :
+        (this.eventsCount>0)? this.eventsCount-- : 0;
         break;
     }
-    this.manageClearButtonHide();
     this.resetIndicator();
   },
 
@@ -455,31 +459,14 @@ const NotificationCenter = new Lang.Class({
   resetIndicator: function() {
 
     this.manageAutohide();
+    this.manageClearButtonVisibility();
         
-    if(this.includeEventsCount==false) {
-      this.eventsCount=0;
-    }
+    this.eventsCount=this.eventsCount*this.includeEventsCount;
     
     if( this.loadDndStatus() == false ) {
-      if(this.includeEventsCount==true && this.showThreeIcons == false) {
-        this.manageLabel(this.notificationCount+this.eventsCount,0); 
-      }
-      else {
-        this.manageLabel(this.notificationCount,this.eventsCount); 
-      }        
+        this.manageLabel((this.notificationCount + (!this.showThreeIcons)*this.eventsCount) ,(this.showThreeIcons)*this.eventsCount); 
     }
-
-    if(this.notificationCount+this.eventsCount<=0) {
-      this.notificationLabel.hide();
-      this.eventsLabel.hide();
-      this.notificationCount=0;
-      this.eventsCount=0;
-      if(this._loopTimeoutId!=null) { 
-        Mainloop.source_remove(this._loopTimeoutId); 
-        this._loopTimeoutId=null;
-      }		
-    }
-    
+        
   },
 
   seen: function() {
@@ -490,6 +477,7 @@ const NotificationCenter = new Lang.Class({
       return ;
     }
     this.manageEvents(0);
+ 
   },
 
   startNotificationCenter: function() {
@@ -502,7 +490,7 @@ const NotificationCenter = new Lang.Class({
     this.actor.add_child(this._indicator);
     Main.panel.addToStatusArea("NotificationCenter", this, 2, this.prefs.get_string('indicator-pos'));
     this.rebuildMessageList();    
-    
+
     this.scrollView.add_actor(this.box);
     this.scrollView._delegate = this;
     
@@ -520,7 +508,7 @@ const NotificationCenter = new Lang.Class({
         this.menu.addMenuItem(this.dnditem); 
         break;
     }
-        
+
     Main.messageTray._bannerBin.x = (this.prefs.get_enum('banner-pos')-1)*(Main.layoutManager.monitors[0].width-(Main.messageTray._bannerBin.width=this.menu.actor.width));
     this.removeDotFromDateMenu();
     this.resetIndicator();
@@ -535,7 +523,7 @@ const NotificationCenter = new Lang.Class({
       this.actor.connect("button-press-event", (actor, event)=>this.middleClickDndToggle(actor, event));
     }
     
-    if(this.showEventsSection) {
+    if(this.eventsSectionToBeShown) {
       this.dmSig=Main.panel.statusArea.dateMenu.menu.connect("open-state-changed",()=> {
         if(!Main.panel.statusArea.dateMenu.menu.isOpen) {
           this._messageList.setDate(new Date());
@@ -575,7 +563,7 @@ const NotificationCenter = new Lang.Class({
     Main.messageTray._bannerBin.show();
     Main.messageTray._bannerBin.x=0;
     
-    if(this.showEventsSection) {
+    if(this.eventsSectionToBeShown) {
       Main.panel.statusArea.dateMenu.menu.disconnect(this.dmSig);
     }
     
