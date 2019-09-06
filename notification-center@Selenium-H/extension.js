@@ -94,21 +94,21 @@ const NotificationCenter = new Lang.Class({
 
   addClearButton: function() {
 
-    if(this.prefs.get_enum("clear-button-alignment")==3){
-      return;
-    }
-
-    this.clearButton.set_x_align(1+this.prefs.get_enum('clear-button-alignment'));
-    this.clearButton.connect('clicked',()=> {
-      let len=this.showingSections.length;
-      while(len!=0) {
+    if(this.prefs.get_enum("clear-button-alignment")<3) {
+     
+      this.clearButton.set_x_align(1+this.prefs.get_enum('clear-button-alignment'));
+      this.clearButton.connect('clicked',()=> {
+        let len=this.showingSections.length;
+        while(len!=0) {
           this.showingSections[len-1].clear();
           len--;
-      }
-      this.clearButton.hide();
-    });
+        }
+        this.clearButton.hide();
+      });
     
-    this.menu.box.add_child(this.clearButton);
+      this.menu.box.add_child(this.clearButton);
+    }
+    
   },
 
   addThisSection:function(section,toBeAdded,messageType) {
@@ -138,7 +138,7 @@ const NotificationCenter = new Lang.Class({
       
       if(pos == 1){
         this.menu.addMenuItem(this.dndItem);
-        this.menu.addMenuItem(new PopupMenu.PopupBaseMenuItem({reactive:false})); 
+        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem()); 
         this.menu.box.add_child(this.scrollView);
         this.addClearButton();
         return;
@@ -146,7 +146,7 @@ const NotificationCenter = new Lang.Class({
       else{
         this.menu.box.add_child(this.scrollView);
         this.addClearButton();
-        this.menu.addMenuItem(new PopupMenu.PopupBaseMenuItem({reactive:false})); 
+        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem()); 
         this.menu.addMenuItem(this.dndItem);
         return;
       }
@@ -165,31 +165,22 @@ const NotificationCenter = new Lang.Class({
     
   },
 
-  blinkIcon: function(blinkTimes,interval) {
+  blinkIcon: function(blinkTimes,interval,opacity) {
   
-    if(this._loopTimeoutId!=null) {
-      Mainloop.source_remove(this._loopTimeoutId);
-      this._loopTimeoutId=null;
-    }
+    this.blinkIconStopIfBlinking(opacity);
 
-    if(blinkTimes <= 0) {
-      this.blinkIconStopIfBlinking();  
-      return;      
-    }
-    
-    if(this.dndpref.get_boolean("show-banners")) {
-      this.notificationIcon.set_opacity((this.notificationIcon.get_opacity()==255)? 100 : 255);
-      this._loopTimeoutId=Mainloop.timeout_add(interval, ()=> this.blinkIcon(--blinkTimes,interval));
+    if(blinkTimes > 0) {
+      this._loopTimeoutId=Mainloop.timeout_add(interval, ()=> this.blinkIcon(--blinkTimes,interval,(opacity==255)?100:255));
     }
     
   },
 
-  blinkIconStopIfBlinking: function() {
+  blinkIconStopIfBlinking: function(opacity) {
   
     if(this._loopTimeoutId!=null) {
       Mainloop.source_remove(this._loopTimeoutId);
       this._loopTimeoutId=null; 
-      this.notificationIcon.set_opacity(255);
+      this.notificationIcon.set_opacity(opacity);
     }
 
   },
@@ -215,11 +206,13 @@ const NotificationCenter = new Lang.Class({
   },
 
   filterNotifications: function() {
+  
+    if(this.isDndOff()) { 
 
-    let source = Main.messageTray.getSources()[Main.messageTray.getSources().length-1];
+      let source = Main.messageTray.getSources()[Main.messageTray.getSources().length-1];
     
-    if (this.prefs.get_strv("name-list").indexOf(source.title)>=0) {
-      switch(this.prefs.get_enum("for-list")) {
+      if (this.prefs.get_strv("name-list").indexOf(source.title)>=0) {
+        switch(this.prefs.get_enum("for-list")) {
           case 0:
             break ;
           case 1:
@@ -230,10 +223,11 @@ const NotificationCenter = new Lang.Class({
           case 2:
             this.notificationCount--;
             return ;
+        }
       }
-    }
     
-    this.blinkIcon(2*!this.menu.isOpen*this.prefs.get_int("blink-icon"),this.prefs.get_int("blink-time"));
+      this.blinkIcon(2*!this.menu.isOpen*this.prefs.get_int("blink-icon"),this.prefs.get_int("blink-time"),255);
+    }
     
   },
 
@@ -264,7 +258,7 @@ const NotificationCenter = new Lang.Class({
       this.dndItem.setToggleState(!this.isDndOff());
     }
     
-    this.blinkIconStopIfBlinking();
+    this.blinkIconStopIfBlinking(255);
     
     if(this.isDndOff()) {
     
@@ -272,6 +266,7 @@ const NotificationCenter = new Lang.Class({
       this.notificationIcon.set_opacity(255);
       Main.messageTray._bannerBin.show();
       return false;
+      
     }
     
     if(Gtk.IconTheme.get_default().has_icon("notifications-disabled-symbolic")) {
@@ -304,7 +299,7 @@ const NotificationCenter = new Lang.Class({
 
   },
 
-  manageAutohide: function(iconState=false) {
+  manageAutohide: function() {
 
     if(this.menu.isOpen) {
       return;
@@ -326,17 +321,14 @@ const NotificationCenter = new Lang.Class({
 
   manageClearButtonVisibility: function() {
   
-    if(!this.menu.isOpen) {
-      return;
-    }
+    if(this.menu.isOpen) {
 
-    this.clearButton.visible = this.notificationSection._canClear() && this.notificationSectionToBeShown;
+      this.clearButton.visible = this.notificationSection._canClear() && this.notificationSectionToBeShown;
     
-    if(Config.PACKAGE_VERSION >= "3.32.0") {  
-      return;
+      if(Config.PACKAGE_VERSION <= "3.30.0") {  
+        this.clearButton.visible = (this.clearButton.visible)||(this.eventsSection._list.get_children().length && this.eventsSectionToBeShown);
+      }
     }
-
-    this.clearButton.visible = (this.clearButton.visible)||(this.eventsSection._list.get_children().length && this.eventsSectionToBeShown);
     
   },
 
@@ -390,7 +382,7 @@ const NotificationCenter = new Lang.Class({
         
           this.checkForMissingMessagesAndRebuildIfSo();      
           this._messageList.setDate(new Date());
-          this.blinkIconStopIfBlinking();
+          this.blinkIconStopIfBlinking(255);
           
           if(this.prefs.get_boolean("show-label")==false) { 
             this.notificationCount=0;
@@ -585,7 +577,7 @@ const NotificationCenter = new Lang.Class({
 
   undoChanges: function () {
 
-    this.blinkIconStopIfBlinking();
+    this.blinkIconStopIfBlinking(255);
 
     this.manageEvents(0);
     this.removeAndDisconnectSections();
