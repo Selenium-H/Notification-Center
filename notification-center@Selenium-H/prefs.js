@@ -113,6 +113,7 @@ const AboutPage = new GObject.Class({
 		settings.reset("for-list"               );
 		
 		reloadExtension();
+		
 	}, 
 	
 });
@@ -432,22 +433,55 @@ const PrefsWindowForNotification =  new GObject.Class({
     this.orderSectionsReOrderRunning = false;
   
   },
+
+  adjustOtherSectionsKeepingThisKeyValueSame: function(KEY) {
+  
+    let currentKeyValue = settings.get_int(KEY);
+    let currentSection = KEY.substring(5,KEY.length); 
+    
+    if(currentKeyValue == 0) {
+      return;
+    }
+  
+    let mediaNotificationEventsSectionOrder = [ settings.get_int("show-media"), settings.get_int("show-notification"), settings.get_int("show-events") ];
+    
+    let missingValue=1;
+    
+    for(missingValue=1;missingValue<=3;missingValue++){
+      if(mediaNotificationEventsSectionOrder.indexOf(missingValue)==-1){
+        break;
+      }
+    }
+    
+    if(currentKeyValue == mediaNotificationEventsSectionOrder[0] && currentSection!="media"){
+      settings.set_int("show-media",missingValue);
+    }
+    
+    if(currentKeyValue == mediaNotificationEventsSectionOrder[1] && currentSection!="notification"){
+      settings.set_int("show-notification",missingValue);
+    }
+    
+    if(currentKeyValue == mediaNotificationEventsSectionOrder[2] && currentSection!="events"){
+      settings.set_int("show-events",missingValue);
+    }
+  
+  },
   
   displayPrefs: function() {
   
-    this.prefOrder ("show-media",              0, ["none","top","middle","bottom"], [_("Don't Show"), _('At The Top'),_('In The Middle'), _('At The Bottom')]);
-    this.prefOrder ("show-notification",       1, ["none","top","middle","bottom"], [_("Don't Show"), _('At The Top'),_('In The Middle'), _('At The Bottom')]);
-    this.prefOrder ("show-events",             2, ["none","top","middle","bottom"], [_("Don't Show"), _('At The Top'),_('In The Middle'), _('At The Bottom')]);
-    this.prefSwitch("show-events-in-calendar", 3                                                                                                             );
-    this.prefCombo ("dnd-position",            4, ["none","top","bottom"],          [_("Don't Show"), _('On Top'), _('At Bottom')]                           );
-    this.prefCombo ("clear-button-alignment",  5, ['left','center','right','hide'], [_('Left'), _('Center'), _('Right'), _("Don't Show")]                    );
-    this.prefSwitch("autoclose-menu",          6                                                                                                             );
-    this.prefTime  ("max-height",              7, 20,  100, 1                                                                                                );
-    this.prefCombo ("banner-pos",              8, ['left','center','right' ],       [_('Left'), _('Center'), _('Right')]                                     );  
+    this.prefSectionPosition ("show-media",         0, ["none","top","middle","bottom"], [_("Don't Show"), _('At The Top'),_('In The Middle'), _('At The Bottom')]);
+    this.prefSectionPosition ("show-notification",  1, ["none","top","middle","bottom"], [_("Don't Show"), _('At The Top'),_('In The Middle'), _('At The Bottom')]);
+    this.prefSectionPosition ("show-events",        2, ["none","top","middle","bottom"], [_("Don't Show"), _('At The Top'),_('In The Middle'), _('At The Bottom')]);
+    this.prefSwitch("show-events-in-calendar",      3                                                                                                             );
+    this.prefCombo ("dnd-position",                 4, ["none","top","bottom"],          [_("Don't Show"), _('On Top'), _('At Bottom')]                           );
+    this.prefCombo ("clear-button-alignment",       5, ['left','center','right','hide'], [_('Left'), _('Center'), _('Right'), _("Don't Show")]                    );
+    this.prefSwitch("autoclose-menu",               6                                                                                                             );
+    this.prefTime  ("max-height",                   7, 20,  100, 1                                                                                                );
+    this.prefCombo ("banner-pos",                   8, ['left','center','right' ],       [_('Left'), _('Center'), _('Right')]                                     );  
     
   },
   
-  prefOrder: function(KEY, pos, options, items) {
+  prefSectionPosition: function(KEY, pos, options, items) {
   
     let SettingCombo = new Gtk.ComboBoxText();
     for (let i = 0; i < options.length; i++) {
@@ -456,7 +490,9 @@ const PrefsWindowForNotification =  new GObject.Class({
     SettingCombo.set_active(settings.get_int(KEY));
     SettingCombo.connect('changed', Lang.bind(this, function(widget) {
       
-      this.orderSectionsReOrder(KEY,widget.get_active());
+      settings.set_int(KEY,widget.get_active());
+      this.adjustOtherSectionsKeepingThisKeyValueSame(KEY);
+      this.reorderOrderOfSections();
       reloadExtension();
     }));
     
@@ -466,68 +502,35 @@ const PrefsWindowForNotification =  new GObject.Class({
     this.attach(SettingCombo, 1, pos, 1, 1);
 
   },
-   
-  orderSectionsReOrder: function(KEY,value) {
-
-    if(this.orderSectionsReOrderRunning ==true){
-      return;
-    }  
-    this.orderSectionsReOrderRunning =true;
+ 
+  reorderOrderOfSections: function() {
   
     let orderStr = ["noValue","noValue","noValue"];
-    let section = KEY.substring(5,KEY.length);
-    let currentKeyValue = settings.get_int(KEY);
     
-    settings.set_int(KEY,value);
+    let mediaNotificationEventsSectionOrder = [ settings.get_int("show-media"), settings.get_int("show-notification"), settings.get_int("show-events") ];
     
-    let sectionsOrders = [ ["media",settings.get_int("show-media")],
-                           ["notification",settings.get_int("show-notification")],
-                           ["events",settings.get_int("show-events")]
-                         ];
-    
-    if(currentKeyValue == 0){
-    
-      let missingValue = 1;
-      
-      for(let i=0;i<3;i++){
-        if(sectionsOrders[i][1] == missingValue){
-          missingValue++;
-        }
-      }
-      
-      currentKeyValue = missingValue;
-    }         
-    
-    for(let i=0;i<3;i++){
-      if(sectionsOrders[i][1]!=0 && sectionsOrders[i][1] == value && sectionsOrders[i][0]!=section){
-        settings.set_int("show-"+sectionsOrders[i][0],currentKeyValue);
-        sectionsOrders[i][1] = currentKeyValue; 
-        break;
-      }
-    }
-                         
-    for(let i=0;i<3;i++){
-      orderStr[sectionsOrders[i][1]-1]=sectionsOrders[i][0]; 
-    }
-       
-    let tempOrderStr = [];
-    let len=0;
-    let index = 0;
-    
-    while(index<3){
-      if(orderStr[index]!="noValue"){
-        tempOrderStr[len] = orderStr[index];
-        len++;
-      }
-      index++;
+    if(mediaNotificationEventsSectionOrder[0]!=0){
+      orderStr[mediaNotificationEventsSectionOrder[0]-1] = "media";
     }
     
-    orderStr = [];
-    orderStr = tempOrderStr;
+    if(mediaNotificationEventsSectionOrder[1]!=0){
+      orderStr[mediaNotificationEventsSectionOrder[1]-1] = "notification";
+    }
     
-    settings.set_strv("sections-order",orderStr);
+    if(mediaNotificationEventsSectionOrder[2]!=0){
+      orderStr[mediaNotificationEventsSectionOrder[2]-1] = "events";
+    }
     
-    this.orderSectionsReOrderRunning =false;
-  },  
-
+    let tempOrderStr=[];
+    
+    for(let i=0;i<3;i++) {
+      if(orderStr[i]!="noValue"){
+        tempOrderStr.push(orderStr[i]);
+      }
+    }
+   
+    settings.set_strv("sections-order",tempOrderStr);
+     
+  },
+  
 });
