@@ -65,6 +65,7 @@ const NotificationCenter = new Lang.Class({
     this.dmsig = null;
     this.cmsig = null;
     this.dndSig= null;
+    this.isDndOff = true;
     this._loopTimeoutId = null;
 
     this.notificationCount = 0;
@@ -105,7 +106,8 @@ const NotificationCenter = new Lang.Class({
         }
         this.clearButton.hide();
       });
-    
+      
+      this.clearButton._delegate=this;
       this.menu.box.add_child(this.clearButton);
     }
     
@@ -185,16 +187,16 @@ const NotificationCenter = new Lang.Class({
 
   },
   
-  checkForMissingMessagesAndRebuildIfSo: function(){
+  checkForMissingMessagesAndRebuildIfSo: function(){  
   
     if((this.notificationSection.actor.height*this.notificationSectionToBeShown + 
         this.mediaSection.actor.height*this.mediaSectionToBeShown+
-        this.eventsSection.actor.height*this.eventsSectionToBeShown) != this.scrollView.height) {
+        this.eventsSection.actor.height*this.eventsSectionToBeShown) != this.box.height) {
         
       log('Detected missing messages. Rebuilding');
       this.removeAndDisconnectSections();
       this.rebuildMessageList();
-      this.manageEvents(0);            
+
     }
   
   },
@@ -207,7 +209,7 @@ const NotificationCenter = new Lang.Class({
 
   filterNotifications: function() {
   
-    if(this.isDndOff()) { 
+    if(this.isDndOff) { 
 
       let source = Main.messageTray.getSources()[Main.messageTray.getSources().length-1];
     
@@ -227,6 +229,7 @@ const NotificationCenter = new Lang.Class({
       }
     
       this.blinkIcon(2*!this.menu.isOpen*this.prefs.get_int("blink-icon"),this.prefs.get_int("blink-time"),255);
+      
     }
     
   },
@@ -246,25 +249,23 @@ const NotificationCenter = new Lang.Class({
     
   },
 
-  isDndOff: function(){
-
-    return this.dndpref.get_boolean("show-banners");
-
-  },
-
   loadDndStatus: function () {
   
+    this.isDndOff = this.dndpref.get_boolean("show-banners");
+  
     if(this.prefs.get_enum("dnd-position")>0) {
-      this.dndItem.setToggleState(!this.isDndOff());
+      this.dndItem.setToggleState(!this.isDndOff);
     }
     
     this.blinkIconStopIfBlinking(255);
+    this.manageAutohide();
     
-    if(this.isDndOff()) {
-    
+    if(this.isDndOff) {
+      
       this.notificationIcon.icon_name = Gtk.IconTheme.get_default().has_icon("notification-symbolic")?"notification-symbolic":"preferences-system-notifications-symbolic";
       this.notificationIcon.set_opacity(255);
       Main.messageTray._bannerBin.show();
+      
       return false;
       
     }
@@ -275,17 +276,17 @@ const NotificationCenter = new Lang.Class({
     else {
       this.notificationIcon.set_opacity(150);
     }
-    
+     
     Main.messageTray._bannerBin.hide();
     this.notificationLabel.hide();
-    this.eventsLabel.hide();
+    this.eventsLabel.hide();    
     return true;
     
   },
   
   loadPreferences: function() {
 
-    this.autohide = this.prefs.get_boolean("autohide");
+    this.autohide = this.prefs.get_int("autohide");  
     this.mediaSectionToBeShown = (this.prefs.get_int("show-media")>0)?true:false;
     this.notificationSectionToBeShown = (this.prefs.get_int("show-notification")>0)?true:false;
     this.eventsSectionToBeShown = (this.prefs.get_int("show-events")>0)?true:false;
@@ -309,7 +310,8 @@ const NotificationCenter = new Lang.Class({
     this.eventsIcon.visible = this.eventsSection._list.get_children().length && this.showThreeIcons && this.eventsSectionToBeShown;
     this.notificationIcon.visible = (this.notificationSection._list.get_children().length && this.notificationSectionToBeShown) || 
                                     (this.mediaSection._shouldShow() && this.mediaSectionToBeShown && !this.showThreeIcons) ||
-                                    (this.eventsSection._list.get_children().length && this.eventsSectionToBeShown && !this.showThreeIcons);         
+                                    (this.eventsSection._list.get_children().length && this.eventsSectionToBeShown && !this.showThreeIcons)||
+                                    ((!this.isDndOff)*this.autohide > 1);
                                     
     this.actor.visible = (this.mediaIcon.visible || this.eventsIcon.visible || this.notificationIcon.visible || !this.autohide);
 
@@ -380,8 +382,6 @@ const NotificationCenter = new Lang.Class({
       case 1 :  // if left click
         if (this.menu.isOpen) {
         
-          this.checkForMissingMessagesAndRebuildIfSo();      
-          this._messageList.setDate(new Date());
           this.blinkIconStopIfBlinking(255);
           
           if(this.prefs.get_boolean("show-label")==false) { 
@@ -411,7 +411,6 @@ const NotificationCenter = new Lang.Class({
         if(this.rightClick==false && this.menu.isOpen == true) {
           this.removeAndDisconnectSections();
           this.rebuildMessageList();
-          this.manageEvents(0);
           this.rightClick = true;
           return ;
         }
@@ -506,7 +505,7 @@ const NotificationCenter = new Lang.Class({
         
     this.eventsCount=this.eventsCount*this.includeEventsCount;
     
-    if(this.isDndOff()) {
+    if(this.isDndOff) {
       this.manageLabel((this.notificationCount + (!this.showThreeIcons)*this.eventsCount) ,(this.showThreeIcons)*this.eventsCount); 
     }
         
@@ -519,7 +518,10 @@ const NotificationCenter = new Lang.Class({
       this.resetIndicator();
       return ;
     }
+    
     this.manageEvents(0);
+    this.checkForMissingMessagesAndRebuildIfSo();
+    this._messageList.setDate(new Date());
  
   },
 
@@ -602,12 +604,24 @@ const NotificationCenter = new Lang.Class({
     
     if(this.dndSig!=null){
       this.dndpref.disconnect(this.dndSig);
+      this.dndItem.destroy();
     }
 
     Main.panel.statusArea.dateMenu.actor.get_children()[0].insert_child_at_index(this.dtActors[0],0);
     Main.panel.statusArea.dateMenu.actor.get_children()[0].add_actor(Main.panel.statusArea.dateMenu._indicator.actor);
     
     Main.wm.removeKeybinding('indicator-shortcut');  
+    
+    this.eventsIcon.destroy();
+    this.eventsLabel.destroy();
+    this.mediaIcon.destroy();
+    this.notificationIcon.destroy();
+    this.notificationLabel.destroy();
+    this._indicator.destroy();
+
+    this.clearButton.destroy();
+    this.box.destroy();
+    this.scrollView.destroy();
     
   },
   
