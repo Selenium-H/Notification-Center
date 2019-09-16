@@ -118,8 +118,8 @@ Version 17
       <description>Show individual icons for each section on panel</description>
     </key>
     
-    <key name="autohide" type="b">
-      <default>true</default>
+    <key name="autohide" type="i">
+      <default>1</default>
       <summary>AutoHide notification indicator on panel</summary>
       <description>AutoHide notification indicator on panel</description>
     </key>
