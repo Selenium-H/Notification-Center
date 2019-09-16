@@ -319,7 +319,7 @@ const PrefsWindowForAppList = new GObject.Class({
     appColumn.add_attribute(nameRenderer, "text"   ,1);
     
     this.treeView.append_column(appColumn);
-    appColumn.set_fixed_width(350);
+    appColumn.set_fixed_width(370);
     listBox.add(this.treeView);
     this.attach(listBox,0,0,1,1);
     
@@ -408,19 +408,36 @@ const PrefsWindowForIndicator =  new GObject.Class({
   
   displayPrefs: function(){
   
-    this.prefCombo ("indicator-pos",           0, ['left','center','right'],                 [_('Left'), _('Center'), _('Right')]                            );
-    this.prefSwitch("individual-icons",        1                                                                                                             );
-    this.prefSwitch("autohide",                2                                                                                                             );
-    this.prefStr   ("indicator-shortcut",      3, ['<Alt>', '<Ctrl>', '<Shift>', '<Super>'], [_('Alt Key'), _('Ctrl Key'), _('Shift Key'), _('Super Key')]   );
-    this.prefCombo ("new-notification",        4, ['none', 'dot', 'count'],                  [_('Show Nothing'), _('Show Dot'), _('Show Count')]             );
-    this.prefSwitch("include-events-count",    5                                                                                                             );
-    this.prefTime  ("blink-icon",              6,    0,     10000,       1                                                                                   );
-    this.prefTime  ("blink-time",              7,    100,   10000,       10                                                                                  );
-    this.prefSwitch("show-label",              8                                                                                                             );
-    this.prefSwitch("middle-click-dnd",        9                                                                                                             );
+    this.prefCombo   ("indicator-pos",           0, ['left','center','right'],                 [_('Left'), _('Center'), _('Right')]                            );
+    this.prefSwitch  ("individual-icons",        1                                                                                                             );
+    this.prefComboInt("autohide",                2, ['0','1','2'],                             [_("No"),_("Yes"),_("If Do Not Disturb is Off")]                );
+    this.prefStr     ("indicator-shortcut",      3, ['<Alt>', '<Ctrl>', '<Shift>', '<Super>'], [_('Alt Key'), _('Ctrl Key'), _('Shift Key'), _('Super Key')]   );
+    this.prefCombo   ("new-notification",        4, ['none', 'dot', 'count'],                  [_('Show Nothing'), _('Show Dot'), _('Show Count')]             );
+    this.prefSwitch  ("include-events-count",    5                                                                                                             );
+    this.prefTime    ("blink-icon",              6,    0,     10000,       1                                                                                   );
+    this.prefTime    ("blink-time",              7,    100,   10000,       10                                                                                  );
+    this.prefSwitch  ("show-label",              8                                                                                                             );
+    this.prefSwitch  ("middle-click-dnd",        9                                                                                                             );
 
   },
+
+  prefComboInt: function(KEY, pos, options, items) {
   
+    let SettingCombo = new Gtk.ComboBoxText();
+    for (let i = 0; i < options.length; i++) {
+      SettingCombo.append(options[i],  items[i]);
+    }
+    SettingCombo.set_active(settings.get_int(KEY));
+    SettingCombo.connect('changed', Lang.bind(this, function(widget) {
+      settings.set_int(KEY, widget.get_active());
+      reloadExtension();
+    }));
+    
+    this.attachLabel(KEY,pos);
+    this.attach(SettingCombo, 1, pos, 1, 1);
+    
+  },
+
 });
 
 const PrefsWindowForNotification =  new GObject.Class({
