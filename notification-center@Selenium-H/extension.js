@@ -542,7 +542,7 @@ const NotificationCenter = new Lang.Class({
     this.loadDndStatus();
     this.resetIndicator();
     
-    Main.messageTray._bannerBin.x = (this.prefs.get_enum('banner-pos')-1)*(Main.layoutManager.monitors[0].width-(Main.messageTray._bannerBin.width=this.menu.actor.width));
+    Main.messageTray.bannerAlignment = this.prefs.get_enum('banner-pos');
     this.removeDotFromDateMenu();
     
     this.indicatorViewShortcut();
@@ -592,7 +592,7 @@ const NotificationCenter = new Lang.Class({
     this._messageList._addSection(this.eventsSection);
     
     Main.messageTray._bannerBin.show();
-    Main.messageTray._bannerBin.x=0;
+    Main.messageTray.bannerAlignment = 2;
     
     if(this.eventsSectionToBeShown) {
       Main.panel.statusArea.dateMenu.menu.disconnect(this.dmSig);
