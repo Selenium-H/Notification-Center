@@ -20,9 +20,9 @@ Version 17
   </enum>
   
   <enum id="org.gnome.shell.extensions.notification-center.banner-pos">
-    <value nick="left" value="0"/>
-    <value nick="center" value="1"/>
-    <value nick="right" value="2"/>
+    <value nick="left" value="1"/>
+    <value nick="center" value="2"/>
+    <value nick="right" value="3"/>
   </enum>
   
   <enum id="org.gnome.shell.extensions.notification-center.indicator-pos">
