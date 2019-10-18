@@ -98,6 +98,7 @@ const AboutPage = new GObject.Class({
 		settings.reset("sections-order"         );
 
 		settings.reset("indicator-pos"          );
+		settings.reset("indicator-index"        );
 		settings.reset("individual-icons"       );
 		settings.reset("autohide"               );
 		settings.reset("indicator-shortcut"     );
@@ -408,16 +409,19 @@ const PrefsWindowForIndicator =  new GObject.Class({
   
   displayPrefs: function(){
   
-    this.prefCombo   ("indicator-pos",           0, ['left','center','right'],                 [_('Left'), _('Center'), _('Right')]                            );
-    this.prefSwitch  ("individual-icons",        1                                                                                                             );
-    this.prefComboInt("autohide",                2, ['0','1','2'],                             [_("No"),_("Yes"),_("If Do Not Disturb is Off")]                );
-    this.prefStr     ("indicator-shortcut",      3, ['<Alt>', '<Ctrl>', '<Shift>', '<Super>'], [_('Alt Key'), _('Ctrl Key'), _('Shift Key'), _('Super Key')]   );
-    this.prefCombo   ("new-notification",        4, ['none', 'dot', 'count'],                  [_('Show Nothing'), _('Show Dot'), _('Show Count')]             );
-    this.prefSwitch  ("include-events-count",    5                                                                                                             );
-    this.prefTime    ("blink-icon",              6,    0,     10000,       1                                                                                   );
-    this.prefTime    ("blink-time",              7,    100,   10000,       10                                                                                  );
-    this.prefSwitch  ("show-label",              8                                                                                                             );
-    this.prefSwitch  ("middle-click-dnd",        9                                                                                                             );
+    let pos = 0;
+    
+    this.prefCombo   ("indicator-pos",           pos++, ['left','center','right'],                 [_('Left'), _('Center'), _('Right')]                            );
+    this.prefInt     ("indicator-index",         pos++,    0,   20,       1                                                                                        );
+    this.prefSwitch  ("individual-icons",        pos++                                                                                                             );
+    this.prefComboInt("autohide",                pos++, ['0','1','2'],                             [_("No"),_("Yes"),_("If Do Not Disturb is Off")]                );
+    this.prefStr     ("indicator-shortcut",      pos++, ['<Alt>', '<Ctrl>', '<Shift>', '<Super>'], [_('Alt Key'), _('Ctrl Key'), _('Shift Key'), _('Super Key')]   );
+    this.prefCombo   ("new-notification",        pos++, ['none', 'dot', 'count'],                  [_('Show Nothing'), _('Show Dot'), _('Show Count')]             );
+    this.prefSwitch  ("include-events-count",    pos++                                                                                                             );
+    this.prefTime    ("blink-icon",              pos++,    0,     10000,       1                                                                                   );
+    this.prefTime    ("blink-time",              pos++,    100,   10000,       10                                                                                  );
+    this.prefSwitch  ("show-label",              pos++                                                                                                             );
+    this.prefSwitch  ("middle-click-dnd",        pos++                                                                                                             );
 
   },
 
@@ -435,6 +439,20 @@ const PrefsWindowForIndicator =  new GObject.Class({
     
     this.attachLabel(KEY,pos);
     this.attach(SettingCombo, 1, pos, 1, 1);
+    
+  },
+  
+  prefInt: function(KEY,pos) {
+  
+    let timeSetting = Gtk.SpinButton.new_with_range(0, 20, 1);
+    timeSetting.set_value(settings.get_int(KEY));
+    timeSetting.connect('notify::value', function(spin) {
+      settings.set_int(KEY,spin.get_value_as_int());
+      reloadExtension();
+    });
+
+    this.attachLabel(KEY,pos);
+    this.attach(timeSetting, 1, pos, 1, 1);
     
   },
 
@@ -486,15 +504,17 @@ const PrefsWindowForNotification =  new GObject.Class({
   
   displayPrefs: function() {
   
-    this.prefSectionPosition ("show-media",         0, ["none","top","middle","bottom"], [_("Don't Show"), _('At The Top'),_('In The Middle'), _('At The Bottom')]);
-    this.prefSectionPosition ("show-notification",  1, ["none","top","middle","bottom"], [_("Don't Show"), _('At The Top'),_('In The Middle'), _('At The Bottom')]);
-    this.prefSectionPosition ("show-events",        2, ["none","top","middle","bottom"], [_("Don't Show"), _('At The Top'),_('In The Middle'), _('At The Bottom')]);
-    this.prefSwitch("show-events-in-calendar",      3                                                                                                             );
-    this.prefCombo ("dnd-position",                 4, ["none","top","bottom"],          [_("Don't Show"), _('On Top'), _('At Bottom')]                           );
-    this.prefCombo ("clear-button-alignment",       5, ['left','center','right','hide'], [_('Left'), _('Center'), _('Right'), _("Don't Show")]                    );
-    this.prefSwitch("autoclose-menu",               6                                                                                                             );
-    this.prefTime  ("max-height",                   7, 20,  100, 1                                                                                                );
-    this.prefCombo ("banner-pos",                   8, ['left','center','right' ],       [_('Left'), _('Center'), _('Right')]                                     );  
+    let pos = 0;
+  
+    this.prefSectionPosition ("show-media",         pos++, ["none","top","middle","bottom"], [_("Don't Show"), _('At The Top'),_('In The Middle'), _('At The Bottom')]);
+    this.prefSectionPosition ("show-notification",  pos++, ["none","top","middle","bottom"], [_("Don't Show"), _('At The Top'),_('In The Middle'), _('At The Bottom')]);
+    this.prefSectionPosition ("show-events",        pos++, ["none","top","middle","bottom"], [_("Don't Show"), _('At The Top'),_('In The Middle'), _('At The Bottom')]);
+    this.prefSwitch("show-events-in-calendar",      pos++                                                                                                             );
+    this.prefCombo ("dnd-position",                 pos++, ["none","top","bottom"],          [_("Don't Show"), _('On Top'), _('At Bottom')]                           );
+    this.prefCombo ("clear-button-alignment",       pos++, ['left','center','right','hide'], [_('Left'), _('Center'), _('Right'), _("Don't Show")]                    );
+    this.prefSwitch("autoclose-menu",               pos++                                                                                                             );
+    this.prefTime  ("max-height",                   pos++, 20,  100, 1                                                                                                );
+    this.prefCombo ("banner-pos",                   pos++, ['left','center','right' ],       [_('Left'), _('Center'), _('Right')]                                     );  
     
   },
   
