@@ -108,8 +108,14 @@ Version 17
     
     <key enum="org.gnome.shell.extensions.notification-center.banner-pos" name="indicator-pos">
       <default>'right'</default>
-      <summary>Notification Center indicator position</summary>
-      <description>Notification Center indicator position</description>
+      <summary>Notification Center icon position on panel</summary>
+      <description>Notifications Center icon position</description>
+    </key>
+    
+    <key name="indicator-index" type="i">
+      <default>1</default>
+      <summary>Position of notification icon in panel box</summary>
+      <description>Position of notification icon in panel box</description>
     </key>
     
     <key name="individual-icons" type="b">
