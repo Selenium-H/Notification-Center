@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#Version 3
+#Version 4
 #=========
 
 
@@ -66,15 +66,27 @@ echo "Done"
 echo -ne "Creating Translations ...        "
 cd locale
 
+status="Done"
+
 for poFile in */
   do
     mkdir ${poFile}/LC_MESSAGES
-    msgfmt ${poFile}/$extensionName".po" -o ${poFile}/LC_MESSAGES/$extensionName".mo"
+    msgfmt ${poFile}/$extensionName".po" -o ${poFile}/LC_MESSAGES/$extensionName".mo"   
+    if [ $? != 0 ]; then
+      status="Error"
+      break
+    fi
   done
-echo "Done"
 
-echo ""
-echo "All Done !"
+if [ "$status" == "Done" ]; then
+  echo -e $status 
+  echo "" 
+  echo "All Done !"
+else
+  echo ""
+  echo "Extension Installed, Translations not done."
+fi 
+ 
 echo ""
 echo "Restart GNOME Shell ( Alt + F2 , Press r , Press Enter )."
 echo "Enable this extension using GNOME Tweak Tool."
