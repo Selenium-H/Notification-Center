@@ -1,7 +1,17 @@
 #!/bin/bash
 
+#Version 4
+#=========
+
+
 # Default Installation Directory
 installDir=~/.local/share/gnome-shell/extensions
+
+# Extension Name and directory
+extensionName=notification-center
+extensionDir=$extensionName@Selenium-H
+
+echo ""
 
 if [ ! -z $1 ]
 then
@@ -35,28 +45,49 @@ then
   fi
 fi
 
-echo "Installing Path "$installDir
-echo "Removing any Older Version"
-rm -rf $installDir"/notification-center@Selenium-H"
+echo "Installing Extension "$extensionDir
+echo "Installation Path "$installDir
+echo ""
+echo -ne "Removing any Older Version ...   "
+rm -rf $installDir"/"$extensionDir
 echo "Done"
 
-echo "Copying New Version"
-cp -rf notification-center@Selenium-H $installDir
-cp -rf locale $installDir"/notification-center@Selenium-H"
-cp -rf schemas $installDir"/notification-center@Selenium-H"
+echo -ne "Copying New Version ...          "
+cp -rf $extensionDir $installDir
+cp -rf schemas $installDir"/"$extensionDir
+cp -rf locale $installDir"/"$extensionDir
 echo "Done"
 
-cd $installDir"/notification-center@Selenium-H"
-echo "Compiling Schemas"
+cd $installDir"/"$extensionDir
+echo -ne "Compiling Schemas ...            "
 glib-compile-schemas schemas
 echo "Done"
 
+echo -ne "Creating Translations ...        "
 cd locale
-echo "Creating Translations"
 
-for locale in */
+status="Done"
+
+for poFile in */
   do
-    mkdir ${locale}/LC_MESSAGES
-    msgfmt ${locale}/notification-center.po -o ${locale}/LC_MESSAGES/notification-center.mo
+    mkdir ${poFile}/LC_MESSAGES
+    msgfmt ${poFile}/$extensionName".po" -o ${poFile}/LC_MESSAGES/$extensionName".mo"   
+    if [ $? != 0 ]; then
+      status="Error"
+      break
+    fi
   done
-echo "All Done !"
+
+if [ "$status" == "Done" ]; then
+  echo -e $status 
+  echo "" 
+  echo "All Done !"
+else
+  echo ""
+  echo "Extension Installed, Translations not done."
+fi 
+ 
+echo ""
+echo "Restart GNOME Shell ( Alt + F2 , Press r , Press Enter )."
+echo "Enable this extension using GNOME Tweak Tool."
+echo ""
