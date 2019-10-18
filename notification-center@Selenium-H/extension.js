@@ -40,7 +40,7 @@ function disable() {
 function reloadExtensionOnPrefsChange() {
 
   // Reloads the Extension when preferences are changed.
-  notificationCenter.prefs.connect("changed::reload-signal", () => {
+  notificationCenter.reloadSignal = notificationCenter.prefs.connect("changed::reload-signal", () => {
     disable();
     enable();
   });
@@ -56,6 +56,7 @@ const NotificationCenter = new Lang.Class({
 
     Convenience.initTranslations("notification-center");
     this.prefs = Convenience.getSettings("org.gnome.shell.extensions.notification-center");
+    this.reloadSignal = null; 
     this.dndpref = new Gio.Settings({schema_id:"org.gnome.desktop.notifications"});
     this.parent(1-0.5*this.prefs.get_enum('indicator-pos'), "NotificationCenter");
     this.loadPreferences();
@@ -499,7 +500,7 @@ const NotificationCenter = new Lang.Class({
     this._indicator.add_child(this.notificationIcon);
     this._indicator.add_child(this.notificationLabel);
     this.panelButtonActor.add_child(this._indicator);
-    Main.panel.addToStatusArea("NotificationCenter", this, 2, this.prefs.get_string('indicator-pos'));
+    Main.panel.addToStatusArea("NotificationCenter", this, this.prefs.get_int('indicator-index'), this.prefs.get_string('indicator-pos'));
 
     this.rebuildMessageList();
     this.scrollView.add_actor(this.box);
@@ -597,6 +598,8 @@ const NotificationCenter = new Lang.Class({
     this.clearButton.destroy();
     this.box.destroy();
     this.scrollView.destroy();
+    
+    this.prefs.disconnect(this.reloadSignal);
 
   },
 
