@@ -69,6 +69,10 @@ const NotificationCenter = new Lang.Class({
     this.isDndOff = true;
     this._loopTimeoutId = null;
 
+    this.textureCache = St.TextureCache.get_default();
+    this.iconThemeChangeSig = null;
+    this.notificationIconName = null;
+
     this.notificationCount = 0;
     this.eventsCount = 0;
     this.mediaCount = 0;
@@ -233,7 +237,7 @@ const NotificationCenter = new Lang.Class({
 
     if(this.isDndOff) {
 
-      this.notificationIcon.icon_name = Gtk.IconTheme.get_default().has_icon("notification-symbolic")?"notification-symbolic":"preferences-system-notifications-symbolic";
+      this.notificationIcon.icon_name = this.notificationIconName;
       this.notificationIcon.set_opacity(255);
       Main.messageTray._bannerBin.show();
 
@@ -492,6 +496,15 @@ const NotificationCenter = new Lang.Class({
 
   },
 
+  setNotificationIconName: function () {
+    this.notificationIconName = Gtk.IconTheme.get_default().has_icon("notification-symbolic")?"notification-symbolic":"preferences-system-notifications-symbolic";
+  },
+
+  iconThemeChanged: function() {
+    this.setNotificationIconName();
+    this.loadDndStatus();
+  },
+
   startNotificationCenter: function() {
 
     this._indicator.add_child(this.eventsIcon);
@@ -499,6 +512,10 @@ const NotificationCenter = new Lang.Class({
     this._indicator.add_child(this.mediaIcon);
     this._indicator.add_child(this.notificationIcon);
     this._indicator.add_child(this.notificationLabel);
+
+    this.setNotificationIconName();
+    this.iconThemeChangeSig = this.textureCache.connect('icon-theme-changed', this.iconThemeChanged.bind(this));
+
     this.panelButtonActor.add_child(this._indicator);
     Main.panel.addToStatusArea("NotificationCenter", this, this.prefs.get_int('indicator-index'), this.prefs.get_string('indicator-pos'));
 
@@ -575,6 +592,10 @@ const NotificationCenter = new Lang.Class({
     if(this.dndSig!=null){
       this.dndpref.disconnect(this.dndSig);
       this.dndItem.destroy();
+    }
+
+    if(this.iconThemeChangeSig!=null){
+      this.textureCache.disconnect(this.iconThemeChangeSig);
     }
 
     if(Config.PACKAGE_VERSION < "3.34") {
