@@ -56,7 +56,7 @@ const NotificationCenter = new Lang.Class({
 
     Convenience.initTranslations("notification-center");
     this.prefs = Convenience.getSettings("org.gnome.shell.extensions.notification-center");
-    this.reloadSignal = null; 
+    this.reloadSignal = null;
     this.dndpref = new Gio.Settings({schema_id:"org.gnome.desktop.notifications"});
     this.parent(1-0.5*this.prefs.get_enum('indicator-pos'), "NotificationCenter");
     this.loadPreferences();
@@ -170,7 +170,7 @@ const NotificationCenter = new Lang.Class({
 
     if(this._loopTimeoutId!=null) {
       Mainloop.source_remove(this._loopTimeoutId);
-      this._loopTimeoutId=null; 
+      this._loopTimeoutId=null;
       this.notificationIcon.set_opacity(opacity);
     }
 
@@ -235,9 +235,9 @@ const NotificationCenter = new Lang.Class({
     this.blinkIconStopIfBlinking(255);
     this.manageAutohide();
 
-    if(this.isDndOff) {
+    this.notificationIcon.icon_name = this.notificationIconName;
 
-      this.notificationIcon.icon_name = this.notificationIconName;
+    if(this.isDndOff) {
       this.notificationIcon.set_opacity(255);
       Main.messageTray._bannerBin.show();
 
@@ -258,7 +258,7 @@ const NotificationCenter = new Lang.Class({
     return true;
 
   },
-  
+
   loadPreferences: function() {
 
     this.autohide = this.prefs.get_int("autohide");
@@ -268,7 +268,7 @@ const NotificationCenter = new Lang.Class({
     this.showEventsInCalendarAlso=(this.eventsSectionToBeShown)?this.prefs.get_boolean("show-events-in-calendar"): false;
     this.showThreeIcons = this.prefs.get_boolean("individual-icons");
     this.includeEventsCount=this.prefs.get_boolean("include-events-count");
-    this.newNotificationAction=this.prefs.get_enum("new-notification"); 
+    this.newNotificationAction=this.prefs.get_enum("new-notification");
     this.menuAutoclose = this.prefs.get_boolean("autoclose-menu");
     this.eventsSectionhere = this.showEventsInCalendarAlso;
     this.showingSections = this.prefs.get_strv("sections-order");
@@ -283,11 +283,11 @@ const NotificationCenter = new Lang.Class({
 
     this.mediaIcon.visible = this.mediaSection._shouldShow() && this.showThreeIcons && this.mediaSectionToBeShown;
     this.eventsIcon.visible = this.eventsSection._list.get_children().length && this.showThreeIcons && this.eventsSectionToBeShown;
-    this.notificationIcon.visible = (this.notificationSection._list.get_children().length && this.notificationSectionToBeShown) || 
+    this.notificationIcon.visible = (this.notificationSection._list.get_children().length && this.notificationSectionToBeShown) ||
                                     (this.mediaSection._shouldShow() && this.mediaSectionToBeShown && !this.showThreeIcons) ||
                                     (this.eventsSection._list.get_children().length && this.eventsSectionToBeShown && !this.showThreeIcons)||
                                     ((!this.isDndOff)*this.autohide > 1);
-                                    
+
     if(this.mediaIcon.visible || this.eventsIcon.visible || this.notificationIcon.visible || !this.autohide) {
       this.panelButtonActor.visible = true;
       this.notificationIcon.visible = (this.mediaIcon.visible || this.eventsIcon.visible) ? this.notificationIcon.visible : true;
@@ -323,7 +323,7 @@ const NotificationCenter = new Lang.Class({
           this.box.insert_child_at_index(this.eventsSection.actor,this.showingSections.indexOf("events"));
           this.eventsSectionhere = true;
           return;
-        case 1: 
+        case 1:
           if(this.eventsSectionhere == false) {
             return;
           }
@@ -345,12 +345,12 @@ const NotificationCenter = new Lang.Class({
         if(nCount>0) {
           this.notificationLabel.text=nCount.toString()+" ";
         }
-        if(eCount > 0 ) {   
+        if(eCount > 0 ) {
           this.eventsLabel.text=eCount.toString()+" ";
         }
-        
+
     }
-    
+
   },
 
   middleClickDndToggle: function (actor, event) {
@@ -377,15 +377,15 @@ const NotificationCenter = new Lang.Class({
   newNotif: function(messageType) {
 
     switch(messageType) {
-      case "media": 
+      case "media":
         this.mediaCount++;
         break;
-      case "notification" : 
-        this.notificationCount = this.notificationCount+ !this.menu.isOpen; 
+      case "notification" :
+        this.notificationCount = this.notificationCount+ !this.menu.isOpen;
         this.filterNotifications();
         break;
       case "events" :
-        this.eventsCount = this.eventsCount + !this.menu.isOpen; 
+        this.eventsCount = this.eventsCount + !this.menu.isOpen;
         break;
     }
     this.resetIndicator();
@@ -414,7 +414,7 @@ const NotificationCenter = new Lang.Class({
       case "media" :
         this.mediaCount--;
         break;
-      case "notification" : 
+      case "notification" :
         (this.notificationCount>0)? this.notificationCount-- : 0;
         break;
       case "events" :
@@ -456,7 +456,7 @@ const NotificationCenter = new Lang.Class({
     }
 
   },
-  
+
   resetIndicator: function() {
 
     this.manageAutohide();
@@ -465,7 +465,7 @@ const NotificationCenter = new Lang.Class({
     this.eventsCount=this.eventsCount*this.includeEventsCount;
 
     if(this.isDndOff) {
-      this.manageLabel((this.notificationCount + (!this.showThreeIcons)*this.eventsCount) ,(this.showThreeIcons)*this.eventsCount); 
+      this.manageLabel((this.notificationCount + (!this.showThreeIcons)*this.eventsCount) ,(this.showThreeIcons)*this.eventsCount);
     }
 
   },
@@ -478,8 +478,8 @@ const NotificationCenter = new Lang.Class({
     }
 
     this.manageEvents(0);
- 
-    this.mediaSection.actor.visible = true; 
+
+    this.mediaSection.actor.visible = true;
     this.notificationSection.actor.visible = true;
     this.eventsSection.actor.visible = true;
 
@@ -619,7 +619,7 @@ const NotificationCenter = new Lang.Class({
     this.clearButton.destroy();
     this.box.destroy();
     this.scrollView.destroy();
-    
+
     this.prefs.disconnect(this.reloadSignal);
 
   },
