@@ -1,5 +1,5 @@
 /*
-Version 17
+Version 18
 ==========
 
 */
@@ -82,7 +82,7 @@ const NotificationCenter = new Lang.Class({
     this.mediaIcon = new St.Icon({icon_name : "audio-x-generic-symbolic",style_class:'system-status-icon',visible:false});
     this.notificationIcon = new St.Icon({style_class:'system-status-icon',visible:false});
     this.notificationLabel = new St.Label({ text: "• ",visible:false});
-    this._indicator =  new St.BoxLayout({ vertical: false, style_class: 'panel-status-menu-box',style:"spacing:0.0em"});
+    this._indicator =  new St.BoxLayout({ vertical: false, style_class: 'panel-status-menu-box'});
 
     this._messageList = Main.panel.statusArea.dateMenu._messageList;
 
@@ -91,7 +91,7 @@ const NotificationCenter = new Lang.Class({
     this.eventsSection = this._messageList._eventsSection;
 
     this.box  = new St.BoxLayout({style_class:'calendar',vertical: true,pack_start:false});
-    this.clearButton = new St.Button({style_class: 'message-list-clear-button button',label: _("Clear All"),can_focus: true,visible:false});
+    this.clearButton = new St.Button({style_class: 'message-list-clear-button button',style:"margin-right: 0em;",label: _("Clear All"),can_focus: true,visible:false});
     let scaleFactor = St.ThemeContext.get_for_stage(global.stage).scale_factor;
     this.scrollView = new St.ScrollView({hscrollbar_policy:2,x_fill:true,y_fill:true ,style:"min-width:"+(this._messageList.actor.width/scaleFactor)+"px;max-height: "+0.01*this.prefs.get_int("max-height")*Main.layoutManager.monitors[0].height+"px; max-width:"+(this._messageList.actor.width/scaleFactor)+"px; padding: 0px;"});
 
@@ -113,8 +113,7 @@ const NotificationCenter = new Lang.Class({
         this.clearButton.hide();
       });
 
-      this.clearButton._delegate=this;
-      this.menu.box.add_child(this.clearButton);
+      this.box.add_child(this.clearButton);
 
     }
 
