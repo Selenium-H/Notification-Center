@@ -276,9 +276,11 @@ const NotificationCenter = new Lang.Class({
       return false;
 
     }
-
-    if(Gtk.IconTheme.get_default().has_icon("notifications-disabled-symbolic")) {
-      this.notificationIcon.icon_name = "notifications-disabled-symbolic";
+ 
+    if(Gtk.IconTheme.get_default()){
+      if(Gtk.IconTheme.get_default().has_icon("notifications-disabled-symbolic")) {
+        this.notificationIcon.icon_name = "notifications-disabled-symbolic";
+      }
     }
     else {
       this.notificationIcon.set_opacity(150);
@@ -544,7 +546,12 @@ const NotificationCenter = new Lang.Class({
   },
 
   setNotificationIconName: function () {
+    if(Gtk.IconTheme.get_default()) {
     this.notificationIconName = Gtk.IconTheme.get_default().has_icon("notification-symbolic")?"notification-symbolic":"preferences-system-notifications-symbolic";
+    }
+    else {
+      this.notificationIconName = "preferences-system-notifications-symbolic";
+    }
   },
 
   iconThemeChanged: function() {
