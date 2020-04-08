@@ -88,7 +88,7 @@ const NotificationCenter = new Lang.Class({
     this.notificationIcon  = new St.Icon({style_class:'system-status-icon',visible:false});
     this.notificationLabel = new St.Label({ text: "• ",visible:false});
     
-    this._indicator =  new St.BoxLayout({ vertical: false, style_class: 'panel-status-menu-box'});
+    this._indicator =  new St.BoxLayout({ vertical: false, style_class: 'panel-status-menu-box',style:"spacing:0.0em"});
     
     this._messageList        = Main.panel.statusArea.dateMenu._messageList;
     this.mediaSection        = this._messageList._mediaSection;
@@ -483,7 +483,7 @@ const NotificationCenter = new Lang.Class({
 
   },
 
-  removeDotFromDateMenu: function() {
+  removeDotAndBorderFromDateMenu: function() {
 
     if(Config.PACKAGE_VERSION < "3.34") {
       Main.panel.statusArea.dateMenu.actor.get_children()[0].remove_actor(Main.panel.statusArea.dateMenu._indicator.actor);
@@ -495,7 +495,17 @@ const NotificationCenter = new Lang.Class({
       this.dtActors=Main.panel.statusArea.dateMenu.get_children()[0].get_children();
       Main.panel.statusArea.dateMenu.get_children()[0].remove_actor(this.dtActors[0]);
     }
-
+    
+       
+    if(this.showingSections.length == 3 && !this.showEventsInCalendarAlso) {
+      if(Config.PACKAGE_VERSION < "3.34") {
+        this._messageList.actor.get_parent().get_children()[1].style="border-width: 0px";
+      }
+      else {
+        this._messageList.get_parent().get_children()[1].style="border-width: 0px";
+      }
+    }
+     
   },
   
   _removeSection(section) {
@@ -581,7 +591,7 @@ const NotificationCenter = new Lang.Class({
 
     Main.messageTray.bannerAlignment = this.prefs.get_enum('banner-pos');
 
-    this.removeDotFromDateMenu();
+    this.removeDotAndBorderFromDateMenu();
     this.indicatorViewShortcut();
 
     this.menu.connect("open-state-changed",()=>this.seen());
@@ -617,6 +627,13 @@ const NotificationCenter = new Lang.Class({
   undoChanges: function () {
 
     this.blinkIconStopIfBlinking(255);
+    
+    if(Config.PACKAGE_VERSION < "3.34") {
+      this._messageList.actor.get_parent().get_children()[1].style="";
+    }
+    else {
+      this._messageList.get_parent().get_children()[1].style="";
+    }
 
     this.manageEvents(0);
     this.removeAndDisconnectSections();
