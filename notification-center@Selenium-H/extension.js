@@ -1,6 +1,6 @@
 /*
-Version 19
-==========
+Version 19.1
+============
 
 */
 
@@ -496,9 +496,8 @@ const NotificationCenter = new Lang.Class({
       Main.panel.statusArea.dateMenu.get_children()[0].remove_actor(this.dtActors[0]);
     }
     
-       
     if(this.showingSections.length == 3 && !this.showEventsInCalendarAlso) {
-      if(Config.PACKAGE_VERSION < "3.34") {
+      if(Config.PACKAGE_VERSION < "3.36") {
         this._messageList.actor.get_parent().get_children()[1].style="border-width: 0px";
       }
       else {
@@ -628,7 +627,7 @@ const NotificationCenter = new Lang.Class({
 
     this.blinkIconStopIfBlinking(255);
     
-    if(Config.PACKAGE_VERSION < "3.34") {
+    if(Config.PACKAGE_VERSION < "3.36") {
       this._messageList.actor.get_parent().get_children()[1].style="";
     }
     else {
