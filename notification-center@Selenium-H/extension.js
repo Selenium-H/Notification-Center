@@ -374,6 +374,10 @@ const NotificationCenter = new Lang.Class({
     this.notificationLabel.visible = nCount*this.newNotificationAction;
     this.eventsLabel.visible = eCount*this.newNotificationAction;
 
+    if (this.prefs.get_boolean("change-icons")) {
+        this.manageIconChange(nCount > 0 || eCount > 0);
+    }
+
     if(this.newNotificationAction == 2) {
 
         if(nCount>0) {
@@ -383,6 +387,18 @@ const NotificationCenter = new Lang.Class({
           this.eventsLabel.text=eCount.toString()+" ";
         }
 
+    }
+
+  },
+
+  manageIconChange: function(statusIcon) {
+
+    let iconName = statusIcon ? "notification-center-full" : "notification-center-empty";
+
+    if ( Gtk.IconTheme.get_default().has_icon(iconName) ) {
+        this.notificationIcon.icon_name = iconName;
+    } else {
+        this.notificationIcon.icon_name = this.notificationIconName;
     }
 
   },
