@@ -395,12 +395,8 @@ const NotificationCenter = new Lang.Class({
 
     let iconName = statusIcon ? "notification-center-full" : "notification-center-empty";
 
-    if ( Gtk.IconTheme.get_default().has_icon(iconName) ) {
-        this.notificationIcon.icon_name = iconName;
-    } else {
-        this.notificationIcon.icon_name = this.notificationIconName;
-    }
-
+    this.notificationIcon.icon_name = iconName;
+    
   },
 
   middleClickDndToggle: function (actor, event) {
