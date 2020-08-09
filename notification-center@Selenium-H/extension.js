@@ -273,6 +273,7 @@ const NotificationCenter = new Lang.Class({
 
     if(this.isDndOff) {
       this.notificationIcon.set_opacity(255);
+      this.manageLabel();
       return false;
 
     }
