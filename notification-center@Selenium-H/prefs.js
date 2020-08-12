@@ -103,6 +103,7 @@ const AboutPage = new GObject.Class({
 		settings.reset("autohide"               );
 		settings.reset("indicator-shortcut"     );
 		settings.reset("new-notification"       );
+		settings.reset("change-icons"           );
 		settings.reset("include-events-count"   );
 		settings.reset("blink-icon"             );
 		settings.reset("blink-time"             );
@@ -417,6 +418,7 @@ const PrefsWindowForIndicator =  new GObject.Class({
     this.prefComboInt("autohide",                pos++, ['0','1','2'],                             [_("No"),_("Yes"),_("If Do Not Disturb is Off")]                );
     this.prefStr     ("indicator-shortcut",      pos++, ['<Alt>', '<Ctrl>', '<Shift>', '<Super>'], [_('Alt Key'), _('Ctrl Key'), _('Shift Key'), _('Super Key')]   );
     this.prefCombo   ("new-notification",        pos++, ['none', 'dot', 'count'],                  [_('Show Nothing'), _('Show Dot'), _('Show Count')]             );
+    this.prefSwitch  ("change-icons",            pos++                                                                                                             );
     this.prefSwitch  ("include-events-count",    pos++                                                                                                             );
     this.prefTime    ("blink-icon",              pos++,    0,     10000,       1                                                                                   );
     this.prefTime    ("blink-time",              pos++,    100,   10000,       10                                                                                  );

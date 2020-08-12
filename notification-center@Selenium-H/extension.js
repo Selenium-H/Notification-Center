@@ -274,6 +274,7 @@ const NotificationCenter = new Lang.Class({
 
     if(this.isDndOff) {
       this.notificationIcon.set_opacity(255);
+      this.manageLabel();
       return false;
 
     }
@@ -375,6 +376,10 @@ const NotificationCenter = new Lang.Class({
     this.notificationLabel.visible = nCount*this.newNotificationAction;
     this.eventsLabel.visible = eCount*this.newNotificationAction;
 
+    if (this.prefs.get_boolean("change-icons")) {
+        this.manageIconChange(nCount > 0 || eCount > 0);
+    }
+
     if(this.newNotificationAction == 2) {
 
         if(nCount>0) {
@@ -386,6 +391,14 @@ const NotificationCenter = new Lang.Class({
 
     }
 
+  },
+
+  manageIconChange: function(statusIcon) {
+
+    let iconName = statusIcon ? "notification-center-full" : "notification-center-empty";
+
+    this.notificationIcon.icon_name = iconName;
+    
   },
 
   middleClickDndToggle: function (actor, event) {
