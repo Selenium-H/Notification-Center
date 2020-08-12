@@ -105,6 +105,7 @@ const NotificationCenter = new Lang.Class({
     this.scrollView = (Config.PACKAGE_VERSION < "3.36") ? new St.ScrollView({hscrollbar_policy:2,x_fill:true,y_fill:true,style:"min-width:"+(this._messageList.actor.width/scaleFactor)+"px;max-height: "+0.01*this.prefs.get_int("max-height")*Main.layoutManager.monitors[0].height+"px; max-width: "+(this._messageList.actor.width/scaleFactor)+"px; padding: 0px;"}) : new St.ScrollView({hscrollbar_policy:2,x_fill:true,y_fill:true,style:"min-width:"+(this._messageList.width/scaleFactor)+"px;max-height: "+0.01*this.prefs.get_int("max-height")*Main.layoutManager.monitors[0].height+"px; max-width: "+(this._messageList.width/scaleFactor)+"px; padding: 0px;"});
     
     this.panelButtonActor = (Config.PACKAGE_VERSION < "3.34") ? this.actor : this;
+    this.panelButtonActor.add_style_class_name('notification-center-panel-button');
     
 
   },
