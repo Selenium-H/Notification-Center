@@ -198,6 +198,12 @@ Version 18
       <description>Signals the extension to reload</description>
     </key>   
      
+    <key name="change-icons" type="b">
+      <default>false</default>
+      <summary>Change icons depending if there is notification or not</summary>
+      <description>Change icons depending if there is notification or not</description>
+    </key>
+   
   </schema>
   
 </schemalist>
