@@ -6,7 +6,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: notification-center-17\n"
+"Project-Id-Version: notification-center-19.2\n"
 "POT-Creation-Date: 2016-06-10 19:03-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -16,266 +16,288 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: extension.js:90
-msgid "Clear All"
-msgstr ""
-
-#: extension.js:123
+#: extension.js:105
 msgid "Do Not Disturb"
 msgstr ""
 
-#: prefs.js:74
+#: extension.js:106
+msgid "Clear"
+msgstr ""
+
+#: prefs.js:75
 msgid "Reset To Default Preferences"
 msgstr ""
 
-#: prefs.js:135
+#: prefs.js:138
 msgid "Notifications"
 msgstr ""
 
-#: prefs.js:136
+#: prefs.js:139
 msgid "Indicator"
 msgstr ""
 
-#: prefs.js:137
+#: prefs.js:140
 msgid "List"
 msgstr ""
 
-#: prefs.js:138
+#: prefs.js:141
 msgid "About"
 msgstr ""
 
-#: prefs.js:261
+#: prefs.js:264
 msgid "Choose an application"
 msgstr ""
 
-#: prefs.js:314
+#: prefs.js:317
 msgid "Application List"
 msgstr ""
 
-#: prefs.js:387
+#: prefs.js:390
 msgid "Show them"
 msgstr ""
 
-#: prefs.js:387
+#: prefs.js:390
 msgid "Show counts only"
 msgstr ""
 
-#: prefs.js:387
+#: prefs.js:390
 msgid "Show banner only"
 msgstr ""
 
-#: prefs.js:387
+#: prefs.js:390
 msgid "Ignore them"
 msgstr ""
 
-#: prefs.js:388
+#: prefs.js:391
 msgid "     Add    "
 msgstr ""
 
-#: prefs.js:392
+#: prefs.js:395
 msgid " Remove "
 msgstr ""
 
-#: prefs.js:414 prefs.js:514 prefs.js:517
+#: prefs.js:417 prefs.js:519 prefs.js:522
 msgid "Left"
 msgstr ""
 
-#: prefs.js:414 prefs.js:514 prefs.js:517
+#: prefs.js:417 prefs.js:519 prefs.js:522
 msgid "Center"
 msgstr ""
 
-#: prefs.js:414 prefs.js:514 prefs.js:517
+#: prefs.js:417 prefs.js:519 prefs.js:522
 msgid "Right"
 msgstr ""
 
-#: prefs.js:417
+#: prefs.js:421
 msgid "No"
 msgstr ""
 
-#: prefs.js:417
+#: prefs.js:421
 msgid "Yes"
 msgstr ""
 
-#: prefs.js:417
+#: prefs.js:421
 msgid "If Do Not Disturb is Off"
 msgstr ""
 
-#: prefs.js:418
+#: prefs.js:422
 msgid "Alt Key"
 msgstr ""
 
-#: prefs.js:418
+#: prefs.js:422
 msgid "Ctrl Key"
 msgstr ""
 
-#: prefs.js:418
+#: prefs.js:422
 msgid "Shift Key"
 msgstr ""
 
-#: prefs.js:418
+#: prefs.js:422
 msgid "Super Key"
 msgstr ""
 
-#: prefs.js:419
+#: prefs.js:423
 msgid "Show Nothing"
 msgstr ""
 
-#: prefs.js:419
+#: prefs.js:423
 msgid "Show Dot"
 msgstr ""
 
-#: prefs.js:419
+#: prefs.js:423
 msgid "Show Count"
 msgstr ""
 
-#: prefs.js:509 prefs.js:510 prefs.js:511 prefs.js:513 prefs.js:514
+#: prefs.js:513 prefs.js:514 prefs.js:515 prefs.js:518 prefs.js:519
 msgid "Don't Show"
 msgstr ""
 
-#: prefs.js:509 prefs.js:510 prefs.js:511
+#: prefs.js:513 prefs.js:514 prefs.js:515
 msgid "At The Top"
 msgstr ""
 
-#: prefs.js:509 prefs.js:510 prefs.js:511
+#: prefs.js:513 prefs.js:514 prefs.js:515
 msgid "In The Middle"
 msgstr ""
 
-#: prefs.js:509 prefs.js:510 prefs.js:511
+#: prefs.js:513 prefs.js:514 prefs.js:515
 msgid "At The Bottom"
 msgstr ""
 
-#: prefs.js:513
+#: prefs.js:516
+msgid "Show Events"
+msgstr ""
+
+#: prefs.js:516
+msgid "Show Remaining Sections"
+msgstr ""
+
+#: prefs.js:516
+msgid "Hide If Empty"
+msgstr ""
+
+#: prefs.js:518
 msgid "On Top"
 msgstr ""
 
-#: prefs.js:513
+#: prefs.js:518
 msgid "At Bottom"
-msgstr ""
-
-#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:51
-#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:52
-msgid "Show Media Section on Notification Center"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:57
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:58
-msgid "Show Notifications list on Notification Center"
+msgid "Show Media Section on Notification Center"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:63
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:64
-msgid "Show Events list on Notification Center"
+msgid "Show Notifications list on Notification Center"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:69
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:70
-msgid "Keep events besides Calendar Menu"
+msgid "Show Events list on Notification Center"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:75
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:76
-msgid "Order of sections in Notification Center"
+msgid "Space Beside Calendar Menu"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:81
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:82
-msgid "Do Not Disturb menu position"
+msgid "Show Calendar Section on Left"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:87
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:88
-msgid "Clear All Button position"
+msgid "Order of sections in Notification Center"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:93
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:94
-msgid "Close Notification Center when focus is switched"
+msgid "Do Not Disturb menu position"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:99
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:100
-msgid "Maximum height of Notification Center ( in % )"
+msgid "Clear All Button position"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:105
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:106
-msgid "Notification Banner position"
+msgid "Close Notification Center when focus is switched"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:111
-msgid "Notification Center icon position on panel"
-msgstr ""
-
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:112
-msgid "Notifications Center icon position"
+msgid "Maximum height of Notification Center ( in % )"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:117
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:118
-msgid "Position of notification icon in panel box"
+msgid "Notification Banner position"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:123
+msgid "Notification Center icon position on panel"
+msgstr ""
+
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:124
-msgid "Show individual icons for each section on panel"
+msgid "Notifications Center icon position"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:129
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:130
+msgid "Position of notification icon in panel box"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:135
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:136
+msgid "Show individual icons for each section on panel"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:141
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:142
 msgid "AutoHide notification indicator on panel"
-msgstr ""
-
-#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:137
-#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:138
-msgid "Shortcut key combiation to show indicator"
-msgstr ""
-
-#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:143
-#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:144
-msgid "When new notification arrives"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:149
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:150
-msgid "Include events in above case"
+msgid "Shortcut key combiation to show indicator"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:155
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:156
-msgid "Number of times panel icon blinks on new notification"
+msgid "When new notification arrives"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:161
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:162
-msgid "Blink Time Interval ( in milliseconds )"
+msgid "Include events in above case"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:167
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:168
-msgid "Show Dots or Counts till all notifications are cleared"
+msgid "Number of times panel icon blinks on new notification"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:173
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:174
-msgid "Middle click panel icon to toggle Do Not Disturb"
+msgid "Blink Time Interval ( in milliseconds )"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:179
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:180
-msgid "List of applications to ignore notifications from"
+msgid "Show Dots or Counts till all notifications are cleared"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:185
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:186
-msgid "List of Names of application to ignore notifications from"
+msgid "Middle click panel icon to toggle Do Not Disturb"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:191
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:192
-msgid "If new notification arrives for apps on this list"
+msgid "List of applications to ignore notifications from"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:197
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:198
+msgid "List of Names of application to ignore notifications from"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:203
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:204
+msgid "If new notification arrives for apps on this list"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:209
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:210
 msgid "Signals the extension to reload"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:215
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:216
+msgid "Change icons depending if there is notification or not"
 msgstr ""
