@@ -1,6 +1,7 @@
+
 /*
-Version 17
-==========
+Version 19.2
+============
  
 */
 
@@ -86,37 +87,38 @@ const AboutPage = new GObject.Class({
   
   resetExtension: function() {
   
-		settings.reset("show-media"             );
-		settings.reset("show-notification"      );
-		settings.reset("show-events"            );
-		settings.reset("show-events-in-calendar");
-		settings.reset("dnd-position"           );
-		settings.reset("clear-button-alignment" );
-		settings.reset("autoclose-menu"         );
-	  settings.reset("max-height"             );
-		settings.reset("banner-pos"             );
-		settings.reset("sections-order"         );
+    settings.reset("show-media"             );
+    settings.reset("show-notification"      );
+    settings.reset("show-events"            );
+    settings.reset("beside-calendar"        );
+    settings.reset("calendar-on-left"       );
+    settings.reset("dnd-position"           );
+    settings.reset("clear-button-alignment" );
+    settings.reset("autoclose-menu"         );
+    settings.reset("max-height"             );
+    settings.reset("banner-pos"             );
+    settings.reset("sections-order"         );
 
-		settings.reset("indicator-pos"          );
-		settings.reset("indicator-index"        );
-		settings.reset("individual-icons"       );
-		settings.reset("autohide"               );
-		settings.reset("indicator-shortcut"     );
-		settings.reset("new-notification"       );
-		settings.reset("change-icons"           );
-		settings.reset("include-events-count"   );
-		settings.reset("blink-icon"             );
-		settings.reset("blink-time"             );
-		settings.reset("show-label"             );
-		settings.reset("middle-click-dnd"       );
+    settings.reset("indicator-pos"          );
+    settings.reset("indicator-index"        );
+    settings.reset("individual-icons"       );
+    settings.reset("autohide"               );
+    settings.reset("indicator-shortcut"     );
+    settings.reset("new-notification"       );
+    settings.reset("change-icons"           );
+    settings.reset("include-events-count"   );
+    settings.reset("blink-icon"             );
+    settings.reset("blink-time"             );
+    settings.reset("show-label"             );
+    settings.reset("middle-click-dnd"       );
 		
-		settings.reset("list"                   );
-		settings.reset("name-list"              );
-		settings.reset("for-list"               );
+    settings.reset("list"                   );
+    settings.reset("name-list"              );
+    settings.reset("for-list"               );
 		
-		reloadExtension();
+    reloadExtension();
 		
-	}, 
+  }, 
 	
 });
 
@@ -415,10 +417,10 @@ const PrefsWindowForIndicator =  new GObject.Class({
     this.prefCombo   ("indicator-pos",           pos++, ['left','center','right'],                 [_('Left'), _('Center'), _('Right')]                            );
     this.prefInt     ("indicator-index",         pos++,    0,   20,       1                                                                                        );
     this.prefSwitch  ("individual-icons",        pos++                                                                                                             );
+    this.prefSwitch  ("change-icons",            pos++                                                                                                             );
     this.prefComboInt("autohide",                pos++, ['0','1','2'],                             [_("No"),_("Yes"),_("If Do Not Disturb is Off")]                );
     this.prefStr     ("indicator-shortcut",      pos++, ['<Alt>', '<Ctrl>', '<Shift>', '<Super>'], [_('Alt Key'), _('Ctrl Key'), _('Shift Key'), _('Super Key')]   );
     this.prefCombo   ("new-notification",        pos++, ['none', 'dot', 'count'],                  [_('Show Nothing'), _('Show Dot'), _('Show Count')]             );
-    this.prefSwitch  ("change-icons",            pos++                                                                                                             );
     this.prefSwitch  ("include-events-count",    pos++                                                                                                             );
     this.prefTime    ("blink-icon",              pos++,    0,     10000,       1                                                                                   );
     this.prefTime    ("blink-time",              pos++,    100,   10000,       10                                                                                  );
@@ -508,15 +510,16 @@ const PrefsWindowForNotification =  new GObject.Class({
   
     let pos = 0;
   
-    this.prefSectionPosition ("show-media",         pos++, ["none","top","middle","bottom"], [_("Don't Show"), _('At The Top'),_('In The Middle'), _('At The Bottom')]);
-    this.prefSectionPosition ("show-notification",  pos++, ["none","top","middle","bottom"], [_("Don't Show"), _('At The Top'),_('In The Middle'), _('At The Bottom')]);
-    this.prefSectionPosition ("show-events",        pos++, ["none","top","middle","bottom"], [_("Don't Show"), _('At The Top'),_('In The Middle'), _('At The Bottom')]);
-    this.prefSwitch("show-events-in-calendar",      pos++                                                                                                             );
-    this.prefCombo ("dnd-position",                 pos++, ["none","top","bottom"],          [_("Don't Show"), _('On Top'), _('At Bottom')]                           );
-    this.prefCombo ("clear-button-alignment",       pos++, ['left','center','right','hide'], [_('Left'), _('Center'), _('Right'), _("Don't Show")]                    );
-    this.prefSwitch("autoclose-menu",               pos++                                                                                                             );
-    this.prefTime  ("max-height",                   pos++, 20,  100, 1                                                                                                );
-    this.prefCombo ("banner-pos",                   pos++, ['left','center','right' ],       [_('Left'), _('Center'), _('Right')]                                     );  
+    this.prefSectionPosition ("show-media",        pos++, ["none","top","middle","bottom"], [_("Don't Show"), _('At The Top'),_('In The Middle'), _('At The Bottom')]);
+    this.prefSectionPosition ("show-notification", pos++, ["none","top","middle","bottom"], [_("Don't Show"), _('At The Top'),_('In The Middle'), _('At The Bottom')]);
+    this.prefSectionPosition ("show-events",       pos++, ["none","top","middle","bottom"], [_("Don't Show"), _('At The Top'),_('In The Middle'), _('At The Bottom')]);
+    this.prefCombo ("beside-calendar",             pos++, ["events","show","hide"],         [_("Show Events"), _("Show Remaining Sections"), _("Hide If Empty")]     );
+    this.prefSwitch("calendar-on-left",            pos++                                                                                                             );
+    this.prefCombo ("dnd-position",                pos++, ["none","top","bottom"],          [_("Don't Show"), _('On Top'), _('At Bottom')]                           );
+    this.prefCombo ("clear-button-alignment",      pos++, ['left','center','right','hide'], [_('Left'), _('Center'), _('Right'), _("Don't Show")]                    );
+    this.prefSwitch("autoclose-menu",              pos++                                                                                                             );
+    this.prefTime  ("max-height",                  pos++, 20,  100, 1                                                                                                );
+    this.prefCombo ("banner-pos",                  pos++, ['left','center','right' ],       [_('Left'), _('Center'), _('Right')]                                     );  
     
   },
   
