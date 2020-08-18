@@ -1,24 +1,25 @@
+
 /*
-Version 19.1
+Version 19.2
 ============
 
 */
 
-const Config = imports.misc.config;
-const Gettext = imports.gettext;
-const Gio = imports.gi.Gio;
-const Gtk = imports.gi.Gtk;
-const Lang = imports.lang;
-const Main = imports.ui.main;
-const Mainloop = imports.mainloop;
-const Me = imports.misc.extensionUtils.getCurrentExtension();
+const Config      = imports.misc.config;
+const Gettext     = imports.gettext;
+const Gio         = imports.gi.Gio;
+const Gtk         = imports.gi.Gtk;
+const Lang        = imports.lang;
+const Main        = imports.ui.main;
+const Mainloop    = imports.mainloop;
+const Me          = imports.misc.extensionUtils.getCurrentExtension();
 const Convenience = Me.imports.convenience;
-const Meta = imports.gi.Meta;
-const PanelMenu = imports.ui.panelMenu;
-const PopupMenu = imports.ui.popupMenu;
-const Shell = imports.gi.Shell;
-const St = imports.gi.St;
-const _ = imports.gettext.domain("notification-center").gettext;
+const Meta        = imports.gi.Meta;
+const PanelMenu   = imports.ui.panelMenu;
+const PopupMenu   = imports.ui.popupMenu;
+const Shell       = imports.gi.Shell;
+const St          = imports.gi.St;
+const _           = imports.gettext.domain("notification-center").gettext;
 
 let notificationCenter = null;
 
@@ -55,7 +56,7 @@ const NotificationCenter = new Lang.Class({
   _init: function () {
 
     Convenience.initTranslations("notification-center");
-    this.prefs = Convenience.getSettings("org.gnome.shell.extensions.notification-center");
+    this.prefs        = Convenience.getSettings("org.gnome.shell.extensions.notification-center");
     this.reloadSignal = null;
     
     this.dndpref = new Gio.Settings({schema_id:"org.gnome.desktop.notifications"});
@@ -88,9 +89,12 @@ const NotificationCenter = new Lang.Class({
     this.notificationIcon  = new St.Icon({style_class:'system-status-icon',visible:false});
     this.notificationLabel = new St.Label({ text: "• ",visible:false});
     
-    this._indicator =  new St.BoxLayout({ vertical: false, style_class: 'panel-status-menu-box',style:"spacing:0.0em"});
+    this._indicator = new St.BoxLayout({ vertical: false, style_class: 'panel-status-menu-box',style:"spacing:0.0em"});
     
     this._messageList        = Main.panel.statusArea.dateMenu._messageList;
+    this._messageListParent  = (Config.PACKAGE_VERSION < "3.36.0") ? this._messageList.actor.get_parent() : this._messageList.get_parent() ;
+    this.messageListRemoved  = false;
+    
     this.mediaSection        = this._messageList._mediaSection;
     this.notificationSection = this._messageList._notificationSection;
     this.eventsSection       = this._messageList._eventsSection;
@@ -107,7 +111,6 @@ const NotificationCenter = new Lang.Class({
     this.panelButtonActor = (Config.PACKAGE_VERSION < "3.34") ? this.actor : this;
     this.panelButtonActor.add_style_class_name('notification-center-panel-button');
     
-
   },
 
   addClearButton: function() {
@@ -297,17 +300,19 @@ const NotificationCenter = new Lang.Class({
 
   loadPreferences: function() {
 
-    this.autohide = this.prefs.get_int("autohide");
-    this.mediaSectionToBeShown = (this.prefs.get_int("show-media")>0)?true:false;
+    this.autohide                     = this.prefs.get_int("autohide");
+    this.mediaSectionToBeShown        = (this.prefs.get_int("show-media")>0)?true:false;
     this.notificationSectionToBeShown = (this.prefs.get_int("show-notification")>0)?true:false;
-    this.eventsSectionToBeShown = (this.prefs.get_int("show-events")>0)?true:false;
-    this.showEventsInCalendarAlso=(this.eventsSectionToBeShown)?this.prefs.get_boolean("show-events-in-calendar"): false;
-    this.showThreeIcons = this.prefs.get_boolean("individual-icons");
-    this.includeEventsCount=this.prefs.get_boolean("include-events-count");
-    this.newNotificationAction=this.prefs.get_enum("new-notification");
-    this.menuAutoclose = this.prefs.get_boolean("autoclose-menu");
-    this.eventsSectionhere = this.showEventsInCalendarAlso;
-    this.showingSections = this.prefs.get_strv("sections-order");
+    this.eventsSectionToBeShown       = (this.prefs.get_int("show-events")>0)?true:false;
+    this.hideEmptySpace               = this.prefs.get_enum("beside-calendar")
+    this.showEventsInCalendarAlso     = (this.eventsSectionToBeShown)? (this.hideEmptySpace == 0) ? true: false: false;
+    this.showThreeIcons               = this.prefs.get_boolean("individual-icons");
+    this.includeEventsCount           = this.prefs.get_boolean("include-events-count");
+    this.newNotificationAction        = this.prefs.get_enum("new-notification");
+    this.menuAutoclose                = this.prefs.get_boolean("autoclose-menu");
+    this.eventsSectionhere            = this.showEventsInCalendarAlso;
+    this.showingSections              = this.prefs.get_strv("sections-order");
+    this.messageListPos               = this.prefs.get_boolean("calendar-on-left") ? 1 : 0;
 
   },
 
@@ -436,12 +441,14 @@ const NotificationCenter = new Lang.Class({
         this.eventsCount = this.eventsCount + !this.menu.isOpen;
         break;
     }
-
     this.resetIndicator();
 
   },
 
   rebuildMessageList: function() {
+
+     (Config.PACKAGE_VERSION < "3.36") ? this._messageListParent.remove_actor(this._messageList.actor) : this._messageListParent.remove_actor(this._messageList); 
+     (Config.PACKAGE_VERSION < "3.36") ? this._messageListParent.insert_child_at_index(this._messageList.actor,this.messageListPos) : this._messageListParent.insert_child_at_index(this._messageList,this.messageListPos);
 
     this._messageList.setDate(new Date());
 
@@ -511,12 +518,7 @@ const NotificationCenter = new Lang.Class({
     }
     
     if(this.showingSections.length == 3 && !this.showEventsInCalendarAlso) {
-      if(Config.PACKAGE_VERSION < "3.36") {
-        this._messageList.actor.get_parent().get_children()[1].style="border-width: 0px";
-      }
-      else {
-        this._messageList.get_parent().get_children()[1].style="border-width: 0px";
-      }
+      this._messageListParent.get_children()[1].style="border-width: 0px";
     }
      
   },
@@ -534,7 +536,7 @@ const NotificationCenter = new Lang.Class({
     this.manageClearButtonVisibility();
 
     this.eventsCount=this.eventsCount*this.includeEventsCount;
-
+                                                    
     if(this.isDndOff) {
       this.manageLabel((this.notificationCount + (!this.showThreeIcons)*this.eventsCount) ,(this.showThreeIcons)*this.eventsCount);
     }
@@ -542,7 +544,6 @@ const NotificationCenter = new Lang.Class({
   },
 
   seen: function() {
-
 
     if(!this.menu.isOpen) {
       this.resetIndicator();
@@ -617,14 +618,33 @@ const NotificationCenter = new Lang.Class({
       this.panelButtonActor.connect("button-press-event", (actor, event)=>this.middleClickDndToggle(actor, event));
     }
 
-    if(this.eventsSectionToBeShown) {
+    if(this.hideEmptySpace != 1) {
       this.dmSig=Main.panel.statusArea.dateMenu.menu.connect("open-state-changed",()=> {
         Main.panel.statusArea.dateMenu._calendar.setDate(new Date());
-        if(this.showEventsInCalendarAlso == true && Main.panel.statusArea.dateMenu.menu.isOpen) {
-          this.manageEvents(1);
-          if(this.prefs.get_boolean("show-label")==false) {
-            this.eventsCount=0;
+        if (Main.panel.statusArea.dateMenu.menu.isOpen) {
+          switch(this.hideEmptySpace) {
+            case 0: 
+              this.manageEvents(1);
+              if(this.prefs.get_boolean("show-label")==false) {
+                this.eventsCount=0;
+              }
+              break;
+              
+            default:
+              if(((!this.mediaSectionToBeShown && this.mediaSection._shouldShow())||(!this.notificationSectionToBeShown && this.notificationSection._list.get_children().length)||(!this.eventsSectionToBeShown && this.eventsSection._list.get_children().length))) {
+                if(this.messageListRemoved) {
+                  (Config.PACKAGE_VERSION < "3.36") ? this._messageListParent.insert_child_at_index(this._messageList.actor,this.messageListPos) : this._messageListParent.insert_child_at_index(this._messageList,this.messageListPos);
+                  this.messageListRemoved = false;
+                }
+              }
+              else {
+                if(!this.messageListRemoved) {
+                   (Config.PACKAGE_VERSION < "3.36") ? this._messageListParent.remove_actor(this._messageList.actor) : this._messageListParent.remove_actor(this._messageList); 
+                  this.messageListRemoved = true;
+                }                
+              }
           }
+        
         }
 
         this.resetIndicator();
@@ -640,14 +660,25 @@ const NotificationCenter = new Lang.Class({
   undoChanges: function () {
 
     this.blinkIconStopIfBlinking(255);
+
+    if(this.messageListRemoved) {
     
-    if(Config.PACKAGE_VERSION < "3.36") {
-      this._messageList.actor.get_parent().get_children()[1].style="";
+      if(Config.PACKAGE_VERSION < "3.36") {
+        this._messageListParent.insert_child_at_index(this._messageList.actor,0); 
+      }
+      else {
+        this._messageListParent.insert_child_at_index(this._messageList,0); 
+      }
+      this.messageListRemoved = false; 
+      
     }
     else {
-      this._messageList.get_parent().get_children()[1].style="";
+     (Config.PACKAGE_VERSION < "3.36") ? this._messageListParent.remove_actor(this._messageList.actor) : this._messageListParent.remove_actor(this._messageList); 
+     (Config.PACKAGE_VERSION < "3.36") ? this._messageListParent.insert_child_at_index(this._messageList.actor,0) : this._messageListParent.insert_child_at_index(this._messageList,0);
     }
-
+    
+    this._messageListParent.get_children()[1].style="";
+    
     this.manageEvents(0);
     this.removeAndDisconnectSections();
 
@@ -662,7 +693,7 @@ const NotificationCenter = new Lang.Class({
     Main.messageTray._bannerBin.show();
     Main.messageTray.bannerAlignment = 2;
 
-    if(this.eventsSectionToBeShown) {
+    if(this.hideEmptySpace != 1) {
       Main.panel.statusArea.dateMenu.menu.disconnect(this.dmSig);
     }
 
