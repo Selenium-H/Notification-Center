@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Version 19.2
-============
+Version 20.00
+=============
  
 -->
 <schemalist gettext-domain="gnome-shell-extensions">
@@ -136,6 +136,12 @@ Version 19.2
       <description>Show individual icons for each section on panel</description>
     </key>
     
+    <key name="change-icons" type="b">
+      <default>false</default>
+      <summary>Change icons depending if there is notification or not</summary>
+      <description>Change icons depending if there is notification or not</description>
+    </key>    
+    
     <key name="autohide" type="i">
       <default>1</default>
       <summary>AutoHide notification indicator on panel</summary>
@@ -209,13 +215,13 @@ Version 19.2
       <summary>Signals the extension to reload </summary>
       <description>Signals the extension to reload</description>
     </key>   
-     
-    <key name="change-icons" type="b">
+    
+    <key name="reload-profiles-signal" type="b">
       <default>false</default>
-      <summary>Change icons depending if there is notification or not</summary>
-      <description>Change icons depending if there is notification or not</description>
-    </key>
-   
+      <summary>Signals the extension to reload profiles </summary>
+      <description>Signals the extension to reload profiles</description>
+    </key>      
+        
   </schema>
   
 </schemalist>
