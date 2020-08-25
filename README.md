@@ -47,7 +47,7 @@ Open terminal in extracted folder and run
 
 `chmod +x INSTALL.sh && ./INSTALL.sh` 
 
-<p align="right"><a href="https://extensions.gnome.org/extension/1526/notification-centerselenium-h/">Get this extension from here &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+<p align="right"><a href="https://extensions.gnome.org/extension/1526/notification-centerselenium-h/">Get this extension from here</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </p>
 
 Restart Gnome Shell ( Alt + F2 , Press r , Press Enter ) .
