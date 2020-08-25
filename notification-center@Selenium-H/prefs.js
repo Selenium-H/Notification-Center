@@ -1,23 +1,23 @@
 
 /*
-Version 19.2
-============
+Version 20.00
+=============
  
 */
 
-const Config = imports.misc.config;
+const Config         = imports.misc.config;
 const ExtensionUtils = imports.misc.extensionUtils;
-const Me = ExtensionUtils.getCurrentExtension();
-const Convenience = Me.imports.convenience;
-const Gettext = imports.gettext;
-const Gio = imports.gi.Gio;
-const GLib = imports.gi.GLib;
-const GObject = imports.gi.GObject;
-const Gtk = imports.gi.Gtk;
-const Lang = imports.lang;
-const Mainloop = imports.mainloop;
-const Metadata = Me.metadata;
-const _ = Gettext.domain("notification-center").gettext;
+const Me             = ExtensionUtils.getCurrentExtension();
+const Convenience    = Me.imports.convenience;
+const Gettext        = imports.gettext;
+const Gio            = imports.gi.Gio;
+const GLib           = imports.gi.GLib;
+const GObject        = imports.gi.GObject;
+const Gtk            = imports.gi.Gtk;
+const Lang           = imports.lang;
+const Mainloop       = imports.mainloop;
+const Metadata       = Me.metadata;
+const _              = Gettext.domain("notification-center").gettext;
 
 let settings = null;
 
@@ -44,7 +44,13 @@ function buildPrefsWidget() {
 
 function reloadExtension () {
 
-    (settings.get_boolean("reload-signal"))?settings.set_boolean("reload-signal", false):settings.set_boolean("reload-signal", true);
+  (settings.get_boolean("reload-signal"))?settings.set_boolean("reload-signal", false):settings.set_boolean("reload-signal", true);
+    
+}
+
+function reloadApplicationProfiles() {
+  
+  (settings.get_boolean("reload-profiles-signal")) ? settings.set_boolean("reload-profiles-signal", false) : settings.set_boolean("reload-profiles-signal", true);
     
 }
 
@@ -291,6 +297,7 @@ const PrefsWindowForAppList = new GObject.Class({
       settings.set_strv('list', appsList);
       settings.set_strv('name-list', nameList);
       this._store.set(this._store.append(),[0, 2, 1],[appInfo, appInfo.get_icon(), appInfo.get_name()]);
+      reloadApplicationProfiles();
 
       dialog.destroy();
     }));
@@ -329,7 +336,7 @@ const PrefsWindowForAppList = new GObject.Class({
     
   },
 
-  prefCombo: function(KEY, pos, options, items,box) {
+  prefCombo: function(KEY, pos, options, items, box) {
   
     let SettingCombo = new Gtk.ComboBoxText();
     for (let i = 0; i < options.length; i++) {
@@ -338,6 +345,7 @@ const PrefsWindowForAppList = new GObject.Class({
     SettingCombo.set_active(options.indexOf(settings.get_string(KEY)));
     SettingCombo.connect('changed', Lang.bind(this, function(widget) {
       settings.set_string(KEY, options[widget.get_active()]);
+      reloadApplicationProfiles();
     }));
     
     this.attachLabel(KEY,pos,box);
@@ -382,6 +390,8 @@ const PrefsWindowForAppList = new GObject.Class({
       settings.set_strv('name-list', nameList);
       this._store.remove(iter);
     }
+
+    reloadApplicationProfiles();
     
   },
 
