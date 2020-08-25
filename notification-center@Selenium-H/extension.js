@@ -1,7 +1,7 @@
 
 /*
-Version 19.2
-============
+Version 20.00
+=============
 
 */
 
@@ -28,6 +28,7 @@ function enable() {
   notificationCenter = new NotificationCenter();
   notificationCenter.startNotificationCenter();
   reloadExtensionOnPrefsChange();
+  reloadApplicationProfilesOnPrefsChange();
 
 }
 
@@ -35,6 +36,13 @@ function disable() {
 
   notificationCenter.undoChanges();
   notificationCenter.destroy();
+
+}
+
+function reloadApplicationProfilesOnPrefsChange() {
+
+  // Reloads Application Profiles when preferences are changed.
+  notificationCenter.reloadProfilesSignal = notificationCenter.prefs.connect("changed::reload-profiles-signal", () => notificationCenter.loadPreferences());
 
 }
 
@@ -56,8 +64,9 @@ const NotificationCenter = new Lang.Class({
   _init: function () {
 
     Convenience.initTranslations("notification-center");
-    this.prefs        = Convenience.getSettings("org.gnome.shell.extensions.notification-center");
-    this.reloadSignal = null;
+    this.prefs                = Convenience.getSettings("org.gnome.shell.extensions.notification-center");
+    this.reloadSignal         = null;
+    this.reloadProfilesSignal = null;
     
     this.dndpref = new Gio.Settings({schema_id:"org.gnome.desktop.notifications"});
     this.parent(1-0.5*this.prefs.get_enum('indicator-pos'), "NotificationCenter");
@@ -119,16 +128,16 @@ const NotificationCenter = new Lang.Class({
       return;
     }
 
-      this.clearButton.connect('clicked', Lang.bind(this, function(){
-        let len=this.showingSections.length;
-        while(len!=0) {
-          this[this.showingSections[len-1]+"Section"].clear();
-          len--;
-        }
-      }));
+    this.clearButton.connect('clicked', Lang.bind(this, function() {
+      let len=this.showingSections.length;
+      while(len!=0) {
+        this[this.showingSections[len-1]+"Section"].clear();
+        len--;
+      }
+    }));
       
-      this.clearButton.set_x_align(1+this.prefs.get_enum('clear-button-alignment'));
-      this.box.add_actor(this.clearButton);
+    this.clearButton.set_x_align(1+this.prefs.get_enum('clear-button-alignment'));
+    this.box.add_actor(this.clearButton);
 
   },
 
@@ -226,15 +235,15 @@ const NotificationCenter = new Lang.Class({
 
       let source = Main.messageTray.getSources()[Main.messageTray.getSources().length-1];
 
-      if (this.prefs.get_strv("name-list").indexOf(source.title)>=0) {
-        switch(this.prefs.get_enum("for-list")) {
+      if (this.appBlackList.indexOf(source.title)>=0) {
+        switch(this.blackListAction) {
           case 0:
             break ;
           case 1:
-            source.policy = new Main.MessageTray.NotificationPolicy({showBanners:false});
+            (Config.PACKAGE_VERSION < "3.32.0")? source.policy = null : Main.messageTray._bannerBin.visible = false; 
             return;
           case 3:
-            source.policy = new Main.MessageTray.NotificationPolicy({showBanners:false});
+            (Config.PACKAGE_VERSION < "3.32.0")? source.policy = null : Main.messageTray._bannerBin.visible = false; 
           case 2:
             this.notificationCount--;
             return ;
@@ -313,6 +322,8 @@ const NotificationCenter = new Lang.Class({
     this.eventsSectionhere            = this.showEventsInCalendarAlso;
     this.showingSections              = this.prefs.get_strv("sections-order");
     this.messageListPos               = this.prefs.get_boolean("calendar-on-left") ? 1 : 0;
+    this.appBlackList                 = this.prefs.get_strv("name-list");
+    this.blackListAction              = this.prefs.get_enum("for-list"); 
 
   },
 
@@ -322,8 +333,8 @@ const NotificationCenter = new Lang.Class({
       return;
     }
 
-    this.mediaIcon.visible = this.mediaSection._shouldShow() && this.showThreeIcons && this.mediaSectionToBeShown;
-    this.eventsIcon.visible = this.eventsSection._list.get_children().length && this.showThreeIcons && this.eventsSectionToBeShown;
+    this.mediaIcon.visible        = this.mediaSection._shouldShow() && this.showThreeIcons && this.mediaSectionToBeShown;
+    this.eventsIcon.visible       = this.eventsSection._list.get_children().length && this.showThreeIcons && this.eventsSectionToBeShown;
     this.notificationIcon.visible = (this.notificationSection._list.get_children().length && this.notificationSectionToBeShown) ||
                                     (this.mediaSection._shouldShow() && this.mediaSectionToBeShown && !this.showThreeIcons) ||
                                     (this.eventsSection._list.get_children().length && this.eventsSectionToBeShown && !this.showThreeIcons)||
@@ -429,6 +440,8 @@ const NotificationCenter = new Lang.Class({
 
   newNotif: function(messageType) {
 
+    Main.messageTray._bannerBin.visible = true;
+
     switch(messageType) {
       case "media":
         this.mediaCount++;
@@ -444,10 +457,12 @@ const NotificationCenter = new Lang.Class({
     this.resetIndicator();
 
   },
+  
+  
 
   rebuildMessageList: function() {
 
-     (Config.PACKAGE_VERSION < "3.36") ? this._messageListParent.remove_actor(this._messageList.actor) : this._messageListParent.remove_actor(this._messageList); 
+     (Config.PACKAGE_VERSION < "3.36") ? this._messageListParent.remove_actor(this._messageList.actor)                              : this._messageListParent.remove_actor(this._messageList); 
      (Config.PACKAGE_VERSION < "3.36") ? this._messageListParent.insert_child_at_index(this._messageList.actor,this.messageListPos) : this._messageListParent.insert_child_at_index(this._messageList,this.messageListPos);
 
     this._messageList.setDate(new Date());
@@ -552,9 +567,9 @@ const NotificationCenter = new Lang.Class({
 
     this.manageEvents(0);
 
-    (Config.PACKAGE_VERSION < "3.36") ? this.mediaSection.actor.visible = true        : this.mediaSection.visible=true;
-    (Config.PACKAGE_VERSION < "3.36") ? this.notificationSection.actor.visible = true : this.notificationSection.visible=true;
-    (Config.PACKAGE_VERSION < "3.36") ? this.eventsSection.actor.visible = true       : this.eventsSection.visible = true;
+    (Config.PACKAGE_VERSION < "3.36") ? this.mediaSection.actor.visible        = true : this.mediaSection.visible        = true;
+    (Config.PACKAGE_VERSION < "3.36") ? this.notificationSection.actor.visible = true : this.notificationSection.visible = true;
+    (Config.PACKAGE_VERSION < "3.36") ? this.eventsSection.actor.visible       = true : this.eventsSection.visible       = true;
     
     this._messageList.setDate(new Date());
 
@@ -734,7 +749,10 @@ const NotificationCenter = new Lang.Class({
     this.notificationCenterBox.destroy();
 
     this.prefs.disconnect(this.reloadSignal);
+    this.prefs.disconnect(this.reloadProfilesSignal);
 
   },
 
 });
+
+
