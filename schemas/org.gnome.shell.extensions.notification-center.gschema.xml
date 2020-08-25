@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Version 18
-==========
+Version 20.00
+=============
  
 -->
 <schemalist gettext-domain="gnome-shell-extensions">
+
+  <enum id="org.gnome.shell.extensions.notification-center.beside-calendar">
+    <value nick="events" value="0"/>
+    <value nick="show" value="1"/>
+    <value nick="hide" value="2"/>
+  </enum>
 
   <enum id="org.gnome.shell.extensions.notification-center.dnd-position">
     <value nick="none" value="0"/>
@@ -64,11 +70,17 @@ Version 18
       <description>Show Events list on Notification Center</description>
     </key>
     
-    <key name="show-events-in-calendar" type="b">
-      <default>true</default>
-      <summary>Keep events besides Calendar Menu</summary>
-      <description>Keep events besides Calendar Menu</description>
+    <key enum="org.gnome.shell.extensions.notification-center.beside-calendar" name="beside-calendar">
+      <default>'events'</default>
+      <summary>Space Beside Calendar Menu</summary>
+      <description>Space Beside Calendar Menu</description>
     </key>
+    
+    <key name="calendar-on-left" type="b">
+      <default>false</default>
+      <summary>Show Calendar Section on Left</summary>
+      <description>Show Calendar Section on Left</description>
+    </key>    
     
     <key name="sections-order" type="as">
       <default>['media','notification','events']</default>
@@ -123,6 +135,12 @@ Version 18
       <summary>Show individual icons for each section on panel</summary>
       <description>Show individual icons for each section on panel</description>
     </key>
+    
+    <key name="change-icons" type="b">
+      <default>false</default>
+      <summary>Change icons depending if there is notification or not</summary>
+      <description>Change icons depending if there is notification or not</description>
+    </key>    
     
     <key name="autohide" type="i">
       <default>1</default>
@@ -197,7 +215,13 @@ Version 18
       <summary>Signals the extension to reload </summary>
       <description>Signals the extension to reload</description>
     </key>   
-     
+    
+    <key name="reload-profiles-signal" type="b">
+      <default>false</default>
+      <summary>Signals the extension to reload profiles </summary>
+      <description>Signals the extension to reload profiles</description>
+    </key>      
+        
   </schema>
   
 </schemalist>

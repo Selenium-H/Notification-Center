@@ -1,22 +1,23 @@
+
 /*
-Version 17
-==========
+Version 20.00
+=============
  
 */
 
-const Config = imports.misc.config;
+const Config         = imports.misc.config;
 const ExtensionUtils = imports.misc.extensionUtils;
-const Me = ExtensionUtils.getCurrentExtension();
-const Convenience = Me.imports.convenience;
-const Gettext = imports.gettext;
-const Gio = imports.gi.Gio;
-const GLib = imports.gi.GLib;
-const GObject = imports.gi.GObject;
-const Gtk = imports.gi.Gtk;
-const Lang = imports.lang;
-const Mainloop = imports.mainloop;
-const Metadata = Me.metadata;
-const _ = Gettext.domain("notification-center").gettext;
+const Me             = ExtensionUtils.getCurrentExtension();
+const Convenience    = Me.imports.convenience;
+const Gettext        = imports.gettext;
+const Gio            = imports.gi.Gio;
+const GLib           = imports.gi.GLib;
+const GObject        = imports.gi.GObject;
+const Gtk            = imports.gi.Gtk;
+const Lang           = imports.lang;
+const Mainloop       = imports.mainloop;
+const Metadata       = Me.metadata;
+const _              = Gettext.domain("notification-center").gettext;
 
 let settings = null;
 
@@ -43,7 +44,13 @@ function buildPrefsWidget() {
 
 function reloadExtension () {
 
-    (settings.get_boolean("reload-signal"))?settings.set_boolean("reload-signal", false):settings.set_boolean("reload-signal", true);
+  (settings.get_boolean("reload-signal"))?settings.set_boolean("reload-signal", false):settings.set_boolean("reload-signal", true);
+    
+}
+
+function reloadApplicationProfiles() {
+  
+  (settings.get_boolean("reload-profiles-signal")) ? settings.set_boolean("reload-profiles-signal", false) : settings.set_boolean("reload-profiles-signal", true);
     
 }
 
@@ -86,36 +93,38 @@ const AboutPage = new GObject.Class({
   
   resetExtension: function() {
   
-		settings.reset("show-media"             );
-		settings.reset("show-notification"      );
-		settings.reset("show-events"            );
-		settings.reset("show-events-in-calendar");
-		settings.reset("dnd-position"           );
-		settings.reset("clear-button-alignment" );
-		settings.reset("autoclose-menu"         );
-	  settings.reset("max-height"             );
-		settings.reset("banner-pos"             );
-		settings.reset("sections-order"         );
+    settings.reset("show-media"             );
+    settings.reset("show-notification"      );
+    settings.reset("show-events"            );
+    settings.reset("beside-calendar"        );
+    settings.reset("calendar-on-left"       );
+    settings.reset("dnd-position"           );
+    settings.reset("clear-button-alignment" );
+    settings.reset("autoclose-menu"         );
+    settings.reset("max-height"             );
+    settings.reset("banner-pos"             );
+    settings.reset("sections-order"         );
 
-		settings.reset("indicator-pos"          );
-		settings.reset("indicator-index"        );
-		settings.reset("individual-icons"       );
-		settings.reset("autohide"               );
-		settings.reset("indicator-shortcut"     );
-		settings.reset("new-notification"       );
-		settings.reset("include-events-count"   );
-		settings.reset("blink-icon"             );
-		settings.reset("blink-time"             );
-		settings.reset("show-label"             );
-		settings.reset("middle-click-dnd"       );
+    settings.reset("indicator-pos"          );
+    settings.reset("indicator-index"        );
+    settings.reset("individual-icons"       );
+    settings.reset("autohide"               );
+    settings.reset("indicator-shortcut"     );
+    settings.reset("new-notification"       );
+    settings.reset("change-icons"           );
+    settings.reset("include-events-count"   );
+    settings.reset("blink-icon"             );
+    settings.reset("blink-time"             );
+    settings.reset("show-label"             );
+    settings.reset("middle-click-dnd"       );
 		
-		settings.reset("list"                   );
-		settings.reset("name-list"              );
-		settings.reset("for-list"               );
+    settings.reset("list"                   );
+    settings.reset("name-list"              );
+    settings.reset("for-list"               );
 		
-		reloadExtension();
+    reloadExtension();
 		
-	}, 
+  }, 
 	
 });
 
@@ -288,6 +297,7 @@ const PrefsWindowForAppList = new GObject.Class({
       settings.set_strv('list', appsList);
       settings.set_strv('name-list', nameList);
       this._store.set(this._store.append(),[0, 2, 1],[appInfo, appInfo.get_icon(), appInfo.get_name()]);
+      reloadApplicationProfiles();
 
       dialog.destroy();
     }));
@@ -326,7 +336,7 @@ const PrefsWindowForAppList = new GObject.Class({
     
   },
 
-  prefCombo: function(KEY, pos, options, items,box) {
+  prefCombo: function(KEY, pos, options, items, box) {
   
     let SettingCombo = new Gtk.ComboBoxText();
     for (let i = 0; i < options.length; i++) {
@@ -335,6 +345,7 @@ const PrefsWindowForAppList = new GObject.Class({
     SettingCombo.set_active(options.indexOf(settings.get_string(KEY)));
     SettingCombo.connect('changed', Lang.bind(this, function(widget) {
       settings.set_string(KEY, options[widget.get_active()]);
+      reloadApplicationProfiles();
     }));
     
     this.attachLabel(KEY,pos,box);
@@ -379,6 +390,8 @@ const PrefsWindowForAppList = new GObject.Class({
       settings.set_strv('name-list', nameList);
       this._store.remove(iter);
     }
+
+    reloadApplicationProfiles();
     
   },
 
@@ -414,6 +427,7 @@ const PrefsWindowForIndicator =  new GObject.Class({
     this.prefCombo   ("indicator-pos",           pos++, ['left','center','right'],                 [_('Left'), _('Center'), _('Right')]                            );
     this.prefInt     ("indicator-index",         pos++,    0,   20,       1                                                                                        );
     this.prefSwitch  ("individual-icons",        pos++                                                                                                             );
+    this.prefSwitch  ("change-icons",            pos++                                                                                                             );
     this.prefComboInt("autohide",                pos++, ['0','1','2'],                             [_("No"),_("Yes"),_("If Do Not Disturb is Off")]                );
     this.prefStr     ("indicator-shortcut",      pos++, ['<Alt>', '<Ctrl>', '<Shift>', '<Super>'], [_('Alt Key'), _('Ctrl Key'), _('Shift Key'), _('Super Key')]   );
     this.prefCombo   ("new-notification",        pos++, ['none', 'dot', 'count'],                  [_('Show Nothing'), _('Show Dot'), _('Show Count')]             );
@@ -506,15 +520,16 @@ const PrefsWindowForNotification =  new GObject.Class({
   
     let pos = 0;
   
-    this.prefSectionPosition ("show-media",         pos++, ["none","top","middle","bottom"], [_("Don't Show"), _('At The Top'),_('In The Middle'), _('At The Bottom')]);
-    this.prefSectionPosition ("show-notification",  pos++, ["none","top","middle","bottom"], [_("Don't Show"), _('At The Top'),_('In The Middle'), _('At The Bottom')]);
-    this.prefSectionPosition ("show-events",        pos++, ["none","top","middle","bottom"], [_("Don't Show"), _('At The Top'),_('In The Middle'), _('At The Bottom')]);
-    this.prefSwitch("show-events-in-calendar",      pos++                                                                                                             );
-    this.prefCombo ("dnd-position",                 pos++, ["none","top","bottom"],          [_("Don't Show"), _('On Top'), _('At Bottom')]                           );
-    this.prefCombo ("clear-button-alignment",       pos++, ['left','center','right','hide'], [_('Left'), _('Center'), _('Right'), _("Don't Show")]                    );
-    this.prefSwitch("autoclose-menu",               pos++                                                                                                             );
-    this.prefTime  ("max-height",                   pos++, 20,  100, 1                                                                                                );
-    this.prefCombo ("banner-pos",                   pos++, ['left','center','right' ],       [_('Left'), _('Center'), _('Right')]                                     );  
+    this.prefSectionPosition ("show-media",        pos++, ["none","top","middle","bottom"], [_("Don't Show"), _('At The Top'),_('In The Middle'), _('At The Bottom')]);
+    this.prefSectionPosition ("show-notification", pos++, ["none","top","middle","bottom"], [_("Don't Show"), _('At The Top'),_('In The Middle'), _('At The Bottom')]);
+    this.prefSectionPosition ("show-events",       pos++, ["none","top","middle","bottom"], [_("Don't Show"), _('At The Top'),_('In The Middle'), _('At The Bottom')]);
+    this.prefCombo ("beside-calendar",             pos++, ["events","show","hide"],         [_("Show Events"), _("Show Remaining Sections"), _("Hide If Empty")]     );
+    this.prefSwitch("calendar-on-left",            pos++                                                                                                             );
+    this.prefCombo ("dnd-position",                pos++, ["none","top","bottom"],          [_("Don't Show"), _('On Top'), _('At Bottom')]                           );
+    this.prefCombo ("clear-button-alignment",      pos++, ['left','center','right','hide'], [_('Left'), _('Center'), _('Right'), _("Don't Show")]                    );
+    this.prefSwitch("autoclose-menu",              pos++                                                                                                             );
+    this.prefTime  ("max-height",                  pos++, 20,  100, 1                                                                                                );
+    this.prefCombo ("banner-pos",                  pos++, ['left','center','right' ],       [_('Left'), _('Center'), _('Right')]                                     );  
     
   },
   
