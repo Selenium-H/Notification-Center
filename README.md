@@ -38,8 +38,7 @@ A GNOME Shell extension that enables notification center indicator on top panel 
   Installations
 </h1>
 
-<h2 align="center"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Manual&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GNOME Shell Extension Website
-</h2>
+<h2 align="right">GNOME Shell Extension Website</h2>
 
 Download or clone the repository and extract the zip file.
 
@@ -47,8 +46,7 @@ Open terminal in extracted folder and run
 
 `chmod +x INSTALL.sh && ./INSTALL.sh` 
 
-<p align="right"><a href="https://extensions.gnome.org/extension/1526/notification-centerselenium-h/">Get this extension from here</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</p>
+<p align="right"><a href="https://extensions.gnome.org/extension/1526/notification-centerselenium-h/">Get this extension from here</p>
 
 Restart Gnome Shell ( Alt + F2 , Press r , Press Enter ) .
 
