@@ -1,6 +1,6 @@
 
 /*
-Version 20.01
+Version 20.02
 =============
 
 */
@@ -117,7 +117,7 @@ const NotificationCenter = new Lang.Class({
     this.clearButton = new St.Button({style_class: 'message-list-clear-button button',style:"margin-left:4px; margin-right: 4px;",label: _("Clear"),can_focus: true,visible:false});
     
     let scaleFactor = St.ThemeContext.get_for_stage(global.stage).scale_factor;
-    this.scrollView = (Config.PACKAGE_VERSION < "3.38") ? new St.ScrollView({hscrollbar_policy:2,x_fill:true,y_fill:true,style:"min-width:"+(this._messageList.actor.width/scaleFactor)+"px;max-height: "+0.01*this.prefs.get_int("max-height")*Main.layoutManager.monitors[0].height+"px; max-width: "+(this._messageList.actor.width/scaleFactor)+"px; padding: 0px;"}) : new St.ScrollView({hscrollbar_policy:2,style:"min-width:"+(this._messageList.width/scaleFactor)+"px;max-height: "+0.01*this.prefs.get_int("max-height")*Main.layoutManager.monitors[0].height+"px; max-width: "+(this._messageList.width/scaleFactor)+"px; padding: 0px;"});
+    this.scrollView = (Config.PACKAGE_VERSION < "3.34.0") ? new St.ScrollView({hscrollbar_policy:2,style:"min-width:"+(this._messageList.actor.width/scaleFactor)+"px;max-height: "+0.01*this.prefs.get_int("max-height")*Main.layoutManager.monitors[0].height+"px; max-width: "+(this._messageList.actor.width/scaleFactor)+"px; padding: 0px;"}): new St.ScrollView({hscrollbar_policy:2,style:"min-width:"+(this._messageList.width/scaleFactor)+"px;max-height: "+0.01*this.prefs.get_int("max-height")*Main.layoutManager.monitors[0].height+"px; max-width: "+(this._messageList.width/scaleFactor)+"px; padding: 0px;"})
     
     this.panelButtonActor = (Config.PACKAGE_VERSION < "3.34") ? this.actor : this;
     this.panelButtonActor.add_style_class_name('notification-center-panel-button');
@@ -317,6 +317,7 @@ const NotificationCenter = new Lang.Class({
     this.eventsSectionToBeShown       = (this.prefs.get_int("show-events")>0)?true:false;
     this.hideEmptySpace               = this.prefs.get_enum("beside-calendar")
     this.showEventsInCalendarAlso     = (this.eventsSectionToBeShown)? (this.hideEmptySpace == 0) ? true: false: false;
+    this.hideEventsSectionIfEmpty     = !this.prefs.get_boolean("hide-events-section-if-empty");
     this.showThreeIcons               = this.prefs.get_boolean("individual-icons");
     this.includeEventsCount           = this.prefs.get_boolean("include-events-count");
     this.newNotificationAction        = this.prefs.get_enum("new-notification");
@@ -367,6 +368,13 @@ const NotificationCenter = new Lang.Class({
 
   manageEvents: function(action) {
 
+    if(Config.PACKAGE_VERSION < "3.36.0") {
+      this.eventsSection.actor.visible = this.shouldShowEventsSection() || this.hideEventsSectionIfEmpty; 
+    }
+    else {
+      this.eventsSection.visible = this.shouldShowEventsSection() || this.hideEventsSectionIfEmpty;   
+    }
+    
     if(this.showEventsInCalendarAlso == true) {
       switch(action) {
         case 0:
@@ -598,12 +606,10 @@ const NotificationCenter = new Lang.Class({
     if(Config.PACKAGE_VERSION < "3.36") {
       this.mediaSection.actor.visible        = true;
       this.notificationSection.actor.visible = true;
-      this.eventsSection.actor.visible       = true;
     }
     else {
       this.mediaSection.visible        = true;
       this.notificationSection.visible = true;
-      this.eventsSection.visible       = true;
     }
 
     (Config.PACKAGE_VERSION < "3.38") ? this._messageList.setDate(new Date()): null;
@@ -720,6 +726,13 @@ const NotificationCenter = new Lang.Class({
       this.cmsig = global.display.connect('notify::focus-window', () => this.autoCloseMenu());
     }
     
+    this.defaultWeatherItemVisibility = Main.panel.statusArea.dateMenu._weatherItem.visible;
+    Main.panel.statusArea.dateMenu._weatherItem.visible = !this.prefs.get_boolean("hide-weather-section") && this.defaultWeatherItemVisibility;
+     
+    this.defaultClocksItemVisibility = Main.panel.statusArea.dateMenu._clocksItem.visible; 
+    Main.panel.statusArea.dateMenu._clocksItem.visible =  !this.prefs.get_boolean("hide-clock-section") && this.defaultClocksItemVisibility; 
+    
+    
   },
   
   undoChanges: function () {
@@ -783,6 +796,9 @@ const NotificationCenter = new Lang.Class({
       Main.panel.statusArea.dateMenu.get_children()[0].insert_child_at_index(this.dtActors[0],0);
       (Config.PACKAGE_VERSION < "3.36") ? Main.panel.statusArea.dateMenu.get_children()[0].add_actor(Main.panel.statusArea.dateMenu._indicator.actor) : Main.panel.statusArea.dateMenu.get_children()[0].add_actor(Main.panel.statusArea.dateMenu._indicator) 
     }
+
+    Main.panel.statusArea.dateMenu._weatherItem.visible = this.defaultWeatherItemVisibility;
+    Main.panel.statusArea.dateMenu._clocksItem.visible  = this.defaultClocksItemVisibility;
 
     Main.wm.removeKeybinding('indicator-shortcut');
 
