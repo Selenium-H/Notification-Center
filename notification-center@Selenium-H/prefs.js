@@ -1,6 +1,6 @@
 
 /*
-Version 20.00
+Version 20.02
 =============
  
 */
@@ -30,7 +30,7 @@ function init() {
 
 function buildPrefsWidget() {
 
-  let widget = new NotificationCenterPrefs();
+  let widget   = new Prefs_NotificationCenterExtension();
   let switcher = new Gtk.StackSwitcher({halign: Gtk.Align.CENTER, visible: true, stack: widget});
   Mainloop.timeout_add(0, () => {
     widget.get_toplevel().get_titlebar().custom_title = switcher;
@@ -54,8 +54,8 @@ function reloadApplicationProfiles() {
     
 }
 
-const AboutPage = new GObject.Class({
-  Name: 'AboutPage',
+const AboutPage_NotificationCenterExtension = new GObject.Class({
+  Name: 'AboutPage_NotificationCenterExtension',
   Extends: Gtk.ScrolledWindow,
 
   _init: function(params) {
@@ -93,34 +93,37 @@ const AboutPage = new GObject.Class({
   
   resetExtension: function() {
   
-    settings.reset("show-media"             );
-    settings.reset("show-notification"      );
-    settings.reset("show-events"            );
-    settings.reset("beside-calendar"        );
-    settings.reset("calendar-on-left"       );
-    settings.reset("dnd-position"           );
-    settings.reset("clear-button-alignment" );
-    settings.reset("autoclose-menu"         );
-    settings.reset("max-height"             );
-    settings.reset("banner-pos"             );
-    settings.reset("sections-order"         );
+    settings.reset("show-media");
+    settings.reset("show-notification");
+    settings.reset("show-events");
+    settings.reset("beside-calendar");
+    settings.reset("calendar-on-left");
+    settings.reset("hide-events-section-if-empty");
+    settings.reset("dnd-position");
+    settings.reset("clear-button-alignment");
+    settings.reset("autoclose-menu");
+    settings.reset("max-height");
+    settings.reset("banner-pos");
+    settings.reset("sections-order");
+    settings.reset("hide-clock-section");
+    settings.reset("hide-weather-section");
 
-    settings.reset("indicator-pos"          );
-    settings.reset("indicator-index"        );
-    settings.reset("individual-icons"       );
-    settings.reset("autohide"               );
-    settings.reset("indicator-shortcut"     );
-    settings.reset("new-notification"       );
-    settings.reset("change-icons"           );
-    settings.reset("include-events-count"   );
-    settings.reset("blink-icon"             );
-    settings.reset("blink-time"             );
-    settings.reset("show-label"             );
-    settings.reset("middle-click-dnd"       );
+    settings.reset("indicator-pos");
+    settings.reset("indicator-index");
+    settings.reset("individual-icons");
+    settings.reset("autohide");
+    settings.reset("indicator-shortcut");
+    settings.reset("new-notification");
+    settings.reset("change-icons");
+    settings.reset("include-events-count");
+    settings.reset("blink-icon");
+    settings.reset("blink-time");
+    settings.reset("show-label");
+    settings.reset("middle-click-dnd");
 		
-    settings.reset("list"                   );
-    settings.reset("name-list"              );
-    settings.reset("for-list"               );
+    settings.reset("list");
+    settings.reset("name-list");
+    settings.reset("for-list");
 		
     reloadExtension();
 		
@@ -128,23 +131,25 @@ const AboutPage = new GObject.Class({
 	
 });
 
-const NotificationCenterPrefs = new GObject.Class({
-  Name: 'NotificationCenterPrefs',
+const Prefs_NotificationCenterExtension = new GObject.Class({
+  Name: 'Prefs_NotificationCenterExtension',
   Extends: Gtk.Stack,
     
   _init: function() {
   
-    this.notificationPrefs = new PrefsWindowForNotification();
-    this.indicatorPrefs    = new PrefsWindowForIndicator();
-    this.appListPrefs      = new PrefsWindowForAppList();
-    this.aboutPage         = new AboutPage();
+    this.notificationPrefs = new PrefsWindowForNotifications_NotificationCenterExtension();
+    this.indicatorPrefs    = new PrefsWindowForIndicator_NotificationCenterExtension();
+    this.appListPrefs      = new PrefsWindowForAppList_NotificationCenterExtension();
+    this.aboutPage         = new AboutPage_NotificationCenterExtension();
     
-  
-    this.parent({ transition_type: 6, transition_duration: 350 });
-    this.add_titled(this.notificationPrefs,  "Notifications", _("Notifications"));
-    this.add_titled(this.indicatorPrefs,     "Indicator",     _("Indicator")    );
-    this.add_titled(this.appListPrefs,       "List",          _("List")         );
-    this.add_titled(this.aboutPage,          "About",         _("About")        );
+    this.notificationPrefsWindow = new Gtk.ScrolledWindow({hexpand: true,shadow_type: Gtk.ShadowType.IN});
+    this.notificationPrefsWindow.add(this.notificationPrefs);
+    
+    this.parent({ transition_type: 6, transition_duration: 200 });
+    this.add_titled(this.notificationPrefsWindow, "Notifications", _("Notifications"));
+    this.add_titled(this.indicatorPrefs,          "Indicator",     _("Indicator")    );
+    this.add_titled(this.appListPrefs,            "List",          _("List")         );
+    this.add_titled(this.aboutPage,               "About",         _("About")        );
     
     this.notificationPrefs.displayPrefs();
     this.indicatorPrefs.displayPrefs();
@@ -155,8 +160,8 @@ const NotificationCenterPrefs = new GObject.Class({
   
 });
 
-const PrefsWindow =  new GObject.Class({
-  Name: "PrefsWindow",
+const PrefsWindow_NotificationCenterExtension =  new GObject.Class({
+  Name: "PrefsWindow_NotificationCenterExtension",
   Extends: Gtk.Grid,
 
   _init: function(page) {
@@ -250,8 +255,8 @@ const PrefsWindow =  new GObject.Class({
 });
 
 
-const PrefsWindowForAppList = new GObject.Class({
-  Name: 'AppsListPrefs',
+const PrefsWindowForAppList_NotificationCenterExtension = new GObject.Class({
+  Name: 'PrefsWindowForAppList_NotificationCenterExtension',
   Extends: Gtk.Grid,
 
   _init: function() {
@@ -410,9 +415,9 @@ const PrefsWindowForAppList = new GObject.Class({
   
 });
 
-const PrefsWindowForIndicator =  new GObject.Class({
-  Name: "PrefsWindowForIndicator",
-  Extends: PrefsWindow,
+const PrefsWindowForIndicator_NotificationCenterExtension =  new GObject.Class({
+  Name: "PrefsWindowForIndicator_NotificationCenterExtension",
+  Extends: PrefsWindow_NotificationCenterExtension,
   
   _init: function(){
   
@@ -472,9 +477,9 @@ const PrefsWindowForIndicator =  new GObject.Class({
 
 });
 
-const PrefsWindowForNotification =  new GObject.Class({
-  Name: "PrefsWindowForNotifications",
-  Extends: PrefsWindow,
+const PrefsWindowForNotifications_NotificationCenterExtension =  new GObject.Class({
+  Name: "PrefsWindowForNotifications_NotificationCenterExtension",
+  Extends: PrefsWindow_NotificationCenterExtension,
   
   _init: function(){
   
@@ -520,16 +525,19 @@ const PrefsWindowForNotification =  new GObject.Class({
   
     let pos = 0;
   
-    this.prefSectionPosition ("show-media",        pos++, ["none","top","middle","bottom"], [_("Don't Show"), _('At The Top'),_('In The Middle'), _('At The Bottom')]);
-    this.prefSectionPosition ("show-notification", pos++, ["none","top","middle","bottom"], [_("Don't Show"), _('At The Top'),_('In The Middle'), _('At The Bottom')]);
-    this.prefSectionPosition ("show-events",       pos++, ["none","top","middle","bottom"], [_("Don't Show"), _('At The Top'),_('In The Middle'), _('At The Bottom')]);
-    this.prefCombo ("beside-calendar",             pos++, ["events","show","hide"],         [_("Show Events"), _("Show Remaining Sections"), _("Hide If Empty")]     );
-    this.prefSwitch("calendar-on-left",            pos++                                                                                                             );
-    this.prefCombo ("dnd-position",                pos++, ["none","top","bottom"],          [_("Don't Show"), _('On Top'), _('At Bottom')]                           );
-    this.prefCombo ("clear-button-alignment",      pos++, ['left','center','right','hide'], [_('Left'), _('Center'), _('Right'), _("Don't Show")]                    );
-    this.prefSwitch("autoclose-menu",              pos++                                                                                                             );
-    this.prefTime  ("max-height",                  pos++, 20,  100, 1                                                                                                );
-    this.prefCombo ("banner-pos",                  pos++, ['left','center','right' ],       [_('Left'), _('Center'), _('Right')]                                     );  
+    this.prefSectionPosition ("show-media",         pos++, ["none","top","middle","bottom"], [_("Don't Show"), _('At The Top'),_('In The Middle'), _('At The Bottom')]);
+    this.prefSectionPosition ("show-notification",  pos++, ["none","top","middle","bottom"], [_("Don't Show"), _('At The Top'),_('In The Middle'), _('At The Bottom')]);
+    this.prefSectionPosition ("show-events",        pos++, ["none","top","middle","bottom"], [_("Don't Show"), _('At The Top'),_('In The Middle'), _('At The Bottom')]);
+    this.prefCombo ("beside-calendar",              pos++, ["events","show","hide"],         [_("Show Events"), _("Show Remaining Sections"), _("Hide If Empty")]     );
+    this.prefSwitch("calendar-on-left",             pos++                                                                                                             );
+    this.prefSwitch("hide-events-section-if-empty", pos++                                                                                                             );
+    this.prefCombo ("dnd-position",                 pos++, ["none","top","bottom"],          [_("Don't Show"), _('On Top'), _('At Bottom')]                           );
+    this.prefCombo ("clear-button-alignment",       pos++, ['left','center','right','hide'], [_('Left'), _('Center'), _('Right'), _("Don't Show")]                    );
+    this.prefSwitch("autoclose-menu",               pos++                                                                                                             );
+    this.prefTime  ("max-height",                   pos++, 20,  100, 1                                                                                                );
+    this.prefSwitch("hide-clock-section",           pos++                                                                                                             );
+    this.prefSwitch("hide-weather-section",         pos++                                                                                                             );
+    this.prefCombo ("banner-pos",                   pos++, ['left','center','right' ],       [_('Left'), _('Center'), _('Right')]                                     );  
     
   },
   
