@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Version 20.00
+Version 20.02
 =============
  
 -->
@@ -81,7 +81,13 @@ Version 20.00
       <summary>Show Calendar Section on Left</summary>
       <description>Show Calendar Section on Left</description>
     </key>    
-    
+   
+    <key name="hide-events-section-if-empty" type="b">
+      <default>false</default>
+      <summary>Hide Events List If Empty</summary>
+      <description>Hide Events List If Empty</description>
+    </key>    
+         
     <key name="sections-order" type="as">
       <default>['media','notification','events']</default>
       <summary>Order of sections in Notification Center</summary>
@@ -112,12 +118,24 @@ Version 20.00
       <description>Maximum height of Notification Center ( in % )</description>
     </key>
     
+    <key name="hide-clock-section" type="b">
+      <default>false</default>
+      <summary>Hide Clock Section</summary>
+      <description>Hide Clock Section</description>
+    </key>    
+    
+    <key name="hide-weather-section" type="b">
+      <default>false</default>
+      <summary>Hide Weather Section</summary>
+      <description>Hide Weather Section</description>
+    </key>    
+    
     <key enum="org.gnome.shell.extensions.notification-center.banner-pos" name="banner-pos">
       <default>'right'</default>
       <summary>Notification Banner position</summary>
       <description>Notification Banner position</description>
     </key>
-    
+       
     <key enum="org.gnome.shell.extensions.notification-center.banner-pos" name="indicator-pos">
       <default>'right'</default>
       <summary>Notification Center icon position on panel</summary>
