@@ -7,11 +7,11 @@
 </h1>
 
 <p align="center">
-Version 20
+Version 21
 </p>
 
 <p align="center">
-A GNOME Shell extension that enables notification center indicator on top panel and customizations.
+A GNOME Shell extension for detaching notification center and customization.
 </p>
 
 <p align="center">
