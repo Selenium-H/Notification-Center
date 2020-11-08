@@ -1,6 +1,6 @@
 
 /*
-Version 20.02
+Version 21.01
 =============
 
 */
@@ -133,7 +133,9 @@ const NotificationCenter = new Lang.Class({
     this.clearButton.connect('clicked', Lang.bind(this, function() {
       let len=this.showingSections.length;
       while(len!=0) {
-        this[this.showingSections[len-1]+"Section"].clear();
+        if(this[this.showingSections[len-1]+"Section"].clear) {
+          this[this.showingSections[len-1]+"Section"].clear();
+        }
         len--;
       }
     }));
