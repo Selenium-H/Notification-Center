@@ -1,6 +1,6 @@
 
 /*
-Version 21.01
+Version 21.02
 =============
 
 */
@@ -758,6 +758,8 @@ const NotificationCenter = new Lang.Class({
     }
     
     this._messageListParent.get_children()[1].style="";
+    this._messageList._dndSwitch.show();
+    this._messageList._dndButton.label_actor.show();
     
     this.manageEvents(0);
     this.removeAndDisconnectSections();
