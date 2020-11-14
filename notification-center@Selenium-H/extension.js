@@ -1,6 +1,6 @@
 
 /*
-Version 20.02
+Version 21.02
 =============
 
 */
@@ -133,7 +133,9 @@ const NotificationCenter = new Lang.Class({
     this.clearButton.connect('clicked', Lang.bind(this, function() {
       let len=this.showingSections.length;
       while(len!=0) {
-        this[this.showingSections[len-1]+"Section"].clear();
+        if(this[this.showingSections[len-1]+"Section"].clear) {
+          this[this.showingSections[len-1]+"Section"].clear();
+        }
         len--;
       }
     }));
@@ -756,6 +758,8 @@ const NotificationCenter = new Lang.Class({
     }
     
     this._messageListParent.get_children()[1].style="";
+    this._messageList._dndSwitch.show();
+    this._messageList._dndButton.label_actor.show();
     
     this.manageEvents(0);
     this.removeAndDisconnectSections();
