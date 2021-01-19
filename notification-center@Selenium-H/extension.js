@@ -732,8 +732,10 @@ const NotificationCenter = new Lang.Class({
     Main.panel.statusArea.dateMenu._weatherItem.visible = !this.prefs.get_boolean("hide-weather-section") && this.defaultWeatherItemVisibility;
      
     this.defaultClocksItemVisibility = Main.panel.statusArea.dateMenu._clocksItem.visible; 
-    Main.panel.statusArea.dateMenu._clocksItem.visible =  !this.prefs.get_boolean("hide-clock-section") && this.defaultClocksItemVisibility; 
+    Main.panel.statusArea.dateMenu._clocksItem.visible =  !this.prefs.get_boolean("hide-clock-section") && this.defaultClocksItemVisibility;
     
+    this.defaultDateVisibility = Main.panel.statusArea.dateMenu._date.visible; 
+    Main.panel.statusArea.dateMenu._date.visible =  !this.prefs.get_boolean("hide-date-section") && this.defaultDateVisibility; 
     
   },
   
@@ -803,6 +805,7 @@ const NotificationCenter = new Lang.Class({
 
     Main.panel.statusArea.dateMenu._weatherItem.visible = this.defaultWeatherItemVisibility;
     Main.panel.statusArea.dateMenu._clocksItem.visible  = this.defaultClocksItemVisibility;
+    Main.panel.statusArea.dateMenu._date.visible        = this.defaultDateVisibility;
 
     Main.wm.removeKeybinding('indicator-shortcut');
 

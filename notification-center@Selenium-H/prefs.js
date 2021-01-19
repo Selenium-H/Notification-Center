@@ -107,6 +107,7 @@ const AboutPage_NotificationCenterExtension = new GObject.Class({
     settings.reset("sections-order");
     settings.reset("hide-clock-section");
     settings.reset("hide-weather-section");
+    settings.reset("hide-date-section");
 
     settings.reset("indicator-pos");
     settings.reset("indicator-index");
@@ -537,6 +538,7 @@ const PrefsWindowForNotifications_NotificationCenterExtension =  new GObject.Cla
     this.prefTime  ("max-height",                   pos++, 20,  100, 1                                                                                                );
     this.prefSwitch("hide-clock-section",           pos++                                                                                                             );
     this.prefSwitch("hide-weather-section",         pos++                                                                                                             );
+    this.prefSwitch("hide-date-section",            pos++                                                                                                             );
     this.prefCombo ("banner-pos",                   pos++, ['left','center','right' ],       [_('Left'), _('Center'), _('Right')]                                     );  
     
   },
