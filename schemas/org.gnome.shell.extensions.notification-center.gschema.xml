@@ -128,7 +128,7 @@ Version 20.02
       <default>false</default>
       <summary>Hide Weather Section</summary>
       <description>Hide Weather Section</description>
-    </key>    
+    </key>   
     
     <key enum="org.gnome.shell.extensions.notification-center.banner-pos" name="banner-pos">
       <default>'right'</default>
@@ -239,6 +239,12 @@ Version 20.02
       <summary>Signals the extension to reload profiles </summary>
       <description>Signals the extension to reload profiles</description>
     </key>      
+   
+    <key name="hide-date-section" type="b">
+      <default>false</default>
+      <summary>Hide Date Section</summary>
+      <description>Hide Date Section</description>
+    </key>  
         
   </schema>
   

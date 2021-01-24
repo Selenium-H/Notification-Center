@@ -342,3 +342,8 @@ msgstr ""
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:240
 msgid "Signals the extension to reload profiles"
 msgstr ""
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:245
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:246
+msgid "Hide Date Section"
+msgstr ""
