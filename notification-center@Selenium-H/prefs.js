@@ -1,6 +1,6 @@
 
 /*
-Version 20.02
+Version 22.01
 =============
  
 */
@@ -8,7 +8,6 @@ Version 20.02
 const Config         = imports.misc.config;
 const ExtensionUtils = imports.misc.extensionUtils;
 const Me             = ExtensionUtils.getCurrentExtension();
-const Convenience    = Me.imports.convenience;
 const Gettext        = imports.gettext;
 const Gio            = imports.gi.Gio;
 const GLib           = imports.gi.GLib;
@@ -23,8 +22,8 @@ let settings = null;
 
 function init() {
 
-  Convenience.initTranslations("notification-center");
-  settings = Convenience.getSettings("org.gnome.shell.extensions.notification-center");
+  ExtensionUtils.initTranslations("notification-center");
+  settings = ExtensionUtils.getSettings("org.gnome.shell.extensions.notification-center");
   
 }
 
@@ -102,6 +101,7 @@ const AboutPage_NotificationCenterExtension = new GObject.Class({
     settings.reset("dnd-position");
     settings.reset("clear-button-alignment");
     settings.reset("autoclose-menu");
+    settings.reset("indicator-shortcut");
     settings.reset("max-height");
     settings.reset("banner-pos");
     settings.reset("sections-order");
@@ -113,12 +113,12 @@ const AboutPage_NotificationCenterExtension = new GObject.Class({
     settings.reset("indicator-index");
     settings.reset("individual-icons");
     settings.reset("autohide");
-    settings.reset("indicator-shortcut");
     settings.reset("new-notification");
     settings.reset("change-icons");
     settings.reset("include-events-count");
     settings.reset("blink-icon");
     settings.reset("blink-time");
+    settings.reset("animate-icon");    
     settings.reset("show-label");
     settings.reset("middle-click-dnd");
 		
@@ -435,11 +435,11 @@ const PrefsWindowForIndicator_NotificationCenterExtension =  new GObject.Class({
     this.prefSwitch  ("individual-icons",        pos++                                                                                                             );
     this.prefSwitch  ("change-icons",            pos++                                                                                                             );
     this.prefComboInt("autohide",                pos++, ['0','1','2'],                             [_("No"),_("Yes"),_("If Do Not Disturb is Off")]                );
-    this.prefStr     ("indicator-shortcut",      pos++, ['<Alt>', '<Ctrl>', '<Shift>', '<Super>'], [_('Alt Key'), _('Ctrl Key'), _('Shift Key'), _('Super Key')]   );
     this.prefCombo   ("new-notification",        pos++, ['none', 'dot', 'count'],                  [_('Show Nothing'), _('Show Dot'), _('Show Count')]             );
     this.prefSwitch  ("include-events-count",    pos++                                                                                                             );
     this.prefTime    ("blink-icon",              pos++,    0,     10000,       1                                                                                   );
     this.prefTime    ("blink-time",              pos++,    100,   10000,       10                                                                                  );
+    this.prefSwitch  ("animate-icon",            pos++                                                                                                             );
     this.prefSwitch  ("show-label",              pos++                                                                                                             );
     this.prefSwitch  ("middle-click-dnd",        pos++                                                                                                             );
 
@@ -535,6 +535,7 @@ const PrefsWindowForNotifications_NotificationCenterExtension =  new GObject.Cla
     this.prefCombo ("dnd-position",                 pos++, ["none","top","bottom"],          [_("Don't Show"), _('On Top'), _('At Bottom')]                           );
     this.prefCombo ("clear-button-alignment",       pos++, ['left','center','right','hide'], [_('Left'), _('Center'), _('Right'), _("Don't Show")]                    );
     this.prefSwitch("autoclose-menu",               pos++                                                                                                             );
+    this.prefStr   ("indicator-shortcut",           pos++, ['<Alt>', '<Ctrl>', '<Shift>', '<Super>'], [_('Alt Key'), _('Ctrl Key'), _('Shift Key'), _('Super Key')]   );
     this.prefTime  ("max-height",                   pos++, 20,  100, 1                                                                                                );
     this.prefSwitch("hide-clock-section",           pos++                                                                                                             );
     this.prefSwitch("hide-weather-section",         pos++                                                                                                             );
