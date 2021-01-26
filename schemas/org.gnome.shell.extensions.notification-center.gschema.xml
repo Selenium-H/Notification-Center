@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Version 20.02
+Version 22.01
 =============
  
 -->
@@ -112,6 +112,14 @@ Version 20.02
       <description>Close Notification Center when focus is switched</description>
     </key>
     
+    <key name="indicator-shortcut" type="as">
+      <default>
+        <![CDATA[['<Super>c']]]>
+      </default>
+      <summary>Shortcut key combiation to show Notification Center</summary>
+      <description>Shortcut key combiation to show Notification Center</description>
+    </key>    
+    
     <key name="max-height" type="i">
       <default>80</default>
       <summary>Maximum height of Notification Center ( in % )</summary>
@@ -166,14 +174,6 @@ Version 20.02
       <description>AutoHide notification indicator on panel</description>
     </key>
     
-    <key name="indicator-shortcut" type="as">
-      <default>
-        <![CDATA[['<Super>c']]]>
-      </default>
-      <summary>Shortcut key combiation to show indicator</summary>
-      <description>Shortcut key combiation to show indicator</description>
-    </key>
-    
     <key enum="org.gnome.shell.extensions.notification-center.new-notification" name="new-notification">
       <default>'dot'</default>
       <summary>When new notification arrives</summary>
@@ -196,6 +196,12 @@ Version 20.02
       <default>500</default>
       <summary>Blink Time Interval ( in milliseconds )</summary>
       <description>Blink Time Interval ( in milliseconds )</description>
+    </key>
+    
+    <key name="animate-icon" type="b">
+      <default>false</default>
+      <summary>Animate icon when new notification arrives</summary>
+      <description>Animate icon when new notification arrives</description>
     </key>
     
     <key name="show-label" type="b">
