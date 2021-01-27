@@ -214,10 +214,11 @@ const NotificationCenter = new Lang.Class({
       'indicator-shortcut',
       this.prefs,
       Meta.KeyBindingFlags.NONE,
-      Shell.ActionMode.NORMAL | Shell.ActionMode.OVERVIEW,
+      Shell.ActionMode.NORMAL | Shell.ActionMode.OVERVIEW | Shell.ActionMode.POPUP,
       () => {
         this.notificationIcon.visible = !(this.mediaIcon.visible || this.eventsIcon.visible);
-        this.panelButtonActor.visible = !this.panelButtonActor.visible ;
+        this.panelButtonActor.visible = true;
+        this.menu.toggle();
       }
     );
 
