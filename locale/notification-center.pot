@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-17 15:27+0530\n"
+"POT-Creation-Date: 2021-02-03 00:23+0530\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,172 +17,188 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: notification-center@Selenium-H/extension.js:116
-msgid "Do Not Disturb"
-msgstr ""
-
-#: notification-center@Selenium-H/extension.js:117
+#: notification-center@Selenium-H/extension.js:99
 msgid "Clear"
 msgstr ""
 
-#: notification-center@Selenium-H/extension.js:652
+#: notification-center@Selenium-H/extension.js:446
 msgid "No Events"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:81
-msgid "Reset To Default Preferences"
+#: notification-center@Selenium-H/prefs.js:84
+#: notification-center@Selenium-H/prefs.js:93
+msgid "Preferences"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:149
-msgid "Notifications"
+#: notification-center@Selenium-H/prefs.js:85
+#: notification-center@Selenium-H/prefs.js:103
+msgid "Help"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:150
-msgid "Indicator"
-msgstr ""
-
-#: notification-center@Selenium-H/prefs.js:151
-msgid "List"
-msgstr ""
-
-#: notification-center@Selenium-H/prefs.js:152
+#: notification-center@Selenium-H/prefs.js:86
 msgid "About"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:275
+#: notification-center@Selenium-H/prefs.js:140
+msgid "Reset Notification Center Extension"
+msgstr ""
+
+#: notification-center@Selenium-H/prefs.js:152
+msgid "Reset Notification Center to defaults?"
+msgstr ""
+
+#: notification-center@Selenium-H/prefs.js:153
+msgid ""
+"Resetting the extension will discard the current preferences configuration "
+"and restore default one."
+msgstr ""
+
+#: notification-center@Selenium-H/prefs.js:223
+msgid "Notifications"
+msgstr ""
+
+#: notification-center@Selenium-H/prefs.js:224
+msgid "Indicator"
+msgstr ""
+
+#: notification-center@Selenium-H/prefs.js:225
+msgid "List"
+msgstr ""
+
+#: notification-center@Selenium-H/prefs.js:347
 msgid "Choose an application"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:329
+#: notification-center@Selenium-H/prefs.js:401
 msgid "Application List"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:405
+#: notification-center@Selenium-H/prefs.js:477
 msgid "Show them"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:405
+#: notification-center@Selenium-H/prefs.js:477
 msgid "Show counts only"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:405
+#: notification-center@Selenium-H/prefs.js:477
 msgid "Show banner only"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:405
+#: notification-center@Selenium-H/prefs.js:477
 msgid "Ignore them"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:406
+#: notification-center@Selenium-H/prefs.js:478
 msgid "     Add    "
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:410
+#: notification-center@Selenium-H/prefs.js:482
 msgid " Remove "
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:432
-#: notification-center@Selenium-H/prefs.js:535
-#: notification-center@Selenium-H/prefs.js:540
+#: notification-center@Selenium-H/prefs.js:504
+#: notification-center@Selenium-H/prefs.js:607
+#: notification-center@Selenium-H/prefs.js:614
 msgid "Left"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:432
-#: notification-center@Selenium-H/prefs.js:535
-#: notification-center@Selenium-H/prefs.js:540
+#: notification-center@Selenium-H/prefs.js:504
+#: notification-center@Selenium-H/prefs.js:607
+#: notification-center@Selenium-H/prefs.js:614
 msgid "Center"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:432
-#: notification-center@Selenium-H/prefs.js:535
-#: notification-center@Selenium-H/prefs.js:540
+#: notification-center@Selenium-H/prefs.js:504
+#: notification-center@Selenium-H/prefs.js:607
+#: notification-center@Selenium-H/prefs.js:614
 msgid "Right"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:436
+#: notification-center@Selenium-H/prefs.js:508
 msgid "No"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:436
+#: notification-center@Selenium-H/prefs.js:508
 msgid "Yes"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:436
+#: notification-center@Selenium-H/prefs.js:508
 msgid "If Do Not Disturb is Off"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:437
-msgid "Alt Key"
-msgstr ""
-
-#: notification-center@Selenium-H/prefs.js:437
-msgid "Ctrl Key"
-msgstr ""
-
-#: notification-center@Selenium-H/prefs.js:437
-msgid "Shift Key"
-msgstr ""
-
-#: notification-center@Selenium-H/prefs.js:437
-msgid "Super Key"
-msgstr ""
-
-#: notification-center@Selenium-H/prefs.js:438
+#: notification-center@Selenium-H/prefs.js:509
 msgid "Show Nothing"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:438
+#: notification-center@Selenium-H/prefs.js:509
 msgid "Show Dot"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:438
+#: notification-center@Selenium-H/prefs.js:509
 msgid "Show Count"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:528
-#: notification-center@Selenium-H/prefs.js:529
-#: notification-center@Selenium-H/prefs.js:530
-#: notification-center@Selenium-H/prefs.js:534
-#: notification-center@Selenium-H/prefs.js:535
+#: notification-center@Selenium-H/prefs.js:600
+#: notification-center@Selenium-H/prefs.js:601
+#: notification-center@Selenium-H/prefs.js:602
+#: notification-center@Selenium-H/prefs.js:606
+#: notification-center@Selenium-H/prefs.js:607
 msgid "Don't Show"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:528
-#: notification-center@Selenium-H/prefs.js:529
-#: notification-center@Selenium-H/prefs.js:530
+#: notification-center@Selenium-H/prefs.js:600
+#: notification-center@Selenium-H/prefs.js:601
+#: notification-center@Selenium-H/prefs.js:602
 msgid "At The Top"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:528
-#: notification-center@Selenium-H/prefs.js:529
-#: notification-center@Selenium-H/prefs.js:530
+#: notification-center@Selenium-H/prefs.js:600
+#: notification-center@Selenium-H/prefs.js:601
+#: notification-center@Selenium-H/prefs.js:602
 msgid "In The Middle"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:528
-#: notification-center@Selenium-H/prefs.js:529
-#: notification-center@Selenium-H/prefs.js:530
+#: notification-center@Selenium-H/prefs.js:600
+#: notification-center@Selenium-H/prefs.js:601
+#: notification-center@Selenium-H/prefs.js:602
 msgid "At The Bottom"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:531
+#: notification-center@Selenium-H/prefs.js:603
 msgid "Show Events"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:531
+#: notification-center@Selenium-H/prefs.js:603
 msgid "Show Remaining Sections"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:531
+#: notification-center@Selenium-H/prefs.js:603
 msgid "Hide If Empty"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:534
+#: notification-center@Selenium-H/prefs.js:606
 msgid "On Top"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:534
+#: notification-center@Selenium-H/prefs.js:606
 msgid "At Bottom"
+msgstr ""
+
+#: notification-center@Selenium-H/prefs.js:609
+msgid "Alt Key"
+msgstr ""
+
+#: notification-center@Selenium-H/prefs.js:609
+msgid "Ctrl Key"
+msgstr ""
+
+#: notification-center@Selenium-H/prefs.js:609
+msgid "Shift Key"
+msgstr ""
+
+#: notification-center@Selenium-H/prefs.js:609
+msgid "Super Key"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:57
@@ -235,57 +251,57 @@ msgstr ""
 msgid "Close Notification Center when focus is switched"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:117
-#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:118
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:119
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:120
+msgid "Shortcut key combiation to show Notification Center"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:125
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:126
 msgid "Maximum height of Notification Center ( in % )"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:123
-#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:124
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:131
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:132
 msgid "Hide Clock Section"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:129
-#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:130
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:137
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:138
 msgid "Hide Weather Section"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:135
-#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:136
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:143
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:144
 msgid "Notification Banner position"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:141
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:149
 msgid "Notification Center icon position on panel"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:142
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:150
 msgid "Notifications Center icon position"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:147
-#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:148
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:155
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:156
 msgid "Position of notification icon in panel box"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:153
-#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:154
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:161
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:162
 msgid "Show individual icons for each section on panel"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:159
-#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:160
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:167
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:168
 msgid "Change icons depending if there is notification or not"
-msgstr ""
-
-#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:165
-#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:166
-msgid "AutoHide notification indicator on panel"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:173
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:174
-msgid "Shortcut key combiation to show indicator"
+msgid "AutoHide notification indicator on panel"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:179
@@ -310,35 +326,45 @@ msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:203
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:204
-msgid "Show Dots or Counts till all notifications are cleared"
+msgid "Animate icon when new notification arrives"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:209
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:210
-msgid "Middle click panel icon to toggle Do Not Disturb"
+msgid "Show Dots or Counts till all notifications are cleared"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:215
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:216
-msgid "List of applications to ignore notifications from"
+msgid "Middle click panel icon to toggle Do Not Disturb"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:221
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:222
-msgid "List of Names of application to ignore notifications from"
+msgid "List of applications to ignore notifications from"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:227
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:228
-msgid "If new notification arrives for apps on this list"
+msgid "List of Names of application to ignore notifications from"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:233
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:234
-msgid "Signals the extension to reload"
+msgid "If new notification arrives for apps on this list"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:239
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:240
+msgid "Signals the extension to reload"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:245
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:246
 msgid "Signals the extension to reload profiles"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:251
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:252
+msgid "Hide Date Section"
 msgstr ""

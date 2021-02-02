@@ -7,7 +7,7 @@
 </h1>
 
 <p align="center">
-Version 22
+Version 23 (Beta)
 </p>
 
 <p align="center">
@@ -62,4 +62,4 @@ This extension is inspired from
 [Notifications Alert Extension](https://extensions.gnome.org/extension/258/notifications-alert-on-user-menu/) by hackedbellini, 
 [Files View Extension](https://extensions.gnome.org/extension/1395/files-view/) by abakkk
 
-Thanks to @amivaleo (Italian Translation), @goodwillcoding, @Vistaus (Dutch Translation), @GorrillaRibs, @hlechner, @Sa2908.
+Thanks to @amivaleo (Italian Translation), @goodwillcoding, @Vistaus (Dutch Translation), @GorrillaRibs, @hlechner, @Sa2908, @scottste.
