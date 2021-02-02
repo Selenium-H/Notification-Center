@@ -1,6 +1,6 @@
 
 /*
-Version 22.02
+Version 22.03
 =============
  
 */
@@ -69,7 +69,8 @@ const ExtensionPreferencesWindow_NotificationCenterExtension = new GObject.Class
   
   createAppMenu: function( ) {
       
-    let preferencesDialogAction = new Gio.SimpleAction({ name: 'app.preferences'});  
+    let preferencesDialogAction = new Gio.SimpleAction({ name: 'app.preferences'});
+    let helpDialogAction        = new Gio.SimpleAction({ name: 'app.help'});  
     let aboutDialogAction       = new Gio.SimpleAction({ name: 'app.about'});
     let actionGroup             = new Gio.SimpleActionGroup();
     let menu                    = new Gio.Menu();
@@ -77,10 +78,12 @@ const ExtensionPreferencesWindow_NotificationCenterExtension = new GObject.Class
     let appMenuButton           = new Gtk.MenuButton({ popover: appMenu, image: new Gtk.Image({ gicon: new Gio.ThemedIcon({ name: "open-menu-symbolic" }), icon_size: Gtk.IconSize.BUTTON, visible: true, }), visible:true});
     
     actionGroup.add_action(aboutDialogAction)
+    actionGroup.add_action(helpDialogAction)
     actionGroup.add_action(preferencesDialogAction)
 
-    menu.append(_("Preferences"),                  "app.preferences" );  
-    menu.append(_("About")+" Notification Center", "app.about"       );
+    menu.append(_("Preferences"),                  "app.preferences"); 
+    menu.append(_("Help"),                         "app.help"       );  
+    menu.append(_("About")+" Notification Center", "app.about"      );
     appMenu.bind_model(menu, "app"); 
         
     this.headerBar.pack_end(appMenuButton);
@@ -94,6 +97,17 @@ const ExtensionPreferencesWindow_NotificationCenterExtension = new GObject.Class
       dialog.get_content_area().pack_start(vbox, false, false, 0);  
       dialog.show_all();  
     });
+
+
+    helpDialogAction.connect('activate', ()=> {
+      let dialog    = new Gtk.Dialog({ title: _("Help"), transient_for: this.toplevel, use_header_bar: true, modal: true });
+      let vbox      = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL, margin: 30 });    
+      let firstInfo = new Gtk.Label({ justify: 0, use_markup: true, label: _(Metadata.description)});  
+      vbox.pack_start(firstInfo,            false, false, 0);
+      dialog.get_content_area().pack_start(vbox, false, false, 0);  
+  
+      dialog.show_all();  
+    });    
 
     aboutDialogAction.connect('activate', ()=> {  
       (new Gtk.AboutDialog({ transient_for: this.toplevel, use_header_bar: true, modal: true, logo: (new Gtk.Image({ file: Extension.dir.get_child('eicon.png').get_path(), pixel_size: 96 })).get_pixbuf(), program_name: Metadata.name, version: Metadata.version.toString()+_(Metadata.status), comments: _(Metadata.comment), license_type: 3    } )).show_all();

@@ -1,6 +1,6 @@
 
 /*
-Version 22.02
+Version 22.03
 =============
 
 */
@@ -61,16 +61,15 @@ const NotificationCenter = new LangClass({
     ExtensionUtils.initTranslations("notification-center");
     this.prefs = ExtensionUtils.getSettings("org.gnome.shell.extensions.notification-center");
     this.parent(1-0.5*this.prefs.get_enum('indicator-pos'), "NotificationCenter");
-    this.eventsIcon        = new St.Icon({icon_name: "x-office-calendar-symbolic", style_class:'system-status-icon', visible:false});
-    this.mediaIcon         = new St.Icon({icon_name: "audio-x-generic-symbolic",   style_class:'system-status-icon', visible:false});
-    this.notificationIcon  = new St.Icon({                                         style_class:'system-status-icon', visible:false});
-    this.eventsLabel       = new St.Label({ text: "• ", visible: false});
-    this.notificationLabel = new St.Label({ text: "• ", visible: false});
-    this._indicator        = new St.BoxLayout({style_class: 'panel-status-menu-box', style:"spacing:0.0em"    });
-    this.box               = new St.BoxLayout({style_class: "notification-center-message-list", vertical: true}); 
-    this.clearButton       = new St.Button({style_class: "notification-center-clear-button button", label: _("Clear"),can_focus: true,visible:false});
-    this.dndItem           = new PopupMenu.PopupSwitchMenuItem(_("Do Not Disturb"),true,{});
     
+    this._messageList           = Main.panel.statusArea.dateMenu._messageList;
+    this.mediaSection           = this._messageList._mediaSection;
+    this.notificationSection    = this._messageList._notificationSection;
+    this.eventsSection          = Main.panel.statusArea.dateMenu._eventsItem;
+    this._messageListParent     = this._messageList.get_parent();
+    this.newEventsSectionParent = this.eventsSection.get_parent();
+    
+    this.loadPreferences();
     this.connectedSignals     = [];
     this.dmsig                = null;
     this.cmsig                = null;
@@ -88,16 +87,18 @@ const NotificationCenter = new LangClass({
     this.seenEvents         = false;
     this.messageListRemoved = false;
     this.isDndOff           = true;
-    this.dndpref = Main.panel.statusArea.dateMenu._indicator._settings;
-        
-    this._messageList           = Main.panel.statusArea.dateMenu._messageList;
-    this.mediaSection           = this._messageList._mediaSection;
-    this.notificationSection    = this._messageList._notificationSection;
-    this.eventsSection          = Main.panel.statusArea.dateMenu._eventsItem;
-    this._messageListParent     = this._messageList.get_parent() ;
-    this.newEventsSectionParent = this.eventsSection.get_parent();
-    
-    this.loadPreferences();
+    this.dndpref = Main.panel.statusArea.dateMenu._indicator._settings;    
+     
+    this.eventsIcon        = new St.Icon({style_class:'system-status-icon', visible:false, icon_name: "x-office-calendar-symbolic"});
+    this.mediaIcon         = new St.Icon({style_class:'system-status-icon', visible:false, icon_name: "audio-x-generic-symbolic"  });
+    this.notificationIcon  = new St.Icon({style_class:'system-status-icon', visible:false});
+    this.eventsLabel       = new St.Label({text: "• ", visible:false});
+    this.notificationLabel = new St.Label({text: "• ", visible:false});
+    this._indicator        = new St.BoxLayout({style_class: 'panel-status-menu-box', style:"spacing:0.0em"});
+    this.box               = new St.BoxLayout({style_class: "notification-center-message-list", vertical: true}); 
+    this.clearButton       = new St.Button({style_class: "notification-center-clear-button button", label: _("Clear"),can_focus: true,visible:false});
+    this.dndItem           = new PopupMenu.PopupSwitchMenuItem(this._messageList._dndButton.label_actor.text,true,{});
+      
     let scaleFactor = St.ThemeContext.get_for_stage(global.stage).scale_factor;
     this.scrollView = new St.ScrollView({hscrollbar_policy:2, style:"min-width:"+(this._messageList.width/scaleFactor)+"px;max-height: "+0.01*this.prefs.get_int("max-height")*Main.layoutManager.monitors[0].height+"px; max-width: "+(this._messageList.width/scaleFactor)+"px; padding: 0px;"})
     
@@ -499,7 +500,7 @@ const NotificationCenter = new LangClass({
       this.dndItem._delegate = this;
       this.dndItem.connect("toggled", ()=>this.dndToggle());
       this._messageList._dndSwitch.hide();
-      this._messageList.get_children()[1].get_children()[1].get_children()[0].hide();
+      this._messageList._dndButton.label_actor.hide();
       this.menu.box.insert_child_at_index(this.dndItem, ( this.dndPos == 1)? 0:2 );
       this.menu.box.insert_child_at_index(new PopupMenu.PopupSeparatorMenuItem(), this.dndPos);
     }

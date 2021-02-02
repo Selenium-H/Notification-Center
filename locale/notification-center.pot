@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-31 19:23+0530\n"
+"POT-Creation-Date: 2021-02-03 00:23+0530\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,186 +17,187 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: notification-center@Selenium-H/extension.js:71
+#: notification-center@Selenium-H/extension.js:99
 msgid "Clear"
 msgstr ""
 
-#: notification-center@Selenium-H/extension.js:72
-msgid "Do Not Disturb"
-msgstr ""
-
-#: notification-center@Selenium-H/extension.js:445
+#: notification-center@Selenium-H/extension.js:446
 msgid "No Events"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:82
-#: notification-center@Selenium-H/prefs.js:90
+#: notification-center@Selenium-H/prefs.js:84
+#: notification-center@Selenium-H/prefs.js:93
 msgid "Preferences"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:83
+#: notification-center@Selenium-H/prefs.js:85
+#: notification-center@Selenium-H/prefs.js:103
+msgid "Help"
+msgstr ""
+
+#: notification-center@Selenium-H/prefs.js:86
 msgid "About"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:126
+#: notification-center@Selenium-H/prefs.js:140
 msgid "Reset Notification Center Extension"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:138
+#: notification-center@Selenium-H/prefs.js:152
 msgid "Reset Notification Center to defaults?"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:139
+#: notification-center@Selenium-H/prefs.js:153
 msgid ""
 "Resetting the extension will discard the current preferences configuration "
 "and restore default one."
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:209
+#: notification-center@Selenium-H/prefs.js:223
 msgid "Notifications"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:210
+#: notification-center@Selenium-H/prefs.js:224
 msgid "Indicator"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:211
+#: notification-center@Selenium-H/prefs.js:225
 msgid "List"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:333
+#: notification-center@Selenium-H/prefs.js:347
 msgid "Choose an application"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:387
+#: notification-center@Selenium-H/prefs.js:401
 msgid "Application List"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:463
+#: notification-center@Selenium-H/prefs.js:477
 msgid "Show them"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:463
+#: notification-center@Selenium-H/prefs.js:477
 msgid "Show counts only"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:463
+#: notification-center@Selenium-H/prefs.js:477
 msgid "Show banner only"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:463
+#: notification-center@Selenium-H/prefs.js:477
 msgid "Ignore them"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:464
+#: notification-center@Selenium-H/prefs.js:478
 msgid "     Add    "
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:468
+#: notification-center@Selenium-H/prefs.js:482
 msgid " Remove "
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:490
-#: notification-center@Selenium-H/prefs.js:593
-#: notification-center@Selenium-H/prefs.js:600
+#: notification-center@Selenium-H/prefs.js:504
+#: notification-center@Selenium-H/prefs.js:607
+#: notification-center@Selenium-H/prefs.js:614
 msgid "Left"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:490
-#: notification-center@Selenium-H/prefs.js:593
-#: notification-center@Selenium-H/prefs.js:600
+#: notification-center@Selenium-H/prefs.js:504
+#: notification-center@Selenium-H/prefs.js:607
+#: notification-center@Selenium-H/prefs.js:614
 msgid "Center"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:490
-#: notification-center@Selenium-H/prefs.js:593
-#: notification-center@Selenium-H/prefs.js:600
+#: notification-center@Selenium-H/prefs.js:504
+#: notification-center@Selenium-H/prefs.js:607
+#: notification-center@Selenium-H/prefs.js:614
 msgid "Right"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:494
+#: notification-center@Selenium-H/prefs.js:508
 msgid "No"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:494
+#: notification-center@Selenium-H/prefs.js:508
 msgid "Yes"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:494
+#: notification-center@Selenium-H/prefs.js:508
 msgid "If Do Not Disturb is Off"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:495
+#: notification-center@Selenium-H/prefs.js:509
 msgid "Show Nothing"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:495
+#: notification-center@Selenium-H/prefs.js:509
 msgid "Show Dot"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:495
+#: notification-center@Selenium-H/prefs.js:509
 msgid "Show Count"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:586
-#: notification-center@Selenium-H/prefs.js:587
-#: notification-center@Selenium-H/prefs.js:588
-#: notification-center@Selenium-H/prefs.js:592
-#: notification-center@Selenium-H/prefs.js:593
+#: notification-center@Selenium-H/prefs.js:600
+#: notification-center@Selenium-H/prefs.js:601
+#: notification-center@Selenium-H/prefs.js:602
+#: notification-center@Selenium-H/prefs.js:606
+#: notification-center@Selenium-H/prefs.js:607
 msgid "Don't Show"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:586
-#: notification-center@Selenium-H/prefs.js:587
-#: notification-center@Selenium-H/prefs.js:588
+#: notification-center@Selenium-H/prefs.js:600
+#: notification-center@Selenium-H/prefs.js:601
+#: notification-center@Selenium-H/prefs.js:602
 msgid "At The Top"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:586
-#: notification-center@Selenium-H/prefs.js:587
-#: notification-center@Selenium-H/prefs.js:588
+#: notification-center@Selenium-H/prefs.js:600
+#: notification-center@Selenium-H/prefs.js:601
+#: notification-center@Selenium-H/prefs.js:602
 msgid "In The Middle"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:586
-#: notification-center@Selenium-H/prefs.js:587
-#: notification-center@Selenium-H/prefs.js:588
+#: notification-center@Selenium-H/prefs.js:600
+#: notification-center@Selenium-H/prefs.js:601
+#: notification-center@Selenium-H/prefs.js:602
 msgid "At The Bottom"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:589
+#: notification-center@Selenium-H/prefs.js:603
 msgid "Show Events"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:589
+#: notification-center@Selenium-H/prefs.js:603
 msgid "Show Remaining Sections"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:589
+#: notification-center@Selenium-H/prefs.js:603
 msgid "Hide If Empty"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:592
+#: notification-center@Selenium-H/prefs.js:606
 msgid "On Top"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:592
+#: notification-center@Selenium-H/prefs.js:606
 msgid "At Bottom"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:595
+#: notification-center@Selenium-H/prefs.js:609
 msgid "Alt Key"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:595
+#: notification-center@Selenium-H/prefs.js:609
 msgid "Ctrl Key"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:595
+#: notification-center@Selenium-H/prefs.js:609
 msgid "Shift Key"
 msgstr ""
 
-#: notification-center@Selenium-H/prefs.js:595
+#: notification-center@Selenium-H/prefs.js:609
 msgid "Super Key"
 msgstr ""
 

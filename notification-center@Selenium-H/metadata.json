@@ -1,13 +1,13 @@
 {
 "name": "Notification Center", 
-"description": "Detach notification center to top panel and customizations", 
+"description": "Detach notification center to top panel and customizations\n\nPress the Refresh button on the left of header bar to Reload the extension.", 
 "comment": "Detach notification center to top panel and customizations",
 "uuid": "notification-center@Selenium-H", 
 "settings-schema": "org.gnome.shell.extensions.notification-center", 
 "shell-version": [
 	"3.38"
 ],
-"status" : " (Beta)",
+"status" : " ",
 "url": "https://github.com/Selenium-H/Notification-Center", 
 "version": 23
 }
