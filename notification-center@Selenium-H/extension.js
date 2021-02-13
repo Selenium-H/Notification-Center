@@ -1,6 +1,6 @@
 
 /*
-Version 22.03
+Version 23.01
 =============
 
 */
@@ -487,14 +487,13 @@ const NotificationCenter = new LangClass({
     this.scrollView.add_actor(this.box);
     this.menu.box.add_child(this.scrollView);
     //this.addClearButton()
-    if(this.prefs.get_enum("clear-button-alignment")==3){
-      return;
+    if(this.prefs.get_enum("clear-button-alignment")!=3){
+      this.clearButton.connect('clicked', ()=> {
+        this.notificationSection.clear();
+      }); 
+      this.clearButton.set_x_align(1+this.prefs.get_enum('clear-button-alignment'));
+      this.menu.box.add_child(this.clearButton);
     }
-    this.clearButton.connect('clicked', ()=> {
-      this.notificationSection.clear();
-    }); 
-    this.clearButton.set_x_align(1+this.prefs.get_enum('clear-button-alignment'));
-    this.menu.box.add_child(this.clearButton);
     
     if( this.dndPos > 0) {
       this.dndItem._delegate = this;
