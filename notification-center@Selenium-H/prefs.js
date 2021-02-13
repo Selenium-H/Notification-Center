@@ -1,15 +1,12 @@
 
 /*
-Version 22.03
+Version 23.01
 =============
  
 */
 
-const Config         = imports.misc.config;
 const ExtensionUtils = imports.misc.extensionUtils;
 const Extension      = ExtensionUtils.getCurrentExtension();
-const Me             = ExtensionUtils.getCurrentExtension();
-const Metadata       = Extension.metadata;
 const Gio            = imports.gi.Gio;
 const GLib           = imports.gi.GLib;
 const GObject        = imports.gi.GObject;
@@ -102,7 +99,7 @@ const ExtensionPreferencesWindow_NotificationCenterExtension = new GObject.Class
     helpDialogAction.connect('activate', ()=> {
       let dialog    = new Gtk.Dialog({ title: _("Help"), transient_for: this.toplevel, use_header_bar: true, modal: true });
       let vbox      = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL, margin: 30 });    
-      let firstInfo = new Gtk.Label({ justify: 0, use_markup: true, label: _(Metadata.description)});  
+      let firstInfo = new Gtk.Label({ justify: 0, use_markup: true, label: _(Extension.metadata.description)});  
       vbox.pack_start(firstInfo,            false, false, 0);
       dialog.get_content_area().pack_start(vbox, false, false, 0);  
   
@@ -110,7 +107,9 @@ const ExtensionPreferencesWindow_NotificationCenterExtension = new GObject.Class
     });    
 
     aboutDialogAction.connect('activate', ()=> {  
-      (new Gtk.AboutDialog({ transient_for: this.toplevel, use_header_bar: true, modal: true, logo: (new Gtk.Image({ file: Extension.dir.get_child('eicon.png').get_path(), pixel_size: 96 })).get_pixbuf(), program_name: Metadata.name, version: Metadata.version.toString()+_(Metadata.status), comments: _(Metadata.comment), license_type: 3    } )).show_all();
+      let aboutDialog = new Gtk.AboutDialog({ transient_for: this.toplevel, modal: true, logo: (new Gtk.Image({ file: Extension.dir.get_child('eicon.png').get_path(), pixel_size: 128 })).get_pixbuf(), program_name: Extension.metadata.name, version: Extension.metadata.version.toString()+_(Extension.metadata.status), comments: _(Extension.metadata.comment), license_type: 3    } );
+      aboutDialog.get_header_bar().get_custom_title().visible = true;
+      aboutDialog.show_all();      
     });
     
     appMenu.connect("button-release-event", ()=> {
