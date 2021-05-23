@@ -139,7 +139,7 @@ Version 23.02
     </key>   
     
     <key name="banner-pos" type="s">
-      <default>"12"</default>
+      <default>"13"</default>
       <summary>Notification Banner position</summary>
       <description>Notification Banner position</description>
     </key>
