@@ -182,7 +182,7 @@ const ExtensionResetButton_NotificationCenterExtension =  new GObject.Class({
     reloadExtension();
     }));
     
-    dialog.show_all();
+    dialog.present();
 		
   }, 
 	  
