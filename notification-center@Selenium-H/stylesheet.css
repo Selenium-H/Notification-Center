@@ -1,12 +1,24 @@
+
+/*
+Version 23.02
+=============
+
+*/
+
 .notification-center-message-list {
   padding: 8px 8px 0 20px
 }
 
-.notification-center-clear-button {
-  
+.notification-center-clear-button { 
   margin: 8px 26px 0 26px;
 }
 
 .notification-center-message-list-section {
   padding-bottom: 6px;
 }
+
+.notification-center-events-label,
+.notification-center-notification-label {
+  padding: 0px 6px 0 0;
+}
+
