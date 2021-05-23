@@ -5,9 +5,10 @@
 "uuid": "notification-center@Selenium-H", 
 "settings-schema": "org.gnome.shell.extensions.notification-center", 
 "shell-version": [
-	"3.38"
+	"3.38",
+	"40"
 ],
-"status" : " ",
+"status" : " (Beta)",
 "url": "https://github.com/Selenium-H/Notification-Center", 
-"version": 23.01
+"version": 23.02
 }
