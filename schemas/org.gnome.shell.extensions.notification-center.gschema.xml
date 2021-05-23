@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Version 22.01
+Version 23.02
 =============
  
 -->
@@ -26,9 +26,9 @@ Version 22.01
   </enum>
   
   <enum id="org.gnome.shell.extensions.notification-center.banner-pos">
-    <value nick="left" value="1"/>
-    <value nick="center" value="2"/>
-    <value nick="right" value="3"/>
+    <value nick="left" value="0"/>
+    <value nick="center" value="1"/>
+    <value nick="right" value="2"/>
   </enum>
   
   <enum id="org.gnome.shell.extensions.notification-center.indicator-pos">
@@ -138,12 +138,12 @@ Version 22.01
       <description>Hide Weather Section</description>
     </key>   
     
-    <key enum="org.gnome.shell.extensions.notification-center.banner-pos" name="banner-pos">
-      <default>'right'</default>
+    <key name="banner-pos" type="s">
+      <default>"12"</default>
       <summary>Notification Banner position</summary>
       <description>Notification Banner position</description>
     </key>
-       
+
     <key enum="org.gnome.shell.extensions.notification-center.banner-pos" name="indicator-pos">
       <default>'right'</default>
       <summary>Notification Center icon position on panel</summary>
@@ -216,10 +216,10 @@ Version 22.01
       <description>Middle click panel icon to toggle Do Not Disturb</description>
     </key>
     
-    <key name="list" type="as">
+    <key name="application-list" type="as">
       <default>[]</default>
-      <summary>List of applications to ignore notifications from</summary>
-      <description>List of applications to ignore notifications from</description>
+      <summary>List of applications</summary>
+      <description>List of applications</description>
     </key>
     
     <key name="name-list" type="as">
@@ -227,11 +227,23 @@ Version 22.01
       <summary>List of Names of application to ignore notifications from</summary>
       <description>List of Names of application to ignore notifications from</description>
     </key>
+
+    <key name="run-script" type="b">
+      <default>false</default>
+      <summary>Run scripts on new notification</summary>
+      <description>Run scripts on new notification</description>
+    </key>
+
+    <key name="script-list" type="as">
+      <default>[]</default>
+      <summary>List of Scripts for applications</summary>
+      <description>List of Scripts for applications</description>
+    </key>
     
     <key enum="org.gnome.shell.extensions.notification-center.for-list" name="for-list">
       <default>'none'</default>
-      <summary>If new notification arrives for apps on this list</summary>
-      <description>If new notification arrives for apps on this list</description>
+      <summary>When new notification arrives</summary>
+      <description>When new notification arrives</description>
     </key>
     
     <key name="reload-signal" type="b">
