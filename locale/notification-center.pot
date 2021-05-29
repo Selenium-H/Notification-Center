@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-23 06:08+0530\n"
+"POT-Creation-Date: 2021-05-29 10:48+0530\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,307 +17,360 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: notification-center@Selenium-H/extension.js:100
+#: notification-center@Selenium-H/extension.js:103
 msgid "Clear"
 msgstr ""
 
-#: notification-center@Selenium-H/extension.js:454
+#: notification-center@Selenium-H/extension.js:105
+msgid "No Notifications"
+msgstr ""
+
+#: notification-center@Selenium-H/extension.js:444
 msgid "No Events"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:67
-#: notification-center@Selenium-H/prefsGtk3.js:76
+#: notification-center@Selenium-H/prefsGtk3.js:68
+#: notification-center@Selenium-H/prefsGtk3.js:77
 #: notification-center@Selenium-H/prefsGtk4.js:66
 #: notification-center@Selenium-H/prefsGtk4.js:78
 msgid "Preferences"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:68
-#: notification-center@Selenium-H/prefsGtk3.js:86
+#: notification-center@Selenium-H/prefsGtk3.js:69
+#: notification-center@Selenium-H/prefsGtk3.js:87
 #: notification-center@Selenium-H/prefsGtk4.js:67
 #: notification-center@Selenium-H/prefsGtk4.js:87
 msgid "Help"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:69
+#: notification-center@Selenium-H/prefsGtk3.js:70
 #: notification-center@Selenium-H/prefsGtk4.js:68
 msgid "About"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:125
+#: notification-center@Selenium-H/prefsGtk3.js:126
 #: notification-center@Selenium-H/prefsGtk4.js:121
 msgid "Reset Notification Center Extension"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:137
+#: notification-center@Selenium-H/prefsGtk3.js:138
+#: notification-center@Selenium-H/prefsGtk4.js:133
 msgid "Reset Notification Center to defaults?"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:138
+#: notification-center@Selenium-H/prefsGtk3.js:139
 #: notification-center@Selenium-H/prefsGtk4.js:134
 msgid ""
 "Resetting the extension will discard the current preferences configuration "
 "and restore default one."
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:209
-#: notification-center@Selenium-H/prefsGtk4.js:205
+#: notification-center@Selenium-H/prefsGtk3.js:216
+#: notification-center@Selenium-H/prefsGtk4.js:211
+msgid "Update"
+msgstr ""
+
+#: notification-center@Selenium-H/prefsGtk3.js:220
+#: notification-center@Selenium-H/prefsGtk4.js:215
 msgid "Notifications"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:210
-#: notification-center@Selenium-H/prefsGtk4.js:206
+#: notification-center@Selenium-H/prefsGtk3.js:221
+#: notification-center@Selenium-H/prefsGtk4.js:216
 msgid "Indicator"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:211
-#: notification-center@Selenium-H/prefsGtk4.js:207
+#: notification-center@Selenium-H/prefsGtk3.js:222
+#: notification-center@Selenium-H/prefsGtk4.js:217
 msgid "Profiles"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:348
-#: notification-center@Selenium-H/prefsGtk4.js:344
+#: notification-center@Selenium-H/prefsGtk3.js:352
+#: notification-center@Selenium-H/prefsGtk4.js:346
+msgid "Custom script location for"
+msgstr ""
+
+#: notification-center@Selenium-H/prefsGtk3.js:375
+#: notification-center@Selenium-H/prefsGtk4.js:369
 msgid "Choose an application"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:405
-#: notification-center@Selenium-H/prefsGtk4.js:401
+#: notification-center@Selenium-H/prefsGtk3.js:433
+#: notification-center@Selenium-H/prefsGtk4.js:427
 msgid "Application List"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:501
-#: notification-center@Selenium-H/prefsGtk4.js:497
-msgid "     Add    "
+#: notification-center@Selenium-H/prefsGtk3.js:532
+#: notification-center@Selenium-H/prefsGtk4.js:526
+msgid "Choose a Script file"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:502
-#: notification-center@Selenium-H/prefsGtk4.js:498
-msgid " Remove "
-msgstr ""
-
-#: notification-center@Selenium-H/prefsGtk3.js:504
-#: notification-center@Selenium-H/prefsGtk4.js:500
+#: notification-center@Selenium-H/prefsGtk3.js:533
+#: notification-center@Selenium-H/prefsGtk3.js:555
+#: notification-center@Selenium-H/prefsGtk4.js:527
+#: notification-center@Selenium-H/prefsGtk4.js:549
 msgid "Set"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:519
-#: notification-center@Selenium-H/prefsGtk4.js:515
+#: notification-center@Selenium-H/prefsGtk3.js:552
+#: notification-center@Selenium-H/prefsGtk4.js:546
+msgid "     Add    "
+msgstr ""
+
+#: notification-center@Selenium-H/prefsGtk3.js:553
+#: notification-center@Selenium-H/prefsGtk4.js:547
+msgid " Remove "
+msgstr ""
+
+#: notification-center@Selenium-H/prefsGtk3.js:556
+#: notification-center@Selenium-H/prefsGtk4.js:550
+msgid "Browse"
+msgstr ""
+
+#: notification-center@Selenium-H/prefsGtk3.js:563
+#: notification-center@Selenium-H/prefsGtk4.js:557
+msgid "No application selected"
+msgstr ""
+
+#: notification-center@Selenium-H/prefsGtk3.js:583
+#: notification-center@Selenium-H/prefsGtk4.js:577
 msgid "For All Applications on the List"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:521
-#: notification-center@Selenium-H/prefsGtk4.js:517
+#: notification-center@Selenium-H/prefsGtk3.js:585
+#: notification-center@Selenium-H/prefsGtk4.js:579
 msgid "Show them"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:521
-#: notification-center@Selenium-H/prefsGtk4.js:517
+#: notification-center@Selenium-H/prefsGtk3.js:585
+#: notification-center@Selenium-H/prefsGtk4.js:579
 msgid "Show counts only"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:521
-#: notification-center@Selenium-H/prefsGtk4.js:517
+#: notification-center@Selenium-H/prefsGtk3.js:585
+#: notification-center@Selenium-H/prefsGtk4.js:579
 msgid "Show banner only"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:521
-#: notification-center@Selenium-H/prefsGtk4.js:517
+#: notification-center@Selenium-H/prefsGtk3.js:585
+#: notification-center@Selenium-H/prefsGtk4.js:579
 msgid "Ignore them"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:524
-#: notification-center@Selenium-H/prefsGtk4.js:520
+#: notification-center@Selenium-H/prefsGtk3.js:588
+#: notification-center@Selenium-H/prefsGtk4.js:582
 msgid "For Selected Application"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:526
-#: notification-center@Selenium-H/prefsGtk4.js:522
-msgid "Custom script location "
-msgstr ""
-
-#: notification-center@Selenium-H/prefsGtk3.js:550
-#: notification-center@Selenium-H/prefsGtk3.js:653
-#: notification-center@Selenium-H/prefsGtk4.js:546
-#: notification-center@Selenium-H/prefsGtk4.js:649
+#: notification-center@Selenium-H/prefsGtk3.js:629
+#: notification-center@Selenium-H/prefsGtk3.js:734
+#: notification-center@Selenium-H/prefsGtk4.js:622
+#: notification-center@Selenium-H/prefsGtk4.js:726
 msgid "Left"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:550
-#: notification-center@Selenium-H/prefsGtk3.js:653
-#: notification-center@Selenium-H/prefsGtk4.js:546
-#: notification-center@Selenium-H/prefsGtk4.js:649
+#: notification-center@Selenium-H/prefsGtk3.js:629
+#: notification-center@Selenium-H/prefsGtk3.js:734
+#: notification-center@Selenium-H/prefsGtk4.js:622
+#: notification-center@Selenium-H/prefsGtk4.js:726
 msgid "Center"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:550
-#: notification-center@Selenium-H/prefsGtk3.js:653
-#: notification-center@Selenium-H/prefsGtk4.js:546
-#: notification-center@Selenium-H/prefsGtk4.js:649
+#: notification-center@Selenium-H/prefsGtk3.js:629
+#: notification-center@Selenium-H/prefsGtk3.js:734
+#: notification-center@Selenium-H/prefsGtk4.js:622
+#: notification-center@Selenium-H/prefsGtk4.js:726
 msgid "Right"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:554
-#: notification-center@Selenium-H/prefsGtk4.js:550
+#: notification-center@Selenium-H/prefsGtk3.js:633
+#: notification-center@Selenium-H/prefsGtk4.js:626
 msgid "No"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:554
-#: notification-center@Selenium-H/prefsGtk4.js:550
+#: notification-center@Selenium-H/prefsGtk3.js:633
+#: notification-center@Selenium-H/prefsGtk4.js:626
 msgid "Yes"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:554
-#: notification-center@Selenium-H/prefsGtk4.js:550
+#: notification-center@Selenium-H/prefsGtk3.js:633
+#: notification-center@Selenium-H/prefsGtk4.js:626
 msgid "If Do Not Disturb is Off"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:555
-#: notification-center@Selenium-H/prefsGtk4.js:551
+#: notification-center@Selenium-H/prefsGtk3.js:634
+#: notification-center@Selenium-H/prefsGtk4.js:627
 msgid "Show Nothing"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:555
-#: notification-center@Selenium-H/prefsGtk4.js:551
+#: notification-center@Selenium-H/prefsGtk3.js:634
+#: notification-center@Selenium-H/prefsGtk4.js:627
 msgid "Show Dot"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:555
-#: notification-center@Selenium-H/prefsGtk4.js:551
+#: notification-center@Selenium-H/prefsGtk3.js:634
+#: notification-center@Selenium-H/prefsGtk4.js:627
 msgid "Show Count"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:646
-#: notification-center@Selenium-H/prefsGtk3.js:647
-#: notification-center@Selenium-H/prefsGtk3.js:648
-#: notification-center@Selenium-H/prefsGtk3.js:652
-#: notification-center@Selenium-H/prefsGtk3.js:653
-#: notification-center@Selenium-H/prefsGtk4.js:642
-#: notification-center@Selenium-H/prefsGtk4.js:643
-#: notification-center@Selenium-H/prefsGtk4.js:644
-#: notification-center@Selenium-H/prefsGtk4.js:648
-#: notification-center@Selenium-H/prefsGtk4.js:649
+#: notification-center@Selenium-H/prefsGtk3.js:726
+#: notification-center@Selenium-H/prefsGtk3.js:727
+#: notification-center@Selenium-H/prefsGtk3.js:728
+#: notification-center@Selenium-H/prefsGtk3.js:733
+#: notification-center@Selenium-H/prefsGtk3.js:734
+#: notification-center@Selenium-H/prefsGtk4.js:718
+#: notification-center@Selenium-H/prefsGtk4.js:719
+#: notification-center@Selenium-H/prefsGtk4.js:720
+#: notification-center@Selenium-H/prefsGtk4.js:725
+#: notification-center@Selenium-H/prefsGtk4.js:726
 msgid "Don't Show"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:646
-#: notification-center@Selenium-H/prefsGtk3.js:647
-#: notification-center@Selenium-H/prefsGtk3.js:648
-#: notification-center@Selenium-H/prefsGtk4.js:642
-#: notification-center@Selenium-H/prefsGtk4.js:643
-#: notification-center@Selenium-H/prefsGtk4.js:644
+#: notification-center@Selenium-H/prefsGtk3.js:726
+#: notification-center@Selenium-H/prefsGtk3.js:727
+#: notification-center@Selenium-H/prefsGtk3.js:728
+#: notification-center@Selenium-H/prefsGtk4.js:718
+#: notification-center@Selenium-H/prefsGtk4.js:719
+#: notification-center@Selenium-H/prefsGtk4.js:720
 msgid "At The Top"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:646
-#: notification-center@Selenium-H/prefsGtk3.js:647
-#: notification-center@Selenium-H/prefsGtk3.js:648
-#: notification-center@Selenium-H/prefsGtk4.js:642
-#: notification-center@Selenium-H/prefsGtk4.js:643
-#: notification-center@Selenium-H/prefsGtk4.js:644
+#: notification-center@Selenium-H/prefsGtk3.js:726
+#: notification-center@Selenium-H/prefsGtk3.js:727
+#: notification-center@Selenium-H/prefsGtk3.js:728
+#: notification-center@Selenium-H/prefsGtk4.js:718
+#: notification-center@Selenium-H/prefsGtk4.js:719
+#: notification-center@Selenium-H/prefsGtk4.js:720
 msgid "In The Middle"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:646
-#: notification-center@Selenium-H/prefsGtk3.js:647
-#: notification-center@Selenium-H/prefsGtk3.js:648
-#: notification-center@Selenium-H/prefsGtk4.js:642
-#: notification-center@Selenium-H/prefsGtk4.js:643
-#: notification-center@Selenium-H/prefsGtk4.js:644
+#: notification-center@Selenium-H/prefsGtk3.js:726
+#: notification-center@Selenium-H/prefsGtk3.js:727
+#: notification-center@Selenium-H/prefsGtk3.js:728
+#: notification-center@Selenium-H/prefsGtk4.js:718
+#: notification-center@Selenium-H/prefsGtk4.js:719
+#: notification-center@Selenium-H/prefsGtk4.js:720
 msgid "At The Bottom"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:649
-#: notification-center@Selenium-H/prefsGtk4.js:645
-msgid "Show Events"
+#: notification-center@Selenium-H/prefsGtk3.js:729
+#: notification-center@Selenium-H/prefsGtk4.js:721
+msgid "Only In Notification Center"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:649
-#: notification-center@Selenium-H/prefsGtk4.js:645
-msgid "Show Remaining Sections"
+#: notification-center@Selenium-H/prefsGtk3.js:729
+#: notification-center@Selenium-H/prefsGtk4.js:721
+msgid "Below Calendar"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:649
-#: notification-center@Selenium-H/prefsGtk4.js:645
-msgid "Hide If Empty"
+#: notification-center@Selenium-H/prefsGtk3.js:729
+#: notification-center@Selenium-H/prefsGtk4.js:721
+msgid "Beside Calendar"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:652
-#: notification-center@Selenium-H/prefsGtk4.js:648
+#: notification-center@Selenium-H/prefsGtk3.js:733
+#: notification-center@Selenium-H/prefsGtk4.js:725
 msgid "On Top"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:652
-#: notification-center@Selenium-H/prefsGtk4.js:648
+#: notification-center@Selenium-H/prefsGtk3.js:733
+#: notification-center@Selenium-H/prefsGtk4.js:725
 msgid "At Bottom"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:655
-#: notification-center@Selenium-H/prefsGtk4.js:651
+#: notification-center@Selenium-H/prefsGtk3.js:736
+#: notification-center@Selenium-H/prefsGtk4.js:728
 msgid "Alt Key"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:655
-#: notification-center@Selenium-H/prefsGtk4.js:651
+#: notification-center@Selenium-H/prefsGtk3.js:736
+#: notification-center@Selenium-H/prefsGtk4.js:728
 msgid "Ctrl Key"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:655
-#: notification-center@Selenium-H/prefsGtk4.js:651
+#: notification-center@Selenium-H/prefsGtk3.js:736
+#: notification-center@Selenium-H/prefsGtk4.js:728
 msgid "Shift Key"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:655
-#: notification-center@Selenium-H/prefsGtk4.js:651
+#: notification-center@Selenium-H/prefsGtk3.js:736
+#: notification-center@Selenium-H/prefsGtk4.js:728
 msgid "Super Key"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:660
-#: notification-center@Selenium-H/prefsGtk4.js:656
+#: notification-center@Selenium-H/prefsGtk3.js:741
+#: notification-center@Selenium-H/prefsGtk4.js:733
 msgid "Top Left"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:660
-#: notification-center@Selenium-H/prefsGtk4.js:656
+#: notification-center@Selenium-H/prefsGtk3.js:741
+#: notification-center@Selenium-H/prefsGtk4.js:733
 msgid "Top Center"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:660
-#: notification-center@Selenium-H/prefsGtk4.js:656
+#: notification-center@Selenium-H/prefsGtk3.js:741
+#: notification-center@Selenium-H/prefsGtk4.js:733
 msgid "Top Right"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:660
-#: notification-center@Selenium-H/prefsGtk4.js:656
+#: notification-center@Selenium-H/prefsGtk3.js:741
+#: notification-center@Selenium-H/prefsGtk4.js:733
 msgid "Middle Left"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:660
-#: notification-center@Selenium-H/prefsGtk4.js:656
+#: notification-center@Selenium-H/prefsGtk3.js:741
+#: notification-center@Selenium-H/prefsGtk4.js:733
 msgid "Middle Center"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:660
-#: notification-center@Selenium-H/prefsGtk4.js:656
+#: notification-center@Selenium-H/prefsGtk3.js:741
+#: notification-center@Selenium-H/prefsGtk4.js:733
 msgid "Middle Right"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:660
-#: notification-center@Selenium-H/prefsGtk4.js:656
+#: notification-center@Selenium-H/prefsGtk3.js:741
+#: notification-center@Selenium-H/prefsGtk4.js:733
 msgid "Bottom Left"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:660
-#: notification-center@Selenium-H/prefsGtk4.js:656
+#: notification-center@Selenium-H/prefsGtk3.js:741
+#: notification-center@Selenium-H/prefsGtk4.js:733
 msgid "Bottom Center"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:660
-#: notification-center@Selenium-H/prefsGtk4.js:656
+#: notification-center@Selenium-H/prefsGtk3.js:741
+#: notification-center@Selenium-H/prefsGtk4.js:733
 msgid "Bottom Right"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk4.js:133
-msgid "Reset Animation Tweaks to defaults?"
+#: notification-center@Selenium-H/prefsGtk3.js:817
+#: notification-center@Selenium-H/prefsGtk4.js:809
+msgid "Extension is upgraded to Version  "
+msgstr ""
+
+#: notification-center@Selenium-H/prefsGtk3.js:817
+#: notification-center@Selenium-H/prefsGtk4.js:809
+msgid ""
+"A Reset to default preferences is needed for upgrading to this version. "
+"Please Reset the extension by clicking the button below."
+msgstr ""
+
+#: notification-center@Selenium-H/prefsGtk3.js:834
+#: notification-center@Selenium-H/prefsGtk4.js:826
+msgid "Version  "
+msgstr ""
+
+#: notification-center@Selenium-H/prefsGtk3.js:834
+#: notification-center@Selenium-H/prefsGtk4.js:826
+msgid "Upgraded Successfully"
+msgstr ""
+
+#: notification-center@Selenium-H/prefsGtk4.js:373
+msgid "Add"
+msgstr ""
+
+#: notification-center@Selenium-H/prefsGtk4.js:530
+msgid "Cancel"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:57
@@ -336,161 +389,185 @@ msgid "Show Events list on Notification Center"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:75
+msgid "Also, Show Events List"
+msgstr ""
+
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:76
-msgid "Space Beside Calendar Menu"
+msgid "Also, show Events List"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:81
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:82
-msgid "Show Calendar Section on Left"
+msgid "Hide space beside Calendar if empty"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:87
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:88
-msgid "Hide Events List If Empty"
+msgid "Show Calendar Section on Left"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:93
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:94
-msgid "Order of sections in Notification Center"
+msgid "Hide Events List If Empty"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:99
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:100
-msgid "Do Not Disturb menu position"
+msgid "Order of sections in Notification Center"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:105
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:106
-msgid "Clear All Button position"
+msgid "Do Not Disturb menu position"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:111
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:112
-msgid "Close Notification Center when focus is switched"
+msgid "Clear All Button position"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:119
-#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:120
-msgid "Shortcut key combiation to show Notification Center"
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:117
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:118
+msgid "Close Notification Center when focus is switched"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:125
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:126
-msgid "Maximum height of Notification Center ( in % )"
+msgid "Shortcut key combiation to show Notification Center"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:131
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:132
-msgid "Hide Clock Section"
+msgid "Maximum height of Notification Center ( in % )"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:137
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:138
-msgid "Hide Weather Section"
+msgid "Hide Clock Section"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:143
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:144
-msgid "Notification Banner position"
+msgid "Hide Weather Section"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:149
-msgid "Notification Center icon position on panel"
-msgstr ""
-
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:150
-msgid "Notifications Center icon position"
+msgid "Hide Date Section"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:155
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:156
-msgid "Position of notification icon in panel box"
+msgid "Notification Banner position"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:161
+msgid "Notification Center icon position on panel"
+msgstr ""
+
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:162
-msgid "Show individual icons for each section on panel"
+msgid "Notifications Center icon position"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:167
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:168
-msgid "Change icons depending if there is notification or not"
+msgid "Position of notification icon in panel box"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:173
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:174
-msgid "AutoHide notification indicator on panel"
+msgid "Show individual icons for each section on panel"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:179
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:180
-#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:245
-#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:246
-msgid "When new notification arrives"
+msgid "Change icons depending if there is notification or not"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:185
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:186
-msgid "Include events in above case"
+msgid "AutoHide notification indicator on panel"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:191
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:192
-msgid "Number of times panel icon blinks on new notification"
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:251
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:252
+msgid "When new notification arrives"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:197
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:198
-msgid "Blink Time Interval ( in milliseconds )"
+msgid "Include events in above case"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:203
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:204
-msgid "Animate icon when new notification arrives"
+msgid "Number of times panel icon blinks on new notification"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:209
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:210
-msgid "Show Dots or Counts till all notifications are cleared"
+msgid "Blink Time Interval ( in milliseconds )"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:215
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:216
-msgid "Middle click panel icon to toggle Do Not Disturb"
+msgid "Animate icon when new notification arrives"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:221
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:222
-msgid "List of applications"
+msgid "Show Dots or Counts till all notifications are cleared"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:227
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:228
-msgid "List of Names of application to ignore notifications from"
+msgid "Middle click panel icon to toggle Do Not Disturb"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:233
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:234
-msgid "Run scripts on new notification"
+msgid "List of applications"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:239
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:240
-msgid "List of Scripts for applications"
+msgid "List of Names of application to ignore notifications from"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:251
-#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:252
-msgid "Signals the extension to reload"
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:245
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:246
+msgid "List of Scripts for applications"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:257
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:258
-msgid "Signals the extension to reload profiles"
+msgid "Run scripts on new notification"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:263
-#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:264
-msgid "Hide Date Section"
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:265
+msgid "Version of Current Extension"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:266
+msgid ""
+"Provided to ensure that extension is stopped incase of autoupdate from "
+"previous version to prevent unwanted effects"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:271
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:272
+msgid "Signals the extension to reload"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:277
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:278
+msgid "Signals the extension to reload Application Profiles"
+msgstr ""
+
+msgid "Detach notification center to top panel and customizations.Please reset the extension after updating.\nThe Extension will stop when upgraded to an incompatible version.\nIn that case an Update tab is created to easily reset the extension.\nA Reset button is also always present in Preferences option in the Top Right Application menu of the extension preferences window."
+msgstr ""
+
+msgid "Detach notification center to top panel and customizations."
 msgstr ""
