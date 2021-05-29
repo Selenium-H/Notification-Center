@@ -6,7 +6,15 @@ Version 23.02
 */
 
 .notification-center-message-list {
-  padding: 8px 8px 0 20px
+  padding: 8px 8px 0 20px;
+}
+
+.notification-center-message-list-empty {
+  padding: 8px 8px 0 20px;
+  min-height: 128px;
+  margin-bottom: 20px;
+  background-image: url("resource:///org/gnome/shell/theme/no-notifications.svg");
+  background-size: 48px;
 }
 
 .notification-center-clear-button { 
