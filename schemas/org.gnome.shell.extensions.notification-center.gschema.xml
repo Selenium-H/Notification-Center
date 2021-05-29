@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Version 23.02
+Version 23.03
 =============
  
 -->
 <schemalist gettext-domain="gnome-shell-extensions">
 
-  <enum id="org.gnome.shell.extensions.notification-center.beside-calendar">
-    <value nick="events" value="0"/>
-    <value nick="show" value="1"/>
-    <value nick="hide" value="2"/>
+<enum id="org.gnome.shell.extensions.notification-center.events-position">
+    <value nick="below" value="0"/>
+    <value nick="dontshow" value="1"/>
+    <value nick="beside" value="2"/>
   </enum>
 
   <enum id="org.gnome.shell.extensions.notification-center.dnd-position">
@@ -70,12 +70,18 @@ Version 23.02
       <description>Show Events list on Notification Center</description>
     </key>
     
-    <key enum="org.gnome.shell.extensions.notification-center.beside-calendar" name="beside-calendar">
-      <default>'events'</default>
-      <summary>Space Beside Calendar Menu</summary>
-      <description>Space Beside Calendar Menu</description>
+    <key enum="org.gnome.shell.extensions.notification-center.events-position" name="events-position">
+      <default>'below'</default>
+      <summary>Also, Show Events List</summary>
+      <description>Also, show Events List</description>
+    </key>    
+
+    <key name="autohide-space-beside-calendar" type="b">
+      <default>false</default>
+      <summary>Hide space beside Calendar if empty</summary>
+      <description>Hide space beside Calendar if empty</description>
     </key>
-    
+ 
     <key name="calendar-on-left" type="b">
       <default>false</default>
       <summary>Show Calendar Section on Left</summary>
@@ -137,6 +143,12 @@ Version 23.02
       <summary>Hide Weather Section</summary>
       <description>Hide Weather Section</description>
     </key>   
+
+    <key name="hide-date-section" type="b">
+      <default>false</default>
+      <summary>Hide Date Section</summary>
+      <description>Hide Date Section</description>
+    </key>  
     
     <key name="banner-pos" type="s">
       <default>"13"</default>
@@ -161,13 +173,13 @@ Version 23.02
       <summary>Show individual icons for each section on panel</summary>
       <description>Show individual icons for each section on panel</description>
     </key>
-    
+
     <key name="change-icons" type="b">
       <default>false</default>
       <summary>Change icons depending if there is notification or not</summary>
       <description>Change icons depending if there is notification or not</description>
     </key>    
-    
+        
     <key name="autohide" type="i">
       <default>1</default>
       <summary>AutoHide notification indicator on panel</summary>
@@ -228,12 +240,6 @@ Version 23.02
       <description>List of Names of application to ignore notifications from</description>
     </key>
 
-    <key name="run-script" type="b">
-      <default>false</default>
-      <summary>Run scripts on new notification</summary>
-      <description>Run scripts on new notification</description>
-    </key>
-
     <key name="script-list" type="as">
       <default>[]</default>
       <summary>List of Scripts for applications</summary>
@@ -246,23 +252,31 @@ Version 23.02
       <description>When new notification arrives</description>
     </key>
     
+    <key name="run-script" type="b">
+      <default>false</default>
+      <summary>Run scripts on new notification</summary>
+      <description>Run scripts on new notification</description>
+    </key>         
+   
+    <!--  =============================================================================   Extension Variables  =========================================================================================== -->
+
+    <key name="current-version" type="d">
+      <default>23.00</default>
+      <summary>Version of Current Extension</summary>
+      <description>Provided to ensure that extension is stopped incase of autoupdate from previous version to prevent unwanted effects</description>
+    </key>
+
     <key name="reload-signal" type="b">
       <default>false</default>
       <summary>Signals the extension to reload </summary>
       <description>Signals the extension to reload</description>
-    </key>   
+    </key>
     
     <key name="reload-profiles-signal" type="b">
       <default>false</default>
-      <summary>Signals the extension to reload profiles </summary>
-      <description>Signals the extension to reload profiles</description>
-    </key>      
-   
-    <key name="hide-date-section" type="b">
-      <default>false</default>
-      <summary>Hide Date Section</summary>
-      <description>Hide Date Section</description>
-    </key>  
+      <summary>Signals the extension to reload Application Profiles</summary>
+      <description>Signals the extension to reload Application Profiles</description>
+    </key>    
         
   </schema>
   
