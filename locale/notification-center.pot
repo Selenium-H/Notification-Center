@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-29 10:48+0530\n"
+"POT-Creation-Date: 2021-05-31 12:04+0530\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,15 +17,17 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: notification-center@Selenium-H/extension.js:103
+#: notification-center@Selenium-H/extension.js:100
+#: notification-center@Selenium-H/prefsGtk3.js:556
+#: notification-center@Selenium-H/prefsGtk4.js:550
 msgid "Clear"
 msgstr ""
 
-#: notification-center@Selenium-H/extension.js:105
+#: notification-center@Selenium-H/extension.js:102
 msgid "No Notifications"
 msgstr ""
 
-#: notification-center@Selenium-H/extension.js:444
+#: notification-center@Selenium-H/extension.js:440
 msgid "No Events"
 msgstr ""
 
@@ -65,23 +67,28 @@ msgid ""
 "and restore default one."
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:216
-#: notification-center@Selenium-H/prefsGtk4.js:211
+#: notification-center@Selenium-H/prefsGtk3.js:214
+#: notification-center@Selenium-H/prefsGtk4.js:209
 msgid "Update"
+msgstr ""
+
+#: notification-center@Selenium-H/prefsGtk3.js:218
+#: notification-center@Selenium-H/prefsGtk4.js:213
+msgid "Notifications"
+msgstr ""
+
+#: notification-center@Selenium-H/prefsGtk3.js:219
+#: notification-center@Selenium-H/prefsGtk4.js:214
+msgid "Calendar"
 msgstr ""
 
 #: notification-center@Selenium-H/prefsGtk3.js:220
 #: notification-center@Selenium-H/prefsGtk4.js:215
-msgid "Notifications"
+msgid "Indicator"
 msgstr ""
 
 #: notification-center@Selenium-H/prefsGtk3.js:221
 #: notification-center@Selenium-H/prefsGtk4.js:216
-msgid "Indicator"
-msgstr ""
-
-#: notification-center@Selenium-H/prefsGtk3.js:222
-#: notification-center@Selenium-H/prefsGtk4.js:217
 msgid "Profiles"
 msgstr ""
 
@@ -122,247 +129,247 @@ msgstr ""
 msgid " Remove "
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:556
-#: notification-center@Selenium-H/prefsGtk4.js:550
+#: notification-center@Selenium-H/prefsGtk3.js:557
+#: notification-center@Selenium-H/prefsGtk4.js:551
 msgid "Browse"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:563
-#: notification-center@Selenium-H/prefsGtk4.js:557
+#: notification-center@Selenium-H/prefsGtk3.js:564
+#: notification-center@Selenium-H/prefsGtk4.js:558
 msgid "No application selected"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:583
-#: notification-center@Selenium-H/prefsGtk4.js:577
+#: notification-center@Selenium-H/prefsGtk3.js:599
+#: notification-center@Selenium-H/prefsGtk4.js:593
 msgid "For All Applications on the List"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:585
-#: notification-center@Selenium-H/prefsGtk4.js:579
+#: notification-center@Selenium-H/prefsGtk3.js:601
+#: notification-center@Selenium-H/prefsGtk4.js:595
 msgid "Show them"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:585
-#: notification-center@Selenium-H/prefsGtk4.js:579
+#: notification-center@Selenium-H/prefsGtk3.js:601
+#: notification-center@Selenium-H/prefsGtk4.js:595
 msgid "Show counts only"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:585
-#: notification-center@Selenium-H/prefsGtk4.js:579
+#: notification-center@Selenium-H/prefsGtk3.js:601
+#: notification-center@Selenium-H/prefsGtk4.js:595
 msgid "Show banner only"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:585
-#: notification-center@Selenium-H/prefsGtk4.js:579
+#: notification-center@Selenium-H/prefsGtk3.js:601
+#: notification-center@Selenium-H/prefsGtk4.js:595
 msgid "Ignore them"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:588
-#: notification-center@Selenium-H/prefsGtk4.js:582
+#: notification-center@Selenium-H/prefsGtk3.js:604
+#: notification-center@Selenium-H/prefsGtk4.js:598
 msgid "For Selected Application"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:629
-#: notification-center@Selenium-H/prefsGtk3.js:734
-#: notification-center@Selenium-H/prefsGtk4.js:622
-#: notification-center@Selenium-H/prefsGtk4.js:726
-msgid "Left"
-msgstr ""
-
-#: notification-center@Selenium-H/prefsGtk3.js:629
-#: notification-center@Selenium-H/prefsGtk3.js:734
-#: notification-center@Selenium-H/prefsGtk4.js:622
-#: notification-center@Selenium-H/prefsGtk4.js:726
-msgid "Center"
-msgstr ""
-
-#: notification-center@Selenium-H/prefsGtk3.js:629
-#: notification-center@Selenium-H/prefsGtk3.js:734
-#: notification-center@Selenium-H/prefsGtk4.js:622
-#: notification-center@Selenium-H/prefsGtk4.js:726
-msgid "Right"
-msgstr ""
-
-#: notification-center@Selenium-H/prefsGtk3.js:633
-#: notification-center@Selenium-H/prefsGtk4.js:626
-msgid "No"
-msgstr ""
-
-#: notification-center@Selenium-H/prefsGtk3.js:633
-#: notification-center@Selenium-H/prefsGtk4.js:626
-msgid "Yes"
-msgstr ""
-
-#: notification-center@Selenium-H/prefsGtk3.js:633
-#: notification-center@Selenium-H/prefsGtk4.js:626
-msgid "If Do Not Disturb is Off"
-msgstr ""
-
-#: notification-center@Selenium-H/prefsGtk3.js:634
-#: notification-center@Selenium-H/prefsGtk4.js:627
-msgid "Show Nothing"
-msgstr ""
-
-#: notification-center@Selenium-H/prefsGtk3.js:634
-#: notification-center@Selenium-H/prefsGtk4.js:627
-msgid "Show Dot"
-msgstr ""
-
-#: notification-center@Selenium-H/prefsGtk3.js:634
-#: notification-center@Selenium-H/prefsGtk4.js:627
-msgid "Show Count"
-msgstr ""
-
-#: notification-center@Selenium-H/prefsGtk3.js:726
-#: notification-center@Selenium-H/prefsGtk3.js:727
-#: notification-center@Selenium-H/prefsGtk3.js:728
-#: notification-center@Selenium-H/prefsGtk3.js:733
-#: notification-center@Selenium-H/prefsGtk3.js:734
-#: notification-center@Selenium-H/prefsGtk4.js:718
-#: notification-center@Selenium-H/prefsGtk4.js:719
-#: notification-center@Selenium-H/prefsGtk4.js:720
-#: notification-center@Selenium-H/prefsGtk4.js:725
-#: notification-center@Selenium-H/prefsGtk4.js:726
-msgid "Don't Show"
-msgstr ""
-
-#: notification-center@Selenium-H/prefsGtk3.js:726
-#: notification-center@Selenium-H/prefsGtk3.js:727
-#: notification-center@Selenium-H/prefsGtk3.js:728
-#: notification-center@Selenium-H/prefsGtk4.js:718
-#: notification-center@Selenium-H/prefsGtk4.js:719
-#: notification-center@Selenium-H/prefsGtk4.js:720
-msgid "At The Top"
-msgstr ""
-
-#: notification-center@Selenium-H/prefsGtk3.js:726
-#: notification-center@Selenium-H/prefsGtk3.js:727
-#: notification-center@Selenium-H/prefsGtk3.js:728
-#: notification-center@Selenium-H/prefsGtk4.js:718
-#: notification-center@Selenium-H/prefsGtk4.js:719
-#: notification-center@Selenium-H/prefsGtk4.js:720
-msgid "In The Middle"
-msgstr ""
-
-#: notification-center@Selenium-H/prefsGtk3.js:726
-#: notification-center@Selenium-H/prefsGtk3.js:727
-#: notification-center@Selenium-H/prefsGtk3.js:728
-#: notification-center@Selenium-H/prefsGtk4.js:718
-#: notification-center@Selenium-H/prefsGtk4.js:719
-#: notification-center@Selenium-H/prefsGtk4.js:720
-msgid "At The Bottom"
-msgstr ""
-
-#: notification-center@Selenium-H/prefsGtk3.js:729
-#: notification-center@Selenium-H/prefsGtk4.js:721
+#: notification-center@Selenium-H/prefsGtk3.js:645
+#: notification-center@Selenium-H/prefsGtk4.js:639
 msgid "Only In Notification Center"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:729
-#: notification-center@Selenium-H/prefsGtk4.js:721
+#: notification-center@Selenium-H/prefsGtk3.js:645
+#: notification-center@Selenium-H/prefsGtk4.js:639
 msgid "Below Calendar"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:729
-#: notification-center@Selenium-H/prefsGtk4.js:721
+#: notification-center@Selenium-H/prefsGtk3.js:645
+#: notification-center@Selenium-H/prefsGtk4.js:639
 msgid "Beside Calendar"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:733
-#: notification-center@Selenium-H/prefsGtk4.js:725
+#: notification-center@Selenium-H/prefsGtk3.js:684
+#: notification-center@Selenium-H/prefsGtk3.js:784
+#: notification-center@Selenium-H/prefsGtk4.js:677
+#: notification-center@Selenium-H/prefsGtk4.js:776
+msgid "Left"
+msgstr ""
+
+#: notification-center@Selenium-H/prefsGtk3.js:684
+#: notification-center@Selenium-H/prefsGtk3.js:784
+#: notification-center@Selenium-H/prefsGtk4.js:677
+#: notification-center@Selenium-H/prefsGtk4.js:776
+msgid "Center"
+msgstr ""
+
+#: notification-center@Selenium-H/prefsGtk3.js:684
+#: notification-center@Selenium-H/prefsGtk3.js:784
+#: notification-center@Selenium-H/prefsGtk4.js:677
+#: notification-center@Selenium-H/prefsGtk4.js:776
+msgid "Right"
+msgstr ""
+
+#: notification-center@Selenium-H/prefsGtk3.js:688
+#: notification-center@Selenium-H/prefsGtk4.js:681
+msgid "No"
+msgstr ""
+
+#: notification-center@Selenium-H/prefsGtk3.js:688
+#: notification-center@Selenium-H/prefsGtk4.js:681
+msgid "Yes"
+msgstr ""
+
+#: notification-center@Selenium-H/prefsGtk3.js:688
+#: notification-center@Selenium-H/prefsGtk4.js:681
+msgid "If Do Not Disturb is Off"
+msgstr ""
+
+#: notification-center@Selenium-H/prefsGtk3.js:689
+#: notification-center@Selenium-H/prefsGtk4.js:682
+msgid "Show Nothing"
+msgstr ""
+
+#: notification-center@Selenium-H/prefsGtk3.js:689
+#: notification-center@Selenium-H/prefsGtk4.js:682
+msgid "Show Dot"
+msgstr ""
+
+#: notification-center@Selenium-H/prefsGtk3.js:689
+#: notification-center@Selenium-H/prefsGtk4.js:682
+msgid "Show Count"
+msgstr ""
+
+#: notification-center@Selenium-H/prefsGtk3.js:780
+#: notification-center@Selenium-H/prefsGtk3.js:781
+#: notification-center@Selenium-H/prefsGtk3.js:782
+#: notification-center@Selenium-H/prefsGtk3.js:783
+#: notification-center@Selenium-H/prefsGtk3.js:784
+#: notification-center@Selenium-H/prefsGtk4.js:772
+#: notification-center@Selenium-H/prefsGtk4.js:773
+#: notification-center@Selenium-H/prefsGtk4.js:774
+#: notification-center@Selenium-H/prefsGtk4.js:775
+#: notification-center@Selenium-H/prefsGtk4.js:776
+msgid "Don't Show"
+msgstr ""
+
+#: notification-center@Selenium-H/prefsGtk3.js:780
+#: notification-center@Selenium-H/prefsGtk3.js:781
+#: notification-center@Selenium-H/prefsGtk3.js:782
+#: notification-center@Selenium-H/prefsGtk4.js:772
+#: notification-center@Selenium-H/prefsGtk4.js:773
+#: notification-center@Selenium-H/prefsGtk4.js:774
+msgid "At The Top"
+msgstr ""
+
+#: notification-center@Selenium-H/prefsGtk3.js:780
+#: notification-center@Selenium-H/prefsGtk3.js:781
+#: notification-center@Selenium-H/prefsGtk3.js:782
+#: notification-center@Selenium-H/prefsGtk4.js:772
+#: notification-center@Selenium-H/prefsGtk4.js:773
+#: notification-center@Selenium-H/prefsGtk4.js:774
+msgid "In The Middle"
+msgstr ""
+
+#: notification-center@Selenium-H/prefsGtk3.js:780
+#: notification-center@Selenium-H/prefsGtk3.js:781
+#: notification-center@Selenium-H/prefsGtk3.js:782
+#: notification-center@Selenium-H/prefsGtk4.js:772
+#: notification-center@Selenium-H/prefsGtk4.js:773
+#: notification-center@Selenium-H/prefsGtk4.js:774
+msgid "At The Bottom"
+msgstr ""
+
+#: notification-center@Selenium-H/prefsGtk3.js:783
+#: notification-center@Selenium-H/prefsGtk4.js:775
 msgid "On Top"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:733
-#: notification-center@Selenium-H/prefsGtk4.js:725
+#: notification-center@Selenium-H/prefsGtk3.js:783
+#: notification-center@Selenium-H/prefsGtk4.js:775
 msgid "At Bottom"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:736
-#: notification-center@Selenium-H/prefsGtk4.js:728
+#: notification-center@Selenium-H/prefsGtk3.js:786
+#: notification-center@Selenium-H/prefsGtk4.js:778
 msgid "Alt Key"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:736
-#: notification-center@Selenium-H/prefsGtk4.js:728
+#: notification-center@Selenium-H/prefsGtk3.js:786
+#: notification-center@Selenium-H/prefsGtk4.js:778
 msgid "Ctrl Key"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:736
-#: notification-center@Selenium-H/prefsGtk4.js:728
+#: notification-center@Selenium-H/prefsGtk3.js:786
+#: notification-center@Selenium-H/prefsGtk4.js:778
 msgid "Shift Key"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:736
-#: notification-center@Selenium-H/prefsGtk4.js:728
+#: notification-center@Selenium-H/prefsGtk3.js:786
+#: notification-center@Selenium-H/prefsGtk4.js:778
 msgid "Super Key"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:741
-#: notification-center@Selenium-H/prefsGtk4.js:733
+#: notification-center@Selenium-H/prefsGtk3.js:788
+#: notification-center@Selenium-H/prefsGtk4.js:780
 msgid "Top Left"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:741
-#: notification-center@Selenium-H/prefsGtk4.js:733
+#: notification-center@Selenium-H/prefsGtk3.js:788
+#: notification-center@Selenium-H/prefsGtk4.js:780
 msgid "Top Center"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:741
-#: notification-center@Selenium-H/prefsGtk4.js:733
+#: notification-center@Selenium-H/prefsGtk3.js:788
+#: notification-center@Selenium-H/prefsGtk4.js:780
 msgid "Top Right"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:741
-#: notification-center@Selenium-H/prefsGtk4.js:733
+#: notification-center@Selenium-H/prefsGtk3.js:788
+#: notification-center@Selenium-H/prefsGtk4.js:780
 msgid "Middle Left"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:741
-#: notification-center@Selenium-H/prefsGtk4.js:733
+#: notification-center@Selenium-H/prefsGtk3.js:788
+#: notification-center@Selenium-H/prefsGtk4.js:780
 msgid "Middle Center"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:741
-#: notification-center@Selenium-H/prefsGtk4.js:733
+#: notification-center@Selenium-H/prefsGtk3.js:788
+#: notification-center@Selenium-H/prefsGtk4.js:780
 msgid "Middle Right"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:741
-#: notification-center@Selenium-H/prefsGtk4.js:733
+#: notification-center@Selenium-H/prefsGtk3.js:788
+#: notification-center@Selenium-H/prefsGtk4.js:780
 msgid "Bottom Left"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:741
-#: notification-center@Selenium-H/prefsGtk4.js:733
+#: notification-center@Selenium-H/prefsGtk3.js:788
+#: notification-center@Selenium-H/prefsGtk4.js:780
 msgid "Bottom Center"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:741
-#: notification-center@Selenium-H/prefsGtk4.js:733
+#: notification-center@Selenium-H/prefsGtk3.js:788
+#: notification-center@Selenium-H/prefsGtk4.js:780
 msgid "Bottom Right"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:817
-#: notification-center@Selenium-H/prefsGtk4.js:809
+#: notification-center@Selenium-H/prefsGtk3.js:864
+#: notification-center@Selenium-H/prefsGtk4.js:856
 msgid "Extension is upgraded to Version  "
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:817
-#: notification-center@Selenium-H/prefsGtk4.js:809
+#: notification-center@Selenium-H/prefsGtk3.js:865
+#: notification-center@Selenium-H/prefsGtk4.js:857
 msgid ""
 "A Reset to default preferences is needed for upgrading to this version. "
 "Please Reset the extension by clicking the button below."
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:834
-#: notification-center@Selenium-H/prefsGtk4.js:826
-msgid "Version  "
+#: notification-center@Selenium-H/prefsGtk3.js:883
+#: notification-center@Selenium-H/prefsGtk4.js:875
+msgid "Upgraded Successfully"
 msgstr ""
 
-#: notification-center@Selenium-H/prefsGtk3.js:834
-#: notification-center@Selenium-H/prefsGtk4.js:826
-msgid "Upgraded Successfully"
+#: notification-center@Selenium-H/prefsGtk3.js:884
+#: notification-center@Selenium-H/prefsGtk4.js:876
+msgid "Version"
 msgstr ""
 
 #: notification-center@Selenium-H/prefsGtk4.js:373
@@ -403,7 +410,7 @@ msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:87
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:88
-msgid "Show Calendar Section on Left"
+msgid "Show Calendar on Left"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:93
