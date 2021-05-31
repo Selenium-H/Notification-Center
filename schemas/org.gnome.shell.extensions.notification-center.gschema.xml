@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Version 23.03
+Version 23.04
 =============
  
 -->
@@ -84,12 +84,12 @@ Version 23.03
  
     <key name="calendar-on-left" type="b">
       <default>false</default>
-      <summary>Show Calendar Section on Left</summary>
-      <description>Show Calendar Section on Left</description>
+      <summary>Show Calendar on Left</summary>
+      <description>Show Calendar on Left</description>
     </key>    
    
-    <key name="hide-events-section-if-empty" type="b">
-      <default>false</default>
+    <key name="show-events-section-if-empty" type="b">
+      <default>true</default>
       <summary>Hide Events List If Empty</summary>
       <description>Hide Events List If Empty</description>
     </key>    
@@ -163,7 +163,7 @@ Version 23.03
     </key>
     
     <key name="indicator-index" type="i">
-      <default>1</default>
+      <default>2</default>
       <summary>Position of notification icon in panel box</summary>
       <description>Position of notification icon in panel box</description>
     </key>
