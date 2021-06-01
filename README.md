@@ -7,7 +7,7 @@
 </h1>
 
 <p align="center">
-Version 23.04
+Version 24
 </p>
 
 <p align="center">
