@@ -1,6 +1,6 @@
 
 /*
-Version 23.04
+Version 23.05
 =============
 
 */
@@ -134,6 +134,7 @@ const NotificationCenter = new LangClass({
 
   animateOnNewNotification: function( times, op=254, angle=3 ) {
 
+    [ this.visible, this.notificationIcon.visible ] = [ true, true ];
     if(times == 0 || this.notAnimateIcon) {
       this.notificationIcon.ease({
         duration:         150,
@@ -146,9 +147,7 @@ const NotificationCenter = new LangClass({
       });
       return;
     }
-    
-    [ this.visible, this.notificationIcon.visible ] = [ true, true ];
-    
+  
     this.notificationIcon.ease({
       duration:         150,
       scale_x:          1.2,
@@ -162,7 +161,8 @@ const NotificationCenter = new LangClass({
   },
 
   blinkIcon: function( blinkTimes, interval, opacity ) {
-
+  
+    this.manageAutohide();
     if(blinkTimes > 0) {
       this.notificationIcon.ease({
         duration:   interval,

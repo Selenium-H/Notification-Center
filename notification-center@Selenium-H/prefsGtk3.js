@@ -1,6 +1,6 @@
 
 /*
-Version 23.04
+Version 23.05
 =============
  
 */
@@ -209,7 +209,7 @@ const Prefs_NotificationCenterExtension = new GObject.Class({
     
     this.parent({ transition_type: 6, transition_duration: 200 });
 
-    if( settings.get_double("current-version") < Metadata.version ) {
+    if( settings.get_double("current-version") < 23.03 ) {
       let updatePage = new UpdatePage_NotificationCenterExtension(this.profilePrefs);
       this.add_titled( updatePage, "Update", _("Update") );
       updatePage.displayPrefs();

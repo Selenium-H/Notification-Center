@@ -1,6 +1,6 @@
 
 /*
-Version 23.04
+Version 23.05
 =============
  
 */
@@ -8,7 +8,6 @@ Version 23.04
 const Config         = imports.misc.config;
 const ExtensionUtils = imports.misc.extensionUtils;
 const Extension      = ExtensionUtils.getCurrentExtension();
-const Me             = ExtensionUtils.getCurrentExtension();
 const Metadata       = Extension.metadata;
 const Gio            = imports.gi.Gio;
 const GLib           = imports.gi.GLib;
@@ -204,7 +203,7 @@ const Prefs_NotificationCenterExtension = new GObject.Class({
     
     this.parent({ transition_type: 6, transition_duration: 200 });
 
-    if( settings.get_double("current-version") < Metadata.version ) {
+    if( settings.get_double("current-version") < 23.03 ) {
       let updatePage = new UpdatePage_NotificationCenterExtension(this.profilePrefs);
       this.add_titled( updatePage, "Update", _("Update") );
       updatePage.displayPrefs();
