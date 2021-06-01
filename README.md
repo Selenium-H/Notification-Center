@@ -7,7 +7,7 @@
 </h1>
 
 <p align="center">
-Version 23
+Version 23.04
 </p>
 
 <p align="center">
@@ -32,6 +32,10 @@ A GNOME Shell extension for detaching notification center and customization.
 
 <p align="center">
 <img src = /Screenshots/Image_05.png >
+</p>
+
+<p align="center">
+<img src = /Screenshots/Image_06.png >
 </p>
 
 <h1 align="center">

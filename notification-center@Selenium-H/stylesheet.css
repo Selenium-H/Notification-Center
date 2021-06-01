@@ -1,12 +1,40 @@
+
+/*
+Version 23.04
+=============
+
+*/
+
 .notification-center-message-list {
-  padding: 8px 8px 0 20px
+  padding: 8px 8px 10px 20px;
+  spacing: 6px;
 }
 
-.notification-center-clear-button {
-  
-  margin: 8px 26px 0 26px;
+.notification-center-message-list-empty {
+  padding: 8px 8px 0 20px;
+  min-height: 128px;
+  margin-bottom: 20px;
+  background-image: url("resource:///org/gnome/shell/theme/no-notifications.svg");
+  background-size: 48px;
+}
+
+.notification-center-clear-button { 
+  margin: 0px 26px 10px 26px;
 }
 
 .notification-center-message-list-section {
-  padding-bottom: 6px;
+  padding-bottom: 0px;
+  padding-top: 0px;
 }
+
+.notification-center-events-label,
+.notification-center-notification-label {
+  padding: 0px 6px 0 0;
+}
+
+.notification-center-datemenu-vbox {
+  border-left-width : 0px;
+  border-right-width : 1px;
+}
+
+
