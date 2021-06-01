@@ -1,6 +1,6 @@
 
 /*
-Version 23.05
+Version 23.06
 =============
 
 */
@@ -609,7 +609,6 @@ const NotificationCenter = new LangClass({
   undoChanges: function () {
   
     if(this._indicator.get_children().length == 0) {    
-      Main.notify("Notification Center","Extension is updated. Please Complete the update process in the extension preferences.");
       return;
     }
 
