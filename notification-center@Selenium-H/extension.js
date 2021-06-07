@@ -1,6 +1,6 @@
 
 /*
-Version 24.01
+Version 24.02
 =============
 
 */
@@ -602,7 +602,13 @@ const NotificationCenter = new LangClass({
       });
     }
     
-    [ Main.panel.statusArea.dateMenu._weatherItem.visible, Main.panel.statusArea.dateMenu._clocksItem.visible, Main.panel.statusArea.dateMenu._date.visible ] = [ !this.prefs.get_boolean("hide-weather-section") && Main.panel.statusArea.dateMenu._weatherItem.visible, !this.prefs.get_boolean("hide-clock-section") && Main.panel.statusArea.dateMenu._clocksItem.visible, !this.prefs.get_boolean("hide-date-section") ];
+    Main.panel.statusArea.dateMenu._date.visible = !this.prefs.get_boolean("hide-date-section");
+    if(this.prefs.get_boolean("hide-weather-section")) {
+      this.originalEventsSectionParent.remove_actor(Main.panel.statusArea.dateMenu._weatherItem);
+    }
+    if(this.prefs.get_boolean("hide-clock-section")) {
+      this.originalEventsSectionParent.remove_actor(Main.panel.statusArea.dateMenu._clocksItem);
+    }    
      
   },
   
@@ -675,8 +681,13 @@ const NotificationCenter = new LangClass({
 
     Main.panel.statusArea.dateMenu.get_children()[0].insert_child_at_index(this.dtActors[0],0);
     Main.panel.statusArea.dateMenu.get_children()[0].insert_child_at_index(Main.panel.statusArea.dateMenu._indicator, 2);
-    Main.panel.statusArea.dateMenu._clocksItem._sync();
-    Main.panel.statusArea.dateMenu._weatherItem._sync();
+    
+    if(Main.panel.statusArea.dateMenu._clocksItem.get_parent() == null) {
+      this.originalEventsSectionParent.insert_child_at_index(Main.panel.statusArea.dateMenu._clocksItem, 1);
+    }
+    if(Main.panel.statusArea.dateMenu._weatherItem.get_parent() == null) {
+      this.originalEventsSectionParent.insert_child_at_index(Main.panel.statusArea.dateMenu._weatherItem, 2);
+    }
     Main.panel.statusArea.dateMenu._date.visible  = true;
     Main.wm.removeKeybinding('indicator-shortcut');
 
