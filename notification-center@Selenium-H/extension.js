@@ -1,6 +1,6 @@
 
 /*
-Version 23.06
+Version 24.01
 =============
 
 */
@@ -83,12 +83,12 @@ const NotificationCenter = new LangClass({
     this.iconThemeChangeSig   = null;
     this.notificationIconName = null;
     
-    this.notificationCount  = 0;
-    this.eventsCount        = 0;
-    this.mediaCount         = 0;
-    this.seenEvents         = false;
-    this.isDndOff           = true;
-    this.dndpref = Main.panel.statusArea.dateMenu._indicator._settings;    
+    this.notificationCount = 0;
+    this.eventsCount       = 0;
+    this.mediaCount        = 0;
+    this.seenEvents        = false;
+    this.isDndOff          = true;
+    this.dndpref           = Main.panel.statusArea.dateMenu._indicator._settings;    
      
     this.eventsIcon          = new St.Icon({style_class:'system-status-icon', visible:false, icon_name: "x-office-calendar-symbolic"});
     this.mediaIcon           = new St.Icon({style_class:'system-status-icon', visible:false, icon_name: "audio-x-generic-symbolic"  });
@@ -437,7 +437,7 @@ const NotificationCenter = new LangClass({
       case 0:
         return 0;
       default:
-        return (this.eventsSection._eventsList.get_children()[0].text == _("No Events")) ? 0: this.eventsSection._eventsList.get_children().length;
+        return (this.eventsSection._eventsList.get_children()[0].style_class == 'event-placeholder') ? 0: this.eventsSection._eventsList.get_children().length;
     }
   
   },  
