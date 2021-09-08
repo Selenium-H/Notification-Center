@@ -66,4 +66,4 @@ This extension is inspired from
 [Notifications Alert Extension](https://extensions.gnome.org/extension/258/notifications-alert-on-user-menu/) by hackedbellini, 
 [Files View Extension](https://extensions.gnome.org/extension/1395/files-view/) by abakkk
 
-Thanks to @amivaleo (Italian Translation), @goodwillcoding, @Vistaus (Dutch Translation), @GorrillaRibs, @hlechner, @Sa2908, @scottste.
+Thanks to @amivaleo (Italian translation), @goodwillcoding, @Vistaus (Dutch translation), @GorrillaRibs, @hlechner, @Sa2908, @scottste, @kuroehanako (Korean translation).
