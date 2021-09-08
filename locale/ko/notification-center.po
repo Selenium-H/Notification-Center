@@ -1,0 +1,589 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-05-31 12:04+0530\n"
+"PO-Revision-Date: 2021-08-31 10:08+0900\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: ko\n"
+
+#: notification-center@Selenium-H/extension.js:100
+#: notification-center@Selenium-H/prefsGtk3.js:556
+#: notification-center@Selenium-H/prefsGtk4.js:550
+msgid "Clear"
+msgstr "모두 지우기"
+
+#: notification-center@Selenium-H/extension.js:102
+msgid "No Notifications"
+msgstr "알림 없음"
+
+#: notification-center@Selenium-H/extension.js:440
+msgid "No Events"
+msgstr "행사 없음"
+
+#: notification-center@Selenium-H/prefsGtk3.js:68
+#: notification-center@Selenium-H/prefsGtk3.js:77
+#: notification-center@Selenium-H/prefsGtk4.js:66
+#: notification-center@Selenium-H/prefsGtk4.js:78
+msgid "Preferences"
+msgstr "설정"
+
+#: notification-center@Selenium-H/prefsGtk3.js:69
+#: notification-center@Selenium-H/prefsGtk3.js:87
+#: notification-center@Selenium-H/prefsGtk4.js:67
+#: notification-center@Selenium-H/prefsGtk4.js:87
+msgid "Help"
+msgstr "도움말"
+
+#: notification-center@Selenium-H/prefsGtk3.js:70
+#: notification-center@Selenium-H/prefsGtk4.js:68
+msgid "About"
+msgstr "정보"
+
+#: notification-center@Selenium-H/prefsGtk3.js:126
+#: notification-center@Selenium-H/prefsGtk4.js:121
+msgid "Reset Notification Center Extension"
+msgstr "알림 센터 확장 초기화"
+
+#: notification-center@Selenium-H/prefsGtk3.js:138
+#: notification-center@Selenium-H/prefsGtk4.js:133
+msgid "Reset Notification Center to defaults?"
+msgstr "기본값으로 초기화하시겠습니까?"
+
+#: notification-center@Selenium-H/prefsGtk3.js:139
+#: notification-center@Selenium-H/prefsGtk4.js:134
+msgid ""
+"Resetting the extension will discard the current preferences configuration "
+"and restore default one."
+msgstr "확장을 초기화하면 모든 설정값이 기본으로 돌아갑니다."
+
+#: notification-center@Selenium-H/prefsGtk3.js:214
+#: notification-center@Selenium-H/prefsGtk4.js:209
+msgid "Update"
+msgstr "업데이트"
+
+#: notification-center@Selenium-H/prefsGtk3.js:218
+#: notification-center@Selenium-H/prefsGtk4.js:213
+msgid "Notifications"
+msgstr "알림"
+
+#: notification-center@Selenium-H/prefsGtk3.js:219
+#: notification-center@Selenium-H/prefsGtk4.js:214
+msgid "Calendar"
+msgstr "달력"
+
+#: notification-center@Selenium-H/prefsGtk3.js:220
+#: notification-center@Selenium-H/prefsGtk4.js:215
+msgid "Indicator"
+msgstr "표시기"
+
+#: notification-center@Selenium-H/prefsGtk3.js:221
+#: notification-center@Selenium-H/prefsGtk4.js:216
+msgid "Profiles"
+msgstr "프로필"
+
+#: notification-center@Selenium-H/prefsGtk3.js:352
+#: notification-center@Selenium-H/prefsGtk4.js:346
+msgid "Custom script location for"
+msgstr "커스텀 스크립트 위치"
+
+#: notification-center@Selenium-H/prefsGtk3.js:375
+#: notification-center@Selenium-H/prefsGtk4.js:369
+msgid "Choose an application"
+msgstr "프로그램 선택"
+
+#: notification-center@Selenium-H/prefsGtk3.js:433
+#: notification-center@Selenium-H/prefsGtk4.js:427
+msgid "Application List"
+msgstr "프로그램 목록"
+
+#: notification-center@Selenium-H/prefsGtk3.js:532
+#: notification-center@Selenium-H/prefsGtk4.js:526
+msgid "Choose a Script file"
+msgstr "스크립트 파일 선택"
+
+#: notification-center@Selenium-H/prefsGtk3.js:533
+#: notification-center@Selenium-H/prefsGtk3.js:555
+#: notification-center@Selenium-H/prefsGtk4.js:527
+#: notification-center@Selenium-H/prefsGtk4.js:549
+msgid "Set"
+msgstr "설정"
+
+#: notification-center@Selenium-H/prefsGtk3.js:552
+#: notification-center@Selenium-H/prefsGtk4.js:546
+msgid "     Add    "
+msgstr "     추가    "
+
+#: notification-center@Selenium-H/prefsGtk3.js:553
+#: notification-center@Selenium-H/prefsGtk4.js:547
+msgid " Remove "
+msgstr " 삭제 "
+
+#: notification-center@Selenium-H/prefsGtk3.js:557
+#: notification-center@Selenium-H/prefsGtk4.js:551
+msgid "Browse"
+msgstr "찾기"
+
+#: notification-center@Selenium-H/prefsGtk3.js:564
+#: notification-center@Selenium-H/prefsGtk4.js:558
+msgid "No application selected"
+msgstr "선택된 프로그램 없음"
+
+#: notification-center@Selenium-H/prefsGtk3.js:599
+#: notification-center@Selenium-H/prefsGtk4.js:593
+msgid "For All Applications on the List"
+msgstr ""
+
+#: notification-center@Selenium-H/prefsGtk3.js:601
+#: notification-center@Selenium-H/prefsGtk4.js:595
+msgid "Show them"
+msgstr ""
+
+#: notification-center@Selenium-H/prefsGtk3.js:601
+#: notification-center@Selenium-H/prefsGtk4.js:595
+msgid "Show counts only"
+msgstr "숫자만"
+
+#: notification-center@Selenium-H/prefsGtk3.js:601
+#: notification-center@Selenium-H/prefsGtk4.js:595
+msgid "Show banner only"
+msgstr "알림 배너만"
+
+#: notification-center@Selenium-H/prefsGtk3.js:601
+#: notification-center@Selenium-H/prefsGtk4.js:595
+msgid "Ignore them"
+msgstr "무시하기"
+
+#: notification-center@Selenium-H/prefsGtk3.js:604
+#: notification-center@Selenium-H/prefsGtk4.js:598
+msgid "For Selected Application"
+msgstr "선택된 프로그램"
+
+#: notification-center@Selenium-H/prefsGtk3.js:645
+#: notification-center@Selenium-H/prefsGtk4.js:639
+msgid "Only In Notification Center"
+msgstr "알림 센터에서만"
+
+#: notification-center@Selenium-H/prefsGtk3.js:645
+#: notification-center@Selenium-H/prefsGtk4.js:639
+msgid "Below Calendar"
+msgstr "달력 밑"
+
+#: notification-center@Selenium-H/prefsGtk3.js:645
+#: notification-center@Selenium-H/prefsGtk4.js:639
+msgid "Beside Calendar"
+msgstr "달력 옆"
+
+#: notification-center@Selenium-H/prefsGtk3.js:684
+#: notification-center@Selenium-H/prefsGtk3.js:784
+#: notification-center@Selenium-H/prefsGtk4.js:677
+#: notification-center@Selenium-H/prefsGtk4.js:776
+msgid "Left"
+msgstr "왼쪽"
+
+#: notification-center@Selenium-H/prefsGtk3.js:684
+#: notification-center@Selenium-H/prefsGtk3.js:784
+#: notification-center@Selenium-H/prefsGtk4.js:677
+#: notification-center@Selenium-H/prefsGtk4.js:776
+msgid "Center"
+msgstr "가운데"
+
+#: notification-center@Selenium-H/prefsGtk3.js:684
+#: notification-center@Selenium-H/prefsGtk3.js:784
+#: notification-center@Selenium-H/prefsGtk4.js:677
+#: notification-center@Selenium-H/prefsGtk4.js:776
+msgid "Right"
+msgstr "오른쪽"
+
+#: notification-center@Selenium-H/prefsGtk3.js:688
+#: notification-center@Selenium-H/prefsGtk4.js:681
+msgid "No"
+msgstr "아니오"
+
+#: notification-center@Selenium-H/prefsGtk3.js:688
+#: notification-center@Selenium-H/prefsGtk4.js:681
+msgid "Yes"
+msgstr "예"
+
+#: notification-center@Selenium-H/prefsGtk3.js:688
+#: notification-center@Selenium-H/prefsGtk4.js:681
+msgid "If Do Not Disturb is Off"
+msgstr "방해 금지가 꺼져 있을 때만"
+
+#: notification-center@Selenium-H/prefsGtk3.js:689
+#: notification-center@Selenium-H/prefsGtk4.js:682
+msgid "Show Nothing"
+msgstr "표시 안 함"
+
+#: notification-center@Selenium-H/prefsGtk3.js:689
+#: notification-center@Selenium-H/prefsGtk4.js:682
+msgid "Show Dot"
+msgstr "점 표시"
+
+#: notification-center@Selenium-H/prefsGtk3.js:689
+#: notification-center@Selenium-H/prefsGtk4.js:682
+msgid "Show Count"
+msgstr "숫자 표시"
+
+#: notification-center@Selenium-H/prefsGtk3.js:780
+#: notification-center@Selenium-H/prefsGtk3.js:781
+#: notification-center@Selenium-H/prefsGtk3.js:782
+#: notification-center@Selenium-H/prefsGtk3.js:783
+#: notification-center@Selenium-H/prefsGtk3.js:784
+#: notification-center@Selenium-H/prefsGtk4.js:772
+#: notification-center@Selenium-H/prefsGtk4.js:773
+#: notification-center@Selenium-H/prefsGtk4.js:774
+#: notification-center@Selenium-H/prefsGtk4.js:775
+#: notification-center@Selenium-H/prefsGtk4.js:776
+msgid "Don't Show"
+msgstr "숨기기"
+
+#: notification-center@Selenium-H/prefsGtk3.js:780
+#: notification-center@Selenium-H/prefsGtk3.js:781
+#: notification-center@Selenium-H/prefsGtk3.js:782
+#: notification-center@Selenium-H/prefsGtk4.js:772
+#: notification-center@Selenium-H/prefsGtk4.js:773
+#: notification-center@Selenium-H/prefsGtk4.js:774
+msgid "At The Top"
+msgstr "위에 표시"
+
+#: notification-center@Selenium-H/prefsGtk3.js:780
+#: notification-center@Selenium-H/prefsGtk3.js:781
+#: notification-center@Selenium-H/prefsGtk3.js:782
+#: notification-center@Selenium-H/prefsGtk4.js:772
+#: notification-center@Selenium-H/prefsGtk4.js:773
+#: notification-center@Selenium-H/prefsGtk4.js:774
+msgid "In The Middle"
+msgstr "가운데"
+
+#: notification-center@Selenium-H/prefsGtk3.js:780
+#: notification-center@Selenium-H/prefsGtk3.js:781
+#: notification-center@Selenium-H/prefsGtk3.js:782
+#: notification-center@Selenium-H/prefsGtk4.js:772
+#: notification-center@Selenium-H/prefsGtk4.js:773
+#: notification-center@Selenium-H/prefsGtk4.js:774
+msgid "At The Bottom"
+msgstr "밑에 표시"
+
+#: notification-center@Selenium-H/prefsGtk3.js:783
+#: notification-center@Selenium-H/prefsGtk4.js:775
+msgid "On Top"
+msgstr "위"
+
+#: notification-center@Selenium-H/prefsGtk3.js:783
+#: notification-center@Selenium-H/prefsGtk4.js:775
+msgid "At Bottom"
+msgstr "아래"
+
+#: notification-center@Selenium-H/prefsGtk3.js:786
+#: notification-center@Selenium-H/prefsGtk4.js:778
+msgid "Alt Key"
+msgstr "Alt 키"
+
+#: notification-center@Selenium-H/prefsGtk3.js:786
+#: notification-center@Selenium-H/prefsGtk4.js:778
+msgid "Ctrl Key"
+msgstr "Ctrl 키"
+
+#: notification-center@Selenium-H/prefsGtk3.js:786
+#: notification-center@Selenium-H/prefsGtk4.js:778
+msgid "Shift Key"
+msgstr "Shift 키"
+
+#: notification-center@Selenium-H/prefsGtk3.js:786
+#: notification-center@Selenium-H/prefsGtk4.js:778
+msgid "Super Key"
+msgstr "Super 키"
+
+#: notification-center@Selenium-H/prefsGtk3.js:788
+#: notification-center@Selenium-H/prefsGtk4.js:780
+msgid "Top Left"
+msgstr "상단 왼쪽 모서리"
+
+#: notification-center@Selenium-H/prefsGtk3.js:788
+#: notification-center@Selenium-H/prefsGtk4.js:780
+msgid "Top Center"
+msgstr "기본"
+
+#: notification-center@Selenium-H/prefsGtk3.js:788
+#: notification-center@Selenium-H/prefsGtk4.js:780
+msgid "Top Right"
+msgstr "상단 오른쪽 모서리"
+
+#: notification-center@Selenium-H/prefsGtk3.js:788
+#: notification-center@Selenium-H/prefsGtk4.js:780
+msgid "Middle Left"
+msgstr "왼쪽"
+
+#: notification-center@Selenium-H/prefsGtk3.js:788
+#: notification-center@Selenium-H/prefsGtk4.js:780
+msgid "Middle Center"
+msgstr "가운데"
+
+#: notification-center@Selenium-H/prefsGtk3.js:788
+#: notification-center@Selenium-H/prefsGtk4.js:780
+msgid "Middle Right"
+msgstr "오른쪽"
+
+#: notification-center@Selenium-H/prefsGtk3.js:788
+#: notification-center@Selenium-H/prefsGtk4.js:780
+msgid "Bottom Left"
+msgstr "하단 왼쪽 모서리"
+
+#: notification-center@Selenium-H/prefsGtk3.js:788
+#: notification-center@Selenium-H/prefsGtk4.js:780
+msgid "Bottom Center"
+msgstr "하단 가운데"
+
+#: notification-center@Selenium-H/prefsGtk3.js:788
+#: notification-center@Selenium-H/prefsGtk4.js:780
+msgid "Bottom Right"
+msgstr "하단 오른쪽 모서리"
+
+#: notification-center@Selenium-H/prefsGtk3.js:864
+#: notification-center@Selenium-H/prefsGtk4.js:856
+msgid "Extension is upgraded to Version  "
+msgstr "Extension is upgraded to Version  "
+
+#: notification-center@Selenium-H/prefsGtk3.js:865
+#: notification-center@Selenium-H/prefsGtk4.js:857
+msgid ""
+"A Reset to default preferences is needed for upgrading to this version. "
+"Please Reset the extension by clicking the button below."
+msgstr ""
+"확장 업데이트 시 설정 초기화가 필요합니다. 아래에 있는 버튼을 눌러 확장을 초"
+"기화하십시오."
+
+#: notification-center@Selenium-H/prefsGtk3.js:883
+#: notification-center@Selenium-H/prefsGtk4.js:875
+msgid "Upgraded Successfully"
+msgstr "업데이트를 완료했습니다"
+
+#: notification-center@Selenium-H/prefsGtk3.js:884
+#: notification-center@Selenium-H/prefsGtk4.js:876
+msgid "Version"
+msgstr "버전"
+
+#: notification-center@Selenium-H/prefsGtk4.js:373
+msgid "Add"
+msgstr "추가"
+
+#: notification-center@Selenium-H/prefsGtk4.js:530
+msgid "Cancel"
+msgstr "취소"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:57
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:58
+msgid "Show Media Section on Notification Center"
+msgstr "알림 센터에 미디어 영역 표시"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:63
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:64
+msgid "Show Notifications list on Notification Center"
+msgstr "알림 센터에 알림 목록 표시"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:69
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:70
+msgid "Show Events list on Notification Center"
+msgstr "알림 센터에 행사 목록 표시"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:75
+msgid "Also, Show Events List"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:76
+msgid "Also, show Events List"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:81
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:82
+msgid "Hide space beside Calendar if empty"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:87
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:88
+msgid "Show Calendar on Left"
+msgstr "왼쪽에 달력 표시"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:93
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:94
+msgid "Hide Events List If Empty"
+msgstr "행사가 없을 때 행사 목록 숨기기"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:99
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:100
+msgid "Order of sections in Notification Center"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:105
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:106
+msgid "Do Not Disturb menu position"
+msgstr "방해 금지 메뉴 위치"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:111
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:112
+msgid "Clear All Button position"
+msgstr "모두 지우기 버튼 위치"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:117
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:118
+msgid "Close Notification Center when focus is switched"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:125
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:126
+msgid "Shortcut key combiation to show Notification Center"
+msgstr "알림 센터를 표시할 바로가기 키 조합"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:131
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:132
+msgid "Maximum height of Notification Center ( in % )"
+msgstr "알림 센터 높이 (%)"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:137
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:138
+msgid "Hide Clock Section"
+msgstr "시계 숨기기"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:143
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:144
+msgid "Hide Weather Section"
+msgstr "날씨 숨기기"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:149
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:150
+msgid "Hide Date Section"
+msgstr "날짜 숨기기"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:155
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:156
+msgid "Notification Banner position"
+msgstr "알림 배너 위치"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:161
+msgid "Notification Center icon position on panel"
+msgstr "패널 내 알림 센터 아이콘 위치"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:162
+msgid "Notifications Center icon position"
+msgstr "알림 센터 아이콘 위치"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:167
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:168
+msgid "Position of notification icon in panel box"
+msgstr "패널 박스 내 알림 센터 아이콘 위치"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:173
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:174
+msgid "Show individual icons for each section on panel"
+msgstr "일정, 알림 아이콘 따로 표시"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:179
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:180
+msgid "Change icons depending if there is notification or not"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:185
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:186
+msgid "AutoHide notification indicator on panel"
+msgstr "패널에서 알림 표시 자동으로 숨기기"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:191
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:192
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:251
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:252
+msgid "When new notification arrives"
+msgstr "새 알림이 도착할 때"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:197
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:198
+msgid "Include events in above case"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:203
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:204
+msgid "Number of times panel icon blinks on new notification"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:209
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:210
+msgid "Blink Time Interval ( in milliseconds )"
+msgstr "깜박이는 시간 설정 (밀리초)"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:215
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:216
+msgid "Animate icon when new notification arrives"
+msgstr "새 알림이 있을 시 아이콘에 애니메이션 효과 주기"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:221
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:222
+msgid "Show Dots or Counts till all notifications are cleared"
+msgstr "모든 알림을 지울 때까지 점이나 숫자 표시"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:227
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:228
+msgid "Middle click panel icon to toggle Do Not Disturb"
+msgstr "아이콘을 가운데 클릭하여 방해 금지 모드 활성화"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:233
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:234
+msgid "List of applications"
+msgstr "프로그램 목록"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:239
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:240
+msgid "List of Names of application to ignore notifications from"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:245
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:246
+msgid "List of Scripts for applications"
+msgstr "프로그램용 스크립트 목록"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:257
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:258
+msgid "Run scripts on new notification"
+msgstr "새 알림 도착 시 스크립트 실행"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:265
+msgid "Version of Current Extension"
+msgstr "현재 버전"
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:266
+msgid ""
+"Provided to ensure that extension is stopped incase of autoupdate from "
+"previous version to prevent unwanted effects"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:271
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:272
+msgid "Signals the extension to reload"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:277
+#: schemas/org.gnome.shell.extensions.notification-center.gschema.xml:278
+msgid "Signals the extension to reload Application Profiles"
+msgstr ""
+
+msgid ""
+"Detach notification center to top panel and customizations.Please reset the "
+"extension after updating.\n"
+"The Extension will stop when upgraded to an incompatible version.\n"
+"In that case an Update tab is created to easily reset the extension.\n"
+"A Reset button is also always present in Preferences option in the Top Right "
+"Application menu of the extension preferences window."
+msgstr ""
+
+msgid "Detach notification center to top panel and customizations."
+msgstr ""
