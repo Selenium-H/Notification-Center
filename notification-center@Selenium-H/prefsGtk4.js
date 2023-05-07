@@ -1,6 +1,6 @@
 
 /*
-Version 23.05
+Version 24.06
 =============
  
 */
@@ -38,17 +38,18 @@ function reloadApplicationProfiles() {
 }
 
 
-const ExtensionPreferencesWindow_NotificationCenterExtension = new GObject.Class({
+var  ExtensionPreferencesWindow_NotificationCenterExtension = new GObject.Class({
 
   Name: 'ExtensionPreferencesWindow_NotificationCenterExtension',
 
   _init: function( widget ) {
   
-    this.toplevel  = widget.get_native();
-    this.headerBar = this.toplevel.get_titlebar();
-    this.headerBar.set_title_widget(new Gtk.StackSwitcher({halign: Gtk.Align.CENTER, stack: widget}));
-    this.createAppMenu();  
-    this.createRefreshButton();  
+    //this.toplevel  = widget.get_native();
+    //this.headerBar = this.toplevel.get_titlebar();
+    //this.toplevel.set_content(new Gtk.StackSwitcher({halign: Gtk.Align.CENTER, stack: widget}));
+    //this.headerBar.set_title_widget(new Gtk.StackSwitcher({halign: Gtk.Align.CENTER, stack: widget}));
+    //this.createAppMenu();  
+    //this.createRefreshButton();  
     
   },
   
@@ -189,7 +190,7 @@ const ExtensionResetButton_NotificationCenterExtension =  new GObject.Class({
 	  
 });
 
-const Prefs_NotificationCenterExtension = new GObject.Class({
+var  Prefs_NotificationCenterExtension = new GObject.Class({
 
   Name: 'Prefs_NotificationCenterExtension',
   Extends: Gtk.Stack,
@@ -203,21 +204,33 @@ const Prefs_NotificationCenterExtension = new GObject.Class({
     
     this.parent({ transition_type: 6, transition_duration: 200 });
 
+    this.settingsBox = new Gtk.Box({ hexpand:true, vexpand: true, valign:Gtk.Align.CENTER, orientation: Gtk.Orientation.VERTICAL });    
+        
+     //this.add_titled(new Gtk.StackSwitcher({halign: Gtk.Align.CENTER, stack: this}), "", "")
+
     if( settings.get_double("current-version") < 23.03 ) {
       let updatePage = new UpdatePage_NotificationCenterExtension(this.profilePrefs);
-      this.add_titled( updatePage, "Update", _("Update") );
+      //this.add_titled( updatePage, "Update", _("Update") );
+      this.settingsBox.append(updatePage);
       updatePage.displayPrefs();
     }
     
-    this.add_titled(this.notificationPrefs,       "Notifications", _("Notifications"));
-    this.add_titled(this.calendarPrefs,           "Calendar",      _("Calendar")     );
-    this.add_titled(this.indicatorPrefs,          "Indicator",     _("Indicator")    );
-    this.add_titled(this.appListPrefs,            "Profiles",      _("Profiles")     );
+    this.settingsBox.append(this.notificationPrefs);
+    this.settingsBox.append(this.calendarPrefs);
+    this.settingsBox.append(this.indicatorPrefs);
+    this.settingsBox.append(this.appListPrefs);
+
+    this.add_titled(this.settingsBox, "", "");
+    //this.add_titled(this.notificationPrefs,       "Notifications", _("Notifications"));
+    //this.add_titled(this.calendarPrefs,           "Calendar",      _("Calendar")     );
+    //this.add_titled(this.indicatorPrefs,          "Indicator",     _("Indicator")    );
+    //this.add_titled(this.appListPrefs,            "Profiles",      _("Profiles")     );
     
     this.notificationPrefs.displayPrefs();
     this.calendarPrefs.displayPrefs();
     this.indicatorPrefs.displayPrefs();
     this.appListPrefs.displayPrefs();
+    
 
   }
   
