@@ -7,6 +7,7 @@ Version 24.03
 
 const ExtensionUtils      = imports.misc.extensionUtils;
 const Gtk                 = imports.gi.Gtk;
+const Gdk                 = imports.gi.Gdk;
 const GObject             = imports.gi.GObject;
 const LangClass           = imports.lang.Class;
 const Main                = imports.ui.main;
@@ -201,8 +202,8 @@ class NotificationCenter extends PanelMenu.Button {
       return false;
     }
  
-    if(Gtk.IconTheme.get_default())  {
-      if(Gtk.IconTheme.get_default().has_icon("notifications-disabled-symbolic")) {
+    if(Gdk.Display.get_default() && Gtk.IconTheme.get_for_display(Gdk.Display.get_default()))  {
+      if(Gtk.IconTheme.get_for_display(Gdk.Display.get_default()).has_icon("notifications-disabled-symbolic")) {
         this.notificationIcon.icon_name = "notifications-disabled-symbolic";
       }
     }
@@ -414,8 +415,8 @@ class NotificationCenter extends PanelMenu.Button {
 
   setNotificationIconName() {
   
-    if(Gtk.IconTheme.get_default()) {
-      this.notificationIconName = Gtk.IconTheme.get_default().has_icon("notification-symbolic")?"notification-symbolic":"preferences-system-notifications-symbolic";
+    if(Gdk.Display.get_default() && Gtk.IconTheme.get_for_display(Gdk.Display.get_default())) {
+      this.notificationIconName = Gtk.IconTheme.get_for_display(Gdk.Display.get_default()).has_icon("notification-symbolic")?"notification-symbolic":"preferences-system-notifications-symbolic";
     }
     else {
       this.notificationIconName = "preferences-system-notifications-symbolic";
